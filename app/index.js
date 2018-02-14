@@ -1,18 +1,9 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+import AppContainer from './containers/AppContainer';
 require('./index.scss');
 
-class App extends React.Component {
-    render() {
-        return (
-            <div>
-                Hello World!
-            </div>
-        )
-    }
-}
-
 ReactDOM.render(
-    <App />,
+    <AppContainer />,
     document.getElementById('app')
 );
