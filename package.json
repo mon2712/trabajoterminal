@@ -12,16 +12,8 @@
       "react"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mon2712/trabajoterminal.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mon2712/trabajoterminal/issues"
-  },
-  "homepage": "https://github.com/mon2712/trabajoterminal#readme",
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
