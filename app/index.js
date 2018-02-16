@@ -1,9 +1,11 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-import AppContainer from './containers/AppContainer';
-require('./index.scss');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/app';
+require('./styles/index.scss');
+
+
 
 ReactDOM.render(
-    <AppContainer />,
+    <App />,
     document.getElementById('app')
 );

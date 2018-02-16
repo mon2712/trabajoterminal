@@ -7,11 +7,17 @@ var extractSass = new ExtractTextPlugin({
     disable: process.env.NODE_ENV === "development"
 });
 
+const components = [
+    './app/libs/jquery.js',
+    './app/libs/angular.js'
+];
+
 module.exports = {
-    entry : ['./app/index.js', './app/index.scss'],
+    entry : ['./app/index.js', './app/styles/index.scss'],
     output : {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'index_bundle.js'
+        filename: 'index_bundle.js',
+        publicPath:'/'
     },
     module: {
         rules: [
@@ -28,23 +34,12 @@ module.exports = {
                     fallback: "style-loader"
                 })
             }
-         /* { // regular css files
-            test: /\.css$/,
-            loader: ExtractTextPlugin.extract({
-              loader: 'css-loader?importLoaders=1',
-            }),
-          },
-         { // sass / scss loader for webpack
-            test: /\.(sass|scss)$/,
-            loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])
-          }*/
         ]
     },
+    devServer:{
+        historyApiFallback: true
+    },
     plugins: [
-        /*new ExtractTextPlugin({ // define where to save the file
-            filename: 'dist/main_bundle.css',
-            allChunks: true,
-        }),*/
         extractSass,
         new HtmlWebpackPlugin({
             template: 'app/index.html'

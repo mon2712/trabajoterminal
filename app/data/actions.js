@@ -8,6 +8,27 @@ const Actions = {
       text,
     });
   },
+
+  getUser(user) {
+    dispatcher.dispatch({
+      type: actionTypes.GET_USER,
+      user,
+    });
+  },
+
+  deleteTodo(id) {
+    dispatcher.dispatch({
+      type: actionTypes.DELETE_TODO,
+      id,
+    });
+  },
+
+  toggleTodo(id) {
+    dispatcher.dispatch({
+      type: actionTypes.TOGGLE_TODO,
+      id,
+    });
+  },
 };
 
 export default Actions;
