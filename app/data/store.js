@@ -9,7 +9,7 @@ import assign from 'object-assign';
 
 let AppData = {
     data:{
-        user:{}
+        user:['Montse', 'Vane']
     },
     getUser() {
         console.log("llego a store")
