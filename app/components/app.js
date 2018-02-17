@@ -24,7 +24,7 @@ class App extends React.Component {
         }
     }
     render() {
-        console.log("this.state", this.state);
+        console.log("this.state componente papa", this.state);
         
         const HeaderConst = (props) => {
             return (

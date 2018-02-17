@@ -7,15 +7,15 @@ class Login extends React.Component {
     render() {
         console.log("Llego al login");
        return (
-        <div>
-            <span>Usuario:</span>
+        <div class='loginContainer'>
+            <span id='title'>Bienvenidos</span>
+            <span id='instruction'>Ingresa tu usuario y contraseña</span>
             <InputUser />
-            <span>Contraseña:</span>
             <InputPass />
-            <div>
+            <div class='button'>
                 Aceptar
             </div>
-           
+           <span id='forgot'>¿Olvidaste tu contraseña?</span>
         </div>
        );
     }

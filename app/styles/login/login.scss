@@ -1,3 +1,52 @@
-body{
-    color: red;
+.loginContainer{
+    background: white;
+    text-align: center;
+    border: 1px black;
+    border-radius: 10px;
+    width: 70%;
+    margin: 0 auto;
+    span{
+        display: block;
+    }
+    #title{
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        color: #A7A7A7;
+        padding: 15px;
+    }
+    #instruction{
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        color: #A7A7A7;
+    }
+    .button{
+        text-align: center;
+        margin: 0 auto;
+        width: 40%;
+        color: white;
+        background: #246ca7;
+        height: 30px;
+        border-radius: 10px;
+        padding: 5px;
+        line-height: 30px;
+        font-size: 20px;
+        &:hover{
+            background: #A7A7A7;
+        }
+    }
+    input{
+        height: 40px;
+        width: 80%;
+        border-radius: 10px;
+        margin: 10px;
+        font-size: 16px;
+    }
+    #forgot{
+        font-size: 14px;
+        padding-top: 5px;
+        padding-bottom: 15px;
+        color: #5a5757;
+    }
 }

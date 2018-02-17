@@ -6,7 +6,7 @@ class InputUser extends React.Component {
        return (
         <form>
             <div>
-                <input type="text"/>
+                <input type="text" placeHolder="Usuario"/>
             </div>
         </form>
        );
