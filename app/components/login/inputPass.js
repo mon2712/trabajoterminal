@@ -6,7 +6,7 @@ class InputPass extends React.Component {
        return (
          <form>
             <div>
-              <input type="password" placeHolder="Contraseña"/>
+              <input type="password" placeholder="Contraseña"/>
             </div>
           </form>
        );
