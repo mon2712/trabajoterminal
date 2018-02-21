@@ -9,7 +9,8 @@ import assign from 'object-assign';
 
 let AppData = {
     data:{
-        user:['Montse', 'Vane']
+        user:['Montse', 'Vane'],
+        password: ['hola', 'holi']
     },
     getUser() {
         console.log("llego a store")

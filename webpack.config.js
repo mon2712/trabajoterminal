@@ -19,6 +19,7 @@ module.exports = {
         filename: 'index_bundle.js',
         publicPath:'/'
     },
+    devtool: "source-map",
     module: {
         rules: [
             { test: /\.(js)$/, use: 'babel-loader' },
@@ -26,13 +27,27 @@ module.exports = {
             { test: /\.scss$/,
                 use: extractSass.extract({
                     use: [{
-                        loader: "css-loader"
+                        loader: "css-loader", options: {
+                            sourceMap: true
+                        }
                     }, {
-                        loader: "sass-loader"
+                        loader: 'sass-loader', options: {
+                            sourceMap: true
+                        }
                     }],
                     // use style-loader in development
                     fallback: "style-loader"
                 })
+            },
+            {
+                test: /\.(png|jp(e*)g|svg)$/,  
+                use: [{
+                    loader: 'url-loader',
+                    options: { 
+                        limit: 8000, // Convert images < 8kb to base64 strings
+                        name: 'images/[hash]-[name].[ext]'
+                    } 
+                }]
             }
         ]
     },
