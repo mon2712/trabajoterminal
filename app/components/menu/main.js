@@ -1,5 +1,6 @@
 import React from 'react';
 import ButtonOptions from '../menu/buttonOptions'
+import SearchBar from '../menu/searchBar'
 import AppStore from '../../data/store';
 
 function getAppState() {
@@ -12,7 +13,7 @@ class Menu extends React.Component {
     constructor(props){
         super(props);        
         //this.state = getAppState();
-        this.props.actions.getMenuTypes('recepcion');         
+        this.props.actions.getMenuTypes('instructor');         
         console.log("en app", this.props.store.user)        
     }
 	componentWillMount(){
@@ -22,6 +23,7 @@ class Menu extends React.Component {
 		
 		return (
 			<div className='menuContainer'>
+                <SearchBar {...this.props} />            
 				<ButtonOptions {...this.props } type="recepcion"/>
 			</div>
 		);

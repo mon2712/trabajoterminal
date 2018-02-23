@@ -47,12 +47,12 @@ let AppData = {
                 "ico": "icon-update",
                 "text": "Actualizar Reporte",
                 "path": "/",
-                "color": "#FFFFFF"
+                "color": "#4765dd"
             },{
                 "ico": "icon-learning",
                 "text": "Vista Centro",
                 "path": "/",
-                "color": "#FFFFFF"
+                "color": "#ebc531"
             },{
                 "ico": "icon-team",
                 "text": "Registro Asistentes",
@@ -62,12 +62,12 @@ let AppData = {
                 "ico": "icon-calls",
                 "text": "Lista Llamadas",
                 "path": "/",
-                "color": "#FFFFFF"
+                "color": "#6ddfc1"
             },{
                 "ico": "icon-point-of-service",
                 "text": "Lista Adeudos",
                 "path": "/",
-                "color": "#FFFFFF"
+                "color": "#acea49"
             },{
                 "ico": "icon-printer",
                 "text": "Imprimir",
