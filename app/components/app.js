@@ -2,7 +2,9 @@ import AppStore from '../data/store';
 import React from 'react';
 import Header from '../components/header/main';
 import Login from '../components/login/main';
+import TiempoReducido from './tiempoReducido/main';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
 
 class App extends React.Component {
     constructor(props){
@@ -31,9 +33,13 @@ class App extends React.Component {
                     <ul>
                         <li><Link to={'/login'}>Login</Link></li>
                     </ul>
+                    <ul>
+                        <li><Link to={'/tiempoReducido'}>Configurar tiempo reducido</Link></li>
+                    </ul>
                     <Switch>
                         <Route exact path='/' component={HeaderConst} />
                         <Route path='/login' component={Login} />
+                        <Route path='/tiempoReducido' component={TiempoReducido} />
                         <Route render={function (){
                             return <p> Not Found </p>
                         }} />
