@@ -2,13 +2,6 @@ import actionTypes from './actionTypes';
 import dispatcher from './dispatcher';
 
 const Actions = {
-  addTodo(text) {
-    dispatcher.dispatch({
-      type: actionTypes.ADD_TODO,
-      text,
-    });
-  },
-
   getUser(user) {
     dispatcher.dispatch({
       type: actionTypes.GET_USER,
@@ -16,19 +9,13 @@ const Actions = {
     });
   },
 
-  deleteTodo(id) {
+  getMenuTypes(typeMenu) {
     dispatcher.dispatch({
-      type: actionTypes.DELETE_TODO,
-      id,
+      type: actionTypes.GET_MENUTYPES,
+      typeMenu
     });
-  },
+  }
 
-  toggleTodo(id) {
-    dispatcher.dispatch({
-      type: actionTypes.TOGGLE_TODO,
-      id,
-    });
-  },
 };
 
 export default Actions;

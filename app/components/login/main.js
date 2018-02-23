@@ -1,11 +1,22 @@
 import React from 'react';
 import InputUser from './inputUser';
 import InputPass from './inputPass';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {browserHistory} from 'react-router';
+
+import {withRouter} from "react-router-dom";
 
 class Login extends React.Component {
+	verifyUser(){
+		console.log("hola");
+		return(
+			<div>
+       			
+			</div>
+		)
+    }
     
     render() {
-		console.log("Llego al login");
 		return (
 			<div className='loginContainer'>
 				<span id='title'>Bienvenidos</span>
@@ -13,11 +24,11 @@ class Login extends React.Component {
 				<InputUser />
 				<InputPass />
 				<div className='button'>
-					Aceptar
+					<Link to={'/menu'}>Aceptar</Link>
 				</div>
 				<span id='forgot'>¿Olvidaste tu contraseña?</span>
 			</div>
 		);
 	}
   }
-  export default Login;
+  export default withRouter(Login);
