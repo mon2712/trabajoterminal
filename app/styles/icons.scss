@@ -1,0 +1,318 @@
+@import "variables";
+
+@font-face {
+  font-family: 'trabajoterminal';
+  src:  url('#{$font-path}/trabajoterminal.eot?k1kpua');
+  src:  url('#{$font-path}/trabajoterminal.eot?k1kpua#iefix') format('embedded-opentype'),
+    url('#{$font-path}/trabajoterminal.ttf?k1kpua') format('truetype'),
+    url('#{$font-path}/trabajoterminal.woff?k1kpua') format('woff'),
+    url('#{$font-path}/trabajoterminal.svg?k1kpua#trabajoterminal') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'trabajoterminal' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@function unicode($str) {
+  @return unquote("\"") + $str + unquote("\"");
+}
+
+.icon-minute-mark {
+  &:before {
+    content: unicode($icon-minute-mark); 
+  }
+}
+.icon-black-stopwatch {
+  &:before {
+    content: unicode($icon-black-stopwatch); 
+  }
+}
+.icon-call-answer {
+  &:before {
+    content: unicode($icon-call-answer); 
+  }
+}
+.icon-check {
+  &:before {
+    content: unicode($icon-check); 
+  }
+}
+.icon-class-group {
+  &:before {
+    content: unicode($icon-class-group); 
+  }
+}
+.icon-list {
+  &:before {
+    content: unicode($icon-list); 
+  }
+}
+.icon-clipboard {
+  &:before {
+    content: unicode($icon-clipboard); 
+  }
+}
+.icon-tutor {
+  &:before {
+    content: unicode($icon-tutor); 
+  }
+}
+.icon-payment {
+  &:before {
+    content: unicode($icon-payment); 
+  }
+}
+.icon-user-female {
+  &:before {
+    content: unicode($icon-user-female); 
+  }
+}
+.icon-girl-on-phone {
+  &:before {
+    content: unicode($icon-girl-on-phone); 
+  }
+}
+.icon-id-card {
+  &:before {
+    content: unicode($icon-id-card); 
+  }
+}
+.icon-card {
+  &:before {
+    content: unicode($icon-card); 
+  }
+}
+.icon-square-check {
+  &:before {
+    content: unicode($icon-square-check); 
+  }
+}
+.icon-invoice {
+  &:before {
+    content: unicode($icon-invoice); 
+  }
+}
+.icon-learning {
+  &:before {
+    content: unicode($icon-learning); 
+  }
+}
+.icon-left-arrow {
+  &:before {
+    content: unicode($icon-left-arrow); 
+  }
+}
+.icon-list-students {
+  &:before {
+    content: unicode($icon-list-students); 
+  }
+}
+.icon-multiply {
+  &:before {
+    content: unicode($icon-multiply); 
+  }
+}
+.icon-planning {
+  &:before {
+    content: unicode($icon-planning); 
+  }
+}
+.icon-point-of-service {
+  &:before {
+    content: unicode($icon-point-of-service); 
+  }
+}
+.icon-printer {
+  &:before {
+    content: unicode($icon-printer); 
+  }
+}
+.icon-right-arrow {
+  &:before {
+    content: unicode($icon-right-arrow); 
+  }
+}
+.icon-search {
+  &:before {
+    content: unicode($icon-search); 
+  }
+}
+.icon-programacion {
+  &:before {
+    content: unicode($icon-programacion); 
+  }
+}
+.icon-smartphone-call {
+  &:before {
+    content: unicode($icon-smartphone-call); 
+  }
+}
+.icon-lines-simple {
+  &:before {
+    content: unicode($icon-lines-simple); 
+  }
+}
+.icon-table {
+  &:before {
+    content: unicode($icon-table); 
+  }
+}
+.icon-team {
+  &:before {
+    content: unicode($icon-team); 
+  }
+}
+.icon-telephone-student {
+  &:before {
+    content: unicode($icon-telephone-student); 
+  }
+}
+.icon-calls {
+  &:before {
+    content: unicode($icon-calls); 
+  }
+}
+.icon-update {
+  &:before {
+    content: unicode($icon-update); 
+  }
+}
+.icon-user-male {
+  &:before {
+    content: unicode($icon-user-male); 
+  }
+}
+.icon-newspaper {
+  &:before {
+    content: unicode($icon-newspaper); 
+  }
+}
+.icon-pencil {
+  &:before {
+    content: unicode($icon-pencil); 
+  }
+}
+.icon-pencil2 {
+  &:before {
+    content: unicode($icon-pencil2); 
+  }
+}
+.icon-barcode {
+  &:before {
+    content: unicode($icon-barcode); 
+  }
+}
+.icon-history {
+  &:before {
+    content: unicode($icon-history); 
+  }
+}
+.icon-clock {
+  &:before {
+    content: unicode($icon-clock); 
+  }
+}
+.icon-clock2 {
+  &:before {
+    content: unicode($icon-clock2); 
+  }
+}
+.icon-alarm {
+  &:before {
+    content: unicode($icon-alarm); 
+  }
+}
+.icon-bell {
+  &:before {
+    content: unicode($icon-bell); 
+  }
+}
+.icon-lock {
+  &:before {
+    content: unicode($icon-lock); 
+  }
+}
+.icon-unlocked {
+  &:before {
+    content: unicode($icon-unlocked); 
+  }
+}
+.icon-wrench {
+  &:before {
+    content: unicode($icon-wrench); 
+  }
+}
+.icon-bin2 {
+  &:before {
+    content: unicode($icon-bin2); 
+  }
+}
+.icon-clipboard2 {
+  &:before {
+    content: unicode($icon-clipboard2); 
+  }
+}
+.icon-download3 {
+  &:before {
+    content: unicode($icon-download3); 
+  }
+}
+.icon-upload3 {
+  &:before {
+    content: unicode($icon-upload3); 
+  }
+}
+.icon-neutral {
+  &:before {
+    content: unicode($icon-neutral); 
+  }
+}
+.icon-wondering {
+  &:before {
+    content: unicode($icon-wondering); 
+  }
+}
+.icon-enter {
+  &:before {
+    content: unicode($icon-enter); 
+  }
+}
+.icon-exit {
+  &:before {
+    content: unicode($icon-exit); 
+  }
+}
+.icon-paragraph-left {
+  &:before {
+    content: unicode($icon-paragraph-left); 
+  }
+}
+.icon-500px {
+  &:before {
+    content: unicode($icon-500px); 
+  }
+}
+.icon-file-pdf {
+  &:before {
+    content: unicode($icon-file-pdf); 
+  }
+}
+.icon-file-excel {
+  &:before {
+    content: unicode($icon-file-excel); 
+  }
+}
+
