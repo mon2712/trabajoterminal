@@ -24,7 +24,18 @@ class TiempoReducido extends React.Component {
                 </div>
                 <div className='confTimeContainer'>
                     <span id='title'>Configurar tiempo</span>
-                    <InputTime />
+                    <span id="mensaje">Alumno: Vanessa Miranda</span>
+                    <div id="TiempoMin">
+                        <span id="mensaje1">Tiempo: </span>
+                        <InputTime />
+                        <span id="mensaje2"> min</span>
+                    </div>
+                    <div className='buttonTime'>
+                        Aceptar
+                    </div>
+                    <div className='buttonClose'>
+                    </div>
+
                 </div>
             </div>
 		);
