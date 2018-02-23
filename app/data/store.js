@@ -13,63 +13,63 @@ let AppData = {
         password: ['hola', 'holi'],
         menuTypes: {
             "recepcion": [{
-                "ico": "",
+                "ico": "icon-clipboard",
                 "text": "Asistencia",
                 "path": "/asistencia",
                 "color": "#4765dd"
             },{
-                "ico": "",
+                "ico": "icon-learning",
                 "text": "Vista Centro",
                 "path": "/vistaCentro",
                 "color": "#ebc531"
             },{
-                "ico": "",
+                "ico": "icon-payment",
                 "text": "Registrar Pago",
                 "path": "/registrarPago",
                 "color": "#e84eb2"
             },{
-                "ico": "",
+                "ico": "icon-calls",
                 "text": "Lista Llamadas",
                 "path": "/",
                 "color": "#6ddfc1"
             },{
-                "ico": "",
+                "ico": "icon-point-of-service",
                 "text": "Lista Adeudo",
                 "path": "/",
                 "color": "#acea49"
             },{
-                "ico": "",
+                "ico": "icon-minute-mark",
                 "text": "Tiempo Reducido",
                 "path": "/",
                 "color": "#48a2bb"
             }],
             "instructor": [{
-                "ico": "",
+                "ico": "icon-update",
                 "text": "Actualizar Reporte",
                 "path": "/",
                 "color": "#FFFFFF"
             },{
-                "ico": "",
+                "ico": "icon-learning",
                 "text": "Vista Centro",
                 "path": "/",
                 "color": "#FFFFFF"
             },{
-                "ico": "",
+                "ico": "icon-team",
                 "text": "Registro Asistentes",
                 "path": "/",
                 "color": "#814bea"
             },{
-                "ico": "",
+                "ico": "icon-calls",
                 "text": "Lista Llamadas",
                 "path": "/",
                 "color": "#FFFFFF"
             },{
-                "ico": "",
+                "ico": "icon-point-of-service",
                 "text": "Lista Adeudos",
                 "path": "/",
                 "color": "#FFFFFF"
             },{
-                "ico": "",
+                "ico": "icon-printer",
                 "text": "Imprimir",
                 "path": "/",
                 "color": "#e9414f"

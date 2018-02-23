@@ -1,52 +1,52 @@
 {
         "menuTypes": {
             "recepción": [{
-                "ico": "",
+                "ico": "icon-clipboard",
                 "text": "Asistencia",
                 "path": "/"
             },{
-                "ico": "",
+                "ico": "icon-learning",
                 "text": "Vista Centro",
                 "path": "/"
             },{
-                "ico": "",
+                "ico": "icon-payment",
                 "text": "Registrar Pago",
                 "path": "/"
             },{
-                "ico": "",
+                "ico": "icon-calls",
                 "text": "Lista Llamadas",
                 "path": "/"
             },{
-                "ico": "",
+                "ico": "icon-point-of-service",
                 "text": "Lista Adeudo",
                 "path": "/"
             },{
-                "ico": "",
+                "ico": "icon-minute-mark",
                 "text": "Tiempo Reducido",
                 "path": "/"
             }],
             "instructor": [{
-                "ico": "",
+                "ico": "icon-update",
                 "text": "Actualizar Reporte",
                 "path": "/"
             },{
-                "ico": "",
+                "ico": "icon-learning",
                 "text": "Vista Centro",
                 "path": "/"
             },{
-                "ico": "",
+                "ico": "icon-team",
                 "text": "Registro Asistentes",
                 "path": "/"
             },{
-                "ico": "",
+                "ico": "icon-calls",
                 "text": "Lista Llamadas",
                 "path": "/"
             },{
-                "ico": "",
+                "ico": "icon-point-of-service",
                 "text": "Lista Adeudos",
                 "path": "/"
             },{
-                "ico": "",
+                "ico": "icon-printer",
                 "text": "Imprimir",
                 "path": "/"
             }]
