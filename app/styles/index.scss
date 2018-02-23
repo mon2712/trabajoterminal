@@ -5,12 +5,18 @@
 @import "menu/menu.scss";
 @import "menu/buttonOption.scss";
 
+@import "/variables.scss";
+@import "/icons.scss";
+
+@import url('https://fonts.googleapis.com/css?family=Cabin|Jaldi');
+
 #generalDiv{
     min-height: 800px;
     max-height: 1500px;
     height: auto;
 }
 #app{
+    font-family: 'Jaldi', sans-serif;
     display: block;
     position: relative;
     width: 100%;
