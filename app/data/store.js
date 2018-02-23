@@ -11,18 +11,82 @@ let AppData = {
     data:{
         user:['Montse', 'Vane'],
         password: ['hola', 'holi'],
-        menuTypes: []
+        menuTypes: {
+            "recepcion": [{
+                "ico": "",
+                "text": "Asistencia",
+                "path": "/asistencia",
+                "color": "#4765dd"
+            },{
+                "ico": "",
+                "text": "Vista Centro",
+                "path": "/vistaCentro",
+                "color": "#ebc531"
+            },{
+                "ico": "",
+                "text": "Registrar Pago",
+                "path": "/registrarPago",
+                "color": "#e84eb2"
+            },{
+                "ico": "",
+                "text": "Lista Llamadas",
+                "path": "/",
+                "color": "#6ddfc1"
+            },{
+                "ico": "",
+                "text": "Lista Adeudo",
+                "path": "/",
+                "color": "#acea49"
+            },{
+                "ico": "",
+                "text": "Tiempo Reducido",
+                "path": "/",
+                "color": "#48a2bb"
+            }],
+            "instructor": [{
+                "ico": "",
+                "text": "Actualizar Reporte",
+                "path": "/",
+                "color": "#FFFFFF"
+            },{
+                "ico": "",
+                "text": "Vista Centro",
+                "path": "/",
+                "color": "#FFFFFF"
+            },{
+                "ico": "",
+                "text": "Registro Asistentes",
+                "path": "/",
+                "color": "#814bea"
+            },{
+                "ico": "",
+                "text": "Lista Llamadas",
+                "path": "/",
+                "color": "#FFFFFF"
+            },{
+                "ico": "",
+                "text": "Lista Adeudos",
+                "path": "/",
+                "color": "#FFFFFF"
+            },{
+                "ico": "",
+                "text": "Imprimir",
+                "path": "/",
+                "color": "#e9414f"
+            }]
+        }
     },
     getUser() {
         console.log("llego a store")
     },
-    getMenuTypes(){
-        console.log("get MenuType")
+    getMenuTypes(action){
+        console.log("get MenuType", action)
 
         $.getJSON('/app/fillData/menuTypes.js', function(info) {
-           //console.log("menu correct", info);
-           AppData.data.menuTypes = info;
+           console.log("menu correct", info);
+           AppData.data.menuTypes = info.menuTypes;
            AppStore.emitChange();
+           console.log("Despues del emit", AppData.data.menuTypes)
         }).fail(function(error) {
             console.error(error);
         });
@@ -53,7 +117,7 @@ dispatcher.register((action) => {
         AppData.getUser();
         break;
     case actionTypes.GET_MENUTYPES:
-        AppData.getMenuTypes();
+        AppData.getMenuTypes(action);
         break;
 
     default:
