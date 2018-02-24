@@ -1,6 +1,7 @@
 import React from 'react';
-import ButtonOptions from '../menu/buttonOptions'
-import SearchBar from '../menu/searchBar'
+import ButtonOptions from '../menu/buttonOptions';
+import SearchBar from '../menu/searchBar';
+import Panel from '../menu/panel';
 import AppStore from '../../data/store';
 
 
@@ -14,8 +15,13 @@ class Menu extends React.Component {
     render() {
 		return (
 			<div className='menuContainer'>
-                <SearchBar {...this.props} />
-				<ButtonOptions {...this.props } type="recepcion"/>
+                <div className="leftContainerM">
+                    <SearchBar {...this.props} />
+				    <ButtonOptions {...this.props } type="recepcion"/>
+                </div>
+                <div className="rightContainerM">
+                    <Panel />
+                </div>
 			</div>
 		);
 	}
