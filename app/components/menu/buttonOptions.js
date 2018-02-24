@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 class ButtonOptions extends React.Component {
 
 
@@ -11,10 +11,12 @@ class ButtonOptions extends React.Component {
           return null;
 
         return menuTypes.map((opt, index) => (
-            <div className='buttonContainer' key={index} style={{background: opt.color, border: opt.color} }>
-                <span className={"ico "+opt.ico}></span>
-                <span>{opt.text}</span>
-            </div>
+            <Link key={index} to={opt.path}>
+              <div className='buttonContainer' key={index} style={{background: opt.color, border: opt.color} }>
+                  <span className={"ico "+opt.ico}></span>
+                  <span>{opt.text}</span>
+              </div>
+            </Link>
         ));
     }
 
