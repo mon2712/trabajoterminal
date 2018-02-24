@@ -7,45 +7,28 @@ import actions from '../data/actions';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import history from '../history';
 
-/*function getAppState() {
-    return {
-        store: AppStore.getData()
-    };
-}*/
+
 function getAppState() {
-    return {
-      store: AppStore.getData()
-    };
+    return AppStore.getData();
 }
 class App extends React.Component {
     constructor(props){
         super(props);
-        this.state = getAppState();
+        this.state = {
+            store: getAppState()
+        }
+        this._onChange = this._onChange.bind(this);
     }
     componentDidMount() {
-        //AppStore.addChangeListener(this._onChange);
+        AppStore.addChangeListener(this._onChange);
     }
     componentWillUnmount() {
-        //AppStore.removeChangeListener(this._onChange);
+        AppStore.removeChangeListener(this._onChange);
     }
     _onChange() {
-        //this.setState({store: getAppState()});
+       this.setState({store: getAppState()});
     }
     render() {
-        console.log("this.state componente papa", this.state);
-        
-        const HeaderConst = (props) => {
-            return (
-              <Header 
-                {...this.state}
-              />
-            );
-        }
-        const MenuConst = (props) => {
-            return (
-                <Menu {...this.state} actions={actions} />
-            );
-        }
 
         return (
             <Router>
@@ -54,15 +37,15 @@ class App extends React.Component {
                         <li><Link to={'/login'}></Link></li>
                     </ul>
                     <Switch>
-                        <Route exact path='/' component={HeaderConst} />
+                        <Route exact path='/' render={(props) => <Header {...this.state} />} />
                         <Route path='/login' component={Login} />
-                        <Route path='/menu' component={MenuConst} />
+                        <Route path='/menu' render={(props) => <Menu {...this.state} actions={actions}/>} />
                         <Route render={function (){
                             return <p> Not Found </p>
                         }} />
                     </Switch>
                 </div>
-            </Router>    
+            </Router>
         );
     }
 }
