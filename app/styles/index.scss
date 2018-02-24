@@ -11,6 +11,15 @@
 
 @import url('https://fonts.googleapis.com/css?family=Cabin|Jaldi');
 
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	margin: 0;
+	outline: none;
+	padding: 0;
+	text-decoration: none;
+}
+
 #generalDiv{
     min-height: 800px;
     max-height: 1500px;
@@ -36,8 +45,7 @@
         bottom: 0;
         right: 0;
         position: absolute;
-        z-index: -1;   
+        z-index: -1;
     }
 
 }
-   
