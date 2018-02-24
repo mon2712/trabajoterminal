@@ -1,55 +1,66 @@
 {
         "menuTypes": {
-            "recepción": [{
+            "recepcion": [{
                 "ico": "icon-clipboard",
                 "text": "Asistencia",
-                "path": "/"
+                "path": "/asistencia",
+                "color": "#4765dd"
             },{
                 "ico": "icon-learning",
                 "text": "Vista Centro",
-                "path": "/"
+                "path": "/vistaCentro",
+                "color": "#ebc531"
             },{
                 "ico": "icon-payment",
                 "text": "Registrar Pago",
-                "path": "/"
+                "path": "/registrarPago",
+                "color": "#e84eb2"
             },{
                 "ico": "icon-calls",
                 "text": "Lista Llamadas",
-                "path": "/"
+                "path": "/",
+                "color": "#6ddfc1"
             },{
                 "ico": "icon-point-of-service",
                 "text": "Lista Adeudo",
-                "path": "/"
+                "path": "/",
+                "color": "#acea49"
             },{
                 "ico": "icon-minute-mark",
                 "text": "Tiempo Reducido",
-                "path": "/"
+                "path": "/",
+                "color": "#48a2bb"
             }],
             "instructor": [{
                 "ico": "icon-update",
                 "text": "Actualizar Reporte",
-                "path": "/"
+                "path": "/",
+                "color": "#4765dd"
             },{
                 "ico": "icon-learning",
                 "text": "Vista Centro",
-                "path": "/"
+                "path": "/",
+                "color": "#ebc531"
             },{
                 "ico": "icon-team",
                 "text": "Registro Asistentes",
-                "path": "/"
+                "path": "/",
+                "color": "#814bea"
             },{
                 "ico": "icon-calls",
                 "text": "Lista Llamadas",
-                "path": "/"
+                "path": "/",
+                "color": "#6ddfc1"
             },{
                 "ico": "icon-point-of-service",
                 "text": "Lista Adeudos",
-                "path": "/"
+                "path": "/",
+                "color": "#acea49"
             },{
                 "ico": "icon-printer",
                 "text": "Imprimir",
-                "path": "/"
+                "path": "/",
+                "color": "#e9414f"
             }]
         }
     }
-
