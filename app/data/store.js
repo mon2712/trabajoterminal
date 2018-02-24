@@ -1,19 +1,29 @@
-import Immutable from 'immutable';
-import {ReduceStore} from 'flux/utils';
 import actionTypes from './actionTypes';
 import dispatcher from './dispatcher';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
+//import _ from 'underscore';
 
+const CHANGE_EVENT = 'change';
 
 
 let AppData = {
     data:{
         user:['Montse', 'Vane'],
-        password: ['hola', 'holi']
+        password: ['hola', 'holi'],
+        menuTypes: {}
     },
     getUser() {
         console.log("llego a store")
+    },
+    getMenuTypes(action){
+        console.log("llego a store")
+        $.getJSON('/app/fillData/menuTypes.js', function(info) {
+           AppData.data.menuTypes = info.menuTypes;
+           AppStore.emitChange();
+        }).fail(function(error) {
+            console.error(error);
+        });
     }
 }
 
@@ -36,15 +46,12 @@ AppStore = assign({}, AppStore, {
 });
 
 dispatcher.register((action) => {
-    switch (action.actionType) {
+    switch (action.type) {
     case actionTypes.GET_USER:
         AppData.getUser();
         break;
-    case actionTypes.DELETE_TODO:
-        AppData.getUser();
-        break;
-    case actionTypes.TOGGLE_TODO:
-        AppData.getUser();
+    case actionTypes.GET_MENUTYPES:
+        AppData.getMenuTypes(action);
         break;
 
     default:
