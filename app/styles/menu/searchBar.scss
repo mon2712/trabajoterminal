@@ -1,0 +1,45 @@
+.searchBarContainer{
+    width: 90%;
+    background: white;
+    border-radius: 10px;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 50px;
+    margin-left: 10px;
+    .searchContainer{
+        border-radius: 0px 10px 10px 0px;
+        box-shadow: 1px 1px 28px #000000;        
+        span{
+            display: inline-block;
+            width: 5%;
+            color: #a7a7a7;
+            font-size: 24px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        input{
+            width: 75%;
+            display: inline-block;
+            vertical-align: middle;
+            height: 35px;
+            margin: 0;
+            padding: 0;
+            border: none;
+            font-size: 18px;
+        }
+        .buttonSearch{
+            width: 20%;
+            text-align: center;
+            background: #000000;
+            color: #a7a7a7;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 24px;
+            border-radius: 0px 10px 10px 0px;
+            &:hover{
+        background: rgba(152,174,206,.8) !important;
+                color: black;
+            }
+        }
+    }
+}

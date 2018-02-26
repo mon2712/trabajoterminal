@@ -9,14 +9,28 @@
 @import "tiempoReducido/inputAlumno.scss";
 @import "general/navigationContainer.scss";
 
+@import "menu/menu.scss";
+@import "menu/buttonOption.scss";
+@import "menu/searchBar.scss";
+@import "menu/panel.scss";
+@import "menu/notification.scss";
 
 @import "/variables.scss";
 @import "/icons.scss";
 
 @import url('https://fonts.googleapis.com/css?family=Cabin|Jaldi');
 
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	margin: 0;
+	outline: none;
+	padding: 0;
+	text-decoration: none;
+}
+
 #generalDiv{
-    min-height: 800px;
+    min-height: 600px;
     max-height: 1500px;
     height: auto;
 }
@@ -40,8 +54,7 @@
         bottom: 0;
         right: 0;
         position: absolute;
-        z-index: -1;   
+        z-index: -1;
     }
 
 }
-   

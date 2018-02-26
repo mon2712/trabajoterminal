@@ -12,8 +12,13 @@ const components = [
     './app/libs/angular.js'
 ];
 
+const scripts = [
+    './app/index.js',
+    './app/styles/index.scss'
+];
+
 module.exports = {
-    entry : ['./app/index.js', './app/styles/index.scss'],
+    entry : scripts,
     output : {
         path: path.resolve(__dirname, 'dist'),
         filename: 'index_bundle.js',
@@ -44,7 +49,7 @@ module.exports = {
                 use: [{
                     loader: 'url-loader',
                     options: { 
-                        limit: 8000 // Convert images < 8kb to base64 strings
+                        limit: 8000, // Convert images < 8kb to base64 strings
                     } 
                 }]
             },
