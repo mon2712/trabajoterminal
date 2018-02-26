@@ -1,16 +1,16 @@
-var React = require('react');
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 class InputSearch extends React.Component {
     
     render() {
        return (
-         <form>
-            <div>
+            <div className='searchDiv'>
                   <input type="text"/>
-                  <div className='buttonLupa'>
-                  </div>
+                  <Link to={'/login'}>
+                    <span className="ico icon-search"></span>
+                  </Link>
             </div>
-          </form>
        );
     }
   }

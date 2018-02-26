@@ -1,0 +1,29 @@
+.navigationContainer{
+    border: 1px black;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    background: rgba(0, 0, 0, .5);
+    text-align: center;
+    width: 20%;
+    height: 10%;
+    vertical-align: 30%;
+    
+    .ico{
+        display: inline-block;
+        vertical-align: middle;
+        color: white;
+        width: 15%;
+        font-size: 14px;
+        cursor: pointer;
+        &:hover{
+            color: #a7a7a7;
+        }
+    }
+    .navigationText{
+        display: inline-block;
+        vertical-align: middle;
+        color: white;
+        font-size: 16px;
+        width: 85%;
+    }
+}
