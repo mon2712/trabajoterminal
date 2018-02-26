@@ -13,7 +13,8 @@ let AppData = {
         password: ['hola', 'holi'],
         menuTypes: {},
         notifications: null,
-        studentsAtCenter: null
+        studentsAtCenter: null,
+        studentFileInfo: null
     },
     getUser() {
         console.log("llego a store")
@@ -39,6 +40,14 @@ let AppData = {
            console.log("En store", info);
             AppData.data.studentsAtCenter = info.studentsInCenter;
            AppStore.emitChange();
+        }).fail(function(error) {
+            console.error(error);
+        });
+    },
+    getStudentInfo(action){
+        $.getJSON('/app/fillData/studentInfo.js', function(info) {
+            AppData.data.studentFileInfo = info[0].student;
+            AppStore.emitChange();
         }).fail(function(error) {
             console.error(error);
         });
@@ -77,7 +86,9 @@ dispatcher.register((action) => {
     case actionTypes.GET_STUDENTSATCENTER:
         AppData.getStudentsAtCenter();
         break;
-
+    case actionTypes.GET_STUDENTINFO:
+        AppData.getStudentInfo();
+        break;
     default:
 		// no op
     }

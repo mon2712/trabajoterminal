@@ -23,6 +23,11 @@ const Actions = {
     dispatcher.dispatch({
       type: actionTypes.GET_STUDENTSATCENTER
     });
+  },
+  getStudentInfo() {
+    dispatcher.dispatch({
+      type: actionTypes.GET_STUDENTINFO
+    });
   }
 };
 

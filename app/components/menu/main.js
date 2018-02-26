@@ -14,6 +14,7 @@ class Menu extends React.Component {
       this.props.actions.getNotifications();
     }
     render() {
+        console.log("en menu", this.props)
 		return (
 			<div className='menuContainer'>
                 <div className="leftContainerM">
