@@ -1,4 +1,13 @@
-.optionsContainer{
-    width: 60%;
-    padding: 30px;
+.menuContainer{
+    .leftContainerM{
+        width: 70%;
+        display: inline-block;
+        vertical-align: top;
+    }
+    .rightContainerM{
+        width: 30%;
+        display: inline-block;
+        vertical-align: top;
+        position: relative;
+    }
 }

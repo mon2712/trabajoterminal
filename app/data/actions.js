@@ -8,14 +8,17 @@ const Actions = {
       user,
     });
   },
-
   getMenuTypes(typeMenu) {
     dispatcher.dispatch({
       type: actionTypes.GET_MENUTYPES,
       typeMenu
     });
+  },
+  getNotifications() {
+    dispatcher.dispatch({
+      type: actionTypes.GET_NOTIFICATIONS
+    });
   }
-
 };
 
 export default Actions;

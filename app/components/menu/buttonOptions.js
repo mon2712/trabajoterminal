@@ -5,7 +5,6 @@ class ButtonOptions extends React.Component {
 
     renderButtons(){
         //map de menuTypes
-
         var menuTypes = this.props.store.menuTypes[this.props.type];
         if (menuTypes == undefined)
           return null;
@@ -21,8 +20,6 @@ class ButtonOptions extends React.Component {
     }
 
     render() {
-        //{this.renderButtons(this.props.store.menuTypes, this.props.type)}
-
 		return (
             <div className="optionsContainer">
               {this.renderButtons()}

@@ -1,0 +1,54 @@
+.notificationsContainer{
+    width: 95%;
+    height: 600px;
+    margin: 0 auto;
+    padding: 10px;
+    overflow-y: scroll;
+    .notificationBox{
+        height: 80px;
+        margin-bottom: 15px;
+        background: rgba(0,0,0,.5);    
+        border-radius: 10px;
+        color: white;
+        .iconDiv{
+            width: 20%;
+            color: white;
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            span{
+                display: block;
+                font-size: 40px;
+                line-height: 80px;
+            }
+        }
+        .infoDiv{
+            display: inline-block;
+            vertical-align: middle;
+            vertical-align: top;
+            width: 70%;
+            padding: 10px;
+            span{
+                display: block;
+            }
+            .title{
+                font-size: 20px;
+            }
+            .button{
+                text-decoration: underline;
+                font-size: 16px;
+                cursor: pointer;
+            }
+        }
+        .ico{
+            display: inline-block;
+            vertical-align: top;
+            width: 10%;
+            font-size: 20px;
+            padding: 10px;
+            text-align: right;
+            cursor: pointer;
+        }
+        
+    }
+}
