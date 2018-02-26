@@ -37,13 +37,10 @@ class App extends React.Component {
                     <ul>
                         <li><Link to={'/login'}></Link></li>
                     </ul>
-                    <ul>
-                        <li><Link to={'/tiempoReducido'}>Configurar tiempo reducido</Link></li>
-                    </ul>
                     <Switch>
                         <Route exact path='/' render={(props) => <Header {...this.state} />} />
                         <Route path='/login' component={Login} />
-                        <Route path='/tiempoReducido' component={TiempoReducido} />
+                        <Route path='/tiempoReducido' render={(props) => <TiempoReducido {...this.state} actions={actions}/>} />
                         <Route path='/menu' render={(props) => <Menu {...this.state} actions={actions}/>} />
                         <Route render={function (){
                             return <p> Not Found </p>

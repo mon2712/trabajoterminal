@@ -7,7 +7,12 @@ import StudentsCenter from './studentsCenter';
 import TimeConfig from './timeConfig';
 
 class TiempoReducido extends React.Component {
-    
+    constructor(props){
+        super(props);
+    }
+    componentDidMount(){
+        this.props.actions.getStudentsAtCenter();
+    }
     render() {
 		console.log("Llego a tiempo reducido");
 		return (
@@ -16,7 +21,7 @@ class TiempoReducido extends React.Component {
                     <NavigationContainer texto="Tiempo Reducido"/>
                 </div>
                 <div className='leftContainer'>    
-                    <StudentsCenter />
+                    <StudentsCenter {...this.props}/>
                 </div>
                 <div className='rightContainer'> 
                     <TimeConfig />

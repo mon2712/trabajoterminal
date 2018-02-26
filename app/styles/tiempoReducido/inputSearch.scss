@@ -1,25 +1,30 @@
 .searchDiv{
-    width: 100%;
-    display: inline-block;
-    Link{
-        text-decoration: none;
-    }
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 20px;
     input{
-        width:60%;
-        height: 40px;
+        width:80%;
+        height: 30px;
+        display: inline-block;
         vertical-align: middle;
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
     }
     .ico{
         width: 20%;
-        height: 40px;
+        height: 30px;
+        line-height: 30px;
+        display: inline-block;
         vertical-align: middle;
         color: white;
-        font-size: 45px;
+        font-size: 24px;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
         background: #6ddfc5; 
+        cursor: pointer;
+        &:hover{
+            background: #56b49e;
+        }
     }
     
 }

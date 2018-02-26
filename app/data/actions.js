@@ -18,6 +18,11 @@ const Actions = {
     dispatcher.dispatch({
       type: actionTypes.GET_NOTIFICATIONS
     });
+  },
+  getStudentsAtCenter() {
+    dispatcher.dispatch({
+      type: actionTypes.GET_STUDENTSATCENTER
+    });
   }
 };
 
