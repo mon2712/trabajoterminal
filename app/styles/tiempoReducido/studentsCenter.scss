@@ -3,32 +3,35 @@
     text-align: center;
     border: 1px black;
     border-radius: 6px;
-    width: 70%;
+    width: 90%;
     background: rgba(0, 0, 0, .6);
-
     .studentsText{
-        vertical-align: middle;
+        display: block;
+        padding-top: 10px;
+        text-align: center;
         color: white;
-        font-size: 25px;
-        width: 85%;
+        font-size: 30px;
     }
     .namesStudents{
         width: 90%;
-    
+        overflow-y: scroll;
+        max-height: 500px;
+        margin: 0 auto;
+        margin-top: 20px;
         .nameStudent{
-            width: 100%;
-            margin: 15px;
-            padding: 2%;
-            vertical-align: middle;
-            color: white;
-            border: 1px black;
+            width: 90%;
+            margin:0 auto;
+            text-align: left;
+            padding: 5px;
+            margin-bottom: 10px;
+            color: #6ddfc5;
             border-radius: 10px;
             background: rgba(0, 0, 0, .5);
+            display: block;
+            cursor: pointer;
             &:hover{
-                color: #a7a7a7;
-            }
-           
+                background: rgba(0, 0, 0, .8);
+            } 
         }
-    
     }
 }
