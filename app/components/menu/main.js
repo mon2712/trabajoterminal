@@ -11,6 +11,7 @@ class Menu extends React.Component {
     }
     componentDidMount() {
       this.props.actions.getMenuTypes('recepcion');
+      this.props.actions.getNotifications();
     }
     render() {
 		return (
@@ -20,7 +21,7 @@ class Menu extends React.Component {
 				    <ButtonOptions {...this.props } type="recepcion"/>
                 </div>
                 <div className="rightContainerM">
-                    <Panel />
+                    <Panel {...this.props}/>
                 </div>
 			</div>
 		);

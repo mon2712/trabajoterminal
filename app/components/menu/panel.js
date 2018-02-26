@@ -1,7 +1,8 @@
 import React from 'react';
+import Notification from '../menu/notification';
+
 
 class Panel extends React.Component {
-    
     
     renderSessionInfo(){
           return(
@@ -14,15 +15,11 @@ class Panel extends React.Component {
               </div>
           );
     }
-	
     render() {
-		
 		return (
             <div className="panelContainer">
                 {this.renderSessionInfo()}
-                <div className="notificationsContainer">
-                
-                </div>
+                <Notification {...this.props}/>
             </div>
 		);
 	}

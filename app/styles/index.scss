@@ -6,6 +6,7 @@
 @import "menu/buttonOption.scss";
 @import "menu/searchBar.scss";
 @import "menu/panel.scss";
+@import "menu/notification.scss";
 
 @import "/variables.scss";
 @import "/icons.scss";
@@ -22,7 +23,7 @@
 }
 
 #generalDiv{
-    min-height: 800px;
+    min-height: 600px;
     max-height: 1500px;
     height: auto;
 }

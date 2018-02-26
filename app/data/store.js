@@ -11,15 +11,23 @@ let AppData = {
     data:{
         user:['Montse', 'Vane'],
         password: ['hola', 'holi'],
-        menuTypes: {}
+        menuTypes: {},
+        notifications: null
     },
     getUser() {
         console.log("llego a store")
     },
     getMenuTypes(action){
-        console.log("llego a store")
         $.getJSON('/app/fillData/menuTypes.js', function(info) {
            AppData.data.menuTypes = info.menuTypes;
+           AppStore.emitChange();
+        }).fail(function(error) {
+            console.error(error);
+        });
+    },
+    getNotifications(action){
+        $.getJSON('/app/fillData/notifications.js', function(info) {
+           AppData.data.notifications = info.notifications;
            AppStore.emitChange();
         }).fail(function(error) {
             console.error(error);
@@ -52,6 +60,9 @@ dispatcher.register((action) => {
         break;
     case actionTypes.GET_MENUTYPES:
         AppData.getMenuTypes(action);
+        break;
+    case actionTypes.GET_NOTIFICATIONS:
+        AppData.getNotifications(action);
         break;
 
     default:
