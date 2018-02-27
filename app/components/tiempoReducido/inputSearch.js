@@ -7,7 +7,7 @@ class InputSearch extends React.Component {
         this.searchStudent=this.searchStudent.bind(this);
     }
     searchStudent(){
-        console.log("Estoy ne searchStudnet");
+        console.log("Estoy en searchStudnet");
     }
     render() {
        return (
