@@ -6,7 +6,7 @@ class InputTime extends React.Component {
        return (
         <form>
             <div>
-                <input type="text"/>
+                <input type="number"/>
             </div>
         </form>
        );

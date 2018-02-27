@@ -33,7 +33,15 @@ const Actions = {
         dispatcher.dispatch({
             type: actionTypes.CLOSE_STUDENTFILE
         });
-  }
+    },
+    getConfigTime(active, id, name){
+        dispatcher.dispatch({
+            type: actionTypes.GET_CONFIGTIME,
+            active,
+            id,
+            name
+        })
+    }
 };
 
 export default Actions;

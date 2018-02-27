@@ -3,6 +3,55 @@
     text-align: center;
     border: 1px black;
     border-radius: 6px;
-    width: 50%;
-    background: rgba(0, 0, 0, .6); 
+    width: 70%;
+    background: rgba(0, 0, 0, .6);
+    padding: 10px;
+    .headerTime{
+        .timeText{
+            margin-top: 10px;
+            display: inline-block;
+            width: 85%;
+            padding-top: 10px;
+            vertical-align: center;
+            color: white;
+            font-size: 30px;
+        }
+        .ico{
+            display: inline-block;
+            width: 15%;
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+            &:hover{
+                color: rgba(0, 0, 0, .8);
+            }
+        }
+    }
+    .timeText2{
+        margin-top: 10px;
+        padding-top: 10px;
+        vertical-align: center;
+        color: white;
+        font-size: 20px;
+    }
+    input{
+        width:10%;
+        height: 30px;
+        border-radius: 5px;
+        text-align: center;
+    }
+    .buttonSetTime{
+        margin: 0px auto;
+        margin-top: 10px;
+        width: 30%;
+        height:40px;
+        text-align: center;
+        border-radius: 5px;
+        background: #6ddfc5;
+        cursor: pointer;
+        &:hover{
+            background: rgba(0, 0, 0, .8);
+        }
+    }
+
 }

@@ -10,6 +10,11 @@ let AppData = {
     data:{
         user:['Montse', 'Vane'],
         password: ['hola', 'holi'],
+        configTime: {
+            active: false,
+            name: "",
+            id: ""
+        },
         menuTypes: {},
         notifications: null,
         studentsAtCenter: null,
@@ -54,6 +59,12 @@ let AppData = {
     closeStudentFile(){
         AppData.data.studentFileInfo = null;
         AppStore.emitChange();
+    },
+    getConfigTime(action){
+        AppData.data.configTime.active = action.active;
+        AppData.data.configTime.id = action.id;
+        AppData.data.configTime.name = action.name;
+        AppStore.emitChange();  
     }
 }
 
@@ -95,7 +106,11 @@ dispatcher.register((action) => {
     case actionTypes.CLOSE_STUDENTFILE:
         AppData.closeStudentFile();
         break;
-    default: 
+    case actionTypes.GET_CONFIGTIME:
+        AppData.getConfigTime(action);
+        break;
+
+    default:
 		// no op
     }
 });

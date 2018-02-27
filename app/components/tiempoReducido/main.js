@@ -1,5 +1,4 @@
 import React from 'react';
-import InputAlumno from './inputAlumno';
 import InputSearch from './inputSearch';
 import InputTime from './inputTime';
 import NavigationContainer from '../general/navigationContainer';
@@ -9,12 +8,15 @@ import TimeConfig from './timeConfig';
 class TiempoReducido extends React.Component {
     constructor(props){
         super(props);
+        this.state={
+            configTime: false
+        }
     }
     componentDidMount(){
         this.props.actions.getStudentsAtCenter();
     }
     render() {
-		console.log("Llego a tiempo reducido");
+		console.log("Llego al main de tiempo reducido", this.props);
 		return (
             <div className="tiempoReducidoContainer">
                 <div className='topContainer'>
@@ -24,7 +26,7 @@ class TiempoReducido extends React.Component {
                     <StudentsCenter {...this.props}/>
                 </div>
                 <div className='rightContainer'> 
-                    <TimeConfig />
+                    {this.props.store.configTime.active === true ? <TimeConfig {...this.props}/> : null}
                 </div>
             </div>
 		);
