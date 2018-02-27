@@ -11,6 +11,11 @@ let AppData = {
     data:{
         user:['Montse', 'Vane'],
         password: ['hola', 'holi'],
+        configTime: {
+            active: false,
+            name: "",
+            id: ""
+        },
         menuTypes: {},
         notifications: null,
         studentsAtCenter: null
@@ -42,6 +47,14 @@ let AppData = {
         }).fail(function(error) {
             console.error(error);
         });
+    },
+    getConfigTime(action){
+        console.log("Estoy en el store: actions en config time",action);
+        AppData.data.configTime.active = action.active;
+        AppData.data.configTime.id = action.id;
+        AppData.data.configTime.name = action.name;
+        AppStore.emitChange();
+       
     }
 }
 
@@ -76,6 +89,9 @@ dispatcher.register((action) => {
         break;
     case actionTypes.GET_STUDENTSATCENTER:
         AppData.getStudentsAtCenter();
+        break;
+    case actionTypes.GET_CONFIGTIME:
+        AppData.getConfigTime(action);
         break;
 
     default:

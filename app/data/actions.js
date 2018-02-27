@@ -23,6 +23,14 @@ const Actions = {
     dispatcher.dispatch({
       type: actionTypes.GET_STUDENTSATCENTER
     });
+  },
+  getConfigTime(active, id, name){
+    dispatcher.dispatch({
+      type: actionTypes.GET_CONFIGTIME,
+      active,
+      id,
+      name
+    });
   }
 };
 
