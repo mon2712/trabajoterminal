@@ -109,7 +109,6 @@ dispatcher.register((action) => {
     case actionTypes.GET_CONFIGTIME:
         AppData.getConfigTime(action);
         break;
-
     default:
 		// no op
     }

@@ -1,7 +1,4 @@
 import React from 'react';
-import StudentFile from '../studentFile/main';
-import AppStore from '../../data/store';
-
 
 class ButtonOptions extends React.Component {
     constructor(props){
@@ -9,13 +6,9 @@ class ButtonOptions extends React.Component {
         this.renderStudentFile=this.renderStudentFile.bind(this);           
     }
     renderStudentFile(){
-        console.log("buscar boton", this.props);
         this.props.actions.getStudentInfo();
-        console.log("props", this.props.store.studentFileInfo)
-        //return(<StudentFile/>);
     }
     renderSearchBar(){
-        console.log("en render search", this.props)
         return(
             <div className='searchContainer'>
                 <span className="ico icon-search"></span>
@@ -24,9 +17,7 @@ class ButtonOptions extends React.Component {
             </div>
         );    
     }
-	
     render() {
-		console.log("this search", this.props)
 		return (
             <div className="searchBarContainer">
               {this.renderSearchBar()}
