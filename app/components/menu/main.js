@@ -3,6 +3,7 @@ import ButtonOptions from '../menu/buttonOptions';
 import SearchBar from '../menu/searchBar';
 import Panel from '../menu/panel';
 import AppStore from '../../data/store';
+import StudentFile from '../studentFile/main';
 
 
 class Menu extends React.Component {
@@ -18,6 +19,7 @@ class Menu extends React.Component {
 			<div className='menuContainer'>
                 <div className="leftContainerM">
                     <SearchBar {...this.props} />
+                    {this.props.store.studentFileInfo !== null ? <StudentFile {...this.props}/> : null}
 				    <ButtonOptions {...this.props } type="recepcion"/>
                 </div>
                 <div className="rightContainerM">

@@ -1,0 +1,66 @@
+.studentFileContainer{
+    width: 60%;
+    background: white;
+    color: #a7a7a7;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: 10px;
+    .leftStudentFile{
+        width: 60%;
+        display: inline-block;
+        vertical-align: top;
+        .nameStudent{
+            font-size: 24px;
+        }
+        .infoTutor{
+            span{
+                font-size: 20px;
+                margin-right: 10px;
+            }
+        }
+        .infoPhones{
+            span{
+                font-size: 18px;
+                margin-right: 10px;
+            }
+        }
+    }
+    .rightStudentFile{
+        width: 40%;
+        display: inline-block;
+        vertical-align: top;
+        position: relative;
+        .cross{
+            font-size: 20px;
+            float: right;
+            display: block;
+            cursor: pointer;
+        }
+        .level{
+            font-size: 70px;
+            text-align: center;
+            line-height: 55px;
+            display: block;
+        }
+        .paymentInfo{
+            font-size: 16px;
+            color: red;
+            text-align: center;
+            span{
+                margin-right: 10px;
+            }
+        }
+        .assistanceFaces{
+            text-align: center;
+            span{
+                font-size: 18px;
+            }
+            .icogreen{
+                color: #99cc00;
+            }
+            .icogray{
+                color: #A7A7A7;
+            }
+        }
+    }
+}
