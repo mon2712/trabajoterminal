@@ -1,0 +1,86 @@
+.fourContainers{
+    .studentsCallContainer{
+        margin: 0px auto;
+        text-align: center;
+        border: 1px black;
+        border-radius: 6px;
+        width: 80%;
+        background: rgba(0, 0, 0, .6);
+        .studentsText{
+            display: block;
+            padding-top: 10px;
+            text-align: center;
+            color: white;
+            font-size: 30px;
+        }
+        .namesStudents{
+            width: 90%;
+            overflow-y: scroll;
+            max-height: 500px;
+            margin: 0 auto;
+            margin-top: 20px;
+            .confCall{
+                width:100%;
+                .nameStudent{
+                    width: 90%;
+                    margin:0 auto;
+                    text-align: left;
+                    padding: 5px;
+                    margin-bottom: 10px;
+                    color: #6ddfc5;
+                    border-top-left-radius: 10px;
+                    border-bottom-left-radius: 10px;
+                    background: rgba(0, 0, 0, .5);
+                    display: inline-block;
+                    vertical-align: middle;
+                    cursor: pointer;
+                    &:hover{
+                        background: rgba(0, 0, 0, .8);
+                    } 
+                }
+                #nameStudentNoCalled{
+                    color: #6ddfc5;
+                }
+                #nameStudentCalled{
+                    color: #13ca41;
+                }
+                .icono{
+                    width: 10%;
+                    height: 37px;
+                    margin: 0px auto;
+                    text-align: center;
+                    padding: 5px;
+                    margin-bottom: 10px;
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                    background: rgba(0, 0, 0, .5);
+                    vertical-align: middle;
+                    display: inline-block;
+                    cursor: pointer;
+                    &:hover{
+                        background: rgba(0, 0, 0, .8);
+                    }
+                }
+                #icono1{
+                    color: #6ddfc5;
+                }
+                #icono2{
+                    color: #13ca41;
+                }
+            }
+        }
+    }   
+}
+.frontContainer{
+    width: auto;
+    min-width: 100%;
+    min-height: 100%;
+    height: auto;
+    position: fixed;
+    background: rgba(0, 0, 0, .8);
+    top:0; 
+    left:0;
+    //display: block;
+    
+    //display: none;
+}

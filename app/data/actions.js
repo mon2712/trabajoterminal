@@ -31,6 +31,20 @@ const Actions = {
       id,
       name
     });
+  },
+  getConfigCall(active,name, id, status){
+    dispatcher.dispatch({
+      type: actionTypes.GET_CONFIGCALL,
+      active,
+      name,
+      id,
+      status
+    });
+  },
+  getConfigCallDone(){
+    dispatcher.dispatch({
+      type: actionTypes.GET_CONFIGCALLDONE
+    });
   }
 };
 
