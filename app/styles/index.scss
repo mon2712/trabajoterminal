@@ -6,6 +6,7 @@
 @import "tiempoReducido/studentsCenter.scss";
 @import "tiempoReducido/timeConfig.scss";
 @import "tiempoReducido/inputSearch.scss";
+
 @import "general/navigationContainer.scss";
 
 @import "menu/menu.scss";
@@ -14,10 +15,12 @@
 @import "menu/panel.scss";
 @import "menu/notification.scss";
 
+@import "paymentList/paymentList.scss";
+
 @import "/variables.scss";
 @import "/icons.scss";
 
-@import url('https://fonts.googleapis.com/css?family=Cabin|Jaldi');
+@import url('https://fonts.googleapis.com/css?family=Cabin|Jaldi|Abel|Quicksand');
 
 * {
 	box-sizing: border-box;

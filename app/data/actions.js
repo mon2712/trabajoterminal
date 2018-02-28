@@ -31,6 +31,11 @@ const Actions = {
       id,
       name
     });
+  },
+  getStudentMissPayment(){
+    dispatcher.dispatch({
+      type: actionTypes.GET_STUDENTSMISSPAYMENT
+    });
   }
 };
 

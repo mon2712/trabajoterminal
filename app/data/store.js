@@ -18,7 +18,8 @@ let AppData = {
         },
         menuTypes: {},
         notifications: null,
-        studentsAtCenter: null
+        studentsAtCenter: null,
+        studentsMissPayment: null
     },
     getUser() {
         console.log("llego a store")
@@ -54,7 +55,14 @@ let AppData = {
         AppData.data.configTime.id = action.id;
         AppData.data.configTime.name = action.name;
         AppStore.emitChange();
-       
+    },
+    getStudentMissPayment(){
+        $.getJSON('/app/fillData/studentsInCenter.js', function(info) {
+            AppData.data.studentsMissPayment = info.studentsInCenter;
+            AppStore.emitChange();
+        }).fail(function(error) {
+            console.error(error);
+        });
     }
 }
 
@@ -92,6 +100,9 @@ dispatcher.register((action) => {
         break;
     case actionTypes.GET_CONFIGTIME:
         AppData.getConfigTime(action);
+        break;
+    case actionTypes.GET_STUDENTSMISSPAYMENT:
+        AppData.getStudentMissPayment();
         break;
 
     default:

@@ -23,7 +23,7 @@
             },{
                 "ico": "icon-point-of-service",
                 "text": "Lista Adeudo",
-                "path": "/",
+                "path": "/paymentList",
                 "color": "#acea49"
             },{
                 "ico": "icon-minute-mark",
