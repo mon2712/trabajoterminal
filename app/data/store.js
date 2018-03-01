@@ -19,7 +19,8 @@ let AppData = {
         notifications: null,
         studentsAtCenter: null,
         studentFileInfo: null,
-        studentsMissPayment: null        
+        studentsMissPayment: null,
+        paymentListStudent: null     
     },
     getUser() {
         console.log("llego a store")
@@ -75,6 +76,15 @@ let AppData = {
             console.error(error);
         });
         AppStore.emitChange();  
+    },
+    getPaymentListStudent(){
+        $.getJSON('/app/fillData/paymentsStudent.js', function(info) {
+            AppData.data.studentsMissPayment = info.studentsInCenter;
+            AppStore.emitChange();
+        }).fail(function(error) {
+            console.error(error);
+        });
+        AppStore.emitChange();  
     }
 }
 
@@ -121,6 +131,9 @@ dispatcher.register((action) => {
         break;
     case actionTypes.GET_STUDENTSMISSPAYMENT:
         AppData.getStudentMissPayment();
+        break;
+    case actionTypes.GET_PAYMENTLISTSTUDENT:
+        AppData.getPaymentListStudent();
         break;
 
     default:

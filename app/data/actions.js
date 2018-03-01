@@ -46,6 +46,11 @@ const Actions = {
         dispatcher.dispatch({
             type: actionTypes.GET_STUDENTSMISSPAYMENT
         });
+    },
+    getPaymentListStudent(){
+        dispatcher.dispatch({
+            type: actionTypes.GET_PAYMENTLISTSTUDENT
+        });
     }
 };
 

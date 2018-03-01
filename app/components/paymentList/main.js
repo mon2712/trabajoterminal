@@ -6,17 +6,20 @@ import NavigationContainer from '../general/navigationContainer';
 class PaymentList extends React.Component {
     constructor(props){
         super(props);
-
+        this.openPaymentListStudent = this.openPaymentListStudent.bind(this);
     }
     componentDidMount() {
         this.props.actions.getStudentMissPayment();
+    }
+    openPaymentListStudent(){
+        console.log("Hola")
     }
     renderList(){
         var studentsMissPayment = this.props.store.studentsMissPayment;
         return studentsMissPayment.map((opt,index)=>(
             <div key={index} className="nameStudent">
                 <span className="name">{index+1}. {opt.name}</span>
-                <span className="ico icon-table"></span>
+                <span className="ico icon-table" onClick={this.openPaymentListStudent}></span>
             </div>   
         ));
     }
