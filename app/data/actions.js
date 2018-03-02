@@ -45,6 +45,15 @@ const Actions = {
     dispatcher.dispatch({
       type: actionTypes.GET_CONFIGCALLDONE
     });
+  },
+  getNote(active,name, id, note){
+    dispatcher.dispatch({
+      type: actionTypes.GET_NOTE,
+      active,
+      name,
+      id,
+      note
+    });
   }
 };
 

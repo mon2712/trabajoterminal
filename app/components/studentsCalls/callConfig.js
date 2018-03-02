@@ -6,12 +6,10 @@ class CallConfig extends React.Component {
         this.configCall = this.configCall.bind(this);
     }
     configCall(active,name,id, status,note){
-        console.log("configCall y config call done", active, name, id, status);
         this.props.actions.getConfigCall(false, name,id,status);
     }
 
     render() {
-        console.log("Llego al callConfig.js", this.props);
         return (
             <div className="frontContainer">
             <div className='configCallContainer'>

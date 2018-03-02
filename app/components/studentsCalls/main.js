@@ -8,7 +8,8 @@ class studentsCalls extends React.Component {
         super(props);
         this.state={
             configCall: false,
-            configCallDone:false
+            configCallDone:false,
+            note: false,
         }
     }
     componentDidMount(){
@@ -20,8 +21,8 @@ class studentsCalls extends React.Component {
                 <div>
                     {this.props.store.configCall.active === true ? <CallConfig {...this.props}/> : null}
                 </div>
-                <div className="fourContainers">
-                    <NavigationContainer texto="Lista de llamadas"/>
+                <NavigationContainer texto="Lista de llamadas"/>
+                <div className="generalContainer">
                     <ListOfCalls {...this.props}/>  
                 </div>
             </div>

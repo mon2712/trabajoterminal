@@ -1,75 +1,76 @@
-.fourContainers{
-    .studentsCallContainer{
-        margin: 0px auto;
-        text-align: center;
-        border: 1px black;
-        border-radius: 6px;
-        width: 80%;
-        background: rgba(0, 0, 0, .6);
-        .studentsText{
-            display: block;
-            padding-top: 10px;
+.generalContainer{
+    width:100%;
+    .twoCallContainer{
+        vertical-align: top;
+        padding: 30px;
+        .studentsCallContainer{
+            margin: 0px auto;
             text-align: center;
-            color: white;
-            font-size: 30px;
-        }
-        .namesStudents{
-            width: 90%;
-            overflow-y: scroll;
-            max-height: 500px;
-            margin: 0 auto;
-            margin-top: 20px;
-            .confCall{
-                width:100%;
-                .nameStudent{
+            border: 1px black;
+            border-radius: 6px;
+            width: 80%;
+            background: rgba(0, 0, 0, .6);
+            min-height: 80%;
+            .studentsText{
+                display: block;
+                padding-top: 10px;
+                text-align: center;
+                color: white;
+                font-size: 30px;
+            }
+            .namesStudents{
+                width: 90%;
+                overflow-y: scroll;
+                max-height: 500px;
+                margin: 0 auto;
+                margin-top: 20px;
+                .confCall{
                     width: 90%;
                     margin:0 auto;
                     text-align: left;
                     padding: 5px;
                     margin-bottom: 10px;
-                    color: #6ddfc5;
-                    border-top-left-radius: 10px;
-                    border-bottom-left-radius: 10px;
+                    border-radius: 10px;
                     background: rgba(0, 0, 0, .5);
-                    display: inline-block;
                     vertical-align: middle;
                     cursor: pointer;
                     &:hover{
                         background: rgba(0, 0, 0, .8);
+                    }  
+                    .nameStudent{
+                        width: 90%;
+                        display: inline-block;
+                        vertical-align: middle;
+                        .note{
+                            color:white;
+                        }
                     } 
-                }
-                #nameStudentNoCalled{
-                    color: #6ddfc5;
-                }
-                #nameStudentCalled{
-                    color: #13ca41;
-                }
-                .icono{
-                    width: 10%;
-                    height: 37px;
-                    margin: 0px auto;
-                    text-align: center;
-                    padding: 5px;
-                    margin-bottom: 10px;
-                    border-top-right-radius: 10px;
-                    border-bottom-right-radius: 10px;
-                    background: rgba(0, 0, 0, .5);
-                    vertical-align: middle;
-                    display: inline-block;
-                    cursor: pointer;
-                    &:hover{
-                        background: rgba(0, 0, 0, .8);
+                    .icono{
+                        width:10%;
+                        display: inline-block;
+                        vertical-align: top;
+                        &:hover{
+                            color: rgba(128, 122, 122, 0.8);
+                        }
                     }
                 }
-                #icono1{
+                #colorNotDone{
                     color: #6ddfc5;
                 }
-                #icono2{
+                #colorDone{
                     color: #13ca41;
                 }
             }
         }
-    }   
+    }
+    #leftContainer{
+        width: 50%;
+        display: inline-block;
+    }  
+    #rightContainer{
+        width: 50%;
+        display: inline-block;
+    } 
 }
 .frontContainer{
     width: auto;
@@ -80,7 +81,4 @@
     background: rgba(0, 0, 0, .8);
     top:0; 
     left:0;
-    //display: block;
-    
-    //display: none;
 }

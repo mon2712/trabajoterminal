@@ -12,7 +12,7 @@
         "name": "Vanessa Mirnada",
         "call": {
             "done": true,
-            "note": "El alumno se ausento por enfermedad pero ya asistirá la proxima clase.",
+            "note": "El alumno balblkabsndaslnx.",
             "date": "2018/02/28"
         }
     },{
@@ -36,7 +36,7 @@
         "name": "Marilyn Miranda",
         "call": {
             "done": true,
-            "note": "El alumno se ausento por enfermedad pero ya asistirá la proxima clase.",
+            "note": "xnunxjnxnjnxjsnxjs",
             "date": "2018/02/28"
         }
     },{

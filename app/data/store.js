@@ -26,6 +26,12 @@ let AppData = {
             done: [],
             notDone: []
         },
+        note:{
+            active: false,
+            name: "",
+            id: "",
+            note: ""
+        },
         menuTypes: {},
         notifications: null,
         studentsAtCenter: null
@@ -83,6 +89,13 @@ let AppData = {
          }).fail(function(error) {
              console.error(error);
          });
+    },
+    getNote(action){
+        AppData.data.note.active = action.active;
+        AppData.data.note.name = action.name;
+        AppData.data.note.id = action.id;
+        AppData.data.note.note = action.note;
+        AppStore.emitChange();
     }
 }
 
@@ -127,6 +140,8 @@ dispatcher.register((action) => {
     case actionTypes.GET_CONFIGCALLDONE:
         AppData.getConfigCallDone(action);
         break;
+    case actionTypes.GET_NOTE:
+        AppData.getNote(action);
 
     default:
 		// no op
