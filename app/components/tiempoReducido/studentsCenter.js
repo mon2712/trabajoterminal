@@ -8,7 +8,7 @@ class StudentsCenter extends React.Component {
         this.configTime = this.configTime.bind(this);
 
     }
-    configTime(name,id,hey){
+    configTime(name,id){
         console.log("configTime", name, id);
         this.props.actions.getConfigTime(true, id,name);
     }
