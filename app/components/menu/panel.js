@@ -9,7 +9,7 @@ class Panel extends React.Component {
               <div className="sesionInfoContainer">
                     <span className="ico icon-user-female"></span>
                     <div className="sessionContainer">
-                        <span>Hola Edith</span>
+                        <span>Hola Mónica</span>
                         <div className="logout">Cerrar Sesión</div>
                     </div>
               </div>

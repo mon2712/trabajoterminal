@@ -13,19 +13,19 @@
         "button": "Falta de pago"
     },{
         "type": "student",
-        "title": "Montserrat Mendoza Romero",
+        "title": "Jessica Itzel Salas Romero",
         "button": "Falta de pago"
     },{
         "type": "student",
-        "title": "Montserrat Mendoza Romero",
+        "title": "Monserrat Dominguez Ponce",
         "button": "Falta de pago"
     },{
         "type": "student",
-        "title": "Montserrat Mendoza Romero",
+        "title": "Roseline Lomelí Ortiz",
         "button": "Falta de pago"
     },{
         "type": "student",
-        "title": "Montserrat Mendoza Romero",
+        "title": "Susana Flores Alvarez",
         "button": "Falta de pago"
     }]
 }

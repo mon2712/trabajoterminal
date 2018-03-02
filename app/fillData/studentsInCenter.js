@@ -13,39 +13,27 @@
         "hour": "2:50"
     },{
         "idStudent": "10003",
-        "name": "Vanessa Miranda",
+        "name": "Roseline Lomelí Ortíz",
         "hour": "2:50"
     },{
         "idStudent": "10003",
-        "name": "Vanessa Miranda",
+        "name": "Susana Flores Alvarez",
         "hour": "2:50"
     },{
         "idStudent": "10003",
-        "name": "Vanessa Miranda",
+        "name": "Monserrat Dominguez Ponce",
         "hour": "2:50"
     },{
         "idStudent": "10003",
-        "name": "Vanessa Miranda",
+        "name": "Ezdi Volcanes Trejo",
         "hour": "2:50"
     },{
         "idStudent": "10003",
-        "name": "Vanessa Miranda",
+        "name": "Uriel Mendoza Rome",
         "hour": "2:50"
     },{
         "idStudent": "10003",
-        "name": "Vanessa Miranda",
-        "hour": "2:50"
-    },{
-        "idStudent": "10003",
-        "name": "Vanessa Miranda",
-        "hour": "2:50"
-    },{
-        "idStudent": "10003",
-        "name": "Vanessa Miranda",
-        "hour": "2:50"
-    },{
-        "idStudent": "10003",
-        "name": "Vanessa Miranda",
+        "name": "Lucas Ramírez Sanchez",
         "hour": "2:50"
     }]
 }
