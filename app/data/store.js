@@ -6,7 +6,6 @@ import assign from 'object-assign';
 
 const CHANGE_EVENT = 'change';
 
-
 let AppData = {
     data:{
         user:['Montse', 'Vane'],
@@ -34,7 +33,8 @@ let AppData = {
         },
         menuTypes: {},
         notifications: null,
-        studentsAtCenter: null
+        studentsAtCenter: null,
+        studentFileInfo: null
     },
     getUser() {
     },
@@ -61,6 +61,18 @@ let AppData = {
         }).fail(function(error) {
             console.error(error);
         });
+    },
+    getStudentInfo(action){
+        $.getJSON('/app/fillData/studentInfo.js', function(info) {
+            AppData.data.studentFileInfo = info[0].student;
+            AppStore.emitChange();
+        }).fail(function(error) {
+            console.error(error);
+        });
+    },
+    closeStudentFile(){
+        AppData.data.studentFileInfo = null;
+        AppStore.emitChange();
     },
     getConfigTime(action){
         AppData.data.configTime.active = action.active;
@@ -131,6 +143,12 @@ dispatcher.register((action) => {
     case actionTypes.GET_STUDENTSATCENTER:
         AppData.getStudentsAtCenter();
         break;
+    case actionTypes.GET_STUDENTINFO:
+        AppData.getStudentInfo();
+        break;
+    case actionTypes.CLOSE_STUDENTFILE:
+        AppData.closeStudentFile();
+        break;
     case actionTypes.GET_CONFIGTIME:
         AppData.getConfigTime(action);
         break;
@@ -149,48 +167,3 @@ dispatcher.register((action) => {
 });
 
 module.exports = AppStore;
-
-
-
-/*
-class store extends ReduceStore {
-  constructor() {
-    super(dispatcher);
-  }
-
-  getInitialState() {
-    return Immutable.OrderedMap();
-  }
-
-  reduce(state, action) {
-    switch (action.type) {
-      case actionTypes.ADD_TODO:
-        // Don't add todos with no text.
-        if (!action.text) {
-          return state;
-        }
-        const id = Counter.increment();
-        return state.set(id, new Todo({
-          id,
-          text: action.text,
-          complete: false,
-        }));
-        return state;
-
-      case actionTypes.DELETE_TODO:
-        return state.delete(action.id);
-
-      case actionTypes.TOGGLE_TODO:
-        return state.update(
-          action.id,
-          todo => todo.set('complete', !todo.complete),
-        );
-
-      default:
-        return state;
-    }
-  }
-}
-
-export default new store();
-*/

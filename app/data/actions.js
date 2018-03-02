@@ -24,6 +24,16 @@ const Actions = {
       type: actionTypes.GET_STUDENTSATCENTER
     });
   },
+  getStudentInfo() {
+    dispatcher.dispatch({
+        type: actionTypes.GET_STUDENTINFO
+    });
+  },
+  closeStudentFile() {
+    dispatcher.dispatch({
+        type: actionTypes.CLOSE_STUDENTFILE
+    }); 
+  },
   getConfigTime(active, id, name){
     dispatcher.dispatch({
       type: actionTypes.GET_CONFIGTIME,
@@ -54,7 +64,6 @@ const Actions = {
       id,
       note
     });
-  }
+  }    
 };
-
 export default Actions;

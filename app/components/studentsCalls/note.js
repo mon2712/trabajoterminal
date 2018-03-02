@@ -9,7 +9,6 @@ class Note extends React.Component {
         this.props.actions.getNote(false, name, id, note);
     }
     render() {
-        console.log("llego a note.js", this.props.store.note.note, this.props.store.note.name);
         return (
             <div>
                 {this.props.store.note.note}     

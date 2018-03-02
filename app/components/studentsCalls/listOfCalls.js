@@ -7,19 +7,21 @@ class ListOfCalls extends React.Component {
         super(props);
         this.configCall = this.configCall.bind(this);
         this.renderList = this.renderList.bind(this);
+        this.renderStudentFile=this.renderStudentFile.bind(this);
         this.n=null;
         this.flag=0;
         this.icon=null;
     }
+    renderStudentFile(){
+        this.props.actions.getStudentInfo();
+    }
     configCall(opt,type, num){
         this.flag=num;
-        console.log(num, this.flag);
         if(type === 1){
             this.props.actions.getConfigCall(true,opt.name,opt.id,opt.call.note);
             }
             else{
                 this.n=opt.name;
-                console.log("Entro a la opcion de mostrar nota", this.n,opt.call.note);
                 this.props.actions.getNote(true,opt.name, opt.id, opt.call.note);
                 if(num === 2){
                     this.flag=0;
@@ -28,10 +30,12 @@ class ListOfCalls extends React.Component {
     }
     renderList(studentList, idColor, icon, type){
         this.icon=icon;
+        this.function=null;
         return studentList.map((opt,index)=>(
             <div key={index} className="confCall" id={idColor}>
                 <div className="nameStudent">
-                    <span >{index+1}.{opt.name}</span>
+                    {type===1 ? this.function=this.renderStudentFile : null}
+                    <span onClick={this.function}>{index+1}.{opt.name}</span>
                     <div className="note">
                         {(this.n === opt.name) && (this.props.store.note.active === true) && (this.flag===1) ? (icon="icon-upload3") && <Note {...this.props}/> : (icon=this.icon) && null}
                     </div>
