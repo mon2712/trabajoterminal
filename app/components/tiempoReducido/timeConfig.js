@@ -6,11 +6,9 @@ class TimeConfig extends React.Component {
         this.configTime = this.configTime.bind(this);
     }
     configTime(active,name,id){
-        console.log("configTime", active, name, id);
         this.props.actions.getConfigTime(false, id,name);
     }
     render() {
-        console.log("Llego al timeConfig.js", this.props);
         return (
             <div className='confTimeContainer'>
                 <div className="headerTime">

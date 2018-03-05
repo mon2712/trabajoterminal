@@ -1,19 +1,19 @@
 @import "variables";
 
 @font-face {
-  font-family: 'trabajoterminal';
-  src:  url('#{$font-path}/trabajoterminal.eot?k1kpua');
-  src:  url('#{$font-path}/trabajoterminal.eot?k1kpua#iefix') format('embedded-opentype'),
-    url('#{$font-path}/trabajoterminal.ttf?k1kpua') format('truetype'),
-    url('#{$font-path}/trabajoterminal.woff?k1kpua') format('woff'),
-    url('#{$font-path}/trabajoterminal.svg?k1kpua#trabajoterminal') format('svg');
+  font-family: 'trabajoterminalfonts';
+  src:  url('#{$font-path}/trabajoterminalfonts.eot?5cev30');
+  src:  url('#{$font-path}/trabajoterminalfonts.eot?5cev30#iefix') format('embedded-opentype'),
+    url('#{$font-path}/trabajoterminalfonts.ttf?5cev30') format('truetype'),
+    url('#{$font-path}/trabajoterminalfonts.woff?5cev30') format('woff'),
+    url('#{$font-path}/trabajoterminalfonts.svg?5cev30#trabajoterminalfonts') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'trabajoterminal' !important;
+  font-family: 'trabajoterminalfonts' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -30,6 +30,41 @@
   @return unquote("\"") + $str + unquote("\"");
 }
 
+.icon-add-button {
+  &:before {
+    content: unicode($icon-add-button); 
+  }
+}
+.icon-add-document {
+  &:before {
+    content: unicode($icon-add-document); 
+  }
+}
+.icon-consulting-message {
+  &:before {
+    content: unicode($icon-consulting-message); 
+  }
+}
+.icon-file {
+  &:before {
+    content: unicode($icon-file); 
+  }
+}
+.icon-note {
+  &:before {
+    content: unicode($icon-note); 
+  }
+}
+.icon-playlist {
+  &:before {
+    content: unicode($icon-playlist); 
+  }
+}
+.icon-speech-bubble {
+  &:before {
+    content: unicode($icon-speech-bubble); 
+  }
+}
 .icon-minute-mark {
   &:before {
     content: unicode($icon-minute-mark); 
@@ -210,9 +245,24 @@
     content: unicode($icon-pencil2); 
   }
 }
+.icon-profile {
+  &:before {
+    content: unicode($icon-profile); 
+  }
+}
+.icon-file-picture {
+  &:before {
+    content: unicode($icon-file-picture); 
+  }
+}
 .icon-barcode {
   &:before {
     content: unicode($icon-barcode); 
+  }
+}
+.icon-qrcode {
+  &:before {
+    content: unicode($icon-qrcode); 
   }
 }
 .icon-history {
@@ -240,6 +290,21 @@
     content: unicode($icon-bell); 
   }
 }
+.icon-search2 {
+  &:before {
+    content: unicode($icon-search2); 
+  }
+}
+.icon-zoom-in {
+  &:before {
+    content: unicode($icon-zoom-in); 
+  }
+}
+.icon-zoom-out {
+  &:before {
+    content: unicode($icon-zoom-out); 
+  }
+}
 .icon-lock {
   &:before {
     content: unicode($icon-lock); 
@@ -253,6 +318,31 @@
 .icon-wrench {
   &:before {
     content: unicode($icon-wrench); 
+  }
+}
+.icon-cog {
+  &:before {
+    content: unicode($icon-cog); 
+  }
+}
+.icon-cogs {
+  &:before {
+    content: unicode($icon-cogs); 
+  }
+}
+.icon-stats-dots {
+  &:before {
+    content: unicode($icon-stats-dots); 
+  }
+}
+.icon-stats-bars {
+  &:before {
+    content: unicode($icon-stats-bars); 
+  }
+}
+.icon-stats-bars2 {
+  &:before {
+    content: unicode($icon-stats-bars2); 
   }
 }
 .icon-bin2 {
@@ -275,6 +365,36 @@
     content: unicode($icon-upload3); 
   }
 }
+.icon-eye {
+  &:before {
+    content: unicode($icon-eye); 
+  }
+}
+.icon-eye-plus {
+  &:before {
+    content: unicode($icon-eye-plus); 
+  }
+}
+.icon-eye-minus {
+  &:before {
+    content: unicode($icon-eye-minus); 
+  }
+}
+.icon-eye-blocked {
+  &:before {
+    content: unicode($icon-eye-blocked); 
+  }
+}
+.icon-smile {
+  &:before {
+    content: unicode($icon-smile); 
+  }
+}
+.icon-sad {
+  &:before {
+    content: unicode($icon-sad); 
+  }
+}
 .icon-neutral {
   &:before {
     content: unicode($icon-neutral); 
@@ -285,6 +405,31 @@
     content: unicode($icon-wondering); 
   }
 }
+.icon-warning {
+  &:before {
+    content: unicode($icon-warning); 
+  }
+}
+.icon-plus {
+  &:before {
+    content: unicode($icon-plus); 
+  }
+}
+.icon-minus {
+  &:before {
+    content: unicode($icon-minus); 
+  }
+}
+.icon-cross {
+  &:before {
+    content: unicode($icon-cross); 
+  }
+}
+.icon-checkmark {
+  &:before {
+    content: unicode($icon-checkmark); 
+  }
+}
 .icon-enter {
   &:before {
     content: unicode($icon-enter); 
@@ -293,6 +438,46 @@
 .icon-exit {
   &:before {
     content: unicode($icon-exit); 
+  }
+}
+.icon-arrow-up {
+  &:before {
+    content: unicode($icon-arrow-up); 
+  }
+}
+.icon-arrow-down {
+  &:before {
+    content: unicode($icon-arrow-down); 
+  }
+}
+.icon-arrow-up2 {
+  &:before {
+    content: unicode($icon-arrow-up2); 
+  }
+}
+.icon-arrow-down2 {
+  &:before {
+    content: unicode($icon-arrow-down2); 
+  }
+}
+.icon-circle-up {
+  &:before {
+    content: unicode($icon-circle-up); 
+  }
+}
+.icon-circle-right {
+  &:before {
+    content: unicode($icon-circle-right); 
+  }
+}
+.icon-circle-down {
+  &:before {
+    content: unicode($icon-circle-down); 
+  }
+}
+.icon-circle-left {
+  &:before {
+    content: unicode($icon-circle-left); 
   }
 }
 .icon-paragraph-left {

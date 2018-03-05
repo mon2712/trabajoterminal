@@ -18,7 +18,7 @@
             },{
                 "ico": "icon-calls",
                 "text": "Lista Llamadas",
-                "path": "/",
+                "path": "/llamadasPendientes",
                 "color": "#6ddfc1"
             },{
                 "ico": "icon-point-of-service",
@@ -28,7 +28,7 @@
             },{
                 "ico": "icon-minute-mark",
                 "text": "Tiempo Reducido",
-                "path": "/",
+                "path": "/tiempoReducido",
                 "color": "#48a2bb"
             }],
             "instructor": [{
@@ -49,7 +49,7 @@
             },{
                 "ico": "icon-calls",
                 "text": "Lista Llamadas",
-                "path": "/",
+                "path": "/llamadasPendientes",
                 "color": "#6ddfc1"
             },{
                 "ico": "icon-point-of-service",

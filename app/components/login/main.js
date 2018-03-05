@@ -8,7 +8,6 @@ import {withRouter} from "react-router-dom";
 
 class Login extends React.Component {
 	verifyUser(){
-		console.log("hola");
 		return(
 			<div>
        			

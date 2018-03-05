@@ -51,7 +51,28 @@ const Actions = {
         dispatcher.dispatch({
             type: actionTypes.GET_PAYMENTLISTSTUDENT
         });
+    },
+    getConfigCall(active,name, id, status){
+        dispatcher.dispatch({
+            type: actionTypes.GET_CONFIGCALL,
+            active,
+            name,
+            id,
+            status
+        });
+    },
+    getConfigCallDone(){
+        dispatcher.dispatch({
+        type: actionTypes.GET_CONFIGCALLDONE
+        });
+    },
+    getNote(active,name, id, note){
+        dispatcher.dispatch({
+            type: actionTypes.GET_NOTE,
+            active,
+            name,
+            id
+        });
     }
 };
-
 export default Actions;

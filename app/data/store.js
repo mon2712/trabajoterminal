@@ -8,12 +8,20 @@ const CHANGE_EVENT = 'change';
 
 let AppData = {
     data:{
-        user:['Montse', 'Vane'],
-        password: ['hola', 'holi'],
         configTime: {
             active: false,
             name: "",
             id: ""
+        },
+        configCall: {
+            active: false,
+            name: "",
+            id: "",
+            status: ""
+        },
+        configCallDone: {
+            done: [],
+            notDone: []
         },
         menuTypes: {},
         notifications: null,
@@ -23,7 +31,6 @@ let AppData = {
         paymentListStudent: null     
     },
     getUser() {
-        console.log("llego a store")
     },
     getMenuTypes(action){
         $.getJSON('/app/fillData/menuTypes.js', function(info) {
@@ -43,7 +50,6 @@ let AppData = {
     },
     getStudentsAtCenter(action){
         $.getJSON('/app/fillData/studentsInCenter.js', function(info) {
-           console.log("En store", info);
             AppData.data.studentsAtCenter = info.studentsInCenter;
            AppStore.emitChange();
         }).fail(function(error) {
@@ -84,7 +90,38 @@ let AppData = {
         }).fail(function(error) {
             console.error(error);
         });
-        AppStore.emitChange();  
+        AppStore.emitChange();
+    },
+    getConfigCall(action){
+        AppData.data.configCall.active = action.active;
+        AppData.data.configCall.name = action.name;
+        AppData.data.configCall.id = action.id;
+        AppData.data.configCall.status = action.status;
+        AppStore.emitChange();
+    },
+    getConfigCallDone(){
+        $.getJSON('/app/fillData/listOfCalls.js', function(info) {
+            var ListOfCalls = info.listOfCalls;
+            AppData.data.configCallDone.done = [];
+            AppData.data.configCallDone.notDone = [];
+                ListOfCalls.map((student,index)=>{
+                    if(student.call.done==true)
+                        AppData.data.configCallDone.done.push(student);
+                    else
+                        AppData.data.configCallDone.notDone.push(student);
+                });
+            AppStore.emitChange();
+         }).fail(function(error) {
+             console.error(error);
+         });
+    },
+    getNote(action){
+        AppData.data.configCallDone.done.map((student,index)=>{
+            if(action.id === student.idStudent){
+                AppData.data.configCallDone.done[index].call.active=action.active;
+            }
+        });
+        AppStore.emitChange();
     }
 }
 
@@ -135,7 +172,14 @@ dispatcher.register((action) => {
     case actionTypes.GET_PAYMENTLISTSTUDENT:
         AppData.getPaymentListStudent();
         break;
-
+    case actionTypes.GET_CONFIGCALL:
+        AppData.getConfigCall(action);
+        break;
+    case actionTypes.GET_CONFIGCALLDONE:
+        AppData.getConfigCallDone(action);
+        break;
+    case actionTypes.GET_NOTE:
+        AppData.getNote(action);
     default:
 		// no op
     }
