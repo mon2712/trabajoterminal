@@ -9,7 +9,6 @@ class StudentsCenter extends React.Component {
 
     }
     configTime(name,id){
-        console.log("configTime", name, id);
         this.props.actions.getConfigTime(true, id,name);
     }
     renderList(){
@@ -19,7 +18,6 @@ class StudentsCenter extends React.Component {
                 <span >{index+1}. {opt.name}</span>
             </div>   
         ));
-
     }  
     render() {
         return (

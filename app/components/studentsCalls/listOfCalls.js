@@ -1,67 +1,55 @@
 import CallConfig from './callConfig';
 import Note from './note';
+import StudentFile from '../studentFile/main';
+
 var React = require('react');
 
 class ListOfCalls extends React.Component {
    constructor(props){
         super(props);
-        this.configCall = this.configCall.bind(this);
-        this.renderList = this.renderList.bind(this);
+        this.renderListNew = this.renderListNew.bind(this);
         this.renderStudentFile=this.renderStudentFile.bind(this);
-        this.n=null;
-        this.flag=0;
-        this.icon=null;
+        this.activateConfigCall = this.activateConfigCall.bind(this);
+        this.activateNote = this.activateNote.bind(this);
+        this.deactivateNote = this.deactivateNote.bind(this);
     }
     renderStudentFile(){
         this.props.actions.getStudentInfo();
     }
-    configCall(opt,type, num){
-        this.flag=num;
-        if(type === 1){
-            this.props.actions.getConfigCall(true,opt.name,opt.id,opt.call.note);
-            }
-            else{
-                this.n=opt.name;
-                this.props.actions.getNote(true,opt.name, opt.id, opt.call.note);
-                if(num === 2){
-                    this.flag=0;
-                }
-            }
+    activateConfigCall(idStudent, name){
+        this.props.actions.getConfigCall(true,name,idStudent);
     }
-    renderList(studentList, idColor, icon, type){
-        this.icon=icon;
-        this.function=null;
+    activateNote(idStudent, name){
+        this.props.actions.getNote(true,name,idStudent);
+    }
+    deactivateNote(idStudent,name){
+        this.props.actions.getNote(false,name,idStudent);
+    }
+    renderListNew(studentList,type){
         return studentList.map((opt,index)=>(
-            <div key={index} className="confCall" id={idColor}>
-                <div className="nameStudent">
-                    {type===1 ? this.function=this.renderStudentFile : null}
-                    <span onClick={this.function}>{index+1}.{opt.name}</span>
-                    <div className="note">
-                        {(this.n === opt.name) && (this.props.store.note.active === true) && (this.flag===1) ? (icon="icon-upload3") && <Note {...this.props}/> : (icon=this.icon) && null}
-                    </div>
-                </div>
-                <div className="icono">  
-                    <span className={icon} onClick={this.configCall.bind(this, opt, type, this.flag+1)}></span>   
-                </div>
+            <div key={index} className={type==="done" ? "confCall colorDone" : "confCall colorNotDone"}>
+                <span className="nameStudent" onClick={this.renderStudentFile}>{index+1}.  {opt.name}</span>
+                <span onClick={type==="notDone" ? () => this.activateConfigCall(opt.idStudent, opt.name) : this.props.store.configCallDone.done[index].call.active === true ? () => this.deactivateNote(opt.idStudent, opt.name) : () => this.activateNote(opt.idStudent, opt.name)} className={type==="notDone" ? "ico icon-add-button" : this.props.store.configCallDone.done[index].call.active === true ? "ico icon-multiply" : "ico icon-speech-bubble"}></span>
+                {this.props.store.configCallDone.done != null && type==="done" && this.props.store.configCallDone.done[index].call.active === true ? <Note note={this.props.store.configCallDone.done[index].call.note}/> : null }
            </div>      
         ));
-    } 
+    }
     render() {
         return (
-            <div>
+            <div className="generalContainer">
                 <div className='twoCallContainer' id="leftContainer">
                     <div className='studentsCallContainer'>
                         <span className="studentsText">Por realizar</span>
                         <div className= "namesStudents">
-                                {this.props.store.configCallDone.notDone !== null ? this.renderList(this.props.store.configCallDone.notDone, "colorNotDone", "icon-pencil", 1) : null}
-                            </div>
+                            {this.props.store.configCallDone.notDone !== null ? this.renderListNew(this.props.store.configCallDone.notDone, "notDone") : null}
+                        </div>
                     </div>
                 </div>
                 <div className='twoCallContainer' id="rightContainer">
                     <div className='studentsCallContainer'>
                         <span className="studentsText">Realizadas</span>
                         <div className= "namesStudents">
-                            {this.props.store.configCallDone.done !== null ? this.renderList(this.props.store.configCallDone.done, "colorDone", "icon-newspaper", 2) : null}
+                            {this.props.store.configCallDone.done !== null ? this.renderListNew(this.props.store.configCallDone.done, "done") : null}
                         </div>
                     </div>
                 </div>

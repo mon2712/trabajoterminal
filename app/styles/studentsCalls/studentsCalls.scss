@@ -10,7 +10,7 @@
             border-radius: 6px;
             width: 80%;
             background: rgba(0, 0, 0, .6);
-            min-height: 80%;
+            min-height: 600px;
             .studentsText{
                 display: block;
                 padding-top: 10px;
@@ -25,7 +25,7 @@
                 margin: 0 auto;
                 margin-top: 20px;
                 .confCall{
-                    width: 90%;
+                    width: 92%;
                     margin:0 auto;
                     text-align: left;
                     padding: 5px;
@@ -37,29 +37,30 @@
                     &:hover{
                         background: rgba(0, 0, 0, .8);
                     }  
-                    .nameStudent{
-                        width: 90%;
+                    .ico{
+                        font-size: 20px;
                         display: inline-block;
                         vertical-align: middle;
-                        .note{
-                            color:white;
-                        }
-                    } 
-                    .icono{
-                        width:10%;
-                        display: inline-block;
-                        vertical-align: top;
                         &:hover{
                             color: rgba(128, 122, 122, 0.8);
                         }
                     }
+                    .nameStudent{
+                        width: 90%;
+                        display: inline-block;
+                        vertical-align: middle;   
+                    }
+                    .note{
+                        color:white;
+                    }
+                    &.colorNotDone{
+                        color: #6ddfc5;
+                    }
+                    &.colorDone{
+                        color: #13ca41;
+                    }
                 }
-                #colorNotDone{
-                    color: #6ddfc5;
-                }
-                #colorDone{
-                    color: #13ca41;
-                }
+
             }
         }
     }

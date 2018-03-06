@@ -7,11 +7,6 @@ var extractSass = new ExtractTextPlugin({
     disable: process.env.NODE_ENV === "development"
 });
 
-const components = [
-    './app/libs/jquery.js',
-    './app/libs/angular.js'
-];
-
 const scripts = [
     './app/index.js',
     './app/styles/index.scss'

@@ -4,7 +4,6 @@ import Title from '../header/title';
 class Header extends React.Component {
     
     render() {
-        //console.log("yo soy el hijo y tengo estas propiedades", this.props.store.password)
         return (
         <div>
             <header>

@@ -4,6 +4,7 @@
         "name": "Montserrat Mendoza",
         "call": {
             "done": true,
+            "active": false,
             "note": "El alumno se ausento por enfermedad pero ya asistirá la proxima clase.",
             "date": "2018/02/28"
         }
@@ -12,6 +13,7 @@
         "name": "Vanessa Mirnada",
         "call": {
             "done": true,
+            "active": false,
             "note": "El alumno balblkabsndaslnx.",
             "date": "2018/02/28"
         }
@@ -20,6 +22,7 @@
         "name": "Lorenzo Muñoz",
         "call": {
             "done": false,
+            "active": false,
             "note": "",
             "date": ""
         }
@@ -28,6 +31,7 @@
         "name": "Marcos Muñoz",
         "call": {
             "done": false,
+            "active": false,
             "note": "",
             "date": ""
         }
@@ -36,6 +40,7 @@
         "name": "Marilyn Miranda",
         "call": {
             "done": true,
+            "active": false,            
             "note": "xnunxjnxnjnxjsnxjs",
             "date": "2018/02/28"
         }
@@ -44,6 +49,7 @@
         "name": "Montserrat Mendoza Romero",
         "call": {
             "done": false,
+            "active": false,            
             "note": "",
             "date": ""
         }

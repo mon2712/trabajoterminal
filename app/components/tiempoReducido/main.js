@@ -16,11 +16,10 @@ class TiempoReducido extends React.Component {
         this.props.actions.getStudentsAtCenter();
     }
     render() {
-		console.log("Llego al main de tiempo reducido", this.props);
 		return (
             <div className="tiempoReducidoContainer">
                 <div className='topContainer'>
-                    <NavigationContainer texto="Tiempo Reducido"/>
+                    <NavigationContainer texto="Tiempo Reducido" path='/menu'/>
                 </div>
                 <div className='leftContainer'>    
                     <StudentsCenter {...this.props}/>

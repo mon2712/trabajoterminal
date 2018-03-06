@@ -7,11 +7,6 @@ import StudentFile from '../studentFile/main';
 class studentsCalls extends React.Component {
     constructor(props){
         super(props);
-        this.state={
-            configCall: false,
-            configCallDone:false,
-            note: false,
-        }
     }
     componentDidMount(){
         this.props.actions.getConfigCallDone();
@@ -19,14 +14,10 @@ class studentsCalls extends React.Component {
     render() {
 		return (
             <div>
-                <div>
-                    {this.props.store.configCall.active === true ? <CallConfig {...this.props}/> : null}
-                </div>
-                <NavigationContainer texto="Lista de llamadas"/>
+                {this.props.store.configCall.active === true ? <CallConfig {...this.props}/> : null}
+                <NavigationContainer texto="Lista de llamadas" path="/menu"/>
                 {this.props.store.studentFileInfo !== null ? <StudentFile {...this.props}/> : null}
-                <div className="generalContainer">
-                    <ListOfCalls {...this.props}/>  
-                </div>
+                <ListOfCalls {...this.props}/>
             </div>
 		);
 	}

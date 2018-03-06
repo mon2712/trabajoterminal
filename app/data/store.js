@@ -8,8 +8,6 @@ const CHANGE_EVENT = 'change';
 
 let AppData = {
     data:{
-        user:['Montse', 'Vane'],
-        password: ['hola', 'holi'],
         configTime: {
             active: false,
             name: "",
@@ -25,16 +23,12 @@ let AppData = {
             done: [],
             notDone: []
         },
-        note:{
-            active: false,
-            name: "",
-            id: "",
-            note: ""
-        },
         menuTypes: {},
         notifications: null,
         studentsAtCenter: null,
-        studentFileInfo: null
+        studentFileInfo: null,
+        studentsMissPayment: null,
+        paymentListStudent: null     
     },
     getUser() {
     },
@@ -79,7 +73,24 @@ let AppData = {
         AppData.data.configTime.id = action.id;
         AppData.data.configTime.name = action.name;
         AppStore.emitChange();
-       
+    },
+    getStudentMissPayment(){
+        $.getJSON('/app/fillData/studentsInCenter.js', function(info) {
+            AppData.data.studentsMissPayment = info.studentsInCenter;
+            AppStore.emitChange();
+        }).fail(function(error) {
+            console.error(error);
+        });
+        AppStore.emitChange();  
+    },
+    getPaymentListStudent(){
+        $.getJSON('/app/fillData/paymentsStudent.js', function(info) {
+            AppData.data.studentsMissPayment = info.studentsInCenter;
+            AppStore.emitChange();
+        }).fail(function(error) {
+            console.error(error);
+        });
+        AppStore.emitChange();
     },
     getConfigCall(action){
         AppData.data.configCall.active = action.active;
@@ -91,6 +102,8 @@ let AppData = {
     getConfigCallDone(){
         $.getJSON('/app/fillData/listOfCalls.js', function(info) {
             var ListOfCalls = info.listOfCalls;
+            AppData.data.configCallDone.done = [];
+            AppData.data.configCallDone.notDone = [];
                 ListOfCalls.map((student,index)=>{
                     if(student.call.done==true)
                         AppData.data.configCallDone.done.push(student);
@@ -103,10 +116,11 @@ let AppData = {
          });
     },
     getNote(action){
-        AppData.data.note.active = action.active;
-        AppData.data.note.name = action.name;
-        AppData.data.note.id = action.id;
-        AppData.data.note.note = action.note;
+        AppData.data.configCallDone.done.map((student,index)=>{
+            if(action.id === student.idStudent){
+                AppData.data.configCallDone.done[index].call.active=action.active;
+            }
+        });
         AppStore.emitChange();
     }
 }
@@ -152,6 +166,12 @@ dispatcher.register((action) => {
     case actionTypes.GET_CONFIGTIME:
         AppData.getConfigTime(action);
         break;
+    case actionTypes.GET_STUDENTSMISSPAYMENT:
+        AppData.getStudentMissPayment();
+        break;
+    case actionTypes.GET_PAYMENTLISTSTUDENT:
+        AppData.getPaymentListStudent();
+        break;
     case actionTypes.GET_CONFIGCALL:
         AppData.getConfigCall(action);
         break;
@@ -160,7 +180,6 @@ dispatcher.register((action) => {
         break;
     case actionTypes.GET_NOTE:
         AppData.getNote(action);
-
     default:
 		// no op
     }
