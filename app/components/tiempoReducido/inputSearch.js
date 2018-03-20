@@ -4,16 +4,28 @@ import {Link} from 'react-router-dom';
 class InputSearch extends React.Component {
     constructor(props){
         super(props);
-        this.searchStudent=this.searchStudent.bind(this);
+        this.displayResult=this.displayResult.bind(this);
+        this.handleChange=this.handleChange.bind(this);
+        this.state = {
+            value: ""
+        };
     }
-    searchStudent(){
-        console.log("Estoy en searchStudnet");
+    displayResult(event){
+        var tecla = event.keyCode;
+        if(tecla === 32 || tecla === 13 || tecla === undefined){
+            this.props.store.filt=this.state.value;
+            this.props.actions.getStudentsAtCenter();   
+        }
     }
+    handleChange(event){
+        this.setState({value: event.target.value});
+    }
+
     render() {
        return (
             <div className='searchDiv'>
-                  <input type="text"/>
-                  <span className="ico icon-search" onClick={this.searchStudent}></span>
+                  <input type="text" onChange={this.handleChange} onKeyDown={this.displayResult}/>
+                  <span className="ico icon-search" onClick={this.displayResult}></span>
             </div>
        );
     }

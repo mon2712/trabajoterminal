@@ -34,12 +34,13 @@ const Actions = {
             type: actionTypes.CLOSE_STUDENTFILE
         });
     },
-    getConfigTime(active, id, name){
+    getConfigTime(active, id, name, timeRed){
         dispatcher.dispatch({
             type: actionTypes.GET_CONFIGTIME,
             active,
             id,
-            name
+            name,
+            timeRed
         })
     },
     getStudentMissPayment(){

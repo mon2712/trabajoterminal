@@ -2,6 +2,7 @@ import actionTypes from './actionTypes';
 import dispatcher from './dispatcher';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
+import axios from 'axios';
 //import _ from 'underscore';
 
 const CHANGE_EVENT = 'change';
@@ -11,7 +12,8 @@ let AppData = {
         configTime: {
             active: false,
             name: "",
-            id: ""
+            id: "",
+            timeRed: ""
         },
         configCall: {
             active: false,
@@ -28,7 +30,8 @@ let AppData = {
         studentsAtCenter: null,
         studentFileInfo: null,
         studentsMissPayment: null,
-        paymentListStudent: null     
+        paymentListStudent: null,
+        filt: null
     },
     getUser() {
     },
@@ -49,11 +52,15 @@ let AppData = {
         });
     },
     getStudentsAtCenter(action){
-        $.getJSON('/app/fillData/studentsInCenter.js', function(info) {
-            AppData.data.studentsAtCenter = info.studentsInCenter;
-           AppStore.emitChange();
-        }).fail(function(error) {
-            console.error(error);
+        var cadena="http://localhost:8088/pt1.pt2/webapi/centro/getStateAtCenter?filter="+AppData.data.filt;
+        axios.get(cadena)
+        .then(function(response){
+            console.log(response)
+            AppData.data.studentsAtCenter = response.data.studentsInCenter;
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log("Estoy en el error del estore: ", error);
         });
     },
     getStudentInfo(action){
@@ -72,6 +79,8 @@ let AppData = {
         AppData.data.configTime.active = action.active;
         AppData.data.configTime.id = action.id;
         AppData.data.configTime.name = action.name;
+        //console.log("hola",action.timeRed);
+        AppData.data.configTime.timeRed = action.timeRed;
         AppStore.emitChange();
     },
     getStudentMissPayment(){
@@ -97,6 +106,7 @@ let AppData = {
         AppData.data.configCall.name = action.name;
         AppData.data.configCall.id = action.id;
         AppData.data.configCall.status = action.status;
+        AppData.data.configCall.timeRed = action.timeRed;
         AppStore.emitChange();
     },
     getConfigCallDone(){
