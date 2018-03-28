@@ -2,7 +2,7 @@ import actionTypes from './actionTypes';
 import dispatcher from './dispatcher';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
-//import _ from 'underscore';
+import axios from 'axios';
 
 const CHANGE_EVENT = 'change';
 
@@ -11,7 +11,8 @@ let AppData = {
         configTime: {
             active: false,
             name: "",
-            id: ""
+            id: "",
+            timeRed: ""
         },
         configCall: {
             active: false,
@@ -28,7 +29,7 @@ let AppData = {
         studentsAtCenter: null,
         studentFileInfo: null,
         studentsMissPayment: null,
-        paymentListStudent: null     
+        paymentListStudent: null,
     },
     getUser() {
     },
@@ -49,11 +50,25 @@ let AppData = {
         });
     },
     getStudentsAtCenter(action){
-        $.getJSON('/app/fillData/studentsInCenter.js', function(info) {
-            AppData.data.studentsAtCenter = info.studentsInCenter;
-           AppStore.emitChange();
-        }).fail(function(error) {
-            console.error(error);
+        var filter=null;
+        if(action.filt===undefined) filter="Jose"
+        else filter=action.filt
+        var cadena="http://localhost:8088/pt1.pt2/webapi/centro/getStateAtCenter?filter="+filter;
+        axios.get(cadena)
+        .then(function(response){
+            AppData.data.studentsAtCenter = response.data.studentsInCenter;
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log( error);
+        });
+    },
+    setTimeRed(action){
+        axios.put('http://localhost:8088/pt1.pt2/webapi/centro/'+action.idStudent+"/"+action.timeRed)
+        .then(function(response){
+        })
+        .catch(function (error){
+            console.log( error);
         });
     },
     getStudentInfo(action){
@@ -72,6 +87,7 @@ let AppData = {
         AppData.data.configTime.active = action.active;
         AppData.data.configTime.id = action.id;
         AppData.data.configTime.name = action.name;
+        AppData.data.configTime.timeRed = action.timeRed;
         AppStore.emitChange();
     },
     getStudentMissPayment(){
@@ -97,6 +113,7 @@ let AppData = {
         AppData.data.configCall.name = action.name;
         AppData.data.configCall.id = action.id;
         AppData.data.configCall.status = action.status;
+        AppData.data.configCall.timeRed = action.timeRed;
         AppStore.emitChange();
     },
     getConfigCallDone(){
@@ -155,7 +172,10 @@ dispatcher.register((action) => {
         AppData.getNotifications(action);
         break;
     case actionTypes.GET_STUDENTSATCENTER:
-        AppData.getStudentsAtCenter();
+        AppData.getStudentsAtCenter(action);
+        break;
+    case actionTypes.SET_TIMERED:
+        AppData.setTimeRed(action);
         break;
     case actionTypes.GET_STUDENTINFO:
         AppData.getStudentInfo();

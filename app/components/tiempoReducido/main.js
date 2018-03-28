@@ -3,7 +3,6 @@ import InputSearch from './inputSearch';
 import InputTime from './inputTime';
 import NavigationContainer from '../general/navigationContainer';
 import StudentsCenter from './studentsCenter';
-import TimeConfig from './timeConfig';
 
 class TiempoReducido extends React.Component {
     constructor(props){
@@ -13,7 +12,7 @@ class TiempoReducido extends React.Component {
         }
     }
     componentDidMount(){
-        this.props.actions.getStudentsAtCenter();
+        this.props.actions.getStudentsAtCenter(' ');
     }
     render() {
 		return (
@@ -21,12 +20,10 @@ class TiempoReducido extends React.Component {
                 <div className='topContainer'>
                     <NavigationContainer texto="Tiempo Reducido" path='/menu'/>
                 </div>
-                <div className='leftContainer'>    
+                <div >    
                     <StudentsCenter {...this.props}/>
                 </div>
-                <div className='rightContainer'> 
-                    {this.props.store.configTime.active === true ? <TimeConfig {...this.props}/> : null}
-                </div>
+                
             </div>
 		);
 	}
