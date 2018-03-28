@@ -10,7 +10,6 @@ class StudentsCenter extends React.Component {
         this.state = {
             value: "",
             idS: ""
-
         };
     }
     configTimeT(name,id, timeRed){
@@ -28,7 +27,6 @@ class StudentsCenter extends React.Component {
     handleChange(event){
         this.setState({value: event.target.value});
     }
-
 
     renderList(){
         var studentsAtCenter = this.props.store.studentsAtCenter;

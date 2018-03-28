@@ -3,11 +3,14 @@ import dispatcher from './dispatcher';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import axios from 'axios';
+//import _ from 'underscore';
 
 const CHANGE_EVENT = 'change';
 
 let AppData = {
     data:{
+        isAuthenticated: true,
+        authenticationInfo: null,
         configTime: {
             active: false,
             name: "",
@@ -31,9 +34,33 @@ let AppData = {
         studentsMissPayment: null,
         paymentListStudent: null,
     },
-    getUser() {
+    getUserLogin() {
+        axios.get('http://localhost:8088/pt1.pt2/webapi/personal/getLogin', {
+            params: {
+                user:"vane",
+                pass:"vanessita"
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     },
     getMenuTypes(action){
+        /*axios.get('http://localhost:8088/pt1.pt2/webapi/personal/getLogin', {
+            params: {
+                user:"mon",
+                pass:"mon"
+            }
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });*/
         $.getJSON('/app/fillData/menuTypes.js', function(info) {
            AppData.data.menuTypes = info.menuTypes;
            AppStore.emitChange();
@@ -162,8 +189,8 @@ AppStore = assign({}, AppStore, {
 
 dispatcher.register((action) => {
     switch (action.type) {
-    case actionTypes.GET_USER:
-        AppData.getUser();
+    case actionTypes.GET_USERLOGIN:
+        AppData.getUserLogin(action);
         break;
     case actionTypes.GET_MENUTYPES:
         AppData.getMenuTypes(action);
