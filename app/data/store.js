@@ -3,16 +3,13 @@ import dispatcher from './dispatcher';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import axios from 'axios';
-<<<<<<< HEAD
 //import _ from 'underscore';
-=======
->>>>>>> dev
 
 const CHANGE_EVENT = 'change';
 
 let AppData = {
     data:{
-        isAuthenticated: false,
+        isAuthenticated: true,
         authenticationInfo: null,
         configTime: {
             active: false,
