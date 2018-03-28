@@ -20,9 +20,18 @@ const Actions = {
             type: actionTypes.GET_NOTIFICATIONS
         });
     },
-    getStudentsAtCenter() {
+    getStudentsAtCenter(filt) {
         dispatcher.dispatch({
-            type: actionTypes.GET_STUDENTSATCENTER
+            type: actionTypes.GET_STUDENTSATCENTER,
+            filt
+
+        });
+    },
+    setTimeRed(id, timeRed) {
+        dispatcher.dispatch({
+            type: actionTypes.SET_TIMERED,
+            idStudent: id,
+            timeRed
         });
     },
     getStudentInfo() {
@@ -35,12 +44,13 @@ const Actions = {
             type: actionTypes.CLOSE_STUDENTFILE
         });
     },
-    getConfigTime(active, id, name){
+    getConfigTime(active, id, name, timeRed){
         dispatcher.dispatch({
             type: actionTypes.GET_CONFIGTIME,
             active,
             id,
-            name
+            name,
+            timeRed
         })
     },
     getStudentMissPayment(){

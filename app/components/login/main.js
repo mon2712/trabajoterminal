@@ -20,8 +20,10 @@ class Login extends React.Component {
 			<div className='loginContainer'>
 				<span id='title'>Bienvenid<span className="icon-wondering"></span>s</span>
 				<span id='instruction'>Ingresa tu usuario y contraseña</span>
+                <div>
                 <span className="ico icon-warning"></span>
                 <span id='errorMessage'>Usuario o contraseña incorrecta</span>
+                </div>
 				<InputPass /> 
 				<InputPass />
 				<div className='button'>
