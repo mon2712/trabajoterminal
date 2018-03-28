@@ -12,8 +12,7 @@ class TiempoReducido extends React.Component {
         }
     }
     componentDidMount(){
-        this.props.store.filt= ' ';
-        this.props.actions.getStudentsAtCenter();
+        this.props.actions.getStudentsAtCenter(' ');
     }
     render() {
 		return (

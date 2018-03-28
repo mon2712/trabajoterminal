@@ -19,9 +19,18 @@ const Actions = {
             type: actionTypes.GET_NOTIFICATIONS
         });
     },
-    getStudentsAtCenter() {
+    getStudentsAtCenter(filt) {
         dispatcher.dispatch({
-            type: actionTypes.GET_STUDENTSATCENTER
+            type: actionTypes.GET_STUDENTSATCENTER,
+            filt
+
+        });
+    },
+    setTimeRed(id, timeRed) {
+        dispatcher.dispatch({
+            type: actionTypes.SET_TIMERED,
+            idStudent: id,
+            timeRed
         });
     },
     getStudentInfo() {

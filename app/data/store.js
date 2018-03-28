@@ -3,7 +3,6 @@ import dispatcher from './dispatcher';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import axios from 'axios';
-//import _ from 'underscore';
 
 const CHANGE_EVENT = 'change';
 
@@ -31,7 +30,6 @@ let AppData = {
         studentFileInfo: null,
         studentsMissPayment: null,
         paymentListStudent: null,
-        filt: null
     },
     getUser() {
     },
@@ -52,15 +50,25 @@ let AppData = {
         });
     },
     getStudentsAtCenter(action){
-        var cadena="http://localhost:8088/pt1.pt2/webapi/centro/getStateAtCenter?filter="+AppData.data.filt;
+        var filter=null;
+        if(action.filt===undefined) filter="Jose"
+        else filter=action.filt
+        var cadena="http://localhost:8088/pt1.pt2/webapi/centro/getStateAtCenter?filter="+filter;
         axios.get(cadena)
         .then(function(response){
-            console.log(response)
             AppData.data.studentsAtCenter = response.data.studentsInCenter;
             AppStore.emitChange();
         })
         .catch(function (error){
-            console.log("Estoy en el error del estore: ", error);
+            console.log( error);
+        });
+    },
+    setTimeRed(action){
+        axios.put('http://localhost:8088/pt1.pt2/webapi/centro/'+action.idStudent+"/"+action.timeRed)
+        .then(function(response){
+        })
+        .catch(function (error){
+            console.log( error);
         });
     },
     getStudentInfo(action){
@@ -79,7 +87,6 @@ let AppData = {
         AppData.data.configTime.active = action.active;
         AppData.data.configTime.id = action.id;
         AppData.data.configTime.name = action.name;
-        //console.log("hola",action.timeRed);
         AppData.data.configTime.timeRed = action.timeRed;
         AppStore.emitChange();
     },
@@ -165,7 +172,10 @@ dispatcher.register((action) => {
         AppData.getNotifications(action);
         break;
     case actionTypes.GET_STUDENTSATCENTER:
-        AppData.getStudentsAtCenter();
+        AppData.getStudentsAtCenter(action);
+        break;
+    case actionTypes.SET_TIMERED:
+        AppData.setTimeRed(action);
         break;
     case actionTypes.GET_STUDENTINFO:
         AppData.getStudentInfo();

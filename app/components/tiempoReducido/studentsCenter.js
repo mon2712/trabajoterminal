@@ -5,18 +5,26 @@ class StudentsCenter extends React.Component {
     constructor(props){
         super(props);
         this.configTimeT = this.configTimeT.bind(this);
+        this.updateTimeRed = this.updateTimeRed.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.state = {
-            value: ""
+            value: "",
+            idS: ""
+
         };
     }
     configTimeT(name,id, timeRed){
         this.props.actions.getConfigTime(true, id,name, timeRed);
-        this.setState({value: timeRed});
+        this.setState({value: timeRed, idS: id});
     }
-    configTimeF(active,name,id, timeRed){
+    configTimeF(name,id, timeRed){
         this.props.actions.getConfigTime(false, id,name, timeRed);
     }
+    updateTimeRed(id,timeRed){
+        this.props.actions.setTimeRed(id,timeRed);
+        this.configTimeF(null,null,null);
+    }
+
     handleChange(event){
         this.setState({value: event.target.value});
     }
@@ -24,11 +32,17 @@ class StudentsCenter extends React.Component {
 
     renderList(){
         var studentsAtCenter = this.props.store.studentsAtCenter;
-        return studentsAtCenter.map((opt,index)=>(
-            <div key={index} className="nameStudent" onClick={() => this.configTimeT(opt.name, opt.idStudent, opt.timeRed)}>
-                <span >{index+1}. {opt.name}</span>
-            </div>   
-        ));
+        if(studentsAtCenter === null || studentsAtCenter === undefined){
+            console.log("Estoy en null o undefined");
+            return null;
+        }
+        else{
+            return studentsAtCenter.map((opt,index)=>(
+                <div key={index} className="nameStudent" onClick={() => this.configTimeT(opt.name, opt.idStudent, opt.timeRed)}>
+                    <span >{index+1}. {opt.name}</span>
+                </div>   
+            ));
+        }
     }  
     renderConfigTime(){
         return(
@@ -46,14 +60,13 @@ class StudentsCenter extends React.Component {
                     <input type="time" step='300' max='00:55' min='00:00' value={this.state.value} onChange={this.handleChange}></input>
                     <span className="timeText2"> min</span>
                 </div>
-                <div className="buttonSetTime">
+                <div className="buttonSetTime" onClick={() => this.updateTimeRed(this.state.idS, this.state.value)}>
                     <span className="timeText2">Aceptar</span>
                 </div>
             </div>
         );
     }
     render() {
-        console.log(this.state);
         return (
             <div>
                 <div className='leftContainer'>

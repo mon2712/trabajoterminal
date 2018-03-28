@@ -13,8 +13,7 @@ class InputSearch extends React.Component {
     displayResult(event){
         var tecla = event.keyCode;
         if(tecla === 32 || tecla === 13 || tecla === undefined){
-            this.props.store.filt=this.state.value;
-            this.props.actions.getStudentsAtCenter();   
+            this.props.actions.getStudentsAtCenter(this.state.value); 
         }
     }
     handleChange(event){
