@@ -4,11 +4,10 @@ class InputPass extends React.Component {
     
     render() {
        return (
-         <form>
-            <div>
+            <div className="inputLogin">
               <input type="password" placeholder="Contraseña"/>
+              <span className="icon-cross"></span>
             </div>
-          </form>
        );
     }
   }

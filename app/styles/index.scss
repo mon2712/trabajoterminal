@@ -36,16 +36,14 @@
 }
 
 #generalDiv{
-    min-height: 600px;
-    max-height: 1500px;
-    height: auto;
+
 }
 #app{
     font-family: 'Jaldi', sans-serif;
     display: block;
-    position: relative;
+    position: absolute;
     width: 100%;
-    height: 100%;
+    height: 800px;
     background: #277ae0;
     z-index: 1;
     &:after{

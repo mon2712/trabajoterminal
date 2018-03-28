@@ -9,6 +9,7 @@ class StudentsCenter extends React.Component {
 
     }
     configTime(name,id){
+        
         this.props.actions.getConfigTime(true, id,name);
     }
     renderList(){

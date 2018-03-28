@@ -7,13 +7,22 @@ import PaymentList from './paymentList/main';
 import StudentsCalls from './studentsCalls/main';
 import Menu from '../components/menu/main';
 import actions from '../data/actions';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 import history from '../history';
 
 
 function getAppState() {
     return AppStore.getData();
 }
+
+const PrivateRoute = ({ component: Component, store: store, actions: actions}) => (
+    <Route render={(props) => (
+      store.store.isAuthenticated === true
+        ? <Component {...store} actions={actions}/>
+        : <Redirect to='/login' />
+    )} />
+)
+
 class App extends React.Component {
     constructor(props){
         super(props);
@@ -32,26 +41,27 @@ class App extends React.Component {
        this.setState({store: getAppState()});
     }
     render() {
-
         return (
             <Router>
                 <div id='generalDiv'>
-                    <ul>
-                        <li><Link to={'/login'}></Link></li>
-                    </ul>
                     <Switch>
-                        <Route exact path='/' render={(props) => <Header {...this.state} />} />
-                        <Route path='/login' component={Login} />
-                        <Route path='/tiempoReducido' render={(props) => <TiempoReducido {...this.state} actions={actions}/>} />
-                        <Route path='/menu' render={(props) => <Menu {...this.state} actions={actions}/>} />
-                        <Route path='/paymentList' render={(props) => <PaymentList {...this.state} actions={actions}/>} />
-                        <Route path='/llamadasPendientes' render={(props) => <StudentsCalls {...this.state} actions={actions}/>} />
-                        <Route render={function (){
-                            return <p> Not Found </p>
-                        }} />
+                        <PrivateRoute path="/menu" component={Menu} store={this.state} actions={actions}/>
+                        <PrivateRoute path="/tiempoReducido" component={TiempoReducido} store={this.state} actions={actions}/>
+                        <PrivateRoute path="/llamadasPendientes" component={StudentsCalls} store={this.state} actions={actions}/>
+                        <PrivateRoute path="/paymentList" component={PaymentList} store={this.state} actions={actions}/>
+
+                        <Route path="/login" component={Login}/>
+
+                        <Route path="/" render={(props) => (
+                            this.state.store.isAuthenticated === true
+                            ? <Menu {...this.state} actions={actions}/>
+                            : <Login {...this.state} actions={actions}/>
+                        )} />
+
                     </Switch>
                 </div>
             </Router>
+
         );
     }
 }

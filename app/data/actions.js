@@ -2,10 +2,11 @@ import actionTypes from './actionTypes';
 import dispatcher from './dispatcher';
 
 const Actions = {
-    getUser(user) {
+    getUserLogin(user, pass) {
         dispatcher.dispatch({
-            type: actionTypes.GET_USER,
+            type: actionTypes.GET_USERLOGIN,
             user,
+            pass
         });
     },
     getMenuTypes(typeMenu) {

@@ -18,9 +18,11 @@ class Login extends React.Component {
     render() {
 		return (
 			<div className='loginContainer'>
-				<span id='title'>Bienvenidos</span>
+				<span id='title'>Bienvenid<span className="icon-wondering"></span>s</span>
 				<span id='instruction'>Ingresa tu usuario y contraseña</span>
-				<InputUser />
+                <span className="ico icon-warning"></span>
+                <span id='errorMessage'>Usuario o contraseña incorrecta</span>
+				<InputPass /> 
 				<InputPass />
 				<div className='button'>
 					<Link to={'/menu'}>Aceptar</Link>
