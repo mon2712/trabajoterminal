@@ -11,17 +11,16 @@ class Menu extends React.Component {
         super(props);
     }
     componentDidMount() {
-      this.props.actions.getMenuTypes('recepcion');
+      this.props.actions.getMenuTypes();
       this.props.actions.getNotifications();
     }
     render() {
-        console.log(this.props)
 		return (
 			<div className='menuContainer'>
                 <div className="leftContainerM">
                     <SearchBar {...this.props} />
                     {this.props.store.studentFileInfo !== null ? <StudentFile {...this.props}/> : null}
-				    <ButtonOptions {...this.props } type="recepcion"/>
+				    <ButtonOptions {...this.props } type={this.props.store.authenticationInfo.type}/>
                 </div>
                 <div className="rightContainerM">
                     <Panel {...this.props}/>

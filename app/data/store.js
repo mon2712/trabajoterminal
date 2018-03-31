@@ -3,14 +3,25 @@ import dispatcher from './dispatcher';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import axios from 'axios';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
+import App from '../components/app';
 //import _ from 'underscore';
 
 const CHANGE_EVENT = 'change';
 
 let AppData = {
     data:{
-        isAuthenticated: true,
-        authenticationInfo: null,
+        isAuthenticated: false,
+        tries: {
+            max: 3,
+            count: 0
+        },
+        authenticationInfo: {
+            code: null,
+            id: null,
+            name: null,
+            type: null
+        },
         configTime: {
             active: false,
             name: "",
@@ -34,33 +45,75 @@ let AppData = {
         studentsMissPayment: null,
         paymentListStudent: null,
     },
-    getUserLogin() {
+    confirmLogin(){
+        if(localStorage.getItem("code") !== null){
+            AppData.data.isAuthenticated=true;
+            AppData.data.authenticationInfo.code=localStorage.getItem("code");
+            AppData.data.authenticationInfo.id=localStorage.getItem("id");
+            AppData.data.authenticationInfo.name=localStorage.getItem("name");
+            AppData.data.authenticationInfo.type=localStorage.getItem("type");
+            AppStore.emitChange();
+        }
+    },
+    getUserLogin(action) {
         axios.get('http://localhost:8088/pt1.pt2/webapi/personal/getLogin', {
             params: {
-                user:"vane",
-                pass:"vanessita"
+                user: action.user,
+                pass: action.pass
             }
         })
         .then(function (response) {
-            console.log(response)
+            if(response.data.infoLogin.code===0){
+                AppData.data.tries.count++;
+                AppData.data.isAuthenticated=false;
+                AppData.data.authenticationInfo=response.data.infoLogin; 
+                if(AppData.data.tries.count >= 3){
+                    AppData.data.authenticationInfo.type="Has excedido el número de intentos permitidos"
+                }
+                AppStore.emitChange();                
+            }else if(response.data.infoLogin.code===1){
+                if(response.data.infoLogin.type === "recepcion" || response.data.infoLogin.type === "instructor"){
+                    AppData.data.isAuthenticated=true;
+                    AppData.data.authenticationInfo=response.data.infoLogin;
+                    if (typeof(Storage) !== "undefined") {
+                        localStorage.code = response.data.infoLogin.code;
+                        localStorage.id = response.data.infoLogin.id;
+                        localStorage.name = response.data.infoLogin.name;
+                        localStorage.type = response.data.infoLogin.type;
+                    } else {
+                        console.log("Sorry! No Web Storage support..")
+                    }
+                    AppStore.emitChange();
+                }else if(response.data.infoLogin.type === "asistente"){
+                    AppData.data.isAuthenticated=false;
+                    AppData.data.authenticationInfo=response.data.infoLogin;
+                    AppData.data.authenticationInfo.code=0;
+                    AppData.data.authenticationInfo.type="Tu usuario no cuenta con permisos para accesar";
+                    AppStore.emitChange();
+                }
+            }
         })
         .catch(function (error) {
             console.log(error);
         });
     },
-    getMenuTypes(action){
-        /*axios.get('http://localhost:8088/pt1.pt2/webapi/personal/getLogin', {
-            params: {
-                user:"mon",
-                pass:"mon"
-            }
-        })
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });*/
+    closeLogin(){
+        localStorage.code = "";
+        localStorage.id = "";
+        localStorage.name = "";
+        localStorage.type = "";
+        AppData.data.isAuthenticated=false;
+        AppData.data.authenticationInfo.code="";
+        AppData.data.authenticationInfo.id="";
+        AppData.data.authenticationInfo.name="";
+        AppData.data.authenticationInfo.type="";
+        AppStore.emitChange();
+    },
+    changeValueCode(){
+        AppData.data.authenticationInfo.code=-1;
+        AppStore.emitChange();
+    },
+    getMenuTypes(){
         $.getJSON('/app/fillData/menuTypes.js', function(info) {
            AppData.data.menuTypes = info.menuTypes;
            AppStore.emitChange();
@@ -189,11 +242,20 @@ AppStore = assign({}, AppStore, {
 
 dispatcher.register((action) => {
     switch (action.type) {
+    case actionTypes.CHANGEVALUE_CODE:
+        AppData.changeValueCode();
+        break;
+    case actionTypes.CLOSE_LOGIN:
+        AppData.closeLogin();
+        break;
+    case actionTypes.CONFIRM_LOGIN:
+        AppData.confirmLogin();
+        break;
     case actionTypes.GET_USERLOGIN:
         AppData.getUserLogin(action);
         break;
     case actionTypes.GET_MENUTYPES:
-        AppData.getMenuTypes(action);
+        AppData.getMenuTypes();
         break;
     case actionTypes.GET_NOTIFICATIONS:
         AppData.getNotifications(action);
