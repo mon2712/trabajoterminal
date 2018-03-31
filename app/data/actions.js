@@ -2,6 +2,21 @@ import actionTypes from './actionTypes';
 import dispatcher from './dispatcher';
 
 const Actions = {
+    confirmLogin() {
+        dispatcher.dispatch({
+            type: actionTypes.CONFIRM_LOGIN
+        });
+    },
+    closeLogin() {
+        dispatcher.dispatch({
+            type: actionTypes.CLOSE_LOGIN
+        });
+    },
+    changeValueCode() {
+        dispatcher.dispatch({
+            type: actionTypes.CHANGEVALUE_CODE
+        });
+    },
     getUserLogin(user, pass) {
         dispatcher.dispatch({
             type: actionTypes.GET_USERLOGIN,
@@ -11,8 +26,7 @@ const Actions = {
     },
     getMenuTypes(typeMenu) {
         dispatcher.dispatch({
-            type: actionTypes.GET_MENUTYPES,
-            typeMenu
+            type: actionTypes.GET_MENUTYPES
         });
     },
     getNotifications() {

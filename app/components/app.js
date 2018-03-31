@@ -17,7 +17,7 @@ function getAppState() {
 
 const PrivateRoute = ({ component: Component, store: store, actions: actions}) => (
     <Route render={(props) => (
-      store.store.isAuthenticated === true
+        localStorage.getItem("code") !== null && localStorage.getItem("code") === "1"
         ? <Component {...store} actions={actions}/>
         : <Redirect to='/login' />
     )} />
@@ -32,6 +32,7 @@ class App extends React.Component {
         this._onChange = this._onChange.bind(this);
     }
     componentDidMount() {
+        actions.confirmLogin();
         AppStore.addChangeListener(this._onChange);
     }
     componentWillUnmount() {
@@ -50,11 +51,15 @@ class App extends React.Component {
                         <PrivateRoute path="/llamadasPendientes" component={StudentsCalls} store={this.state} actions={actions}/>
                         <PrivateRoute path="/paymentList" component={PaymentList} store={this.state} actions={actions}/>
 
-                        <Route path="/login" component={Login}/>
-
+                        <Route path="/login" render={(props) => (
+                            localStorage.getItem("code") !== null && localStorage.getItem("code") === "1"
+                            ? <Redirect to='/menu' />
+                            : <Login {...this.state} actions={actions}/>
+                        )} />
+                        
                         <Route path="/" render={(props) => (
-                            this.state.store.isAuthenticated === true
-                            ? <Menu {...this.state} actions={actions}/>
+                            localStorage.getItem("code") !== null && localStorage.getItem("code") === "1"
+                            ? <Redirect to='/menu' />
                             : <Login {...this.state} actions={actions}/>
                         )} />
 
