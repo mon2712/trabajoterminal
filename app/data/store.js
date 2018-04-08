@@ -41,6 +41,7 @@ let AppData = {
         menuTypes: {},
         notifications: null,
         studentsAtCenter: null,
+        students: null,
         studentFileInfo: null,
         studentsMissPayment: null,
         paymentListStudent: null,
@@ -107,6 +108,7 @@ let AppData = {
         AppData.data.authenticationInfo.id="";
         AppData.data.authenticationInfo.name="";
         AppData.data.authenticationInfo.type="";
+        AppData.data.students="";
         AppStore.emitChange();
     },
     changeValueCode(){
@@ -120,6 +122,26 @@ let AppData = {
         }).fail(function(error) {
             console.error(error);
         });
+    },
+    getAllStudents(action){
+        axios.get('http://localhost:8088/pt1.pt2/webapi/alumno/getAllStudents', {
+            params: {
+                filter: action.filter
+            }
+        })
+        .then(function (response){
+            console.log(response)
+            if(response.data.allStudents.length === 0){
+                AppData.data.students = "";
+            }else{
+                AppData.data.students = response.data.allStudents;
+            }
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log(error);
+        });
+
     },
     getNotifications(action){
         $.getJSON('/app/fillData/notifications.js', function(info) {
@@ -152,11 +174,18 @@ let AppData = {
         });
     },
     getStudentInfo(action){
-        $.getJSON('/app/fillData/studentInfo.js', function(info) {
-            AppData.data.studentFileInfo = info[0].student;
+        axios.get('http://localhost:8088/pt1.pt2/webapi/alumno/getStudentFile', {
+            params: {
+                id: action.id
+            }
+        })
+        .then(function (response){
+            console.log(response)
+            AppData.data.studentFileInfo = response.data.student;
             AppStore.emitChange();
-        }).fail(function(error) {
-            console.error(error);
+        })
+        .catch(function (error){
+            console.log(error);
         });
     },
     closeStudentFile(){
@@ -257,6 +286,9 @@ dispatcher.register((action) => {
     case actionTypes.GET_MENUTYPES:
         AppData.getMenuTypes();
         break;
+    case actionTypes.GET_ALLSTUDENTS:
+        AppData.getAllStudents(action);
+        break;
     case actionTypes.GET_NOTIFICATIONS:
         AppData.getNotifications(action);
         break;
@@ -267,7 +299,7 @@ dispatcher.register((action) => {
         AppData.setTimeRed(action);
         break;
     case actionTypes.GET_STUDENTINFO:
-        AppData.getStudentInfo();
+        AppData.getStudentInfo(action);
         break;
     case actionTypes.CLOSE_STUDENTFILE:
         AppData.closeStudentFile();

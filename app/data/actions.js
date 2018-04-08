@@ -29,6 +29,12 @@ const Actions = {
             type: actionTypes.GET_MENUTYPES
         });
     },
+    getAllStudents(filter) {
+        dispatcher.dispatch({
+            type: actionTypes.GET_ALLSTUDENTS,
+            filter
+        });
+    },
     getNotifications() {
         dispatcher.dispatch({
             type: actionTypes.GET_NOTIFICATIONS
@@ -48,9 +54,10 @@ const Actions = {
             timeRed
         });
     },
-    getStudentInfo() {
+    getStudentInfo(id) {
         dispatcher.dispatch({
-            type: actionTypes.GET_STUDENTINFO
+            type: actionTypes.GET_STUDENTINFO,
+            id
         });
     },
     closeStudentFile() {

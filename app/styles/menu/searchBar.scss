@@ -8,7 +8,25 @@
     margin-left: 10px;
     .searchContainer{
         border-radius: 0px 10px 10px 0px;
-        box-shadow: 1px 1px 28px #000000;        
+        box-shadow: 1px 1px 28px #000000; 
+        position: relative;
+        .studentsListContainer{
+            position: absolute;
+            width: 80%;
+            background: rgba(0, 0, 0, 0.5);
+            max-height: 150px;
+            overflow-y: scroll;
+            .student{
+                cursor: pointer;
+                span{
+                    width: 100%;
+                    color: white;
+                }
+                &:hover{
+                    background: rgba(0, 0, 0, 0.5);
+                }
+            }
+        }       
         span{
             display: inline-block;
             width: 5%;
