@@ -105,6 +105,11 @@ const Actions = {
             name,
             id
         });
-    }
+    },
+    getStatusCenter(){
+        dispatcher.dispatch({
+            type: actionTypes.GET_STATUSATCENTER,
+        });
+    },
 };
 export default Actions;
