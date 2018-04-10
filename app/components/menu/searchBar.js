@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ButtonOptions extends React.Component {
+class SearchBar extends React.Component {
     constructor(props){
         super(props);  
         this.renderStudentFile=this.renderStudentFile.bind(this);
@@ -35,7 +35,6 @@ class ButtonOptions extends React.Component {
         this.setState({textInput: event.target.value});        
     }
     renderStudentsList(){
-        console.log("renderStudentList",this.props.store.students)
         if(this.props.store.students !== ""){
             return this.props.store.students.map((opt, index) => (
                 <div className='student' key={index} onClick={() => this.renderStudentFile(opt.idStudent)}>
@@ -70,4 +69,4 @@ class ButtonOptions extends React.Component {
 		);
 	}
   }
-  export default ButtonOptions;
+  export default SearchBar;

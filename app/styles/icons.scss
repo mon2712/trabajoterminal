@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: 'trabajoterminalfonts';
-  src:  url('#{$font-path}/trabajoterminalfonts.eot?5cev30');
-  src:  url('#{$font-path}/trabajoterminalfonts.eot?5cev30#iefix') format('embedded-opentype'),
-    url('#{$font-path}/trabajoterminalfonts.ttf?5cev30') format('truetype'),
-    url('#{$font-path}/trabajoterminalfonts.woff?5cev30') format('woff'),
-    url('#{$font-path}/trabajoterminalfonts.svg?5cev30#trabajoterminalfonts') format('svg');
+  src:  url('#{$font-path}/trabajoterminalfonts.eot?8nkghi');
+  src:  url('#{$font-path}/trabajoterminalfonts.eot?8nkghi#iefix') format('embedded-opentype'),
+    url('#{$font-path}/trabajoterminalfonts.ttf?8nkghi') format('truetype'),
+    url('#{$font-path}/trabajoterminalfonts.woff?8nkghi') format('woff'),
+    url('#{$font-path}/trabajoterminalfonts.svg?8nkghi#trabajoterminalfonts') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -30,41 +30,6 @@
   @return unquote("\"") + $str + unquote("\"");
 }
 
-.icon-add-button {
-  &:before {
-    content: unicode($icon-add-button); 
-  }
-}
-.icon-add-document {
-  &:before {
-    content: unicode($icon-add-document); 
-  }
-}
-.icon-consulting-message {
-  &:before {
-    content: unicode($icon-consulting-message); 
-  }
-}
-.icon-file {
-  &:before {
-    content: unicode($icon-file); 
-  }
-}
-.icon-note {
-  &:before {
-    content: unicode($icon-note); 
-  }
-}
-.icon-playlist {
-  &:before {
-    content: unicode($icon-playlist); 
-  }
-}
-.icon-speech-bubble {
-  &:before {
-    content: unicode($icon-speech-bubble); 
-  }
-}
 .icon-minute-mark {
   &:before {
     content: unicode($icon-minute-mark); 
@@ -243,6 +208,41 @@
 .icon-pencil2 {
   &:before {
     content: unicode($icon-pencil2); 
+  }
+}
+.icon-add-button {
+  &:before {
+    content: unicode($icon-add-button); 
+  }
+}
+.icon-add-document {
+  &:before {
+    content: unicode($icon-add-document); 
+  }
+}
+.icon-consulting-message {
+  &:before {
+    content: unicode($icon-consulting-message); 
+  }
+}
+.icon-file {
+  &:before {
+    content: unicode($icon-file); 
+  }
+}
+.icon-note {
+  &:before {
+    content: unicode($icon-note); 
+  }
+}
+.icon-playlist {
+  &:before {
+    content: unicode($icon-playlist); 
+  }
+}
+.icon-speech-bubble {
+  &:before {
+    content: unicode($icon-speech-bubble); 
   }
 }
 .icon-profile {
@@ -430,14 +430,14 @@
     content: unicode($icon-checkmark); 
   }
 }
-.icon-enter {
+.icon-enter2 {
   &:before {
-    content: unicode($icon-enter); 
+    content: unicode($icon-enter2); 
   }
 }
-.icon-exit {
+.icon-exit2 {
   &:before {
-    content: unicode($icon-exit); 
+    content: unicode($icon-exit2); 
   }
 }
 .icon-arrow-up {
@@ -498,6 +498,21 @@
 .icon-file-excel {
   &:before {
     content: unicode($icon-file-excel); 
+  }
+}
+.icon-enter {
+  &:before {
+    content: unicode($icon-enter); 
+  }
+}
+.icon-exit {
+  &:before {
+    content: unicode($icon-exit); 
+  }
+}
+.icon-loop2 {
+  &:before {
+    content: unicode($icon-loop2); 
   }
 }
 

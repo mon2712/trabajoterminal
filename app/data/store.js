@@ -50,6 +50,7 @@ let AppData = {
             fileBase: "",
             fileReport: ""
         },
+        studentsViewCenter: "",
     },
     confirmLogin(){
         if(localStorage.getItem("code") !== null){
@@ -260,6 +261,21 @@ let AppData = {
         AppData.data.setFiles.fileReport = action.fileReport;
         AppStore.emitChange();
     },
+    getStatusCenter(){
+        //studentsViewCenter
+        axios.get('http://localhost:8088/pt1.pt2/webapi/centro/getStatusOfCenter')
+        .then(function (response){
+            if(response.data.asistentes.length === 0){
+                AppData.data.studentsViewCenter = "";
+            }else{
+                AppData.data.studentsViewCenter = response.data;
+            }
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log(error);
+        });
+    }
 }
 
 let AppStore = assign({}, EventEmitter.prototype, {
@@ -335,6 +351,10 @@ dispatcher.register((action) => {
         break;
     case actionTypes.GET_SETFILES:
         AppData.getSetFiles(action);
+        break; 
+    case actionTypes.GET_STATUSATCENTER:
+        AppData.getStatusCenter();
+        break; 
     default:
 		// no op
     }

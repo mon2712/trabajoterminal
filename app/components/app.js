@@ -4,6 +4,7 @@ import Header from '../components/header/main';
 import Login from '../components/login/main';
 import TiempoReducido from './tiempoReducido/main';
 import PaymentList from './paymentList/main';
+import ViewCenter from './viewCenter/main';
 import StudentsCalls from './studentsCalls/main';
 import Menu from '../components/menu/main';
 import actions from '../data/actions';
@@ -52,6 +53,7 @@ class App extends React.Component {
                         <PrivateRoute path="/llamadasPendientes" component={StudentsCalls} store={this.state} actions={actions}/>
                         <PrivateRoute path="/paymentList" component={PaymentList} store={this.state} actions={actions}/>
                         <PrivateRoute path="/uploadFile" component={UploadFile} store={this.state} actions={actions}/>
+                        <PrivateRoute path="/vistaCentro" component={ViewCenter} store={this.state} actions={actions}/>
 
                         <Route path="/login" render={(props) => (
                             localStorage.getItem("code") !== null && localStorage.getItem("code") === "1"

@@ -112,7 +112,12 @@ const Actions = {
             active,
             fileBase,
             fileReport
-        })
+        });
+    },
+    getStatusCenter(){
+        dispatcher.dispatch({
+            type: actionTypes.GET_STATUSATCENTER,
+        });
     },
 };
 export default Actions;
