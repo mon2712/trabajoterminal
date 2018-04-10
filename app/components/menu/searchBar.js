@@ -35,7 +35,6 @@ class SearchBar extends React.Component {
         this.setState({textInput: event.target.value});        
     }
     renderStudentsList(){
-        console.log("renderStudentList",this.props.store.students)
         if(this.props.store.students !== ""){
             return this.props.store.students.map((opt, index) => (
                 <div className='student' key={index} onClick={() => this.renderStudentFile(opt.idStudent)}>
