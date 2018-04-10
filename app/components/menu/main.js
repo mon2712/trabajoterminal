@@ -4,7 +4,7 @@ import SearchBar from '../menu/searchBar';
 import Panel from '../menu/panel';
 import AppStore from '../../data/store';
 import StudentFile from '../studentFile/main';
-
+import UploadFile from '../menu/uploadFile';
 
 class Menu extends React.Component {
     constructor(props){
@@ -26,6 +26,7 @@ class Menu extends React.Component {
                     <Panel {...this.props}/>
                 </div>
 			</div>
+            
 		);
 	}
   }

@@ -45,6 +45,11 @@ let AppData = {
         studentFileInfo: null,
         studentsMissPayment: null,
         paymentListStudent: null,
+        setFiles: {
+            active: false,
+            fileBase: "",
+            fileReport: ""
+        },
     },
     confirmLogin(){
         if(localStorage.getItem("code") !== null){
@@ -248,7 +253,13 @@ let AppData = {
             }
         });
         AppStore.emitChange();
-    }
+    },
+    getSetFiles(action){
+        AppData.data.setFiles.active = action.active;
+        AppData.data.setFiles.fileBase = action.fileBase;
+        AppData.data.setFiles.fileReport = action.fileReport;
+        AppStore.emitChange();
+    },
 }
 
 let AppStore = assign({}, EventEmitter.prototype, {
@@ -321,6 +332,9 @@ dispatcher.register((action) => {
         break;
     case actionTypes.GET_NOTE:
         AppData.getNote(action);
+        break;
+    case actionTypes.GET_SETFILES:
+        AppData.getSetFiles(action);
     default:
 		// no op
     }

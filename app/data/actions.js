@@ -105,6 +105,14 @@ const Actions = {
             name,
             id
         });
-    }
+    },
+    getSetFiles(active, fileBase,fileReport){
+        dispatcher.dispatch({
+            type: actionTypes.GET_SETFILES,
+            active,
+            fileBase,
+            fileReport
+        })
+    },
 };
 export default Actions;
