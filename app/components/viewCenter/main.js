@@ -58,13 +58,11 @@ class ViewCenter extends React.Component {
     move(movement){
 
         if(movement=="left"){
-            console.log("muevete izquierda")
             this.setState({
                 currentPage: this.state.currentPage-1,
                 position: this.state.position-((this.state.perPage*300)+(this.state.perPage*10))             
             })
         }else if(movement=="right"){
-            console.log("muevete derecha")
             this.setState({
                 currentPage: this.state.currentPage+1,
                 position: this.state.position+((this.state.perPage*300)+(this.state.perPage*10))
@@ -119,7 +117,6 @@ class ViewCenter extends React.Component {
         );
     }
     render() {
-        console.log("component", this.props.store.studentsViewCenter)
 		return (
 			<div className='centerStateContainer'>
                 <NavigationContainer texto="Vista del Centro" path='/menu'/>

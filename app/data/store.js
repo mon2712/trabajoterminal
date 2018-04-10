@@ -252,10 +252,8 @@ let AppData = {
     },
     getStatusCenter(){
         //studentsViewCenter
-        console.log("studiantes en el centro")
         axios.get('http://localhost:8088/pt1.pt2/webapi/centro/getStatusOfCenter')
         .then(function (response){
-            console.log(response.data)
             if(response.data.asistentes.length === 0){
                 AppData.data.studentsViewCenter = "";
             }else{
