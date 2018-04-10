@@ -36,6 +36,12 @@
             border-radius: 10px;
             margin-top: 10px;
             color: white;
+            .statusSize{
+                width: 33.33%;
+                display: inline-block;
+                vertical-align: middle;
+                overflow: hidden;
+            }
             .circle{
                 border: 1px solid;
                 width: 20px;
@@ -43,7 +49,7 @@
                 height: 20px;
                 border-radius: 50%;
                 vertical-align: middle;
-                margin-right: 10px;
+                margin-right: 3%;
                 &.normal{
                     border-color: #52b0b0;
                     background: #52b0b0;
@@ -61,7 +67,6 @@
                 font-size: 20px;
                 display: inline-block;
                 vertical-align: middle;
-                margin-right: 15px;
                 &.normal{
                     color: #52b0b0;
                 }
@@ -117,11 +122,11 @@
                 display: inline-block;
                 vertical-align: middle;
                 width: 300px;
-                height: 500px;
+                height: 600px;
                 margin-right: 10px;
                 border-radius: 4px;
                 .headerAssistant{
-                    padding: 5px;
+                    padding: 15px;
                     span{
                         display: inline-block;
                         vertical-align: middle;
@@ -141,7 +146,7 @@
                     margin-right: 5%;
                     margin-bottom: 5%;
                     position: relative;
-                    height: 80px;
+                    height: 90px;
                     max-height: 100px;
                     overflow-y: scroll;
                     &:hover{
@@ -152,7 +157,6 @@
                     .timeCont{
                         transition: right 400ms ease-out;
                         display: block;
-                        height: 100px;
                         position: absolute;
                         top:0;
                         right: 100%;
@@ -163,17 +167,26 @@
                         border: none;
                         opacity: 1;
                         color: white;
-                        font-size: 30px;
+                        font-size: 20px;
                         bottom: 0px;
                         filter: alpha(opacity=90);
+                        span{
+                            width: 100%;
+                            display: block;
+                        }
                     }
                     .level{
                         display: block;
                         width: 100%;
+                        font-size: 25px;
+                        height: 50%;
+                        color: white;
                     }
                     .name{
                         display: block;
                         width: 100%;
+                        height: 56%;
+                        font-size: 18px;
                     }
                     .lastName{
                         display: block;

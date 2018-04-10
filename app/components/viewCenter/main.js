@@ -19,12 +19,18 @@ class ViewCenter extends React.Component {
         return(
             <div className="barStatus">
                 <div className="status">
-                    <span className="circle normal"></span>
-                    <span className="text normal">Normal</span>
-                    <span className="circle soon"></span>
-                    <span className="text soon" >Salida Pronto</span>
-                    <span className="circle urgent"></span>
-                    <span className="text urgent">Salida Urgente</span>
+                    <div className="statusSize">
+                        <span className="circle normal"></span>
+                        <span className="text normal">Normal</span>
+                    </div>
+                    <div className="statusSize">
+                        <span className="circle soon"></span>
+                        <span className="text soon" >Salida Pronto</span>
+                    </div>
+                    <div className="statusSize">
+                        <span className="circle urgent"></span>
+                        <span className="text urgent">Salida Urgente</span>
+                    </div>
                 </div>
             </div>
         );
@@ -38,19 +44,13 @@ class ViewCenter extends React.Component {
         );
     }
     renderStudent(student, i){
-        //var time = Date.parse(student.timeAtCenter)
-        //console.log(student.timeAtCenter)
-        //var d = new Date (new Date().toDateString() + ' ' + student.timeAtCenter)
-        //var m = d.getMinutes();
-        //var n= d.getHours();
-        //var n = Date.getMinutes(student.timeAtCenter)
-        //console.log("min", n)
         return(
             <div className={student.timeAtCenter>=45 && student.timeAtCenter<=60? 'studentContainer soon' : student.timeAtCenter>60 ? 'studentContainer urgent' : 'studentContainer normal'} key={i}>
-                <span className="name">{student.name + " " + student.lastName}</span>
+                <span className="name">{student.name}</span>
                 <span className="level">{student.level}</span>
                 <div className="timeCont">
-                    <span className="timeAtCenter">{Math.ceil(student.timeAtCenter)} min</span>
+                    <span>{student.lastName}</span>
+                    <span className="timeAtCenter">{Math.ceil(student.timeAtCenter)+' min'}</span>
                 </div>
             </div>
         );
@@ -73,13 +73,10 @@ class ViewCenter extends React.Component {
 
     }
     renderAssistant(){
-        console.log("renderAsistentes", this.state.currentPage)
         var assistants=[]
         assistants = this.props.store.studentsViewCenter.asistentes;
         var numAssis =assistants.length;
-        //var perPage=4;
         var pages = Math.ceil(numAssis / this.state.perPage);
-        console.log("pages", pages)
         return(
             <div className="assistantsContainer"
                 style={{
