@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ButtonOptions extends React.Component {
+class SearchBar extends React.Component {
     constructor(props){
         super(props);  
         this.renderStudentFile=this.renderStudentFile.bind(this);
@@ -70,4 +70,4 @@ class ButtonOptions extends React.Component {
 		);
 	}
   }
-  export default ButtonOptions;
+  export default SearchBar;

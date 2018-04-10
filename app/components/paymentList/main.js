@@ -1,6 +1,7 @@
 import React from 'react';
 import AppStore from '../../data/store';
 import NavigationContainer from '../general/navigationContainer';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 
 
 class PaymentList extends React.Component {
@@ -34,4 +35,5 @@ class PaymentList extends React.Component {
 		);
 	}
   }
+  
   export default PaymentList;
