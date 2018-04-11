@@ -2,27 +2,28 @@
     margin: 0px auto;
     border-radius: 6px;
     width: 40%;
-    background:  #6ddfc5;
+    background:  #5dc4c4;
     margin-top:10%;
-    padding: 30px;
+    padding: 20px;
     .headerConfigCall{
         .callInitialText{
             display: inline-block;
             text-align: center;
             width: 95%;
-            color: white;
+            color: #3e3636;
             font-size: 30px;
         }
         .ico{
             display: inline-block;
             text-align: left;
-            vertical-align:  top;
+            vertical-align: top;
             width: 5%;
             color: white;
             font-size: 25px;
+            font-weight: bolder;
             cursor: pointer;
             &:hover{
-                color: rgba(0, 0, 0, .8);
+                color: #a7a7a7;
             }
         }
     }
@@ -31,29 +32,55 @@
         padding-top: 10px;
         color: white;
         font-size: 20px;
+        display: inline-block;
+        &.student{
+            font-size: 25px;
+        }
+        &.left{
+            width: 20%;
+        }
+        &.right{
+            width: 80%;
+        }
+        &.note{
+            width: 100%;
+            margin-bottom: 5px;
+        }
     }
     input{
+        display: inline-block;
         border-radius: 5px;
         width:50%;
         height: 30px;
+        border-color: white;
+        font-size: 14px;
+        color: #a7a7a7;
     }
     textarea{
         border-radius: 5px;
         width:95%;
         height: 80px;
         padding: 5px;
+        border-color: white;
+        color: #a7a7a7;
+        font-size: 14px;
     }
     .buttonSetNote{
         margin: 0px auto;
         margin-top: 10px;
         width: 30%;
         height:40px;
+        line-height: 40px;
         text-align: center;
         border-radius: 5px;
         background: #a7a7a7;
         cursor: pointer;
+        font-size: 22px;
+        color: white;
+        box-shadow: 3px 3px 10px #000000;
+        margin-bottom: 15px;
         &:hover{
-            background: rgba(0, 0, 0, .8);
+            background: #847f7f;
         }
     }   
 }
