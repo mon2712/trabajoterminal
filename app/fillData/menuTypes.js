@@ -1,4 +1,5 @@
 {
+    
         "menuTypes": {
             "recepcion": [{
                 "ico": "icon-clipboard",

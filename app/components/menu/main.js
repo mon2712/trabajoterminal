@@ -4,7 +4,8 @@ import SearchBar from '../menu/searchBar';
 import Panel from '../menu/panel';
 import AppStore from '../../data/store';
 import StudentFile from '../studentFile/main';
-import UploadFile from '../menu/uploadFile';
+import UploadFile from './uploadFile';
+
 
 class Menu extends React.Component {
     constructor(props){

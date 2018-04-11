@@ -16,18 +16,18 @@ class UploadFile extends React.Component {
                 <div className="headerSetRouteFile">
                     <span className="setRouteTextText">Seleccionar Archivos</span>
                     <span className="ico icon-file-excel"></span>
-                    <span className="ico icon-multiply" onClick={this.setRoutFile.bind(this,null,null)}></span>
+                    <span className="ico icon-multiply" onClick={this.props.closePopUp()}></span>
                 </div>
                 <div>
                     <span className="fileText">Base de datos: </span>
-                    <input type="file">Archivo</input>
+                    <input type="file"></input>
                 </div>
                 <div>
                 <span className="fileText">Reporte mensual: </span>
-                    <input type="file">Reporte</input>
+                    <input type="file"></input>
                 </div>
                 <div className="buttonSetFiles">
-                <span className="fileText" onClick={this.setRoutFile.bind(this,null,null,null)}>Subir archivos</span>
+                     <span className="fileText" onClick={this.setRoutFile.bind(this,null,null,null)}>Subir archivos</span>
                 </div>
             </div>
             </div>
