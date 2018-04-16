@@ -110,6 +110,11 @@ const Actions = {
         dispatcher.dispatch({
             type: actionTypes.GET_STATUSATCENTER,
         });
-    },
+    }, 
+    getAllAssistants(){
+        dispatcher.dispatch({
+            type: actionTypes.GET_ALLASSISTANTS,
+        });
+    }
 };
 export default Actions;

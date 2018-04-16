@@ -49,7 +49,7 @@ class ButtonOptions extends React.Component {
                 {this.props.store.menuTypes[this.props.type] != undefined ? this.renderButtons() : null}
                 {
                     this.state.popUpActive === true && this.state.id===2 ? 
-                        <PrintOptions closePopUp={()=>this.closePopUp}/> 
+                        <PrintOptions {...this.props} closePopUp={()=>this.closePopUp}/> 
                     : null
                 }                
             </div>

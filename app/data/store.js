@@ -264,6 +264,21 @@ let AppData = {
         .catch(function (error){
             console.log(error);
         });
+    },
+    getAllAssistants(){
+        axios.get('http://localhost:8088/pt1.pt2/webapi/asistente/getAllAssistants')
+        .then(function (response){
+            console.log(response)
+            /*if(response.data.asistentes.length === 0){
+                AppData.data.studentsViewCenter = "";
+            }else{
+                AppData.data.studentsViewCenter = response.data;
+            }
+            AppStore.emitChange();*/
+        })
+        .catch(function (error){
+            console.log(error);
+        });
     }
 }
 
@@ -340,6 +355,9 @@ dispatcher.register((action) => {
         break; 
     case actionTypes.GET_STATUSATCENTER:
         AppData.getStatusCenter();
+        break; 
+    case actionTypes.GET_ALLASSISTANTS:
+        AppData.getAllAssistants();
         break; 
     default:
 		// no op
