@@ -37,6 +37,7 @@
     .selectPeople{
         .optionAll{
             color:white;
+            margin-bottom: 5px;
             .checkbox{
                 border: 1px solid white;
                 border-radius: 5px;
@@ -54,18 +55,40 @@
                     font-size: 16px;
                 }
                 &:hover{
+                    background: #9c9797;
+                    border: #9c9797;
+                    .ico{
+                        color: white;
+                    }
+                }
+                &.active{
                     background: #847f7f;
                     border: #847f7f;
                     .ico{
                         color: white;
+                    }
+                    &:hover{
+                        background: #9c9797;
+                        border: #9c9797;
+                        .ico{
+                            color: white;
+                        }
                     }
                 }
             }
             span{
                 display: inline-block;
                 vertical-align: middle;
-                font-size: 25px;
+                font-size: 22px;
             }
+        }
+        .peopleContainer{
+            padding: 10px;
+            max-height: 150px;
+            overflow: scroll;
+            background: #5aa9a9;
+            margin-bottom: 15px;
+            border-radius: 10px;
         }
         .button{
             width: 40%;

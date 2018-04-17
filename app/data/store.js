@@ -46,6 +46,8 @@ let AppData = {
         studentsMissPayment: null,
         paymentListStudent: null,
         studentsViewCenter: "",
+        assistants: null,
+        selectedPeople: null
     },
     confirmLogin(){
         if(localStorage.getItem("code") !== null){
@@ -268,13 +270,30 @@ let AppData = {
     getAllAssistants(){
         axios.get('http://localhost:8088/pt1.pt2/webapi/asistente/getAllAssistants')
         .then(function (response){
-            console.log(response)
-            /*if(response.data.asistentes.length === 0){
-                AppData.data.studentsViewCenter = "";
+            if(response.data.allAssistants.length === 0){
+                AppData.data.assistants = "";
             }else{
-                AppData.data.studentsViewCenter = response.data;
+                AppData.data.assistants = response.data.allAssistants;
             }
-            AppStore.emitChange();*/
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log(error);
+        });
+    },
+    createStamp(action){
+        console.log("los seleccionados son:  ", action.selectedPeople)
+        AppData.data.selectedPeople = action.selectedPeople;
+        AppStore.emitChange();
+
+        console.log(AppData.data.selectedPeople)
+        axios.post('http://localhost:8088/pt1.pt2/webapi/asistente/createIds', AppData.data.selectedPeople,{
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(function (response){
+            console.log(response)
         })
         .catch(function (error){
             console.log(error);
@@ -358,6 +377,9 @@ dispatcher.register((action) => {
         break; 
     case actionTypes.GET_ALLASSISTANTS:
         AppData.getAllAssistants();
+        break; 
+    case actionTypes.CREATE_STAMP:
+        AppData.createStamp(action);
         break; 
     default:
 		// no op

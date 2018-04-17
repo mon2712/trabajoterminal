@@ -115,6 +115,12 @@ const Actions = {
         dispatcher.dispatch({
             type: actionTypes.GET_ALLASSISTANTS,
         });
-    }
+    }, 
+    createStamp(selectedPeople){
+        dispatcher.dispatch({
+            type: actionTypes.CREATE_STAMP,
+            selectedPeople
+        });
+    },
 };
 export default Actions;
