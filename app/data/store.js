@@ -45,6 +45,10 @@ let AppData = {
         studentFileInfo: null,
         studentsMissPayment: null,
         paymentListStudent: null,
+        setFiles: {
+            fileBase: "",
+            fileReport: ""
+        },
         studentsViewCenter: "",
     },
     confirmLogin(){
@@ -250,6 +254,14 @@ let AppData = {
         });
         AppStore.emitChange();
     },
+    setFiles(action){
+        axios.put('http://localhost:8088/pt1.pt2/webapi/documento/'+action.fileBase+"/"+action.fileReport)
+        .then(function(response){
+        })
+        .catch(function (error){
+            console.log( error);
+        });
+    },
     getStatusCenter(){
         //studentsViewCenter
         axios.get('http://localhost:8088/pt1.pt2/webapi/centro/getStatusOfCenter')
@@ -337,6 +349,9 @@ dispatcher.register((action) => {
         break;
     case actionTypes.GET_NOTE:
         AppData.getNote(action);
+        break;
+    case actionTypes.SET_FILES:
+        AppData.setFiles(action);
         break; 
     case actionTypes.GET_STATUSATCENTER:
         AppData.getStatusCenter();

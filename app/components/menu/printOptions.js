@@ -6,7 +6,7 @@ class PrintOptions extends React.Component {
         this.activeView=this.activeView.bind(this);        
         this.renderList=this.renderList.bind(this);        
         this.state={
-            view: 1,
+            view: 0,
             asistentes: [
                 {
                     id: "1",
@@ -78,7 +78,6 @@ class PrintOptions extends React.Component {
         );
     }
     render() {
-        console.log("div", this.state.view)
 		return (
             <div className="popUpContainer">
                 <div className="printOptionsContainer">

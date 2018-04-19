@@ -11,7 +11,7 @@ class CallConfig extends React.Component {
 
     render() {
         return (
-            <div className="frontContainer">
+            <div className="popUpContainer">
             <div className='configCallContainer'>
                 <div className="headerConfigCall">
                     <span className="callInitialText">Registro de llamada</span>
