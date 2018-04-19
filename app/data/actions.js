@@ -122,5 +122,11 @@ const Actions = {
             selectedPeople
         });
     },
+    createIdsAssistants(selectedPeople){
+        dispatcher.dispatch({
+            type: actionTypes.CREATE_IDSASSISTANTS,
+            selectedPeople
+        });
+    },
 };
 export default Actions;

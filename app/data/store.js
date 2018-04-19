@@ -287,7 +287,33 @@ let AppData = {
         AppStore.emitChange();
 
         console.log(AppData.data.selectedPeople)
-        axios.post('http://localhost:8088/pt1.pt2/webapi/asistente/createIds', AppData.data.selectedPeople,{
+        axios.post('http://localhost:8088/pt1.pt2/webapi/instructor/createStampsStudents', 
+        {
+            selectedPeople: AppData.data.selectedPeople
+        }
+        ,{
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(function (response){
+            console.log(response)
+        })
+        .catch(function (error){
+            console.log(error);
+        });
+    },
+    createIdsAssistants(action){
+        console.log("los seleccionados son createIdsAssistants:  ", action.selectedPeople)
+        AppData.data.selectedPeople = action.selectedPeople;
+        AppStore.emitChange();
+
+        console.log(AppData.data.selectedPeople)
+        axios.post('http://localhost:8088/pt1.pt2/webapi/instructor/createIds', 
+        {
+            selectedPeople: AppData.data.selectedPeople
+        }
+        ,{
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -381,7 +407,10 @@ dispatcher.register((action) => {
     case actionTypes.CREATE_STAMP:
         AppData.createStamp(action);
         break; 
-    default:
+    case actionTypes.CREATE_IDSASSISTANTS:
+        AppData.createIdsAssistants(action);
+        break; 
+    default: 
 		// no op
     }
 });

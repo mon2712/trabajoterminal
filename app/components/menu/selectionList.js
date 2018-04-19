@@ -16,17 +16,8 @@ class SelectionList extends React.Component {
     }
     onSelected(person){
         var arraySelected = this.state.selected;
-        console.log("onSelected",person)
         
         var bandera=0, idDelete="", identifier="";
-
-
-        if(person.idStudent){
-            console.log("es alumno")
-            
-        }else{
-            console.log("es asistente")
-        }
 
         if(arraySelected.length === 0){
             arraySelected.push(person);
@@ -54,7 +45,8 @@ class SelectionList extends React.Component {
             if(bandera===0){ 
                 arraySelected.push(person);
             }else{
-                delete arraySelected[idDelete];                
+                delete arraySelected[idDelete];     
+                arraySelected[idDelete] = {};          
             }
 
             this.setState({
@@ -109,10 +101,12 @@ class SelectionList extends React.Component {
         );
     }
     sendAllSelected(){
-        /*this.state.selected.map((content,index)=>{
-            console.log("los seleccionados fueron ", content)
-        });*/
-        this.props.actions.createStamp(this.state.selected);
+        if(this.props.view === 1){
+            this.props.actions.createIdsAssistants(this.state.selected);            
+        }
+        if(this.props.view === 2){
+            this.props.actions.createStamp(this.state.selected);
+        }
     }
     renderViewAll(){
         return(
@@ -121,7 +115,7 @@ class SelectionList extends React.Component {
                     <div className={this.state.selectAll === true ? "checkbox active" : "checkbox"} onClick={this.selectAll}>
                         <span className="ico icon-checkmark"></span>
                     </div>
-                    <span>{this.props.view === 1 ? "Generar gafetes de todos los asistentes" : "Generar etiquetas de todos los alumnos"}</span>
+                    <span>{this.props.view === 1 ? "Generar gafetes de todos los asistentes" : this.props.view === 2 ?  "Generar etiquetas de todos los alumnos" : ""}</span>
                 </div>
                 <div className="peopleContainer">
                     {this.props.allPeople.map((person, i) => (
