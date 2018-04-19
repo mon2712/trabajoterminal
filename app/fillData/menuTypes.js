@@ -23,13 +23,13 @@
                 "ico": "icon-calls",
                 "text": "Lista Llamadas",
                 "path": "/llamadasPendientes",
-                "color": "#6ddfc1",
+                "color": "#45B4A9",
                 "popUp": false
             },{
                 "ico": "icon-point-of-service",
-                "text": "Lista Adeudo",
+                "text": "Lista Adeudos",
                 "path": "/paymentList",
-                "color": "#acea49",
+                "color": "#AAC814",
                 "popUp": false
             },{
                 "ico": "icon-minute-mark",
@@ -53,21 +53,22 @@
                 "popUp": false
             },{
                 "ico": "icon-team",
-                "text": "Registro Asistentes",
+                "text": "Administración Asistentes",
                 "path": "/",
                 "color": "#814bea",
-                "popUp": false
+                "popUp": true,
+                "id": 3
             },{
                 "ico": "icon-calls",
                 "text": "Lista Llamadas",
                 "path": "/llamadasPendientes",
-                "color": "#6ddfc1",
+                "color": "#45B4A9",
                 "popUp": false
             },{
                 "ico": "icon-point-of-service",
                 "text": "Lista Adeudos",
                 "path": "/",
-                "color": "#acea49",
+                "color": "#AAC814",
                 "popUp": true
             },{
                 "ico": "icon-printer",

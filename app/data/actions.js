@@ -135,5 +135,11 @@ const Actions = {
             selectedPeople
         });
     },
+    getAssistantInfo(selectedPeople){
+        dispatcher.dispatch({
+            type: actionTypes.GET_ASSISTANTINFO,
+            selectedPeople
+        });
+    },
 };
 export default Actions;

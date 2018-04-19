@@ -1,0 +1,47 @@
+.userInfoContainer{
+    margin-top: 20px;
+    padding: 15px;
+    .leftColumn{
+        color: white;
+        font-size: 20px;
+        display: inline-block;
+        height: 40px;
+        line-height: 40px;
+        width: 30%;
+        margin-bottom: 10px;
+    }
+    .rightColumn{
+        display: inline-block;
+        border-radius: 5px;
+        height: 40px;
+        border-color: white;
+        font-size: 14px;
+        color: #a7a7a7;
+        width: 70%;
+        margin-bottom: 10px;
+        input{
+            height: 40px;
+            width: 100%;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+    }   
+    .buttonCreate{
+        margin: 0px auto;
+        margin-top: 10px;
+        width: 30%;
+        height:40px;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 5px;
+        background: #a7a7a7;
+        cursor: pointer;
+        font-size: 22px;
+        color: white;
+        box-shadow: 3px 3px 10px #000000;
+        margin-bottom: 15px;
+        &:hover{
+            background: #847f7f;
+        }
+    }
+}

@@ -22,6 +22,7 @@ const ActionTypes = {
     CREATE_STAMP: 'CREATE_STAMP',
     CREATE_IDSASSISTANTS: 'CREATE_IDSASSISTANTS',
     SET_FILES: 'SET_FILES',
+    GET_ASSISTANTINFO: 'GET_ASSISTANTINFO'
   };
 
   export default ActionTypes;

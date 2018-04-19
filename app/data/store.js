@@ -51,7 +51,8 @@ let AppData = {
         },
         studentsViewCenter: "",
         assistants: null,
-        selectedPeople: null
+        selectedPeople: null,
+        assistant: null
     },
     confirmLogin(){
         if(localStorage.getItem("code") !== null){
@@ -336,6 +337,28 @@ let AppData = {
         .catch(function (error){
             console.log(error);
         });
+    },
+    getAssistantInfo(action){
+        console.log("los seleccionados son getAssistantInfo:  ", action.selectedPeople)
+        AppData.data.selectedPeople = action.selectedPeople;
+        AppStore.emitChange();
+
+        console.log(AppData.data.selectedPeople)
+        axios.post('http://localhost:8088/pt1.pt2/webapi/asistente/getAssistantInfo', 
+        {
+            selectedPeople: AppData.data.selectedPeople
+        }
+        ,{
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(function (response){
+            console.log("assistants info",response)
+        })
+        .catch(function (error){
+            console.log(error);
+        });
     }
 }
 
@@ -425,6 +448,9 @@ dispatcher.register((action) => {
     case actionTypes.CREATE_IDSASSISTANTS:
         AppData.createIdsAssistants(action);
         break; 
+    case actionTypes.GET_ASSISTANTINFO:
+        AppData.getAssistantInfo(action);
+        break;
     default: 
 		// no op
     }

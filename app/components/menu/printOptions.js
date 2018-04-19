@@ -1,6 +1,7 @@
 import React from 'react';
 import { ENGINE_METHOD_DIGESTS } from 'constants';
 import SelectionList from './selectionList';
+import CreateUser from './createUser';
 
 class PrintOptions extends React.Component {
     constructor(props){
@@ -11,9 +12,11 @@ class PrintOptions extends React.Component {
         };
     }
     activeView(id){
-        if(id === 1){
+        console.log(id)
+        if(id === 1  || id === 4){
+            console.log("manda a llamar assistants")
             this.props.actions.getAllAssistants();
-        }else{
+        }else if(id === 2){
             this.props.actions.getAllStudents("");
         }
         this.setState({
@@ -32,8 +35,21 @@ class PrintOptions extends React.Component {
     renderDivButtons(){
         return(
             <div className="divButtons">
-                {this.renderButtons("Generar gafetes", "icon-id-card", "#b83a7c",1)}
-                {this.renderButtons("Generar etiquetas", "icon-qrcode", "#633aba",2)}    
+                {
+                    this.props.startView === 2 ?
+                        <div>
+                            {this.renderButtons("Generar gafetes", "icon-id-card", "#b83a7c",1)}
+                            {this.renderButtons("Generar etiquetas", "icon-qrcode", "#FF6B6B",2)}   
+                        </div>
+                    :
+                    this.props.startView === 3 ? 
+                        <div>
+                            {this.renderButtons("Crear Asistente", "icon-user-male", "#EDAE49",3)}
+                            {this.renderButtons("Editar Asistente", "icon-user-male", "#30638E",4)}
+                        </div>
+                    : null
+                }
+
             </div>  
         );
     }
@@ -42,10 +58,38 @@ class PrintOptions extends React.Component {
             <div className="popUpContainer">
                 <div className="printOptionsContainer">
                     <div className="headerPrintContainer">
-                        <span className="titleContainer">{this.state.view === 0 ? "Selecciona una opción" : this.state.view === 1 ? "Selecciona los asistentes" : "Selecciona a los alumnos"}</span>
+                        <span className="titleContainer">
+                            {this.state.view === 0 ? "Selecciona una opción" : 
+                            this.state.view === 1 ? "Selecciona los asistentes" : 
+                            this.state.view === 2 ?  "Selecciona a los alumnos" : 
+                            this.state.view === 3 ? "Crear un Nuevo Asistente" : 
+                            this.state.view === 4 ? "Editar Asistente" : ""}
+                        </span>
                         <span className="ico icon-multiply" onClick={this.props.closePopUp()}/>
                     </div>
-                    {this.state.view === 0 ? this.renderDivButtons() : this.state.view === 1 && this.props.store.assistants !== null ? <SelectionList allPeople={this.props.store.assistants} view={this.state.view} actions={this.props.actions}/> : this.state.view === 2 && this.props.store.students !== null ? <SelectionList allPeople={this.props.store.students} view={this.state.view} actions={this.props.actions}/> : null}              
+                    {
+                        this.props.startView === 2 && this.state.view === 0 ? this.renderDivButtons() 
+
+                        : this.props.startView === 3 && this.state.view === 0 ? this.renderDivButtons()
+
+                        : this.state.view === 1 && this.props.store.assistants !== null 
+
+                        ? <SelectionList allPeople={this.props.store.assistants} view={this.state.view} actions={this.props.actions}/>
+
+                        : this.state.view === 2 && this.props.store.students !== null 
+
+                        ? <SelectionList allPeople={this.props.store.students} view={this.state.view} actions={this.props.actions}/> 
+
+                        : this.state.view === 3
+
+                        ? <CreateUser {...this.props} view={this.state.view} actions={this.props.actions}/>
+
+                        : this.state.view === 4 && this.props.store.assistants !== null 
+
+                        ? <SelectionList allPeople={this.props.store.assistants} view={this.state.view} actions={this.props.actions}/>
+                        
+                        : null
+                    }              
                 </div>
             </div>
 		);

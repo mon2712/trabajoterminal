@@ -7,7 +7,7 @@ class SelectionList extends React.Component {
         this.renderViewAll=this.renderViewAll.bind(this);        
         this.onSelected=this.onSelected.bind(this);
         this.selectAll=this.selectAll.bind(this);        
-        this.sendAllSelected=this.sendAllSelected.bind(this);        
+        this.sendAllSelected=this.sendAllSelected.bind(this);  
         this.state={
             selectAll: false,
             selected: [],
@@ -16,37 +16,52 @@ class SelectionList extends React.Component {
     }
     onSelected(person){
         var arraySelected = this.state.selected;
-        
-        var bandera=0, idDelete="", identifier="";
+        if(this.props.view === 1 || this.props.view === 2){
+            
+            var bandera=0, idDelete="", identifier="";
 
-        if(arraySelected.length === 0){
-            arraySelected.push(person);
+            if(arraySelected.length === 0){
+                arraySelected.push(person);
 
-            this.setState({
-                selected: arraySelected,
-                selectAll: false
-            });
+                this.setState({
+                    selected: arraySelected,
+                    selectAll: false
+                });
 
-        }else{
-            this.state.selected.map((content,index)=>{
-                if(content.idAssistant){
-                    if(content.idAssistant==person.idAssistant){
-                        bandera=1;
-                        idDelete=index;
+            }else{
+                this.state.selected.map((content,index)=>{
+                    if(content.idAssistant){
+                        if(content.idAssistant==person.idAssistant){
+                            bandera=1;
+                            idDelete=index;
+                        }
+                    }else{
+                        if(content.idStudent==person.idStudent){
+                            bandera=1;
+                            idDelete=index;
+                        }
                     }
+                });
+
+                if(bandera===0){ 
+                    arraySelected.push(person);
                 }else{
-                    if(content.idStudent==person.idStudent){
-                        bandera=1;
-                        idDelete=index;
-                    }
+                    delete arraySelected[idDelete];     
+                    arraySelected[idDelete] = {};          
                 }
-            });
 
-            if(bandera===0){ 
+                this.setState({
+                    selected: arraySelected,
+                    selectAll: false
+                });
+            }
+        }else{
+            if(arraySelected.length === 0){
                 arraySelected.push(person);
             }else{
-                delete arraySelected[idDelete];     
-                arraySelected[idDelete] = {};          
+                delete arraySelected[0]; 
+                arraySelected[0] = person;
+                console.log(arraySelected[0])
             }
 
             this.setState({
@@ -107,15 +122,19 @@ class SelectionList extends React.Component {
         if(this.props.view === 2){
             this.props.actions.createStamp(this.state.selected);
         }
+        if(this.props.view === 4){
+            this.props.actions.getAssistantInfo(this.state.selected);
+        }
     }
+    
     renderViewAll(){
         return(
             <div className="selectPeople">
-                <div className="optionAll">
+                <div className="optionAll" style={{display: this.props.view === 4 ? 'none' : 'block'}}>
                     <div className={this.state.selectAll === true ? "checkbox active" : "checkbox"} onClick={this.selectAll}>
                         <span className="ico icon-checkmark"></span>
                     </div>
-                    <span>{this.props.view === 1 ? "Generar gafetes de todos los asistentes" : this.props.view === 2 ?  "Generar etiquetas de todos los alumnos" : ""}</span>
+                    <span> {this.props.view === 1 ? "Generar gafetes de todos los asistentes" : this.props.view === 2 ?  "Generar etiquetas de todos los alumnos" : ""}</span>
                 </div>
                 <div className="peopleContainer">
                     {this.props.allPeople.map((person, i) => (
@@ -123,12 +142,13 @@ class SelectionList extends React.Component {
                     ))}
                 </div>
                 <div className="button" onClick={this.sendAllSelected}>
-                    Generar
+                    {this.props.view === 4 ? "Editar" : "Generar"}
                 </div>
             </div>  
         );
     }
     render() {
+        console.log("estoy en selectionlist")
 		return (
             <div className="selectionListContainer">
                 {this.renderViewAll()}              
