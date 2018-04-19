@@ -6,6 +6,7 @@ import AppStore from '../../data/store';
 import StudentFile from '../studentFile/main';
 
 
+
 class Menu extends React.Component {
     constructor(props){
         super(props);
@@ -26,6 +27,7 @@ class Menu extends React.Component {
                     <Panel {...this.props}/>
                 </div>
 			</div>
+            
 		);
 	}
   }

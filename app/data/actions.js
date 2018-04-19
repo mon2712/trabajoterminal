@@ -106,6 +106,13 @@ const Actions = {
             id
         });
     },
+    setFiles(fileBase,fileReport){
+        dispatcher.dispatch({
+            type: actionTypes.SET_FILES,
+            fileBase,
+            fileReport
+        });
+    },
     getStatusCenter(){
         dispatcher.dispatch({
             type: actionTypes.GET_STATUSATCENTER,

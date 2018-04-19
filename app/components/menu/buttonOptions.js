@@ -1,4 +1,6 @@
 import React from 'react';
+import UploadFile from './uploadFile';
+
 import PrintOptions from './printOptions';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 
@@ -46,10 +48,13 @@ class ButtonOptions extends React.Component {
     render() {
 		return (
             <div className="optionsContainer">
-                {this.props.store.menuTypes[this.props.type] != undefined ? this.renderButtons() : null}
+               {this.props.store.menuTypes[this.props.type] != undefined ? this.renderButtons() : null}
                 {
                     this.state.popUpActive === true && this.state.id===2 ? 
                         <PrintOptions {...this.props} closePopUp={()=>this.closePopUp}/> 
+                    :
+                    this.state.popUpActive === true && this.state.id===1 ?
+                        <UploadFile {...this.props} closePopUp={()=>this.closePopUp}/> 
                     : null
                 }                
             </div>

@@ -1,4 +1,5 @@
 {
+    
         "menuTypes": {
             "recepcion": [{
                 "ico": "icon-clipboard",
@@ -43,7 +44,7 @@
                 "path": "/",
                 "color": "#4765dd",
                 "popUp": true,
-                "id": "1"
+                "id": 1
             },{
                 "ico": "icon-learning",
                 "text": "Vista Centro",
