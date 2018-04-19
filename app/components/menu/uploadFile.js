@@ -5,7 +5,6 @@ class UploadFile extends React.Component {
         super(props);
         this.setRouteFile = this.setRouteFile.bind(this);
         this.uploadFile = this.uploadFile.bind(this);
-        this.closePopUp2 = this.closePopUp2.bind(this);
         this.state = {
             rute1: "",
             rute2:"",
@@ -14,26 +13,14 @@ class UploadFile extends React.Component {
     }
     setRouteFile(){
         this.props.closePopUp();
-        console.log(this.state.rute1,this.state.rute2);
         this.props.actions.setFiles(this.state.rute1,this.state.rute2);
-        console.log(this.state.rute1,this.state.rute2);
         this.setState({view: 1});
-        //this.closePopUp2();
-    }
-    closePopUp2(){
-        console.log(this.props);
-        console.log("estoy llamando close2");
-        this.props.closePopUp();
-        
     }
     uploadFile(event){
         for(let size=0; size < event.target.files.length; size++){
-          console.log('Selected file:', event.target.files[size]);
           if(event.target.className==="val"){
-            console.log("Entro al route1, event");
             this.setState({rute1: event.target.files[size].name});
           }else{
-            console.log("Entro al route2");
             this.setState({rute2: event.target.files[size].name});
           }
         }

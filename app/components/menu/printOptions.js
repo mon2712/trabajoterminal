@@ -78,7 +78,6 @@ class PrintOptions extends React.Component {
         );
     }
     render() {
-        console.log("div", this.state.view)
 		return (
             <div className="popUpContainer">
                 <div className="printOptionsContainer">

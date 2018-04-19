@@ -10,7 +10,6 @@ import Menu from '../components/menu/main';
 import actions from '../data/actions';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 import history from '../history';
-import UploadFile from './uploadFile/main'
 
 
 function getAppState() {
@@ -52,7 +51,6 @@ class App extends React.Component {
                         <PrivateRoute path="/tiempoReducido" component={TiempoReducido} store={this.state} actions={actions}/>
                         <PrivateRoute path="/llamadasPendientes" component={StudentsCalls} store={this.state} actions={actions}/>
                         <PrivateRoute path="/paymentList" component={PaymentList} store={this.state} actions={actions}/>
-                        <PrivateRoute path="/uploadFile" component={UploadFile} store={this.state} actions={actions}/>
                         <PrivateRoute path="/vistaCentro" component={ViewCenter} store={this.state} actions={actions}/>
 
                         <Route path="/login" render={(props) => (
