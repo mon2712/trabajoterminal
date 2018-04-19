@@ -141,14 +141,13 @@
                     border-radius: 10px;
                     display: inline-block;
                     vertical-align: middle;
-                    overflow-y: scroll;
                     color: #52b0b0;
                     margin-right: 5%;
                     margin-bottom: 5%;
                     position: relative;
                     height: 90px;
                     max-height: 100px;
-                    overflow-y: scroll;
+                    overflow-y: hidden;
                     &:hover{
                         .timeCont{
                             right: 0;
@@ -191,7 +190,6 @@
                     .lastName{
                         display: block;
                         width: 100%;
-                        overflow-y: scroll;
                         max-height: 30px;
                     }
                     &.normal{

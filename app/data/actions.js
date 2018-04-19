@@ -106,10 +106,9 @@ const Actions = {
             id
         });
     },
-    getSetFiles(active, fileBase,fileReport){
+    setFiles(fileBase,fileReport){
         dispatcher.dispatch({
-            type: actionTypes.GET_SETFILES,
-            active,
+            type: actionTypes.SET_FILES,
             fileBase,
             fileReport
         });

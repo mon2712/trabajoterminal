@@ -43,11 +43,12 @@
                 "text": "Actualizar Reporte",
                 "path": "/",
                 "color": "#4765dd",
-                "popUp": true
+                "popUp": true,
+                "id": 1
             },{
                 "ico": "icon-learning",
                 "text": "Vista Centro",
-                "path": "/",
+                "path": "/vistaCentro",
                 "color": "#ebc531",
                 "popUp": false
             },{
@@ -67,13 +68,14 @@
                 "text": "Lista Adeudos",
                 "path": "/",
                 "color": "#acea49",
-                "popUp": false
+                "popUp": true
             },{
                 "ico": "icon-printer",
                 "text": "Imprimir",
                 "path": "/",
                 "color": "#e9414f",
-                "popUp": true
+                "popUp": true,
+                "id": 2
             }]
         }
     }
