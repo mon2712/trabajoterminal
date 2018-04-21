@@ -135,10 +135,18 @@ const Actions = {
             selectedPeople
         });
     },
-    getAssistantInfo(selectedPeople){
+    getAssistantInfo(selectedPeople, view){
         dispatcher.dispatch({
             type: actionTypes.GET_ASSISTANTINFO,
-            selectedPeople
+            selectedPeople,
+            view
+        });
+    },
+    setAssistant(infoAssistant, view){
+        dispatcher.dispatch({
+            type: actionTypes.SET_ASSISTANT,
+            infoAssistant,
+            view
         });
     },
 };

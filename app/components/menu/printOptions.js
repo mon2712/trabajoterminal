@@ -2,22 +2,25 @@ import React from 'react';
 import { ENGINE_METHOD_DIGESTS } from 'constants';
 import SelectionList from './selectionList';
 import CreateUser from './createUser';
+import AppStore from '../../data/store';
 
 class PrintOptions extends React.Component {
     constructor(props){
         super(props);
         this.activeView=this.activeView.bind(this);                
         this.state={
-            view: 0
+            view: 0,
+            selected: []
         };
     }
     activeView(id){
-        console.log(id)
         if(id === 1  || id === 4){
             console.log("manda a llamar assistants")
             this.props.actions.getAllAssistants();
         }else if(id === 2){
             this.props.actions.getAllStudents("");
+        }else if(id === 3){
+            this.props.actions.getAssistantInfo(this.state.selected, id);
         }
         this.setState({
             view: id
@@ -74,11 +77,11 @@ class PrintOptions extends React.Component {
 
                         : this.state.view === 1 && this.props.store.assistants !== null 
 
-                        ? <SelectionList allPeople={this.props.store.assistants} view={this.state.view} actions={this.props.actions}/>
+                        ? <SelectionList {...this.props} allPeople={this.props.store.assistants} view={this.state.view} actions={this.props.actions}/>
 
                         : this.state.view === 2 && this.props.store.students !== null 
 
-                        ? <SelectionList allPeople={this.props.store.students} view={this.state.view} actions={this.props.actions}/> 
+                        ? <SelectionList {...this.props} allPeople={this.props.store.students} view={this.state.view} actions={this.props.actions}/> 
 
                         : this.state.view === 3
 
@@ -86,7 +89,7 @@ class PrintOptions extends React.Component {
 
                         : this.state.view === 4 && this.props.store.assistants !== null 
 
-                        ? <SelectionList allPeople={this.props.store.assistants} view={this.state.view} actions={this.props.actions}/>
+                        ? <SelectionList {...this.props} allPeople={this.props.store.assistants} view={this.state.view} actions={this.props.actions}/>
                         
                         : null
                     }              

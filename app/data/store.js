@@ -52,7 +52,17 @@ let AppData = {
         studentsViewCenter: "",
         assistants: null,
         selectedPeople: null,
-        assistant: null
+        assistant: {
+            arriveTime: "",
+            idAssistant: "",
+            lastName: "",
+            level: "",
+            name: "",
+            password: "",
+            phone: "",
+            username: "",
+            status: ""
+        }
     },
     confirmLogin(){
         if(localStorage.getItem("code") !== null){
@@ -339,14 +349,51 @@ let AppData = {
         });
     },
     getAssistantInfo(action){
-        console.log("los seleccionados son getAssistantInfo:  ", action.selectedPeople)
-        AppData.data.selectedPeople = action.selectedPeople;
-        AppStore.emitChange();
+        if(action.view == 4){
 
-        console.log(AppData.data.selectedPeople)
-        axios.post('http://localhost:8088/pt1.pt2/webapi/asistente/getAssistantInfo', 
+            axios.post('http://localhost:8088/pt1.pt2/webapi/asistente/getAssistantInfo', 
+            {
+                selectedPeople: action.selectedPeople
+            }
+            ,{
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(function (response){
+                
+                AppData.data.assistant = response.data.assistantInfo;
+                AppStore.emitChange();
+                
+            })
+            .catch(function (error){
+                console.log(error);
+            });
+
+        }else if(action.view == 3){
+            AppData.data.assistant.arriveTime = "",
+            AppData.data.assistant.idAssistant = "",
+            AppData.data.assistant.lastName = "",
+            AppData.data.assistant.level = "",
+            AppData.data.assistant.name = "",
+            AppData.data.assistant.password = "",
+            AppData.data.assistant.phone = "",
+            AppData.data.assistant.username = "", 
+            AppData.data.assistant.lunes = "", 
+            AppData.data.assistant.miercoles = "", 
+            AppData.data.assistant.jueves = "", 
+            AppData.data.assistant.sabado = "", 
+
+            AppStore.emitChange();
+
+        }
+    },
+    setAssistant(action){
+        console.log(action)
+
+        axios.post('http://localhost:8088/pt1.pt2/webapi/asistente/setAssistant', 
         {
-            selectedPeople: AppData.data.selectedPeople
+            infoAssistant: action.infoAssistant
         }
         ,{
             headers: {
@@ -354,7 +401,10 @@ let AppData = {
             }
         })
         .then(function (response){
-            console.log("assistants info",response)
+              console.log("response", response)  
+            //AppData.data.assistant = response.data.assistantInfo;
+            //AppStore.emitChange();
+                
         })
         .catch(function (error){
             console.log(error);
@@ -377,6 +427,9 @@ let AppStore = assign({}, EventEmitter.prototype, {
 AppStore = assign({}, AppStore, {
     getData: () => {
         return AppData.data;
+    },
+    getInfoAssistant: () => {
+        return AppData.data.assistant;
     }
 });
 
@@ -450,6 +503,9 @@ dispatcher.register((action) => {
         break; 
     case actionTypes.GET_ASSISTANTINFO:
         AppData.getAssistantInfo(action);
+        break;
+    case actionTypes.SET_ASSISTANT:
+        AppData.setAssistant(action);
         break;
     default: 
 		// no op

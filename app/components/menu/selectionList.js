@@ -1,4 +1,5 @@
 import React from 'react';
+import CreateUser from './createUser';
 
 class SelectionList extends React.Component {
     constructor(props){
@@ -11,7 +12,8 @@ class SelectionList extends React.Component {
         this.state={
             selectAll: false,
             selected: [],
-            people: null
+            people: null,
+            activeEdit: false
         };
     }
     onSelected(person){
@@ -123,7 +125,8 @@ class SelectionList extends React.Component {
             this.props.actions.createStamp(this.state.selected);
         }
         if(this.props.view === 4){
-            this.props.actions.getAssistantInfo(this.state.selected);
+            this.props.actions.getAssistantInfo(this.state.selected, this.props.view);
+            this.setState({activeEdit: true});
         }
     }
     
@@ -148,10 +151,9 @@ class SelectionList extends React.Component {
         );
     }
     render() {
-        console.log("estoy en selectionlist")
 		return (
             <div className="selectionListContainer">
-                {this.renderViewAll()}              
+                {this.props.view === 4 && this.state.activeEdit === true ? <CreateUser {...this.props} selected={this.state.selected} view={this.props.view} actions={this.props.actions}/> : this.renderViewAll()}     
             </div>
 		);
 	}

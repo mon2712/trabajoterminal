@@ -1,10 +1,59 @@
 .userInfoContainer{
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 15px;
+    .status{
+        text-align: center;
+        margin-bottom: 5px;
+        .checkbox{
+            border: 1px solid white;
+            border-radius: 5px;
+            display: inline-block;
+            vertical-align: middle;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            background: white;
+            cursor: pointer;
+            box-shadow: 3px 0px 5px #000000;
+            margin-right: 10px;
+            .ico{
+                color: #847f7f;
+                font-size: 16px;
+            }
+            &:hover{
+                background: #9c9797;
+                border: #9c9797;
+                .ico{
+                    color: white;
+                }
+            }
+            &.active{
+                background: #847f7f;
+                border: #847f7f;
+                .ico{
+                    color: white;
+                }
+                &:hover{
+                    background: #9c9797;
+                    border: #9c9797;
+                    .ico{
+                        color: white;
+                    }
+                }
+            }
+        }
+        span{
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 22px;
+            color: #3e3636;
+        }
+    }
     .leftColumn{
         color: white;
         font-size: 20px;
         display: inline-block;
+        vertical-align: middle;
         height: 40px;
         line-height: 40px;
         width: 30%;
@@ -12,6 +61,7 @@
     }
     .rightColumn{
         display: inline-block;
+        vertical-align:  middle;
         border-radius: 5px;
         height: 40px;
         border-color: white;
@@ -19,11 +69,65 @@
         color: #a7a7a7;
         width: 70%;
         margin-bottom: 10px;
+        position: relative;
+        &.days{
+            height: 70px;
+        }
         input{
             height: 40px;
             width: 100%;
             border-radius: 10px;
             font-size: 20px;
+        }
+        .dayContainer{
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+            width: 50%;
+            .checkbox{
+                border: 1px solid white;
+                border-radius: 5px;
+                display: inline-block;
+                vertical-align: middle;
+                width: 30px;
+                height: 30px;
+                text-align: center;
+                background: white;
+                cursor: pointer;
+                box-shadow: 3px 0px 5px #000000;
+                margin-right: 10px;
+                .ico{
+                    color: #847f7f;
+                    font-size: 16px;
+                }
+                &:hover{
+                    background: #9c9797;
+                    border: #9c9797;
+                    .ico{
+                        color: white;
+                    }
+                }
+                &.active{
+                    background: #847f7f;
+                    border: #847f7f;
+                    .ico{
+                        color: white;
+                    }
+                    &:hover{
+                        background: #9c9797;
+                        border: #9c9797;
+                        .ico{
+                            color: white;
+                        }
+                    }
+                }
+            }
+            span{
+                display: inline-block;
+                vertical-align: middle;
+                font-size: 22px;
+                color: #3e3636;
+            }
         }
     }   
     .buttonCreate{
