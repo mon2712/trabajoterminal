@@ -50,9 +50,8 @@ class CreateUser extends React.Component {
         this.props.actions.setAssistant(this.state.infoAssistant)
     }
     renderDay(day, dayName, value){
-        console.log("value", value)
-        var newValue = (value === "1" ? "0" : value === "2" ? "1" : value==="0" ? "1" : "");
-        console.log("newValue", newValue)
+        var newValue = (value === "1" ? "0" : value === "2" ? "1" : value==="0" ? "1" : value === "" ? "0" : "");
+        
         return(
             <div className="dayContainer">
                 <div className={value === "1" ? "checkbox active" : "checkbox"} onClick={()=>this.selectDays(dayName,newValue)}>
@@ -63,10 +62,9 @@ class CreateUser extends React.Component {
         );
     }
     renderForm(){
-        console.log("dias", this.state.infoAssistant)
         return(
             <div className="form">
-                <div className="status">
+                <div className="status" style={{display: this.props.view === 4 ? 'block' : 'none'}}>
                     {this.renderDay("Activo","status",this.state.infoAssistant.status)}
                 </div>  
                 <span className="leftColumn">Nombre:</span>
@@ -79,11 +77,11 @@ class CreateUser extends React.Component {
                 </div>  
                 <span className="leftColumn">Usuario:</span>
                 <div className="rightColumn">
-                    <input type="text" value={this.state.infoAssistant.username} onChange={this.handleChange} name="lastName"></input>    
+                    <input type="text" value={this.state.infoAssistant.username} onChange={this.handleChange} name="username"></input>    
                 </div>  
                 <span className="leftColumn">Contraseña:</span>
                 <div className="rightColumn">
-                    <input type="text" type="password" value={this.state.infoAssistant.password} onChange={this.handleChange} name="lastName"></input>    
+                    <input type="text" type="password" value={this.state.infoAssistant.password} onChange={this.handleChange} name="password"></input>    
                 </div>
                 <span className="leftColumn">Días:</span>
                 <div className="rightColumn days">

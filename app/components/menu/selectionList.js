@@ -63,7 +63,6 @@ class SelectionList extends React.Component {
             }else{
                 delete arraySelected[0]; 
                 arraySelected[0] = person;
-                console.log(arraySelected[0])
             }
 
             this.setState({

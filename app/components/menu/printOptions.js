@@ -1,5 +1,4 @@
 import React from 'react';
-import { ENGINE_METHOD_DIGESTS } from 'constants';
 import SelectionList from './selectionList';
 import CreateUser from './createUser';
 import AppStore from '../../data/store';
@@ -15,7 +14,6 @@ class PrintOptions extends React.Component {
     }
     activeView(id){
         if(id === 1  || id === 4){
-            console.log("manda a llamar assistants")
             this.props.actions.getAllAssistants();
         }else if(id === 2){
             this.props.actions.getAllStudents("");
