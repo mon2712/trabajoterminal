@@ -50,6 +50,19 @@ let AppData = {
             fileReport: ""
         },
         studentsViewCenter: "",
+        assistants: null,
+        selectedPeople: null,
+        assistant: {
+            arriveTime: "",
+            idAssistant: "",
+            lastName: "",
+            level: "",
+            name: "",
+            password: "",
+            phone: "",
+            username: "",
+            status: ""
+        }
     },
     confirmLogin(){
         if(localStorage.getItem("code") !== null){
@@ -276,6 +289,126 @@ let AppData = {
         .catch(function (error){
             console.log(error);
         });
+    },
+    getAllAssistants(){
+        axios.get('http://localhost:8088/pt1.pt2/webapi/asistente/getAllAssistants')
+        .then(function (response){
+            if(response.data.allAssistants.length === 0){
+                AppData.data.assistants = "";
+            }else{
+                AppData.data.assistants = response.data.allAssistants;
+            }
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log(error);
+        });
+    },
+    createStamp(action){
+        console.log("los seleccionados son:  ", action.selectedPeople)
+        AppData.data.selectedPeople = action.selectedPeople;
+        AppStore.emitChange();
+
+        console.log(AppData.data.selectedPeople)
+        axios.post('http://localhost:8088/pt1.pt2/webapi/instructor/createStampsStudents', 
+        {
+            selectedPeople: AppData.data.selectedPeople
+        }
+        ,{
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(function (response){
+            console.log(response)
+        })
+        .catch(function (error){
+            console.log(error);
+        });
+    },
+    createIdsAssistants(action){
+        console.log("los seleccionados son createIdsAssistants:  ", action.selectedPeople)
+        AppData.data.selectedPeople = action.selectedPeople;
+        AppStore.emitChange();
+
+        console.log(AppData.data.selectedPeople)
+        axios.post('http://localhost:8088/pt1.pt2/webapi/instructor/createIds', 
+        {
+            selectedPeople: AppData.data.selectedPeople
+        }
+        ,{
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(function (response){
+            console.log(response)
+        })
+        .catch(function (error){
+            console.log(error);
+        });
+    },
+    getAssistantInfo(action){
+        if(action.view == 4){
+
+            axios.post('http://localhost:8088/pt1.pt2/webapi/asistente/getAssistantInfo', 
+            {
+                selectedPeople: action.selectedPeople
+            }
+            ,{
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(function (response){
+                
+                AppData.data.assistant = response.data.assistantInfo;
+                AppStore.emitChange();
+                
+            })
+            .catch(function (error){
+                console.log(error);
+            });
+
+        }else if(action.view == 3){
+            AppData.data.assistant.arriveTime = "",
+            AppData.data.assistant.idAssistant = "",
+            AppData.data.assistant.lastName = "",
+            AppData.data.assistant.level = "",
+            AppData.data.assistant.name = "",
+            AppData.data.assistant.password = "",
+            AppData.data.assistant.phone = "",
+            AppData.data.assistant.username = "", 
+            AppData.data.assistant.lunes = "", 
+            AppData.data.assistant.miercoles = "", 
+            AppData.data.assistant.jueves = "", 
+            AppData.data.assistant.sabado = "", 
+
+            AppStore.emitChange();
+
+        }
+    },
+    setAssistant(action){
+        console.log(action)
+
+        axios.post('http://localhost:8088/pt1.pt2/webapi/asistente/setAssistant', 
+        {
+            infoAssistant: action.infoAssistant
+        }
+        ,{
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(function (response){
+              console.log("response", response)  
+            //AppData.data.assistant = response.data.assistantInfo;
+            //AppStore.emitChange();
+                
+        })
+        .catch(function (error){
+            console.log(error);
+        });
     }
 }
 
@@ -294,6 +427,9 @@ let AppStore = assign({}, EventEmitter.prototype, {
 AppStore = assign({}, AppStore, {
     getData: () => {
         return AppData.data;
+    },
+    getInfoAssistant: () => {
+        return AppData.data.assistant;
     }
 });
 
@@ -356,7 +492,22 @@ dispatcher.register((action) => {
     case actionTypes.GET_STATUSATCENTER:
         AppData.getStatusCenter();
         break; 
-    default:
+    case actionTypes.GET_ALLASSISTANTS:
+        AppData.getAllAssistants();
+        break; 
+    case actionTypes.CREATE_STAMP:
+        AppData.createStamp(action);
+        break; 
+    case actionTypes.CREATE_IDSASSISTANTS:
+        AppData.createIdsAssistants(action);
+        break; 
+    case actionTypes.GET_ASSISTANTINFO:
+        AppData.getAssistantInfo(action);
+        break;
+    case actionTypes.SET_ASSISTANT:
+        AppData.setAssistant(action);
+        break;
+    default: 
 		// no op
     }
 });

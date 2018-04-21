@@ -117,6 +117,37 @@ const Actions = {
         dispatcher.dispatch({
             type: actionTypes.GET_STATUSATCENTER,
         });
+    }, 
+    getAllAssistants(){
+        dispatcher.dispatch({
+            type: actionTypes.GET_ALLASSISTANTS,
+        });
+    }, 
+    createStamp(selectedPeople){
+        dispatcher.dispatch({
+            type: actionTypes.CREATE_STAMP,
+            selectedPeople
+        });
+    },
+    createIdsAssistants(selectedPeople){
+        dispatcher.dispatch({
+            type: actionTypes.CREATE_IDSASSISTANTS,
+            selectedPeople
+        });
+    },
+    getAssistantInfo(selectedPeople, view){
+        dispatcher.dispatch({
+            type: actionTypes.GET_ASSISTANTINFO,
+            selectedPeople,
+            view
+        });
+    },
+    setAssistant(infoAssistant, view){
+        dispatcher.dispatch({
+            type: actionTypes.SET_ASSISTANT,
+            infoAssistant,
+            view
+        });
     },
 };
 export default Actions;
