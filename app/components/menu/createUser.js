@@ -50,14 +50,15 @@ class CreateUser extends React.Component {
         this.props.actions.setAssistant(this.state.infoAssistant)
     }
     renderDay(day, dayName, value){
-        var newValue = (value === "1" ? "0" : value === "2" ? "1" : value==="0" ? "1" : value === "" ? "0" : "");
+        console.log("value",value, this.state)
+        var newValue = (value === "1" ? "0" : "1");
         
         return(
             <div className="dayContainer">
-                <div className={value === "1" ? "checkbox active" : "checkbox"} onClick={()=>this.selectDays(dayName,newValue)}>
+                <div className={value === "1" || value === "2" ? "checkbox active" : "checkbox"} onClick={()=>this.selectDays(dayName,newValue)}>
                     <span className="ico icon-checkmark"></span>
                 </div>
-                <span>{day}</span>
+                <span>{value === "2" ? "Desbloquear" : day}</span>
             </div>
         );
     }
