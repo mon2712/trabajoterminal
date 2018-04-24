@@ -11,6 +11,19 @@
             width: 80%;
             background: rgba(0, 0, 0, .6);
             min-height: 600px;
+            .noStudents{
+                margin-top: 20%;
+                color: white;
+                font-size: 30px;
+                .icon-happy{
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+                .text{
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+            }
             .studentsText{
                 display: block;
                 padding-top: 10px;

@@ -289,6 +289,9 @@ let AppData = {
         console.log("Variables en el store: id: ", action.id, " nota: ", action.note, "date: ", action.date);
         axios.put('http://localhost:8088/pt1.pt2/webapi/recepcion/'+action.id+"/"+action.note+"/"+action.date)
         .then(function(response){
+            AppData.data.configCall.active = false;
+            AppData.getConfigCallDone();
+            AppStore.emitChange();
         })
         .catch(function (error){
             console.log( error);

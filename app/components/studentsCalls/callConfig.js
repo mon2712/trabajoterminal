@@ -12,14 +12,14 @@ class CallConfig extends React.Component {
             note: ""
         };
     }
+    
     configCall(active,name,id, status,note, date){
         this.props.actions.getConfigCall(active, name,id,status, note, date);
     }
     setNote(active,name,id, status,note, date){
         console.log("antes del store active: ", active, "nombre: ", name, "id: ", id, "status: ", status, "nota: ", note, "date: ", date);
         this.props.actions.setNoteCall(id, note, date);
-        this.configCall(active, name,id,status, note, date); 
-        
+        //this.configCall(active, name,id,status, note, date); 
     }
     handleChange(event){
         if (event.target.name === "fecha"){
@@ -49,7 +49,7 @@ class CallConfig extends React.Component {
                 <span className="callText note">Nota: </span>
                 <textarea type="text" name="nota" placeholder="Agregar nota" text={this.state.note} onChange={this.handleChange}></textarea>
                 
-                <div className="buttonSetNote" onClick={() => this.setNote(false, this.props.store.configCall.name, this.props.store.configCall.id, "done", this.state.date, this.state.date)}>
+                <div className="buttonSetNote" onClick={() => this.setNote(false, this.props.store.configCall.name, this.props.store.configCall.id, "done", this.state.note, this.state.date)}>
                     Guardar
                 </div>
             </div>
