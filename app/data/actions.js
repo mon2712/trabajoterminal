@@ -85,7 +85,7 @@ const Actions = {
             idStudent
         });
     },
-    getConfigCall(active,name, id, status, note, date){
+    getConfigCall(active,name, id, status, note, date, old){
         dispatcher.dispatch({
             type: actionTypes.GET_CONFIGCALL,
             active,
@@ -93,7 +93,8 @@ const Actions = {
             id,
             status, 
             note, 
-            date
+            date,
+            old
         });
     },
     getConfigCallDone(){
@@ -163,12 +164,13 @@ const Actions = {
             infoPayment
         });
     }, 
-    setNoteCall(id, note, date) {
+    setNoteCall(id, note, date, old) {
         dispatcher.dispatch({
             type: actionTypes.SET_NOTECALL,
             id,
             note,
-            date
+            date,
+            old
         });
     },
     cleanResponse(){
