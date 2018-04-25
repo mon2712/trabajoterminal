@@ -47,10 +47,12 @@ class CreateUser extends React.Component {
 
     }
     sendCreateEdit(){
-        this.props.actions.setAssistant(this.state.infoAssistant)
+        console.log("sendCreateEdit", this.state.infoAssistant)
+        if(this.state.infoAssistant.lastName !== "" && this.state.infoAssistant.name !== "" && this.state.infoAssistant.password !== "" && this.state.infoAssistant.username != "" && this.state.infoAssistant.level !== "")
+            this.props.actions.setAssistant(this.state.infoAssistant)
     }
     renderDay(day, dayName, value){
-        console.log("value",value, this.state)
+        //console.log("value",value, this.state)
         var newValue = (value === "1" ? "0" : "1");
         
         return(
@@ -58,7 +60,7 @@ class CreateUser extends React.Component {
                 <div className={value === "1" || value === "2" ? "checkbox active" : "checkbox"} onClick={()=>this.selectDays(dayName,newValue)}>
                     <span className="ico icon-checkmark"></span>
                 </div>
-                <span>{value === "2" ? "Desbloquear" : day}</span>
+                <span>{value === "2" ? "Desbloquear usuario" : value==="0" && dayName==="status" ? "Usuario activo, para dar de baja de clic aquí" : value==="1" && dayName==="status" ? "Para activar usuario de clic aquí" : day}</span>
             </div>
         );
     }
@@ -93,25 +95,33 @@ class CreateUser extends React.Component {
                 </div>  
                 <span className="leftColumn">Telefono:</span>
                 <div className="rightColumn">
-                    <input type="number" maxLength="10" value={this.state.infoAssistant.phone} onChange={this.handleChange} name="phone"></input>    
+                    <input type="phone" maxLength="10" value={this.state.infoAssistant.phone} onChange={this.handleChange} name="phone"></input>    
                 </div>
-                <span className="leftColumn">Hora de entrada: </span>  
+                <span className="leftColumn">Entrada: </span>  
                 <div className="rightColumn">
                     <input type="time" pattern="[0-9]{2}:[0-9]{2}" min="12:00" max="18:00" value={this.state.infoAssistant.arriveTime} onChange={this.handleChange} name="arriveTime"></input>
                 </div>
                 <span className="leftColumn">Nivel: </span>  
                 <div className="rightColumn">
-                    <input type="text" value={this.state.infoAssistant.level} onChange={this.handleChange} name="level"></input>
+                    <input type="text" maxLength="3" value={this.state.infoAssistant.level} onChange={this.handleChange} name="level"></input>
                 </div>
-
-                <div className="buttonCreate" onClick={this.sendCreateEdit}>{this.props.view === 3 ? "Crear" : "Editar"}</div>
+            </div>
+        );
+    }
+    renderResponse(){
+        return(
+            <div>
+                <span>El usuario con nombre <b>{this.props.store.response.info.name}</b></span>
+                <span><b>{this.props.store.response.info.messageError}</b></span>
             </div>
         );
     }
     render() {
+        console.log(this.props)
 		return (
             <div className="userInfoContainer">
-                {this.renderForm()}
+                {this.props.store.response.active === false ? this.renderForm() : this.renderResponse()}
+                <div className="buttonCreate" onClick={this.props.view === 3 || this.props.view ===4 ? this.sendCreateEdit : null }>{this.props.view === 3 ? "Crear" : this.props.view === 4 && this.props.store.response.active === true ? "OK" : "Editar" }</div>
             </div>
 		);
 	}

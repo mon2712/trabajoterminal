@@ -16,7 +16,7 @@ class Panel extends React.Component {
               <div className="sesionInfoContainer">
                     <span className="ico icon-user-female"></span>
                     <div className="sessionContainer">
-                        <span>Hola {this.props.store.authenticationInfo.name}</span>
+                        <span className="nameSession" >Hola {this.props.store.authenticationInfo.name}</span>
                         <div className="logout" onClick={this.closeSession}>Cerrar Sesión</div>
                     </div>
               </div>

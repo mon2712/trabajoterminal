@@ -38,7 +38,7 @@ class ButtonOptions extends React.Component {
             <Link to={opt.path} key={index}>
             <div className='buttonContainer' style={{background: opt.color, border: opt.color}}>
                 <span className={"ico "+opt.ico}></span>
-                <span>{opt.text}</span>
+                <span className="textButton">{opt.text}</span>
             </div>
             </Link>
         ));

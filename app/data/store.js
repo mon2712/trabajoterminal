@@ -62,6 +62,10 @@ let AppData = {
             phone: "",
             username: "",
             status: ""
+        },
+        response: {
+            info: "",
+            active: false
         }
     },
     confirmLogin(){
@@ -401,9 +405,10 @@ let AppData = {
             }
         })
         .then(function (response){
-              console.log("response", response)  
-            //AppData.data.assistant = response.data.assistantInfo;
-            //AppStore.emitChange();
+            console.log("response", response)  
+            AppData.data.response.info = response.data.assistantInfo;
+            AppData.data.response.active = true;
+            AppStore.emitChange();
                 
         })
         .catch(function (error){
