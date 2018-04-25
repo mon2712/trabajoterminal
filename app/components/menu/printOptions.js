@@ -39,14 +39,14 @@ class PrintOptions extends React.Component {
                 {
                     this.props.startView === 2 ?
                         <div>
-                            {this.renderButtons("Generar gafetes", "icon-id-card", "#b83a7c",1)}
-                            {this.renderButtons("Generar etiquetas", "icon-qrcode", "#FF6B6B",2)}   
+                            {this.renderButtons("Generar gafetes", "icon-id-card", "#30638E",1)}
+                            {this.renderButtons("Generar etiquetas", "icon-qrcode", "#30638E",2)}   
                         </div>
                     :
                     this.props.startView === 3 ? 
                         <div>
-                            {this.renderButtons("Crear Asistente", "icon-user-male", "#EDAE49",3)}
-                            {this.renderButtons("Editar Asistente", "icon-user-male", "#30638E",4)}
+                            {this.renderButtons("Crear Usuario", "icon-user-male", "#30638E",3)}
+                            {this.renderButtons("Editar Usuario", "icon-user-male", "#30638E",4)}
                         </div>
                     : null
                 }
@@ -61,10 +61,10 @@ class PrintOptions extends React.Component {
                     <div className="headerPrintContainer">
                         <span className="titleContainer">
                             {this.state.view === 0 ? "Selecciona una opción" : 
-                            this.state.view === 1 ? "Selecciona los asistentes" : 
+                            this.state.view === 1 ? "Selecciona los usuarios" : 
                             this.state.view === 2 ?  "Selecciona a los alumnos" : 
-                            this.state.view === 3 ? "Crear un Nuevo Asistente" : 
-                            this.state.view === 4 ? "Editar Asistente" : ""}
+                            this.state.view === 3 ? "Crear un Nuevo Usuario" : 
+                            this.state.view === 4 ? "Editar Usuario" : ""}
                         </span>
                         <span className="ico icon-multiply" onClick={this.props.closePopUp()}/>
                     </div>
