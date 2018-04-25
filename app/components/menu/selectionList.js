@@ -117,7 +117,6 @@ class SelectionList extends React.Component {
         );
     }
     sendAllSelected(){
-        console.log("estado en send all", this.state.selected)
         if(this.props.view === 1){
             this.props.actions.createIdsAssistants(this.state.selected);            
         }

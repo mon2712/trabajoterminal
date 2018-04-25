@@ -47,12 +47,10 @@ class CreateUser extends React.Component {
 
     }
     sendCreateEdit(){
-        console.log("sendCreateEdit", this.state.infoAssistant)
         if(this.state.infoAssistant.lastName !== "" && this.state.infoAssistant.name !== "" && this.state.infoAssistant.password !== "" && this.state.infoAssistant.username != "" && this.state.infoAssistant.level !== "")
             this.props.actions.setAssistant(this.state.infoAssistant)
     }
     renderDay(day, dayName, value){
-        //console.log("value",value, this.state)
         var newValue = (value === "1" ? "0" : "1");
         
         return(
@@ -121,7 +119,7 @@ class CreateUser extends React.Component {
 		return (
             <div className="userInfoContainer">
                 {this.props.store.response.active === false ? this.renderForm() : this.renderResponse()}
-                <div className="buttonCreate" onClick={this.props.view === 3 || this.props.view ===4 ? this.sendCreateEdit : null }>{this.props.view === 3 ? "Crear" : this.props.view === 4 && this.props.store.response.active === true ? "OK" : "Editar" }</div>
+                <div className="buttonCreate" onClick={this.props.view === 3 || this.props.view === 4 ? this.sendCreateEdit : null }>{this.props.view === 3 ? "Crear" : this.props.view === 4 && this.props.store.response.active === true ? "OK" : "Editar" }</div>
             </div>
 		);
 	}
