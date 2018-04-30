@@ -148,6 +148,11 @@ const Actions = {
             infoAssistant,
             view
         });
-    },
+    }, 
+    setResponseEmpty(){
+        dispatcher.dispatch({
+            type: actionTypes.SET_RESPONSEEMPTY,
+        });
+    }, 
 };
 export default Actions;

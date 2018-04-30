@@ -60,11 +60,13 @@ class PrintOptions extends React.Component {
                 <div className="printOptionsContainer">
                     <div className="headerPrintContainer">
                         <span className="titleContainer">
-                            {this.state.view === 0 ? "Selecciona una opción" : 
-                            this.state.view === 1 ? "Selecciona los usuarios" : 
-                            this.state.view === 2 ?  "Selecciona a los alumnos" : 
-                            this.state.view === 3 ? "Crear un Nuevo Usuario" : 
-                            this.state.view === 4 ? "Editar Usuario" : ""}
+                            {
+                                this.state.view === 0 ? "Selecciona una opción" : 
+                                this.state.view === 1 ? "Selecciona los usuarios" : 
+                                this.state.view === 2 ? "Selecciona a los alumnos" : 
+                                this.state.view === 3 ? "Crear un Nuevo Usuario" : 
+                                this.state.view === 4 ? "Editar Usuario" : ""
+                            }
                         </span>
                         <span className="ico icon-multiply" onClick={this.props.closePopUp()}/>
                     </div>
@@ -73,19 +75,19 @@ class PrintOptions extends React.Component {
 
                         : this.props.startView === 3 && this.state.view === 0 ? this.renderDivButtons()
 
-                        : this.state.view === 1 && this.props.store.assistants !== null 
+                        : this.state.view === 1 && this.props.store.assistants !== null && this.props.store.assistants !== ""
 
                         ? <SelectionList {...this.props} allPeople={this.props.store.assistants} view={this.state.view} actions={this.props.actions}/>
 
-                        : this.state.view === 2 && this.props.store.students !== null 
+                        : this.state.view === 2 && this.props.store.students !== null && this.props.store.students !== ""
 
                         ? <SelectionList {...this.props} allPeople={this.props.store.students} view={this.state.view} actions={this.props.actions}/> 
 
                         : this.state.view === 3
 
-                        ? <CreateUser {...this.props} view={this.state.view} actions={this.props.actions}/>
+                        ? <CreateUser {...this.props} view={this.state.view} actions={this.props.actions} closePopUp={this.props.closePopUp}/>
 
-                        : this.state.view === 4 && this.props.store.assistants !== null 
+                        : this.state.view === 4 && this.props.store.assistants !== null  && this.props.store.assistants !== ""
 
                         ? <SelectionList {...this.props} allPeople={this.props.store.assistants} view={this.state.view} actions={this.props.actions}/>
                         

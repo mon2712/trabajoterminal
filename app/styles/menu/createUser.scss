@@ -22,7 +22,7 @@
                 box-shadow: 3px 0px 5px #000000;
                 margin-right: 10px;
                 .ico{
-                    color: #847f7f;
+                    color: white;
                     font-size: 16px;
                 }
                 &.active{
@@ -73,6 +73,10 @@
                 max-height: 100px;
                 overflow-y: scroll;
             }
+            &.level{
+                position: relative;
+                width: 20%;
+            }
             input{
                 height: 40px;
                 width: 100%;
@@ -97,7 +101,7 @@
                     box-shadow: 3px 0px 5px #000000;
                     margin-right: 10px;
                     .ico{
-                        color: #847f7f;
+                        color: white;
                         font-size: 16px;
                     }
                     &:hover{

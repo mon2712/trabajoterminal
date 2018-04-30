@@ -18,7 +18,8 @@
                 "text": "Registrar Pago",
                 "path": "/registrarPago",
                 "color": "#29DBFF",
-                "popUp": true
+                "popUp": true,
+                "id": 4
             },{
                 "ico": "icon-calls",
                 "text": "Lista Llamadas",
@@ -67,9 +68,9 @@
             },{
                 "ico": "icon-point-of-service",
                 "text": "Lista Adeudos",
-                "path": "/",
+                "path": "/paymentList",
                 "color": "#1AA5BF",
-                "popUp": true
+                "popUp": false
             },{
                 "ico": "icon-printer",
                 "text": "Imprimir",

@@ -1,6 +1,8 @@
 import React from 'react';
 import UploadFile from './uploadFile';
 import PrintOptions from './printOptions';
+import RegisterPayment from '../general/registerPayment';
+import SelectionList from './selectionList';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 
 class ButtonOptions extends React.Component {
@@ -14,6 +16,11 @@ class ButtonOptions extends React.Component {
         };  
     }
     sendAction(id){
+        
+        if(id===4){
+            this.props.actions.getAllStudents("");
+        }
+
         this.setState({
             popUpActive: true,
             id: id
@@ -57,6 +64,15 @@ class ButtonOptions extends React.Component {
                     : 
                     this.state.popUpActive == true && this.state.id===3 ?
                         <PrintOptions {...this.props} startView={this.state.id} closePopUp={()=>this.closePopUp} />
+                    :
+                    this.state.popUpActive == true && this.state.id===4 ?
+                        <div className="popUpContainer">
+                            <div className='registerPyamentContainer'>
+                                <span className="title">Registrar Pago</span>   
+                                <span className="icoClose icon-multiply" onClick={this.closePopUp}/>           
+                                {this.props.store.students !== "" && this.props.store.students !== null ? <SelectionList {...this.props} allPeople={this.props.store.students} view={5} actions={this.props.actions} closePopUp={()=>this.closePopUp}/> : null }
+                            </div>
+                        </div>
                     :
                     null
                 }                

@@ -1,0 +1,219 @@
+.registerPyamentContainer{
+    width: 60%;
+    margin: 0px auto;
+    background:  #5dc4c4;
+    margin-top: 10%;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+    .title{
+        display: inline-block;
+        width: 95%;
+        text-align: center;
+        font-size: 30px;
+        color: #21647F;
+    }
+    .icoClose{
+        display: inline-block;
+        vertical-align: top;
+        color: white;
+        font-size: 30px;
+        font-weight: bolder;
+        cursor: pointer;
+        &:hover{
+            color: #a7a7a7;
+        }
+    }
+    .form{
+        padding: 15px;
+        max-height: 400px;
+        overflow-y: scroll;
+        background: #5aa9a9;
+        border-radius: 10px;
+        color: white;
+        .leftColumn{
+            display: inline-block;
+            vertical-align: middle;
+            width: 50%;
+            padding: 5px;
+            .ico{
+                font-size: 25px;
+                margin-right: 10px;
+            }
+            .nameStudent{
+                font-size: 24px;
+            }
+            .month{
+                display: inline-block;
+                vertical-align: middle;
+                width: 30%;
+                font-size: 20px;
+            }
+            .digits{
+                display: inline-block;
+                vertical-align: middle;
+                width: 30%;
+                font-size: 20px;
+            }
+            .stars{
+                font-size: 20px;
+                display: inline-block;
+                vertical-align: middle;
+                width: 35%;
+                text-align: right;
+            }
+            .digits4{
+                width: 30%;
+                font-size: 20px;
+                display: inline-block;
+                height: 40px;
+                text-align: center;
+                border-radius: 0px 10px 10px 0px;
+                color: #21647F;
+            }
+            .selectionMonths{
+                display: inline-block;
+                vertical-align: middle;
+                width: 70%;
+                z-index: 0;
+                position: relative;
+                .listMonths{
+                    display: block;
+                    width: 80%;
+                    overflow-y: scroll;
+                    max-height: 80px;
+                    background: white;
+                    color: #21647F;
+                    text-align: center;
+                    z-index: 1;
+                    position: absolute;
+                    .optionList{
+                        &.selected{
+                            background: #21647F;
+                            color: white;
+                        }
+                    }
+                }
+                .selectedMonth{
+                    display: inline-block;
+                    vertical-align: middle;
+                    text-align: center;
+                    font-size: 18px;
+                    height: 40px;
+                    line-height: 40px;
+                    background: white;
+                    color: #21647F;
+                    width: 80%;
+                    border-radius: 10px 0px 0px 10px;
+                    &.listActive{
+                        border-radius: 10px 0px 0px 0px;
+                    }
+                }
+                .iconContainer{
+                    display: inline-block;
+                    vertical-align: middle;
+                    height: 40px;
+                    line-height: 42px;
+                    width: 15%;
+                    background: #21647F;
+                    border-radius: 0px 10px 10px 0px;
+                    text-align: center;
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+
+            }
+        }
+        .rightColumn{
+            display: inline-block;
+            vertical-align: middle;
+            width: 50%;
+            padding: 5px;
+            .year{
+                display: inline-block;
+                vertical-align: middle;
+                width: 30%;
+                font-size: 20px;
+            }
+            .selectionYears{
+                display: inline-block;
+                vertical-align: middle;
+                width: 70%;
+                z-index: 0;
+                position: relative;
+                .listYears{
+                    display: block;
+                    width: 80%;
+                    overflow-y: scroll;
+                    max-height: 80px;
+                    background: white;
+                    color: #21647F;
+                    text-align: center;
+                    z-index: 1;
+                    position: absolute;
+                    .optionList{
+                        &.selected{
+                            background: #21647F;
+                            color: white;
+                        }
+                    }
+                }
+                .selectedYear{
+                    display: inline-block;
+                    vertical-align: middle;
+                    text-align: center;
+                    font-size: 18px;
+                    height: 40px;
+                    line-height: 40px;
+                    background: white;
+                    color: #21647F;
+                    width: 80%;
+                    border-radius: 10px 0px 0px 10px;
+                    &.listActive{
+                        border-radius: 10px 0px 0px 0px;
+                    }
+                }
+                .iconContainer{
+                    display: inline-block;
+                    vertical-align: middle;
+                    height: 40px;
+                    line-height: 42px;
+                    width: 15%;
+                    background: #21647F;
+                    border-radius: 0px 10px 10px 0px;
+                    text-align: center;
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+
+            }
+            .date{
+                font-size: 20px;
+                margin-right: 10px;
+            }
+            .valueDate{
+                font-size: 30px;
+            }
+            .quantity{
+                display: inline-block;
+                vertical-align: middle;
+                width: 30%;
+                font-size: 20px;
+            }
+            .moneySym{
+                width: 15%;
+                font-size: 30px;
+                padding: 3px;
+                color: #21647F;
+            }
+            .quantityVal{
+                width: 60%;
+                height: 40px;
+                border-radius: 10px; 
+                font-size: 20px;
+                text-align: center;
+                color: #21647F;
+            }
+        }
+    }
+}

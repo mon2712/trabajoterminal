@@ -61,7 +61,12 @@ let AppData = {
             password: "",
             phone: "",
             username: "",
-            status: ""
+            status: "",
+            lunes: "",
+            jueves: "",
+            miercoles:"",
+            sabado:"",
+            type: 1,
         },
         response: {
             info: "",
@@ -387,13 +392,13 @@ let AppData = {
             AppData.data.assistant.miercoles = "", 
             AppData.data.assistant.jueves = "", 
             AppData.data.assistant.sabado = "", 
-
+            AppData.data.assistant.type = "asistente", 
             AppStore.emitChange();
 
         }
     },
     setAssistant(action){
-        console.log(action)
+        console.log("store",action)
 
         axios.post('http://localhost:8088/pt1.pt2/webapi/asistente/setAssistant', 
         {
@@ -405,7 +410,6 @@ let AppData = {
             }
         })
         .then(function (response){
-            console.log("response", response)  
             AppData.data.response.info = response.data.assistantInfo;
             AppData.data.response.active = true;
             AppStore.emitChange();
@@ -414,6 +418,12 @@ let AppData = {
         .catch(function (error){
             console.log(error);
         });
+    },
+    setResponseEmpty(){
+        console.log("llega a response empty")
+        AppData.data.response.info = "";
+        AppData.data.response.active = false;
+        AppStore.emitChange();
     }
 }
 
@@ -511,7 +521,10 @@ dispatcher.register((action) => {
         break;
     case actionTypes.SET_ASSISTANT:
         AppData.setAssistant(action);
-        break;
+        break; 
+    case actionTypes.SET_RESPONSEEMPTY:
+        AppData.setResponseEmpty();
+        break; 
     default: 
 		// no op
     }

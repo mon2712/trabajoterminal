@@ -11,8 +11,10 @@ class CreateUser extends React.Component {
         this._onChange = this._onChange.bind(this);
         this.renderForm = this.renderForm.bind(this);
         this.sendCreateEdit=this.sendCreateEdit.bind(this);  
+        this.acceptResponse=this.acceptResponse.bind(this);  
         this.handleChange = this.handleChange.bind(this);
         this.renderDay = this.renderDay.bind(this);
+        this.selectType = this.selectType.bind(this);
         this.state = {
             infoAssistant: getInfoAssistant(),
             value: ''
@@ -46,19 +48,60 @@ class CreateUser extends React.Component {
         })
 
     }
+    selectType() {
+        var arrayToEdit = this.state.infoAssistant;
+        
+        if(this.state.infoAssistant.type === "asistente"){
+            arrayToEdit["type"] = "recepcionista";
+        }else{
+            arrayToEdit["type"] = "asistente";
+        }
+        this.setState({
+            arrayToEdit
+        })
+
+    }
     sendCreateEdit(){
-        if(this.state.infoAssistant.lastName !== "" && this.state.infoAssistant.name !== "" && this.state.infoAssistant.password !== "" && this.state.infoAssistant.username != "" && this.state.infoAssistant.level !== "")
-            this.props.actions.setAssistant(this.state.infoAssistant)
+        if(this.state.infoAssistant.type === "asistente"){
+            if(this.state.infoAssistant.lastName !== "" && this.state.infoAssistant.name !== "" && this.state.infoAssistant.password !== "" && this.state.infoAssistant.username != "" && this.state.infoAssistant.level !== "")
+                this.props.actions.setAssistant(this.state.infoAssistant)
+        }
+        if(this.state.infoAssistant.type === "recepcionista"){
+            if(this.state.infoAssistant.lastName !== "" && this.state.infoAssistant.name !== "" && this.state.infoAssistant.password !== "" && this.state.infoAssistant.username != ""){
+                this.props.actions.setAssistant(this.state.infoAssistant)
+            }
+        }
+    }
+    acceptResponse(){
+        this.props.actions.setResponseEmpty();
+
     }
     renderDay(day, dayName, value){
         var newValue = (value === "1" ? "0" : "1");
-        
         return(
             <div className="dayContainer">
                 <div className={value === "1" || value === "2" ? "checkbox active" : "checkbox"} onClick={()=>this.selectDays(dayName,newValue)}>
                     <span className="ico icon-checkmark"></span>
                 </div>
                 <span>{value === "2" ? "Desbloquear usuario" : value==="0" && dayName==="status" ? "Usuario activo, para dar de baja de clic aquí" : value==="1" && dayName==="status" ? "Para activar usuario de clic aquí" : day}</span>
+            </div>
+        );
+    }
+    renderType(){
+        return(
+            <div>
+                <div className="dayContainer">
+                    <div className={this.state.infoAssistant.type === "asistente" ? "checkbox active" : "checkbox"} onClick={this.selectType}>
+                        <span className="ico icon-checkmark"></span>
+                    </div>
+                    <span>Asistente</span>
+                </div>
+                <div className="dayContainer">
+                    <div className={this.state.infoAssistant.type === "recepcionista" ? "checkbox active" : "checkbox"} onClick={this.selectType}>
+                        <span className="ico icon-checkmark"></span>
+                    </div>
+                    <span>Recepcionista</span>
+                </div>
             </div>
         );
     }
@@ -99,8 +142,12 @@ class CreateUser extends React.Component {
                 <div className="rightColumn">
                     <input type="time" pattern="[0-9]{2}:[0-9]{2}" min="12:00" max="18:00" value={this.state.infoAssistant.arriveTime} onChange={this.handleChange} name="arriveTime"></input>
                 </div>
-                <span className="leftColumn">Nivel: </span>  
-                <div className="rightColumn">
+                <span className="leftColumn"  style={{display: this.props.view === 3 ? 'inline-block' : 'none'}}>Tipo: </span>  
+                <div className="rightColumn" style={{display: this.props.view === 3 ? 'inline-block' : 'none'}}>
+                    {this.renderType()}
+                </div>
+                <span className="leftColumn"  style={{display: this.state.infoAssistant.type === "asistente" ? 'inline-block' : 'none'}}>Nivel: </span>  
+                <div className="rightColumn level"   style={{display: this.state.infoAssistant.type === "asistente" ? 'inline-block' : 'none'}}>
                     <input type="text" maxLength="3" value={this.state.infoAssistant.level} onChange={this.handleChange} name="level"></input>
                 </div>
             </div>
@@ -110,16 +157,16 @@ class CreateUser extends React.Component {
         return(
             <div>
                 <span>El usuario con nombre <b>{this.props.store.response.info.name}</b></span>
-                <span><b>{this.props.store.response.info.messageError}</b></span>
+                <span><b>{this.props.store.response.info.messageError === "" ? "Se ha creado correctamente" : this.props.store.response.info.messageError}</b></span>
+                <div className="buttonCreate" onClick={this.props.closePopUp()}>{ "OK" }</div>                
             </div>
         );
     }
     render() {
-        console.log(this.props)
 		return (
             <div className="userInfoContainer">
                 {this.props.store.response.active === false ? this.renderForm() : this.renderResponse()}
-                <div className="buttonCreate" onClick={this.props.view === 3 || this.props.view === 4 ? this.sendCreateEdit : null }>{this.props.view === 3 ? "Crear" : this.props.view === 4 && this.props.store.response.active === true ? "OK" : "Editar" }</div>
+                <div className="buttonCreate" style={{display: (this.props.view === 4 || this.props.view === 3)&& this.props.store.response.active === true ? 'none' : 'block'}} onClick={(this.props.view === 4 || this.props.view === 3 ) && this.props.store.response.active === true ? this.acceptResponse : this.sendCreateEdit }>{this.props.view === 3 && this.props.store.response.active === false ? "Crear" : (this.props.view === 4 || this.props.view === 3) && this.props.store.response.active === true ? "OK" : "Editar" }</div>
             </div>
 		);
 	}
