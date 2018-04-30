@@ -9,6 +9,8 @@ class RegisterPayment extends React.Component {
         this.renderDropMonths = this.renderDropMonths.bind(this);
         this.changeMonth = this.changeMonth.bind(this);
         this.changeYear = this.changeYear.bind(this);
+        this.changeType = this.changeType.bind(this);
+        this.sendToRegister=this.sendToRegister.bind(this);  
         this.activeList = this.activeList.bind(this);
         this.state = {
             view: 0,
@@ -16,6 +18,7 @@ class RegisterPayment extends React.Component {
             listYears: false,
             startYear: 2010,
             months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            typesOfPayments: ["Débito", "Crédito", "Efectivo", "Transferencia"],
             years: [],
             infoPayment:{
                 date: "",
@@ -76,6 +79,9 @@ class RegisterPayment extends React.Component {
             });
         
     }
+    sendToRegister(){
+        
+    }
     renderDropMonths(){
         return (
             <div className="selectionMonths">
@@ -132,13 +138,38 @@ class RegisterPayment extends React.Component {
         var infoToEdit = this.state.infoPayment;
         infoToEdit["date"] = numberDate;
         infoToEdit["idStudent"]=this.props.selected[0].idStudent;
-        infoToEdit["type"]=1;
+        infoToEdit["type"]=0;
         infoToEdit["month"]=d.getMonth();
         infoToEdit["year"]=d.getFullYear();
         
         this.setState({
             infoToEdit
         })
+    }
+    changeType(index){
+        var infoToEdit = this.state.infoPayment;
+        infoToEdit["type"] = index;
+
+        this.setState({
+            infoToEdit,
+        });
+    }
+    renderTypesPayment(){
+        return(
+            <div className="typesOfPayments">
+                <span className="typePay">Tipo de pago: </span>
+                <div className="typesContainer">
+                    {this.state.typesOfPayments.map((opt, index) => (
+                        <div className="optionPayment" key={index}>
+                            <div className={this.state.infoPayment.type === index ? "checkbox active" : "checkbox"} onClick={() => this.changeType(index)}>
+                                <span className="ico icon-checkmark"></span>
+                            </div>
+                            <span>{opt}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
     }
     renderForm(){
         return(
@@ -152,6 +183,7 @@ class RegisterPayment extends React.Component {
                         <span className="date">Fecha: </span>
                         <span className="valueDate">{this.state.infoPayment.date}</span>
                     </div>
+                    {this.renderTypesPayment()}
                     <div className="leftColumn">
                         <span className="month">Mes: </span>
                         {this.renderDropMonths()}
@@ -161,15 +193,18 @@ class RegisterPayment extends React.Component {
                         {this.renderDropYears()}
                     </div>
                     <div className="leftColumn">
-                        <span className="digits" >Digitos: </span>
-                        <span className="stars">XXXXXXXXXXXX</span>
-                        <input  type="number" maxLength="4" name="card" className="digits4" value={this.state.infoPayment.card} onChange={this.handleChange}></input>
-                    </div>
-                    <div className="rightColumn">
                         <span className="quantity"> Cantidad: </span>
                         <span className="moneySym">$</span>
                         <input type="number" maxLength="8" name="quantity" className="quantityVal" value={this.state.infoPayment.quantity} onChange={this.handleChange}></input>
                     </div>
+                    <div className="rightColumn"  style={{display: this.state.infoPayment.type === 2 ? 'none' : 'inline-block'}}>
+                        <span className="digits" >Digitos: </span>
+                        <span className="stars">XXXXXXXXXXXX</span>
+                        <input  type="number" maxLength="4" name="card" className="digits4" value={this.state.infoPayment.card} onChange={this.handleChange}></input>
+                    </div>
+                </div>
+                <div className="button" onClick={this.sendToRegister}>
+                    Aceptar
                 </div>
             </div>
         );
