@@ -1,4 +1,4 @@
-.registerPyamentContainer{
+.registerPaymentContainer{
     width: 50%;
     margin: 0px auto;
     background:  #5dc4c4;
@@ -40,10 +40,15 @@
             margin-bottom: 10px;
             .ico{
                 font-size: 25px;
-                margin-right: 10px;
+                display: inline-block;
+                vertical-align: middle;
+                width: 20%;
             }
             .nameStudent{
                 font-size: 24px;
+                width: 80%;
+                display: inline-block;
+                vertical-align: middle;
             }
             .month{
                 display: inline-block;

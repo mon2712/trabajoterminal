@@ -227,13 +227,28 @@ let AppData = {
         AppStore.emitChange();
     },
     getStudentMissPayment(){
-        $.getJSON('/app/fillData/studentsInCenter.js', function(info) {
+        /*$.getJSON('/app/fillData/studentsInCenter.js', function(info) {
             AppData.data.studentsMissPayment = info.studentsInCenter;
             AppStore.emitChange();
         }).fail(function(error) {
             console.error(error);
+        });*/
+
+        axios.get('http://localhost:8088/pt1.pt2/webapi/instructor/getStudentsMissingPayments')
+        .then(function (response){
+            console.log("respuesta del servicio", response)
+            if(response.data.studentMissingPayment.length === 0){
+                AppData.data.studentsMissPayment = "";
+            }else{
+                AppData.data.studentsMissPayment = response.data.studentMissingPayment;
+            }
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log(error);
         });
-        AppStore.emitChange();  
+        
+        //AppStore.emitChange();  
     },
     getPaymentListStudent(){
         $.getJSON('/app/fillData/paymentsStudent.js', function(info) {
