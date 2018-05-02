@@ -73,4 +73,101 @@
             }
         }
     }
+    .containerPayments{
+        &:hover{
+            .arrow{
+                opacity: 1;
+            }
+        }
+        .arrow{
+            width: 100px;
+            height: 100px;
+            top: 50%;
+            margin-top: -50px;
+            text-align: center;
+            overflow: hidden;
+            position: absolute;
+            z-index: 1;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 500ms linear;
+            &.right{
+                right: -20px;
+            }
+            &.left{
+                left: -20px;
+            }
+            span{
+                color: white;
+                font-size: 60px;
+            }
+        }
+        .listsContainer{
+            color: white;
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+            margin: 0 auto;
+            margin-top: 10%;
+            .yearContainer{
+                display: inline-block;
+                vertical-align: middle;
+                height: 600px;
+                width: 300px;
+                margin-right: 10px;
+                border-radius: 4px;
+                background: rgba(0, 0, 0, 0.5);
+                padding: 10px;
+                overflow-y: auto;
+                .monthContainer{
+                    background: rgba(0, 0, 0, 0.5);
+                    border-radius: 4px;
+                    margin-bottom: 5px;
+                    .infoPayment{
+                        .topDiv{
+                            text-align: center;
+                            span{
+                                display: inline-block;
+                                vertical-align: middle;
+                            }
+                            .folio{
+                                width: 15%;
+                            }
+                            .numFolio{
+                                width: 20%;
+                                margin-right: 10%;
+                            }
+                            .dateTag{
+                                width: 15%;
+                            }
+                            .date{
+                                width: 30%;
+                            }
+                        }
+                        .midDiv{
+                            span{
+                                display: inline-block;
+                                vertical-align: middle;
+                            }
+                            .type{
+                                width: 32%;
+                                margin-right: 3%;
+                            }
+                            .typePayment{
+                                width: 15%;
+                                margin-right: 5%;
+                            }
+                            .quantityTag{
+                                width: 22%;
+                                margin-right: 3%;
+                            }
+                            .quantity{
+                                width: 20%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
