@@ -91,14 +91,14 @@ class StudentPaymentList extends React.Component {
                 {
                     this.props.store.paymentListStudent.map((colegiatura,index) => (
                         <div className="yearContainer" key={index}>
-                            {colegiatura.year}
+                            <span className="year">{colegiatura.year}</span>
                             {
                                 colegiatura.months.map((month, index2) => (
-                                    <div className="monthContainer" key={index2}>
-                                        <div>
+                                    <div className={this.state.infoActive === true ? "monthContainer active" : "monthContainer"} key={index2}>
+                                        <div className="generalDiv">
                                             <span className="monthName">{this.state.months[month.month-1]}</span>
                                             <span className="arrowDown icon-circle-down"  style={{display: this.state.infoActive === false ? 'inline-block' : 'none'}} onClick={() => this.activeInfoPayment(index,index2,true)}></span>
-                                            <span className="arrowDown icon-multiply" style={{display: this.state.infoActive === true  && this.state.infoId === index2 && this.state.infoYear === index ? 'inline-block' : 'none'}}  onClick={() => this.activeInfoPayment(index,index2,false)}></span>
+                                            <span className="cross icon-multiply" style={{display: this.state.infoActive === true  && this.state.infoId === index2 && this.state.infoYear === index ? 'inline-block' : 'none'}}  onClick={() => this.activeInfoPayment(index,index2,false)}></span>
                                         </div>
                                         <div className="infoPayment"  style={{display: this.state.infoActive === true && this.state.infoId === index2 && this.state.infoYear === index? 'block' : 'none'}}>
                                             <div className="topDiv">

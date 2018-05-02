@@ -108,7 +108,7 @@
             text-align: center;
             overflow: hidden;
             margin: 0 auto;
-            margin-top: 10%;
+            margin-top: 8%;
             .yearContainer{
                 display: inline-block;
                 vertical-align: middle;
@@ -119,10 +119,34 @@
                 background: rgba(0, 0, 0, 0.5);
                 padding: 10px;
                 overflow-y: auto;
+                .year{
+                    font-size: 30px;
+                }
                 .monthContainer{
                     background: rgba(0, 0, 0, 0.5);
                     border-radius: 4px;
                     margin-bottom: 5px;
+                    height: 30px;
+                    line-height: 30px;    
+                    &.active{
+                        height: auto;
+                    }            
+                    .generalDiv{
+                        position: relative;
+                        span{
+                            display: inline-block;
+                            vertical-align: middle;
+                        }
+                        .monthName{
+                            width: 80%;
+                        }
+                        .arrowDown, .cross{
+                            position: absolute;
+                            height: 30px;
+                            line-height: 30px;
+                            cursor: pointer;
+                        }
+                    }
                     .infoPayment{
                         .topDiv{
                             text-align: center;
