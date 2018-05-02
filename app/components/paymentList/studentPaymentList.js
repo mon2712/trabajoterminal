@@ -12,7 +12,7 @@ class StudentPaymentList extends React.Component {
         }
     }
     componentDidMount() {
-       // this.props.actions.getPaymentListStudent();
+        this.props.actions.getPaymentListStudent();
     }
     renderList(){
         var studentPayments = this.props.store.paymentListStudent;
@@ -53,6 +53,27 @@ class StudentPaymentList extends React.Component {
             popUpActive: true
         });
     }
+    renderListOfYears(){
+        console.log("lista", this.props.store.paymentListStudent)
+        return(
+            <div className="listsContainer">
+                {
+                    this.props.store.paymentListStudent.map((colegiatura,index) => (
+                        <div key={index}>
+                            {colegiatura.year}
+                            {
+                                colegiatura.months.map((month, index2) => (
+                                    <div key={index2}>
+                                        {month.month}
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    ))
+                }
+            </div>
+        );
+    }
     render() {
         console.log("en los pagos de alumnos", this.props, this.state)
 		return (
@@ -61,8 +82,8 @@ class StudentPaymentList extends React.Component {
                     Registrar nuevo Pago
                 </div>
                 {this.props.infoStudent != undefined ? this.renderStudentInfo() : null}
-                <div className= "namesStudents">
-                    
+                <div className= "containerPayments">
+                    {this.props.store.paymentListStudent != null && this.props.store.paymentListStudent != undefined ? this.renderListOfYears() : null}
                 </div>
                 {
                     this.state.popUpActive == true ?

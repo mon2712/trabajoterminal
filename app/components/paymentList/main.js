@@ -18,7 +18,7 @@ class PaymentList extends React.Component {
     }
     openPaymentListStudent(student){
         console.log("Hola", student)
-
+        
         this.setState({
             view: 1,
             infoStudent: student

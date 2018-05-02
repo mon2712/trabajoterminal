@@ -251,13 +251,19 @@ let AppData = {
         //AppStore.emitChange();  
     },
     getPaymentListStudent(){
-        $.getJSON('/app/fillData/paymentsStudent.js', function(info) {
-            AppData.data.studentsMissPayment = info.studentsInCenter;
+        axios.get('http://localhost:8088/pt1.pt2/webapi/instructor/getPaymentOfStudent')
+        .then(function (response){
+            console.log("respuesta del servicio", response)
+            if(response.data.paymentsStudent.length === 0){
+                AppData.data.paymentListStudent = "";
+            }else{
+                AppData.data.paymentListStudent = response.data.paymentsStudent;
+            }
             AppStore.emitChange();
-        }).fail(function(error) {
-            console.error(error);
+        })
+        .catch(function (error){
+            console.log(error);
         });
-        AppStore.emitChange();
     },
     getConfigCall(action){
         AppData.data.configCall.active = action.active;
