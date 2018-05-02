@@ -1,4 +1,5 @@
 .paymentContainer{
+    overflow: hidden;
     .buttonRegister{
         display: inline-block;
         vertical-align: middle;
@@ -73,7 +74,7 @@
             }
         }
     }
-    .containerPayments{
+    .bigContainer{
         &:hover{
             .arrow{
                 opacity: 1;
@@ -102,91 +103,96 @@
                 font-size: 60px;
             }
         }
-        .listsContainer{
-            color: white;
+        .containerPayments{
             position: relative;
-            text-align: center;
+            width: 100%;
             overflow: hidden;
             margin: 0 auto;
-            margin-top: 8%;
-            .yearContainer{
-                display: inline-block;
-                vertical-align: middle;
-                height: 600px;
-                width: 300px;
-                margin-right: 10px;
-                border-radius: 4px;
-                background: rgba(0, 0, 0, 0.5);
-                padding: 10px;
-                overflow-y: auto;
-                .year{
-                    font-size: 30px;
-                }
-                .monthContainer{
-                    background: rgba(0, 0, 0, 0.5);
+            .listsContainer{
+                color: white;
+                position: relative;
+                text-align: center;
+                overflow: hidden;
+                margin: 0 auto;
+                .yearContainer{
+                    display: inline-block;
+                    vertical-align: middle;
+                    height: 600px;
+                    width: 300px;
+                    margin-right: 10px;
                     border-radius: 4px;
-                    margin-bottom: 5px;
-                    height: 30px;
-                    line-height: 30px;    
-                    &.active{
-                        height: auto;
-                    }            
-                    .generalDiv{
-                        position: relative;
-                        span{
-                            display: inline-block;
-                            vertical-align: middle;
-                        }
-                        .monthName{
-                            width: 80%;
-                        }
-                        .arrowDown, .cross{
-                            position: absolute;
-                            height: 30px;
-                            line-height: 30px;
-                            cursor: pointer;
-                        }
+                    background: rgba(0, 0, 0, 0.5);
+                    padding: 10px;
+                    overflow-y: auto;
+                    .year{
+                        font-size: 30px;
                     }
-                    .infoPayment{
-                        .topDiv{
-                            text-align: center;
+                    .monthContainer{
+                        background: rgba(0, 0, 0, 0.5);
+                        border-radius: 4px;
+                        margin-bottom: 5px;
+                        height: 30px;
+                        line-height: 30px;    
+                        &.active{
+                            height: auto;
+                        }            
+                        .generalDiv{
+                            position: relative;
                             span{
                                 display: inline-block;
                                 vertical-align: middle;
                             }
-                            .folio{
-                                width: 15%;
+                            .monthName{
+                                width: 80%;
                             }
-                            .numFolio{
-                                width: 20%;
-                                margin-right: 10%;
-                            }
-                            .dateTag{
-                                width: 15%;
-                            }
-                            .date{
-                                width: 30%;
+                            .arrowDown, .cross{
+                                position: absolute;
+                                height: 30px;
+                                line-height: 30px;
+                                cursor: pointer;
                             }
                         }
-                        .midDiv{
-                            span{
-                                display: inline-block;
-                                vertical-align: middle;
+                        .infoPayment{
+                            .topDiv{
+                                text-align: center;
+                                span{
+                                    display: inline-block;
+                                    vertical-align: middle;
+                                }
+                                .folio{
+                                    width: 15%;
+                                }
+                                .numFolio{
+                                    width: 20%;
+                                    margin-right: 10%;
+                                }
+                                .dateTag{
+                                    width: 15%;
+                                }
+                                .date{
+                                    width: 30%;
+                                }
                             }
-                            .type{
-                                width: 32%;
-                                margin-right: 3%;
-                            }
-                            .typePayment{
-                                width: 15%;
-                                margin-right: 5%;
-                            }
-                            .quantityTag{
-                                width: 22%;
-                                margin-right: 3%;
-                            }
-                            .quantity{
-                                width: 20%;
+                            .midDiv{
+                                span{
+                                    display: inline-block;
+                                    vertical-align: middle;
+                                }
+                                .type{
+                                    width: 32%;
+                                    margin-right: 3%;
+                                }
+                                .typePayment{
+                                    width: 15%;
+                                    margin-right: 5%;
+                                }
+                                .quantityTag{
+                                    width: 22%;
+                                    margin-right: 3%;
+                                }
+                                .quantity{
+                                    width: 20%;
+                                }
                             }
                         }
                     }

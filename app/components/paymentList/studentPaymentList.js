@@ -12,15 +12,17 @@ class StudentPaymentList extends React.Component {
             months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
             popUpActive: false,
             selected: [],
-            currentPage: 0,
+            currentPage: 1,
             position: 0,
-            perPage: 1,
+            perPage: 3,
             infoActive: false,
             infoId: 0,
-            infoYear: ''
+            infoYear: '',
+            newHeight: 0,
         }
     }
     componentDidMount() {
+        this.getData();
         this.props.actions.getPaymentListStudent();
     }
     renderList(){
@@ -38,9 +40,8 @@ class StudentPaymentList extends React.Component {
         });
     }
     renderStudentInfo(){
-        console.log("infoAlumno", this.props)
         return(
-            <div className="infoStudentContainer">
+            <div className="infoStudentContainer" id="containerInfoStudent">
                 <div className="nameStudent">
                     <span className="ico icon-smile"></span>
                     <span className="name">{this.props.infoStudent.name}</span>
@@ -70,7 +71,6 @@ class StudentPaymentList extends React.Component {
         });
     }
     move(movement){
-
         if(movement=="left"){
             this.setState({
                 currentPage: this.state.currentPage-1,
@@ -86,8 +86,17 @@ class StudentPaymentList extends React.Component {
     }
     renderListOfYears(){
         //console.log("lista", this.props.store.paymentListStudent)
+        var payments=[]
+        payments = this.props.store.paymentListStudent != undefined && this.props.store.paymentListStudent != null ? this.props.store.paymentListStudent : [];
+        var numAssis =payments.length;
+        var pages = Math.ceil(numAssis / this.state.perPage);
         return(
-            <div className="listsContainer">
+            <div className="listsContainer"
+                style={{
+                    width: ((numAssis*300)+(numAssis*10))+'px',
+                    right: this.state.position+'px'
+                }}
+            >
                 {
                     this.props.store.paymentListStudent.map((colegiatura,index) => (
                         <div className="yearContainer" key={index}>
@@ -124,14 +133,53 @@ class StudentPaymentList extends React.Component {
             </div>
         );
     }
-    render() {
-        console.log("en los pagos de alumnos", this.props, this.state)
-        var assistants=[]
-        assistants = this.props.store.studentsViewCenter.asistentes != undefined && this.props.store.studentsViewCenter.asistentes != null ? this.props.store.studentsViewCenter.asistentes : [];
-        var numAssis =assistants.length;
+    getData(){
+        var h = document.getElementById('containerInfoStudent').clientHeight;
+
+        this.setState({
+            perPage: Math.floor(screen.width/(300+10)),
+            newHeight: h-30
+        })
+    }
+    renderListOfPayments(){
+        var payments=[]
+        payments = this.props.store.paymentListStudent != undefined && this.props.store.paymentListStudent != null ? this.props.store.paymentListStudent : [];
+        var numAssis =payments.length;
         var pages = Math.ceil(numAssis / this.state.perPage);
+
+        return(
+            <div className="bigContainer">
+                {this.state.currentPage !== 1 ?
+                        <div className="arrow left">
+                            <span className="icon-left-arrow" onClick={()=>this.move("left")}></span>                    
+                        </div>
+                        :
+                        null
+                    }
+                    {this.state.currentPage < pages ?
+                        <div className="arrow right">
+                            <span className="icon-right-arrow" onClick={()=>this.move("right")}></span>                    
+                        </div>
+                        :
+                        null
+                    }
+                <div className="containerPayments"
+                    style={{
+                        width: (( this.state.perPage*300)+( this.state.perPage*10))+'px',
+                        marginTop: (this.state.newHeight)+'px'
+                    }}            
+                >
+                    
+                    {this.renderListOfYears()}
+                </div>
+            </div>
+        );
+    }
+    render() {
+        
 		return (
 			<div className='paymentContainer'>
+
                 <div className="buttonRegister" onClick={this.activePopUp}>
                     Registrar nuevo Pago
                 </div>
@@ -140,23 +188,7 @@ class StudentPaymentList extends React.Component {
 
                 {
                     this.props.store.paymentListStudent != null && this.props.store.paymentListStudent != undefined ? 
-                    <div className="containerPayments">
-                        {//this.state.currentPage !== 1 ?
-                            <div className="arrow left">
-                                <span className="icon-left-arrow" onClick={()=>this.move("left")}></span>                    
-                            </div>
-                            //:
-                            //null
-                        }
-                        {//this.state.currentPage < pages ?
-                            <div className="arrow right">
-                                <span className="icon-right-arrow" onClick={()=>this.move("right")}></span>                    
-                            </div>
-                            //:
-                            //null
-                        }
-                        {this.renderListOfYears()}
-                    </div>
+                    this.renderListOfPayments()
                     : 
                     null
                 }
