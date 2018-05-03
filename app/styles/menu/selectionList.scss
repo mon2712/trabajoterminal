@@ -1,0 +1,74 @@
+.selectPeople{
+    .optionAll{
+        color:white;
+        margin-bottom: 5px;
+        .checkbox{
+            border: 1px solid white;
+            border-radius: 5px;
+            display: inline-block;
+            vertical-align: middle;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            background: white;
+            cursor: pointer;
+            box-shadow: 3px 0px 5px #000000;
+            margin-right: 10px;
+            .ico{
+                color: white;
+                font-size: 16px;
+            }
+            &:hover{
+                background: #9c9797;
+                border: #9c9797;
+                .ico{
+                    color: white;
+                }
+            }
+            &.active{
+                background: #21647F;;
+                border: #21647F;;
+                .ico{
+                    color: white;
+                }
+                &:hover{
+                    background: #9c9797;
+                    border: #9c9797;
+                    .ico{
+                        color: white;
+                    }
+                }
+            }
+        }
+        span{
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 22px;
+        }
+    }
+    .peopleContainer{
+        padding: 10px;
+        max-height: 150px;
+        overflow: scroll;
+        background: #5aa9a9;
+        margin-bottom: 15px;
+        border-radius: 10px;
+    }
+    .button{
+        width: 40%;
+        height: 40px;
+        margin: 0 auto;
+        background: #21647F;;
+        line-height: 40px;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 3px 3px 10px #000000;
+        margin-bottom: 15px;
+        font-size: 22px;
+        border-radius: 5px;
+        &:hover{
+            background: #847f7f;
+        }
+    }
+}

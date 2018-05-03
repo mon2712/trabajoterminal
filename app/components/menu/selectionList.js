@@ -1,5 +1,6 @@
 import React from 'react';
 import CreateUser from './createUser';
+import RegisterPayment from '../general/registerPayment';
 
 class SelectionList extends React.Component {
     constructor(props){
@@ -13,7 +14,8 @@ class SelectionList extends React.Component {
             selectAll: false,
             selected: [],
             people: null,
-            activeEdit: false
+            activeEdit: false,
+            activeRegisterPayment: false
         };
     }
     onSelected(person){
@@ -127,12 +129,16 @@ class SelectionList extends React.Component {
             this.props.actions.getAssistantInfo(this.state.selected, this.props.view);
             this.setState({activeEdit: true});
         }
+        if(this.props.view === 5){
+            console.log("formulario para registrar")
+            this.setState({activeRegisterPayment: true});
+        }
     }
     
     renderViewAll(){
         return(
             <div className="selectPeople">
-                <div className="optionAll" style={{display: this.props.view === 4 ? 'none' : 'block'}}>
+                <div className="optionAll" style={{display: this.props.view === 4 || this.props.view === 5 ? 'none' : 'block'}}>
                     <div className={this.state.selectAll === true ? "checkbox active" : "checkbox"} onClick={this.selectAll}>
                         <span className="ico icon-checkmark"></span>
                     </div>
@@ -144,7 +150,7 @@ class SelectionList extends React.Component {
                     ))}
                 </div>
                 <div className="button" onClick={this.sendAllSelected}>
-                    {this.props.view === 4 ? "Editar" : "Generar"}
+                    {this.props.view === 4 ? "Editar" : this.props.view === 5 ? "Registrar" : "Generar"}
                 </div>
             </div>  
         );
@@ -152,7 +158,17 @@ class SelectionList extends React.Component {
     render() {
 		return (
             <div className="selectionListContainer">
-                {this.props.view === 4 && this.state.activeEdit === true ? <CreateUser {...this.props} selected={this.state.selected} view={this.props.view} actions={this.props.actions}/> : this.renderViewAll()}     
+                {
+                    this.props.view === 4 && this.state.activeEdit === true ? 
+
+                    <CreateUser {...this.props} selected={this.state.selected} view={this.props.view} actions={this.props.actions}/> 
+
+                    : this.props.view === 5 && this.state.activeRegisterPayment === true ?
+
+                    <RegisterPayment  {...this.props} selected={this.state.selected} view={this.props.view} actions={this.props.actions} /> :
+                    
+                    this.renderViewAll()
+                }     
             </div>
 		);
 	}

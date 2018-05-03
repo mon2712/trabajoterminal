@@ -8,6 +8,7 @@
 @import "tiempoReducido/inputSearch.scss";
 
 @import "general/navigationContainer.scss";
+@import "general/registerPayment.scss";
 
 @import "menu/menu.scss";
 @import "menu/buttonOption.scss";
@@ -18,8 +19,10 @@
 @import "menu/popUp.scss";
 @import "menu/printOptions.scss";
 @import "menu/createUser.scss";
+@import "menu/selectionList.scss";
 
 @import "paymentList/paymentList.scss";
+@import "paymentList/studentPaymentList.scss";
 
 @import "viewCenter/viewCenter.scss";
 
@@ -50,7 +53,7 @@
     position: absolute;
     width: 100%;
     height: 800px;
-    background: #9dbdde;
+    background: #79b5f3;
     z-index: 1;
     &:after{
         content:"";

@@ -150,7 +150,18 @@ const Actions = {
             infoAssistant,
             view
         });
-    },
+    }, 
+    setResponseEmpty(){
+        dispatcher.dispatch({
+            type: actionTypes.SET_RESPONSEEMPTY,
+        });
+    }, 
+    setPaymentTuition(infoPayment){
+        dispatcher.dispatch({
+            type: actionTypes.SET_PAYMENTTUITION,
+            infoPayment
+        });
+    }, 
     setNoteCall(id, note, date) {
         dispatcher.dispatch({
             type: actionTypes.SET_NOTECALL,

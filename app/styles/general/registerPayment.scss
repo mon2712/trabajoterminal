@@ -1,0 +1,300 @@
+.registerPaymentContainer{
+    width: 50%;
+    margin: 0px auto;
+    background:  #5dc4c4;
+    margin-top: 10%;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+    .title{
+        display: inline-block;
+        width: 95%;
+        text-align: center;
+        font-size: 30px;
+        color: #21647F;
+    }
+    .icoClose{
+        display: inline-block;
+        vertical-align: top;
+        color: white;
+        font-size: 30px;
+        font-weight: bolder;
+        cursor: pointer;
+        width: 5%;
+        &:hover{
+            color: #a7a7a7;
+        }
+    }
+    .form{
+        padding: 15px;
+        max-height: 400px;
+        overflow-y: scroll;
+        background: #5aa9a9;
+        border-radius: 10px;
+        color: white;
+        .leftColumn{
+            display: inline-block;
+            vertical-align: middle;
+            width: 50%;
+            padding: 5px;
+            margin-bottom: 10px;
+            .ico{
+                font-size: 25px;
+                display: inline-block;
+                vertical-align: middle;
+                width: 20%;
+            }
+            .nameStudent{
+                font-size: 24px;
+                width: 80%;
+                display: inline-block;
+                vertical-align: middle;
+            }
+            .month{
+                display: inline-block;
+                vertical-align: middle;
+                width: 30%;
+                font-size: 20px;
+            }
+            .selectionMonths{
+                display: inline-block;
+                vertical-align: middle;
+                width: 70%;
+                z-index: 0;
+                position: relative;
+                .listMonths{
+                    display: block;
+                    width: 80%;
+                    overflow-y: scroll;
+                    max-height: 80px;
+                    background: white;
+                    color: #21647F;
+                    text-align: center;
+                    z-index: 1;
+                    position: absolute;
+                    .optionList{
+                        &.selected{
+                            background: #21647F;
+                            color: white;
+                        }
+                    }
+                }
+                .selectedMonth{
+                    display: inline-block;
+                    vertical-align: middle;
+                    text-align: center;
+                    font-size: 18px;
+                    height: 40px;
+                    line-height: 40px;
+                    background: white;
+                    color: #21647F;
+                    width: 80%;
+                    border-radius: 10px 0px 0px 10px;
+                    &.listActive{
+                        border-radius: 10px 0px 0px 0px;
+                    }
+                }
+                .iconContainer{
+                    display: inline-block;
+                    vertical-align: middle;
+                    height: 40px;
+                    line-height: 42px;
+                    width: 15%;
+                    background: #21647F;
+                    border-radius: 0px 10px 10px 0px;
+                    text-align: center;
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+
+            }
+            .quantity{
+                display: inline-block;
+                vertical-align: middle;
+                width: 30%;
+                font-size: 20px;
+                overflow-x: hidden;
+            }
+            .moneySym{
+                width: 15%;
+                font-size: 30px;
+                color: #21647F;
+            }
+            .quantityVal{
+                width: 60%;
+                height: 40px;
+                border-radius: 10px; 
+                font-size: 20px;
+                text-align: center;
+                color: #21647F;
+            }
+        }
+        .rightColumn{
+            display: inline-block;
+            vertical-align: middle;
+            width: 50%;
+            padding: 5px;
+            margin-bottom: 10px;
+            .year{
+                display: inline-block;
+                vertical-align: middle;
+                width: 30%;
+                font-size: 20px;
+            }
+            .selectionYears{
+                display: inline-block;
+                vertical-align: middle;
+                width: 70%;
+                z-index: 0;
+                position: relative;
+                .listYears{
+                    display: block;
+                    width: 80%;
+                    overflow-y: scroll;
+                    max-height: 80px;
+                    background: white;
+                    color: #21647F;
+                    text-align: center;
+                    z-index: 1;
+                    position: absolute;
+                    .optionList{
+                        &.selected{
+                            background: #21647F;
+                            color: white;
+                        }
+                    }
+                }
+                .selectedYear{
+                    display: inline-block;
+                    vertical-align: middle;
+                    text-align: center;
+                    font-size: 18px;
+                    height: 40px;
+                    line-height: 40px;
+                    background: white;
+                    color: #21647F;
+                    width: 80%;
+                    border-radius: 10px 0px 0px 10px;
+                    &.listActive{
+                        border-radius: 10px 0px 0px 0px;
+                    }
+                }
+                .iconContainer{
+                    display: inline-block;
+                    vertical-align: middle;
+                    height: 40px;
+                    line-height: 42px;
+                    width: 15%;
+                    background: #21647F;
+                    border-radius: 0px 10px 10px 0px;
+                    text-align: center;
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+
+            }
+            .date{
+                font-size: 20px;
+                margin-right: 10px;
+            }
+            .valueDate{
+                font-size: 30px;
+            }
+            .digits{
+                display: inline-block;
+                vertical-align: middle;
+                width: 30%;
+                font-size: 20px;
+            }
+            .stars{
+                font-size: 20px;
+                display: inline-block;
+                vertical-align: middle;
+                width: 35%;
+                text-align: right;
+                overflow-x: hidden;
+            }
+            .digits4{
+                width: 30%;
+                font-size: 20px;
+                display: inline-block;
+                height: 40px;
+                text-align: center;
+                border-radius: 0px 10px 10px 0px;
+                color: #21647F;
+            }
+        }
+        .typesOfPayments{
+            margin-bottom: 15px;
+            .typePay{
+                font-size: 20px;
+                width: 20%;
+                display: inline-block;
+                vertical-align: middle;
+            }
+            .typesContainer{
+                width: 80%;
+                max-height: 100px;
+                display: inline-block;
+                vertical-align: middle;
+                .optionPayment{
+                    display: inline-block;
+                    vertical-align: middle;
+                    margin-right: 10px;
+                    height: 40px;
+                    font-size: 20px;
+                    .checkbox{
+                        border: 1px solid white;
+                        border-radius: 5px;
+                        display: inline-block;
+                        vertical-align: middle;
+                        width: 30px;
+                        height: 30px;
+                        line-height: 30px;
+                        text-align: center;
+                        background: white;
+                        cursor: pointer;
+                        box-shadow: 3px 0px 5px #000000;
+                        margin-right: 10px;
+                        .ico{
+                            color: white;
+                            font-size: 16px;
+                        }
+                        &:hover{
+                            background: #9c9797;
+                            border: #9c9797;
+                            .ico{
+                                color: white;
+                            }
+                        }
+                        &.active{
+                            background: #21647F;
+                            border: #21647F;
+                            .ico{
+                                color: white;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .button{
+        width: 40%;
+        height: 40px;
+        margin: 0 auto;
+        background: #21647F;;
+        line-height: 40px;
+        color: white;
+        text-align: center;
+        margin-top: 15px;
+        cursor: pointer;
+        box-shadow: 3px 3px 10px #000000;
+        margin-bottom: 15px;
+        font-size: 22px;
+        border-radius: 5px;
+        &:hover{
+            background: #847f7f;
+        }
+    }
+}

@@ -63,7 +63,12 @@ let AppData = {
             password: "",
             phone: "",
             username: "",
-            status: ""
+            status: "",
+            lunes: "",
+            jueves: "",
+            miercoles:"",
+            sabado:"",
+            type: 1,
         },
         response: {
             info: "",
@@ -225,22 +230,43 @@ let AppData = {
         AppStore.emitChange();
     },
     getStudentMissPayment(){
-        $.getJSON('/app/fillData/studentsInCenter.js', function(info) {
+        /*$.getJSON('/app/fillData/studentsInCenter.js', function(info) {
             AppData.data.studentsMissPayment = info.studentsInCenter;
             AppStore.emitChange();
         }).fail(function(error) {
             console.error(error);
+        });*/
+
+        axios.get('http://localhost:8088/pt1.pt2/webapi/instructor/getStudentsMissingPayments')
+        .then(function (response){
+            console.log("respuesta del servicio", response)
+            if(response.data.studentMissingPayment.length === 0){
+                AppData.data.studentsMissPayment = "";
+            }else{
+                AppData.data.studentsMissPayment = response.data.studentMissingPayment;
+            }
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log(error);
         });
-        AppStore.emitChange();  
+        
+        //AppStore.emitChange();  
     },
     getPaymentListStudent(){
-        $.getJSON('/app/fillData/paymentsStudent.js', function(info) {
-            AppData.data.studentsMissPayment = info.studentsInCenter;
+        axios.get('http://localhost:8088/pt1.pt2/webapi/instructor/getPaymentOfStudent')
+        .then(function (response){
+            console.log("respuesta del servicio", response)
+            if(response.data.paymentsStudent.length === 0){
+                AppData.data.paymentListStudent = "";
+            }else{
+                AppData.data.paymentListStudent = response.data.paymentsStudent;
+            }
             AppStore.emitChange();
-        }).fail(function(error) {
-            console.error(error);
+        })
+        .catch(function (error){
+            console.log(error);
         });
-        AppStore.emitChange();
     },
     getConfigCall(action){
         AppData.data.configCall.active = action.active;
@@ -414,13 +440,13 @@ let AppData = {
             AppData.data.assistant.miercoles = "", 
             AppData.data.assistant.jueves = "", 
             AppData.data.assistant.sabado = "", 
-
+            AppData.data.assistant.type = "asistente", 
             AppStore.emitChange();
 
         }
     },
     setAssistant(action){
-        console.log(action)
+        console.log("store",action)
 
         axios.post('http://localhost:8088/pt1.pt2/webapi/asistente/setAssistant', 
         {
@@ -432,7 +458,6 @@ let AppData = {
             }
         })
         .then(function (response){
-            console.log("response", response)  
             AppData.data.response.info = response.data.assistantInfo;
             AppData.data.response.active = true;
             AppStore.emitChange();
@@ -441,6 +466,16 @@ let AppData = {
         .catch(function (error){
             console.log(error);
         });
+    },
+    setResponseEmpty(){
+        console.log("llega a response empty")
+        AppData.data.response.info = "";
+        AppData.data.response.active = false;
+        AppStore.emitChange();
+    },
+    setPaymentTuition(action){
+        console.log("payment tuition", action)
+        
     }
 }
 
@@ -538,7 +573,13 @@ dispatcher.register((action) => {
         break;
     case actionTypes.SET_ASSISTANT:
         AppData.setAssistant(action);
-        break;
+        break; 
+    case actionTypes.SET_RESPONSEEMPTY:
+        AppData.setResponseEmpty();
+        break; 
+    case actionTypes.SET_PAYMENTTUITION:
+        AppData.setPaymentTuition(action);
+        break; 
     case actionTypes.SET_NOTECALL:
         AppData.setNoteCall(action);
         break;
