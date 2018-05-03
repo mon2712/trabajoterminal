@@ -84,13 +84,15 @@ const Actions = {
             type: actionTypes.GET_PAYMENTLISTSTUDENT
         });
     },
-    getConfigCall(active,name, id, status){
+    getConfigCall(active,name, id, status, note, date){
         dispatcher.dispatch({
             type: actionTypes.GET_CONFIGCALL,
             active,
             name,
             id,
-            status
+            status, 
+            note, 
+            date
         });
     },
     getConfigCallDone(){
@@ -147,6 +149,14 @@ const Actions = {
             type: actionTypes.SET_ASSISTANT,
             infoAssistant,
             view
+        });
+    },
+    setNoteCall(id, note, date) {
+        dispatcher.dispatch({
+            type: actionTypes.SET_NOTECALL,
+            id,
+            note,
+            date
         });
     },
 };

@@ -79,7 +79,7 @@ class StudentsCenter extends React.Component {
                 <div className='rightContainer'> 
                         {this.props.store.configTime.active == true ? 
                         this.renderConfigTime()
-                        : null}
+                        : "00:00"}
                 </div>
             </div>
         );
