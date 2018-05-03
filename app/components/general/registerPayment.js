@@ -87,7 +87,7 @@ class RegisterPayment extends React.Component {
             }
         }else{
             if(this.state.infoPayment.card !== "" && this.state.infoPayment.idStudent.length !== 0 && this.state.infoPayment.month != "" && this.state.infoPayment.quantity != "" && this.state.infoPayment.type !== "" && this.state.infoPayment.year !== ""){
-                this.props.actions.setPaymentTuition(this.state.infoPayment);                
+                this.props.actions.setPaymentTuition(this.state.infoPayment);          
             }
             
         }

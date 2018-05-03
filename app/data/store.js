@@ -32,7 +32,9 @@ let AppData = {
             active: false,
             name: "",
             id: "",
-            status: ""
+            status: "",
+            note:"", 
+            date: ""
         },
         configCallDone: {
             done: [],
@@ -180,11 +182,12 @@ let AppData = {
     },
     getStudentsAtCenter(action){
         var filter=null;
-        if(action.filt===undefined) filter="Jose"
+        if(action.filt===undefined) filter=""
         else filter=action.filt
         var cadena="http://localhost:8088/pt1.pt2/webapi/centro/getStateAtCenter?filter="+filter;
         axios.get(cadena)
         .then(function(response){
+            console.log();
             AppData.data.studentsAtCenter = response.data.studentsInCenter;
             AppStore.emitChange();
         })
@@ -270,24 +273,35 @@ let AppData = {
         AppData.data.configCall.name = action.name;
         AppData.data.configCall.id = action.id;
         AppData.data.configCall.status = action.status;
-        AppData.data.configCall.timeRed = action.timeRed;
+        AppData.data.configCall.not = action.note;
+        AppData.data.configCall.date = action.date;
+        
         AppStore.emitChange();
     },
     getConfigCallDone(){
-        $.getJSON('/app/fillData/listOfCalls.js', function(info) {
-            var ListOfCalls = info.listOfCalls;
+        var cadena="http://localhost:8088/pt1.pt2/webapi/recepcion/getStudentsCalls";
+        axios.get(cadena)
+        .then(function(response){
+            var ListOfCalls = response.data.listOfCalls;
+            console.log( ListOfCalls);
             AppData.data.configCallDone.done = [];
             AppData.data.configCallDone.notDone = [];
                 ListOfCalls.map((student,index)=>{
-                    if(student.call.done==true)
+                    if(student.call.done=="true"){
+                        console.log("call done:", student);
                         AppData.data.configCallDone.done.push(student);
-                    else
+                    }else{
+                        console.log("call not done:", student);
                         AppData.data.configCallDone.notDone.push(student);
+                    
+                    }
                 });
             AppStore.emitChange();
-         }).fail(function(error) {
-             console.error(error);
-         });
+         
+        })
+        .catch(function (error){
+            console.log( error);
+        });
     },
     getNote(action){
         AppData.data.configCallDone.done.map((student,index)=>{
@@ -296,6 +310,19 @@ let AppData = {
             }
         });
         AppStore.emitChange();
+    },
+    setNoteCall(action){
+        console.log("Variables en el store: id: ", action.id, " nota: ", action.note, "date: ", action.date);
+        axios.put('http://localhost:8088/pt1.pt2/webapi/recepcion/'+action.id+"/"+action.note+"/"+action.date)
+        .then(function(response){
+            AppData.data.configCall.active = false;
+            AppData.getConfigCallDone();
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log( error);
+        });
+        
     },
     setFiles(action){
         axios.put('http://localhost:8088/pt1.pt2/webapi/documento/'+action.fileBase+"/"+action.fileReport)
@@ -553,6 +580,9 @@ dispatcher.register((action) => {
     case actionTypes.SET_PAYMENTTUITION:
         AppData.setPaymentTuition(action);
         break; 
+    case actionTypes.SET_NOTECALL:
+        AppData.setNoteCall(action);
+        break;
     default: 
 		// no op
     }

@@ -12,6 +12,7 @@ class ListOfCalls extends React.Component {
         this.activateConfigCall = this.activateConfigCall.bind(this);
         this.activateNote = this.activateNote.bind(this);
         this.deactivateNote = this.deactivateNote.bind(this);
+        this.renderEmptyCenter = this.renderEmptyCenter.bind(this);
     }
     renderStudentFile(){
         this.props.actions.getStudentInfo();
@@ -34,23 +35,39 @@ class ListOfCalls extends React.Component {
            </div>      
         ));
     }
+    renderEmptyCenter(msg){
+        return(
+            <div className="noStudents">
+                <span className="text"> {msg} </span>
+                <span className="icon-smile"></span>
+            </div>
+        );
+    }
     render() {
         return (
             <div className="generalContainer">
                 <div className='twoCallContainer' id="leftContainer">
                     <div className='studentsCallContainer'>
                         <span className="studentsText">Por realizar</span>
-                        <div className= "namesStudents">
-                            {this.props.store.configCallDone.notDone !== null ? this.renderListNew(this.props.store.configCallDone.notDone, "notDone") : null}
-                        </div>
+                            {this.props.store.configCallDone.notDone !== null && this.props.store.configCallDone.notDone !== undefined && this.props.store.configCallDone.notDone.length !==0 ? 
+                               <div className= "namesStudents"> 
+                                    {this.renderListNew(this.props.store.configCallDone.notDone, "notDone")} 
+                                </div>
+                                : 
+                                this.renderEmptyCenter("No hay llamadas por realizar")
+                            }
                     </div>
                 </div>
                 <div className='twoCallContainer' id="rightContainer">
                     <div className='studentsCallContainer'>
                         <span className="studentsText">Realizadas</span>
-                        <div className= "namesStudents">
-                            {this.props.store.configCallDone.done !== null ? this.renderListNew(this.props.store.configCallDone.done, "done") : null}
-                        </div>
+                            {this.props.store.configCallDone.done !== null && this.props.store.configCallDone.done !== undefined && this.props.store.configCallDone.done.length !== 0 ?
+                                <div className= "namesStudents">
+                                    {this.renderListNew(this.props.store.configCallDone.done, "done")}
+                                </div> 
+                                : 
+                                this.renderEmptyCenter("No hay llamadas realizadas")
+                            }
                     </div>
                 </div>
             </div>
