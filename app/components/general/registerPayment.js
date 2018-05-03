@@ -80,7 +80,17 @@ class RegisterPayment extends React.Component {
         
     }
     sendToRegister(){
-        
+        console.log("mandar", this.state)
+        if(this.state.infoPayment.type===2){
+            if(this.state.infoPayment.idStudent.length !== '' && this.state.infoPayment.month != "" && this.state.infoPayment.quantity != "" && this.state.infoPayment.type !== "" && this.state.infoPayment.year !== ""){
+                this.props.actions.setPaymentTuition(this.state.infoPayment);
+            }
+        }else{
+            if(this.state.infoPayment.card !== "" && this.state.infoPayment.idStudent.length !== 0 && this.state.infoPayment.month != "" && this.state.infoPayment.quantity != "" && this.state.infoPayment.type !== "" && this.state.infoPayment.year !== ""){
+                this.props.actions.setPaymentTuition(this.state.infoPayment);                
+            }
+            
+        }
     }
     renderDropMonths(){
         return (

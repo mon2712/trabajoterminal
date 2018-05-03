@@ -85,7 +85,6 @@ class StudentPaymentList extends React.Component {
 
     }
     renderListOfYears(){
-        //console.log("lista", this.props.store.paymentListStudent)
         var payments=[]
         payments = this.props.store.paymentListStudent != undefined && this.props.store.paymentListStudent != null ? this.props.store.paymentListStudent : [];
         var numAssis =payments.length;

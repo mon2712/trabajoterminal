@@ -445,6 +445,10 @@ let AppData = {
         AppData.data.response.info = "";
         AppData.data.response.active = false;
         AppStore.emitChange();
+    },
+    setPaymentTuition(action){
+        console.log("payment tuition", action)
+        
     }
 }
 
@@ -545,6 +549,9 @@ dispatcher.register((action) => {
         break; 
     case actionTypes.SET_RESPONSEEMPTY:
         AppData.setResponseEmpty();
+        break; 
+    case actionTypes.SET_PAYMENTTUITION:
+        AppData.setPaymentTuition(action);
         break; 
     default: 
 		// no op

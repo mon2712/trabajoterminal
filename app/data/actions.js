@@ -154,5 +154,12 @@ const Actions = {
             type: actionTypes.SET_RESPONSEEMPTY,
         });
     }, 
+    setPaymentTuition(infoPayment){
+        dispatcher.dispatch({
+            type: actionTypes.SET_PAYMENTTUITION,
+            infoPayment
+        });
+    }, 
+
 };
 export default Actions;
