@@ -108,6 +108,25 @@
             width: 100%;
             overflow: hidden;
             margin: 0 auto;
+            .response{
+                border-radius: 10px;
+                background: rgba(0, 0, 0, 0.5);
+                color: white;
+                width: 30%;
+                margin: 0 auto;
+                text-align: center;
+                font-size: 35px;
+                padding: 15px;
+                .msg{
+                    display: block;
+                    width: 75%;
+                    margin: 0 auto;
+                }
+                .ico{
+                    display: block;
+                    font-size: 50px;
+                }
+            }
             .listsContainer{
                 color: white;
                 position: relative;

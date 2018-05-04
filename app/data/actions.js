@@ -79,9 +79,10 @@ const Actions = {
             type: actionTypes.GET_STUDENTSMISSPAYMENT
         });
     },
-    getPaymentListStudent(){
+    getPaymentListStudent(idStudent){
         dispatcher.dispatch({
-            type: actionTypes.GET_PAYMENTLISTSTUDENT
+            type: actionTypes.GET_PAYMENTLISTSTUDENT,
+            idStudent
         });
     },
     getConfigCall(active,name, id, status, note, date){
@@ -168,6 +169,11 @@ const Actions = {
             id,
             note,
             date
+        });
+    },
+    cleanResponse(){
+        dispatcher.dispatch({
+            type: actionTypes.CLEAN_RESPONSE
         });
     },
 };

@@ -1,5 +1,6 @@
 import SelectionList from '../menu/selectionList';
 import React from 'react';
+import IncompleteInputs from '../general/incompleteInputs';
 
 
 class RegisterPayment extends React.Component {
@@ -12,6 +13,7 @@ class RegisterPayment extends React.Component {
         this.changeType = this.changeType.bind(this);
         this.sendToRegister=this.sendToRegister.bind(this);  
         this.activeList = this.activeList.bind(this);
+        this.deactivateTag = this.deactivateTag.bind(this);
         this.state = {
             view: 0,
             listMonths: false,
@@ -27,12 +29,19 @@ class RegisterPayment extends React.Component {
                 type: "",
                 quantity: "",
                 month: 0,
-                year: ""
-            }
+                year: "",
+                idRecepcionista: "",
+            },
+            activeTag: false
         };
     }
     componentDidMount(){
         this.setBasics();
+    }
+    deactivateTag(){
+        this.setState({
+            activeTag: false
+        });
     }
     handleChange(event) {
         var arrayToEdit = this.state.infoPayment;
@@ -45,7 +54,6 @@ class RegisterPayment extends React.Component {
 
     }
     changeMonth(index){
-        console.log("index", index)
 
         var infoToEdit = this.state.infoPayment;
         infoToEdit["month"] = index;
@@ -56,8 +64,6 @@ class RegisterPayment extends React.Component {
         });
     }
     changeYear(value){
-        console.log("value", value)
-
         var infoToEdit = this.state.infoPayment;
         infoToEdit["year"] = value;
 
@@ -67,7 +73,6 @@ class RegisterPayment extends React.Component {
         });
     }
     activeList(type){
-        console.log("activeList", type)
         if(type === 1) 
             this.setState({
                 listMonths: !this.state.listMonths
@@ -80,14 +85,21 @@ class RegisterPayment extends React.Component {
         
     }
     sendToRegister(){
-        console.log("mandar", this.state)
-        if(this.state.infoPayment.type===2){
-            if(this.state.infoPayment.idStudent.length !== '' && this.state.infoPayment.month != "" && this.state.infoPayment.quantity != "" && this.state.infoPayment.type !== "" && this.state.infoPayment.year !== ""){
+        if(this.state.infoPayment.type==="Efectivo"){
+            if(this.state.infoPayment.idStudent.length !== '' && this.state.infoPayment.quantity != "" && this.state.infoPayment.type !== "" && this.state.infoPayment.year !== ""){
                 this.props.actions.setPaymentTuition(this.state.infoPayment);
+            }else{
+                this.setState({
+                    activeTag: true
+                });
             }
         }else{
-            if(this.state.infoPayment.card !== "" && this.state.infoPayment.idStudent.length !== 0 && this.state.infoPayment.month != "" && this.state.infoPayment.quantity != "" && this.state.infoPayment.type !== "" && this.state.infoPayment.year !== ""){
-                this.props.actions.setPaymentTuition(this.state.infoPayment);          
+            if(this.state.infoPayment.card !== "" && this.state.infoPayment.idStudent.length !== 0 && this.state.infoPayment.quantity != "" && this.state.infoPayment.type !== "" && this.state.infoPayment.year !== ""){
+                this.props.actions.setPaymentTuition(this.state.infoPayment);                         
+            }else{
+                this.setState({
+                    activeTag: true
+                });
             }
             
         }
@@ -144,13 +156,13 @@ class RegisterPayment extends React.Component {
             start=start+1;
         }
 
-
         var infoToEdit = this.state.infoPayment;
         infoToEdit["date"] = numberDate;
         infoToEdit["idStudent"]=this.props.selected[0].idStudent;
-        infoToEdit["type"]=0;
+        infoToEdit["type"]="Débito";
         infoToEdit["month"]=d.getMonth();
         infoToEdit["year"]=d.getFullYear();
+        infoToEdit["idRecepcionista"]=localStorage.getItem("id");
         
         this.setState({
             infoToEdit
@@ -171,13 +183,21 @@ class RegisterPayment extends React.Component {
                 <div className="typesContainer">
                     {this.state.typesOfPayments.map((opt, index) => (
                         <div className="optionPayment" key={index}>
-                            <div className={this.state.infoPayment.type === index ? "checkbox active" : "checkbox"} onClick={() => this.changeType(index)}>
+                            <div className={this.state.infoPayment.type === opt ? "checkbox active" : "checkbox"} onClick={() => this.changeType(opt)}>
                                 <span className="ico icon-checkmark"></span>
                             </div>
                             <span>{opt}</span>
                         </div>
                     ))}
                 </div>
+            </div>
+        );
+    }
+    renderResponse(){
+        return(
+            <div className="response">
+                <span className="mensaje">{this.props.store.response.info.messageError}</span>
+                <div className="button" onClick={this.props.closePopUp()}>Aceptar</div>
             </div>
         );
     }
@@ -205,12 +225,12 @@ class RegisterPayment extends React.Component {
                     <div className="leftColumn">
                         <span className="quantity"> Cantidad: </span>
                         <span className="moneySym">$</span>
-                        <input type="number" maxLength="8" name="quantity" className="quantityVal" value={this.state.infoPayment.quantity} onChange={this.handleChange}></input>
+                        <input type="number" maxLength="8" name="quantity" className="quantityVal" value={this.state.infoPayment.quantity} onChange={this.handleChange} onFocus={this.deactivateTag}></input>
                     </div>
-                    <div className="rightColumn"  style={{display: this.state.infoPayment.type === 2 ? 'none' : 'inline-block'}}>
+                    <div className="rightColumn"  style={{display: this.state.infoPayment.type === "Efectivo" ? 'none' : 'inline-block'}}>
                         <span className="digits" >Digitos: </span>
                         <span className="stars">XXXXXXXXXXXX</span>
-                        <input  type="number" maxLength="4" name="card" className="digits4" value={this.state.infoPayment.card} onChange={this.handleChange}></input>
+                        <input  type="number" maxLength="4" name="card" className="digits4" value={this.state.infoPayment.card} onChange={this.handleChange} onFocus={this.deactivateTag}></input>
                     </div>
                 </div>
                 <div className="button" onClick={this.sendToRegister}>
@@ -221,7 +241,10 @@ class RegisterPayment extends React.Component {
     }
     render() {
         return (
-            this.renderForm()
+            <div>
+                {this.state.activeTag === true ? <IncompleteInputs/> : null}
+                {this.props.store.response.active ===true ? this.renderResponse() : this.renderForm()}
+            </div>
         );
     }
   }

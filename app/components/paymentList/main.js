@@ -17,7 +17,6 @@ class PaymentList extends React.Component {
         this.props.actions.getStudentMissPayment();
     }
     openPaymentListStudent(student){
-        console.log("Hola", student)
         
         this.setState({
             view: 1,

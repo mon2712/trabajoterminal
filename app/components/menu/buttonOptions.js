@@ -10,6 +10,7 @@ class ButtonOptions extends React.Component {
         super(props);
         this.sendAction=this.sendAction.bind(this);
         this.closePopUp=this.closePopUp.bind(this);
+        this.closePopUp2=this.closePopUp2.bind(this);
         this.state = {
             popUpActive: false,
             id: ""
@@ -27,6 +28,13 @@ class ButtonOptions extends React.Component {
         });
     }
     closePopUp(){
+        this.setState({
+            popUpActive: false,
+            id: ""
+        });
+    }
+    closePopUp2(){
+        this.props.actions.cleanResponse();
         this.setState({
             popUpActive: false,
             id: ""
@@ -69,8 +77,7 @@ class ButtonOptions extends React.Component {
                         <div className="popUpContainer">
                             <div className='registerPaymentContainer'>
                                 <span className="title">Registrar Pago</span>   
-                                <span className="icoClose icon-multiply" onClick={this.closePopUp}/>           
-                                {this.props.store.students !== "" && this.props.store.students !== null ? <SelectionList {...this.props} allPeople={this.props.store.students} view={5} actions={this.props.actions} closePopUp={()=>this.closePopUp}/> : null }
+                                {this.props.store.students !== "" && this.props.store.students !== null ? <SelectionList {...this.props} allPeople={this.props.store.students} view={5} actions={this.props.actions} closePopUp={()=>this.closePopUp2}/> : null }
                             </div>
                         </div>
                     :
