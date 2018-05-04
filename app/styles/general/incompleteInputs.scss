@@ -1,0 +1,22 @@
+.tagWarning{
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid;
+    border-color: #ED2939;
+    color: #ED2939;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    .ico{
+        display: inline-block;
+        vertical-align: middle;
+        width: 15%;
+        font-size: 25px;
+    }
+    .msg{
+        display: inline-block;
+        vertical-align: middle;
+        width: 80%;
+        font-size: 20px;
+    }
+}

@@ -159,7 +159,6 @@ let AppData = {
             }
         })
         .then(function (response){
-            console.log(response)
             if(response.data.allStudents.length === 0){
                 AppData.data.students = "";
             }else{
@@ -187,7 +186,6 @@ let AppData = {
         var cadena="http://localhost:8088/pt1.pt2/webapi/centro/getStateAtCenter?filter="+filter;
         axios.get(cadena)
         .then(function(response){
-            console.log();
             AppData.data.studentsAtCenter = response.data.studentsInCenter;
             AppStore.emitChange();
         })
@@ -210,7 +208,6 @@ let AppData = {
             }
         })
         .then(function (response){
-            console.log(response)
             AppData.data.studentFileInfo = response.data.student;
             AppStore.emitChange();
         })
@@ -239,7 +236,6 @@ let AppData = {
 
         axios.get('http://localhost:8088/pt1.pt2/webapi/instructor/getStudentsMissingPayments')
         .then(function (response){
-            console.log("respuesta del servicio", response)
             if(response.data.studentMissingPayment.length === 0){
                 AppData.data.studentsMissPayment = "";
             }else{
@@ -253,11 +249,16 @@ let AppData = {
         
         //AppStore.emitChange();  
     },
-    getPaymentListStudent(){
-        axios.get('http://localhost:8088/pt1.pt2/webapi/instructor/getPaymentOfStudent')
+    getPaymentListStudent(action){
+        axios.get('http://localhost:8088/pt1.pt2/webapi/instructor/getPaymentOfStudent',{
+            params: {
+                idStudent: action.idStudent
+            }
+        })
         .then(function (response){
-            console.log("respuesta del servicio", response)
-            if(response.data.paymentsStudent.length === 0){
+            if(response.data.paymentsStudent[0].err){
+                AppData.data.response.info = response.data.paymentsStudent[0];
+                AppData.data.response.active = true;
                 AppData.data.paymentListStudent = "";
             }else{
                 AppData.data.paymentListStudent = response.data.paymentsStudent;
@@ -283,17 +284,13 @@ let AppData = {
         axios.get(cadena)
         .then(function(response){
             var ListOfCalls = response.data.listOfCalls;
-            console.log( ListOfCalls);
             AppData.data.configCallDone.done = [];
             AppData.data.configCallDone.notDone = [];
                 ListOfCalls.map((student,index)=>{
                     if(student.call.done=="true"){
-                        console.log("call done:", student);
                         AppData.data.configCallDone.done.push(student);
                     }else{
-                        console.log("call not done:", student);
                         AppData.data.configCallDone.notDone.push(student);
-                    
                     }
                 });
             AppStore.emitChange();
@@ -312,7 +309,6 @@ let AppData = {
         AppStore.emitChange();
     },
     setNoteCall(action){
-        console.log("Variables en el store: id: ", action.id, " nota: ", action.note, "date: ", action.date);
         axios.put('http://localhost:8088/pt1.pt2/webapi/recepcion/'+action.id+"/"+action.note+"/"+action.date)
         .then(function(response){
             AppData.data.configCall.active = false;
@@ -362,11 +358,9 @@ let AppData = {
         });
     },
     createStamp(action){
-        console.log("los seleccionados son:  ", action.selectedPeople)
         AppData.data.selectedPeople = action.selectedPeople;
         AppStore.emitChange();
 
-        console.log(AppData.data.selectedPeople)
         axios.post('http://localhost:8088/pt1.pt2/webapi/instructor/createStampsStudents', 
         {
             selectedPeople: AppData.data.selectedPeople
@@ -384,11 +378,9 @@ let AppData = {
         });
     },
     createIdsAssistants(action){
-        console.log("los seleccionados son createIdsAssistants:  ", action.selectedPeople)
         AppData.data.selectedPeople = action.selectedPeople;
         AppStore.emitChange();
 
-        console.log(AppData.data.selectedPeople)
         axios.post('http://localhost:8088/pt1.pt2/webapi/instructor/createIds', 
         {
             selectedPeople: AppData.data.selectedPeople
@@ -446,8 +438,6 @@ let AppData = {
         }
     },
     setAssistant(action){
-        console.log("store",action)
-
         axios.post('http://localhost:8088/pt1.pt2/webapi/asistente/setAssistant', 
         {
             infoAssistant: action.infoAssistant
@@ -468,14 +458,33 @@ let AppData = {
         });
     },
     setResponseEmpty(){
-        console.log("llega a response empty")
         AppData.data.response.info = "";
         AppData.data.response.active = false;
         AppStore.emitChange();
     },
     setPaymentTuition(action){
-        console.log("payment tuition", action)
-        
+        axios.post('http://localhost:8088/pt1.pt2/webapi/instructor/setTuition', 
+        {
+            infoPayment: action.infoPayment
+        }
+        ,{
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(function (response){
+            AppData.data.response.info = response.data.response;
+            AppData.data.response.active = true;
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log(error);
+        });
+    },
+    cleanResponse(){
+        AppData.data.response.info = "";
+        AppData.data.response.active = false;
+        AppStore.emitChange();
     }
 }
 
@@ -542,7 +551,7 @@ dispatcher.register((action) => {
         AppData.getStudentMissPayment();
         break;
     case actionTypes.GET_PAYMENTLISTSTUDENT:
-        AppData.getPaymentListStudent();
+        AppData.getPaymentListStudent(action);
         break;
     case actionTypes.GET_CONFIGCALL:
         AppData.getConfigCall(action);
@@ -582,6 +591,9 @@ dispatcher.register((action) => {
         break; 
     case actionTypes.SET_NOTECALL:
         AppData.setNoteCall(action);
+        break;
+    case actionTypes.CLEAN_RESPONSE:
+        AppData.cleanResponse();
         break;
     default: 
 		// no op

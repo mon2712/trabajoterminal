@@ -23,7 +23,7 @@ class StudentPaymentList extends React.Component {
     }
     componentDidMount() {
         this.getData();
-        this.props.actions.getPaymentListStudent();
+        this.props.actions.getPaymentListStudent(this.props.infoStudent.idStudent);
     }
     renderList(){
         var studentPayments = this.props.store.paymentListStudent;
@@ -35,6 +35,8 @@ class StudentPaymentList extends React.Component {
         });
     }
     closePopUp(){
+        this.props.actions.getPaymentListStudent(this.props.infoStudent.idStudent);        
+        this.props.actions.cleanResponse();
         this.setState({
             popUpActive: false
         });
@@ -140,12 +142,21 @@ class StudentPaymentList extends React.Component {
             newHeight: h-30
         })
     }
+    renderEmpty(){
+        if(this.props.store.response.active === true){
+            return(
+                <div className="response" >
+                    <span className="msg">{this.props.store.response.info.messageError}</span>     
+                    <span className="ico icon-sad"></span>                               
+                </div>
+            );
+        }
+    }
     renderListOfPayments(){
         var payments=[]
-        payments = this.props.store.paymentListStudent != undefined && this.props.store.paymentListStudent != null ? this.props.store.paymentListStudent : [];
+        payments = this.props.store.paymentListStudent != undefined && this.props.store.paymentListStudent != null && this.props.store.paymentListStudent != "" ? this.props.store.paymentListStudent : [];
         var numAssis =payments.length;
         var pages = Math.ceil(numAssis / this.state.perPage);
-
         return(
             <div className="bigContainer">
                 {this.state.currentPage !== 1 ?
@@ -169,7 +180,12 @@ class StudentPaymentList extends React.Component {
                     }}            
                 >
                     
-                    {this.renderListOfYears()}
+                {
+                    this.props.store.paymentListStudent != undefined && this.props.store.paymentListStudent != null && this.props.store.paymentListStudent != "" ?
+                        this.renderListOfYears()
+                    :
+                        this.renderEmpty()    
+                }
                 </div>
             </div>
         );
@@ -197,8 +213,8 @@ class StudentPaymentList extends React.Component {
                         <div className="popUpContainer">
                             <div className='registerPaymentContainer'>
                                 <span className="title">Registrar Pago</span>   
-                                <span className="icoClose icon-multiply" onClick={this.closePopUp}/>           
-                                {this.props.infoStudent !== "" && this.props.infoStudent !== null ? <RegisterPayment {...this.props} selected={this.state.selected}  actions={this.props.actions} closePopUp={()=>this.closePopUp}/> : null }
+                                <span className="icoClose icon-multiply" onClick={this.closePopUp} style={{display: this.props.store.response.active === true ? 'none' : 'inline-block'}} />                                                  
+                                {this.props.infoStudent !== "" && this.props.infoStudent !== null ? <RegisterPayment {...this.props} selected={this.state.selected}  actions={this.props.actions} update={true} closePopUp={()=>this.closePopUp}/> : null }
                             </div>
                         </div>
                     :

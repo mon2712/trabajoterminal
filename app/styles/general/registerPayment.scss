@@ -25,6 +25,20 @@
             color: #a7a7a7;
         }
     }
+    .response{
+        span{
+            background: #5aa9a9;
+            width: 90%;
+            display: block;
+            margin: 0 auto;
+            height: 60px;
+            font-size: 20px;
+            line-height: 60px;
+            color: white;
+            border-radius: 10px;
+            text-align: center;
+        }
+    }
     .form{
         padding: 15px;
         max-height: 400px;

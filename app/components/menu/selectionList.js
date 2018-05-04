@@ -130,7 +130,6 @@ class SelectionList extends React.Component {
             this.setState({activeEdit: true});
         }
         if(this.props.view === 5){
-            console.log("formulario para registrar")
             this.setState({activeRegisterPayment: true});
         }
     }
@@ -165,7 +164,7 @@ class SelectionList extends React.Component {
 
                     : this.props.view === 5 && this.state.activeRegisterPayment === true ?
 
-                    <RegisterPayment  {...this.props} selected={this.state.selected} view={this.props.view} actions={this.props.actions} /> :
+                    <RegisterPayment  {...this.props} selected={this.state.selected} update={false} view={this.props.view} actions={this.props.actions} /> :
                     
                     this.renderViewAll()
                 }     
