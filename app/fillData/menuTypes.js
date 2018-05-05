@@ -78,6 +78,20 @@
                 "color": "#1AA5BF",
                 "popUp": true,
                 "id": 2
+            },{
+                "ico": "icon-planning",
+                "text": "Proyección Anual",
+                "path": "/",
+                "color": "#1AA5BF",
+                "popUp": true,
+                "id": 5
+            },{
+                "ico": "icon-paragraph-left",
+                "text": "Programación Diaria",
+                "path": "/",
+                "color": "#1AA5BF",
+                "popUp": true,
+                "id": 6
             }]
         }
     }
