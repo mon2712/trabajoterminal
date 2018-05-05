@@ -29,7 +29,7 @@ class PaymentList extends React.Component {
         return studentsMissPayment.map((opt,index)=>(
             <div key={index} className="nameStudent">
                 <span className="name">{index+1}. {opt.name}</span>
-                <span className="ico icon-table" onClick={() => this.openPaymentListStudent(opt)}></span>
+                <span className="ico icon-card" onClick={() => this.openPaymentListStudent(opt)}></span>
             </div>
         ));
     }
@@ -50,8 +50,8 @@ class PaymentList extends React.Component {
 
                         <StudentPaymentList {...this.props} actions={this.props.actions} infoStudent={this.state.infoStudent}/>
 
-                        :
-                    null
+                    :
+                        null
                 }
                 
 			</div>

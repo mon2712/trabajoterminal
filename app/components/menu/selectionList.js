@@ -119,25 +119,28 @@ class SelectionList extends React.Component {
         );
     }
     sendAllSelected(){
-        if(this.props.view === 1){
-            this.props.actions.createIdsAssistants(this.state.selected);            
-        }
-        if(this.props.view === 2){
-            this.props.actions.createStamp(this.state.selected);
-        }
-        if(this.props.view === 4){
-            this.props.actions.getAssistantInfo(this.state.selected, this.props.view);
-            this.setState({activeEdit: true});
-        }
-        if(this.props.view === 5){
-            this.setState({activeRegisterPayment: true});
+        console.log(this.state.selected)
+        if(this.state.selected.length !== 0){
+            if(this.props.view === 1){
+                this.props.actions.createIdsAssistants(this.state.selected);            
+            }
+            if(this.props.view === 2){
+                this.props.actions.createStamp(this.state.selected);
+            }
+            if(this.props.view === 4){
+                this.props.actions.getAssistantInfo(this.state.selected, this.props.view);
+                this.setState({activeEdit: true});
+            }
+            if(this.props.view === 55){ //El 55 es para el registro de pagos
+                this.setState({activeRegisterPayment: true});
+            }
         }
     }
     
     renderViewAll(){
         return(
             <div className="selectPeople">
-                <div className="optionAll" style={{display: this.props.view === 4 || this.props.view === 5 ? 'none' : 'block'}}>
+                <div className="optionAll" style={{display: this.props.view === 4 || this.props.view === 55 ? 'none' : 'block'}}>
                     <div className={this.state.selectAll === true ? "checkbox active" : "checkbox"} onClick={this.selectAll}>
                         <span className="ico icon-checkmark"></span>
                     </div>
@@ -149,7 +152,7 @@ class SelectionList extends React.Component {
                     ))}
                 </div>
                 <div className="button" onClick={this.sendAllSelected}>
-                    {this.props.view === 4 ? "Editar" : this.props.view === 5 ? "Registrar" : "Generar"}
+                    {this.props.view === 4 ? "Editar" : this.props.view === 55 ? "Registrar" : "Generar"}
                 </div>
             </div>  
         );
@@ -162,7 +165,7 @@ class SelectionList extends React.Component {
 
                     <CreateUser {...this.props} selected={this.state.selected} view={this.props.view} actions={this.props.actions}/> 
 
-                    : this.props.view === 5 && this.state.activeRegisterPayment === true ?
+                    : this.props.view === 55 && this.state.activeRegisterPayment === true ?
 
                     <RegisterPayment  {...this.props} selected={this.state.selected} update={false} view={this.props.view} actions={this.props.actions} /> :
                     
