@@ -175,6 +175,12 @@ const Actions = {
         dispatcher.dispatch({
             type: actionTypes.CLEAN_RESPONSE
         });
-    },
+    }, 
+    getFormAnualPlan(infoToGet){
+        dispatcher.dispatch({
+            type: actionTypes.GET_FORMANUALPLAN,
+            infoToGet
+        });
+    }, 
 };
 export default Actions;

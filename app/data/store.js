@@ -485,6 +485,9 @@ let AppData = {
         AppData.data.response.info = "";
         AppData.data.response.active = false;
         AppStore.emitChange();
+    },
+    getFormAnualPlan(){
+
     }
 }
 
@@ -594,6 +597,9 @@ dispatcher.register((action) => {
         break;
     case actionTypes.CLEAN_RESPONSE:
         AppData.cleanResponse();
+        break;
+    case actionTypes.GET_FORMANUALPLAN:
+        AppData.getFormAnualPlan();
         break;
     default: 
 		// no op

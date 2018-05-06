@@ -17,7 +17,6 @@ class ButtonOptions extends React.Component {
         };  
     }
     sendAction(id){
-        console.log("id", id)
         if(id===4){
             this.props.actions.getAllStudents("");
         }

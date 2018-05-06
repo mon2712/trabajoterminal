@@ -242,7 +242,7 @@ class RegisterPayment extends React.Component {
     render() {
         return (
             <div>
-                {this.state.activeTag === true ? <IncompleteInputs/> : null}
+                {this.state.activeTag === true ? <IncompleteInputs message={"Llenar campos requeridos"}/> : null}
                 {this.props.store.response.active ===true ? this.renderResponse() : this.renderForm()}
             </div>
         );

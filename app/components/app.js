@@ -5,11 +5,15 @@ import Login from '../components/login/main';
 import TiempoReducido from './tiempoReducido/main';
 import PaymentList from './paymentList/main';
 import ViewCenter from './viewCenter/main';
+import ProyeccionAnual from './annualPlan/main';
 import StudentsCalls from './studentsCalls/main';
 import Menu from '../components/menu/main';
 import actions from '../data/actions';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
-import history from '../history';
+
+import createBrowserHistory from 'history/createBrowserHistory'
+
+const history = createBrowserHistory()
 
 
 function getAppState() {
@@ -19,7 +23,7 @@ function getAppState() {
 const PrivateRoute = ({ component: Component, store: store, actions: actions}) => (
     <Route render={(props) => (
         localStorage.getItem("code") !== null && localStorage.getItem("code") === "1"
-        ? <Component {...store} actions={actions}/>
+        ? <Component {...store} history={history} actions={actions}/>
         : <Redirect to='/login' />
     )} />
 )
@@ -43,15 +47,17 @@ class App extends React.Component {
        this.setState({store: getAppState()});
     }
     render() {
+        console.log("history", history)
         return (
             <Router>
                 <div id='generalDiv'>
                     <Switch>
                         <PrivateRoute path="/menu" component={Menu} store={this.state} actions={actions}/>
                         <PrivateRoute path="/tiempoReducido" component={TiempoReducido} store={this.state} actions={actions}/>
-                        <PrivateRoute path="/llamadasPendientes" component={StudentsCalls} store={this.state} actions={actions}/>
-                        <PrivateRoute path="/paymentList" component={PaymentList} store={this.state} actions={actions}/>
+                        <PrivateRoute path="/llamadasPendientes" component={StudentsCalls}  store={this.state} actions={actions}/>
+                        <PrivateRoute path="/paymentList" component={PaymentList}  store={this.state} actions={actions}/>
                         <PrivateRoute path="/vistaCentro" component={ViewCenter} store={this.state} actions={actions}/>
+                        <PrivateRoute path="/proyeccionAnual" component={ProyeccionAnual} store={this.state} actions={actions}/>
 
                         <Route path="/login" render={(props) => (
                             localStorage.getItem("code") !== null && localStorage.getItem("code") === "1"
