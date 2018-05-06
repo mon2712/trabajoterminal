@@ -34,8 +34,7 @@ let AppData = {
             id: "",
             status: "",
             note:"", 
-            date: "",
-            old: true
+            date: ""
         },
         configCallDone: {
             done: [],

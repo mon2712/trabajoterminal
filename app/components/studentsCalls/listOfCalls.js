@@ -28,7 +28,7 @@ class ListOfCalls extends React.Component {
     }
     renderListNew(studentList,type){
         return studentList.map((opt,index)=>(
-            <div key={index} className={type==="notDone" && this.props.store.configCall.old===false ? "confCall colorNotDone" : type==="notDone" && this.props.store.configCall.old === true ? "confCall colorOld" : "confCall colorNotDone"}>
+            <div key={index} className={type==="notDone" && this.props.store.configCallDone.notDone[index].call.old==="false" ? "confCall colorNotDone" : type==="notDone" && this.props.store.configCallDone.notDone[index].call.old === "true" ? "confCall colorOld" : "confCall colorNotDone"}>
                 <span className="nameStudent" onClick={this.renderStudentFile}>{index+1}.  {opt.name}</span>
                 <span onClick={type==="notDone" ? () => this.activateConfigCall(opt.idStudent, opt.name) : this.props.store.configCallDone.done[index].call.active === true ? () => this.deactivateNote(opt.idStudent, opt.name) : () => this.activateNote(opt.idStudent, opt.name)} className={type==="notDone" ? "ico icon-add-button" : this.props.store.configCallDone.done[index].call.active === true ? "ico icon-multiply" : "ico icon-speech-bubble"}></span>
                 {this.props.store.configCallDone.done != null && type==="done" && this.props.store.configCallDone.done[index].call.active === true ? <Note note={this.props.store.configCallDone.done[index].call.note}/> : null }
