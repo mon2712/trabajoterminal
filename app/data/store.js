@@ -276,6 +276,7 @@ let AppData = {
         AppData.data.configCall.status = action.status;
         AppData.data.configCall.not = action.note;
         AppData.data.configCall.date = action.date;
+         AppData.data.configCall.old = action.old;
         
         AppStore.emitChange();
     },
