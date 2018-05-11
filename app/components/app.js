@@ -47,7 +47,6 @@ class App extends React.Component {
        this.setState({store: getAppState()});
     }
     render() {
-        console.log("history", history)
         return (
             <Router>
                 <div id='generalDiv'>

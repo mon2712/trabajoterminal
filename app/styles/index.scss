@@ -31,6 +31,10 @@
 @import "studentsCalls/configCall.scss";
 @import "studentFile/studentFile.scss";
 
+@import "annualPlan/annualPlan.scss";
+@import "annualPlan/exams.scss";
+@import "annualPlan/generalForm.scss";
+
 @import "/variables.scss";
 @import "/icons.scss";
 
@@ -68,7 +72,7 @@
         bottom: 0;
         right: 0;
         position: absolute;
-        z-index: -1;
+        z-index: -2;
     }
 
 }

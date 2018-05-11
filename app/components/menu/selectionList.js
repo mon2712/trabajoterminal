@@ -115,7 +115,7 @@ class SelectionList extends React.Component {
                     arraySelected.push(exam);
                 }else{
                     delete arraySelected[idDelete];     
-                    arraySelected[idDelete] = {};          
+                    arraySelected[idDelete] = "";          
                 }
 
                 this.setState({
@@ -186,29 +186,26 @@ class SelectionList extends React.Component {
                 this.setState({activeRegisterPayment: true});
             }
             if(this.props.view === 5){
-                console.log("selected", this.state.selectedExams.length)
-                var finalSelection = [];
-
-                finalSelection.push(this.state.selectedExams);
-                finalSelection.push(this.state.selected);
-
-                console.log("final selection", finalSelection)
-                 
-
-
-        
-                if(this.state.selectedExams.length !== 0){
-                    this.props.history.push({
-                        pathname: '/proyeccionAnual',
-                        selectedStudent: this.state.selected[0],
-                        selectedExams: this.state.selectedExams 
-                    })
+                var flag=1;
+                this.state.selectedExams.map((opt, index) => {
+                    if(opt.length === 0){
+                        console.log("si esta vacio")
+                        //flag=1;
+                    }else{
+                        console.log("no esta vacio")
+                        flag=0;
+                    }
+                });
+                console.log("flag", flag);
+                if(flag === 0){
+                    var finalSelection = {selectedStudent: this.state.selected[0], selectedExams: this.state.selectedExams};
+                    this.props.actions.getFormAnualPlan(finalSelection);
+                    this.props.history.push('/proyeccionAnual',this.state.selected);
                 }else{
                     this.setState({
                         activeTag: true
                     });
                 }
-                //this.props.history.push('/proyeccionAnual', this.state);
             }
         }else{
             this.setState({

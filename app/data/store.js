@@ -73,7 +73,8 @@ let AppData = {
         response: {
             info: "",
             active: false
-        }
+        },
+        annualPlanInfo: null
     },
     confirmLogin(){
         if(localStorage.getItem("code") !== null){
@@ -486,8 +487,35 @@ let AppData = {
         AppData.data.response.active = false;
         AppStore.emitChange();
     },
-    getFormAnualPlan(){
-
+    getFormAnualPlan(action){
+        console.log("en el store", action.infoToGet)
+        axios.get('http://localhost:8088/pt1.pt2/webapi/test/getTestAnnualPlan', 
+        {
+            params: {
+                infoToGet: action.infoToGet
+            }
+        }
+        ,{
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(function (response){
+            console.log("respuesta servicio", response)
+            AppData.data.annualPlanInfo = response.data.infoForm
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log(error);
+        });
+        //Provicional
+        /*$.getJSON('/app/fillData/formAnnualPlan.json', function(info) {
+            console.log("formAnnualPlan", info)
+            AppData.data.formAnnualPlan = info.formAnnualPlan;
+            AppStore.emitChange();
+        }).fail(function(error) {
+             console.error("error", error);
+        });*/
     }
 }
 
@@ -599,7 +627,7 @@ dispatcher.register((action) => {
         AppData.cleanResponse();
         break;
     case actionTypes.GET_FORMANUALPLAN:
-        AppData.getFormAnualPlan();
+        AppData.getFormAnualPlan(action);
         break;
     default: 
 		// no op

@@ -1,0 +1,36 @@
+.examContainer{
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 15px;
+    .title{
+        font-size: 30px;
+        padding-left: 10px;
+    }
+    .examsContainer{
+        table, th, td {
+            border: 1px solid white;
+            color: white;
+            border-collapse: collapse;
+        }
+        table {
+            border-spacing: 15px;
+            width: 20%;
+            text-align: center;
+            display: inline-table;
+            vertical-align: top;
+            margin-right: 15px;
+            .colLevels{
+                display: inline-table;
+                width: 100%;
+                display: inline-table;
+            }
+            .colLeft{
+                width: 50%;
+            }
+            .colRight{
+                width: 50%;
+            }
+        }
+    }
+
+}
