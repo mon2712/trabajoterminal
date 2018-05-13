@@ -5,17 +5,49 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } fr
 class GeneralForm extends React.Component {
     constructor(props){
         super(props);
-        this.renderAnswers=this.renderAnswers.bind(this);
-
+        this.selectAnswer=this.selectAnswer.bind(this);
+        this.state={
+            results: [],
+            finalScore: 0
+        }
     }
-    renderAnswers(answers){
-        console.log("answers", answers)
+    componentDidMount(){
+        this.setQuestions();
+    }
+    setQuestions(){
+        var resultsStart = [];
+        var total = this.state.finalScore;
+        this.props.questions.map((qs, index) => {
+            var obj = {idQs: qs.id, idAns: qs.answers[0].id, score:qs.answers[0].score};
+            total = total + parseInt(qs.answers[0].score);
+            resultsStart.push(obj);
+        });
+
+        this.setState({
+            results: resultsStart,
+            finalScore: total
+        });
+    }
+    selectAnswer(answer, score, question){
+        var total = this.state.finalScore;
+        var arrayChange = this.state.results;
+        total = total - parseInt(arrayChange[question].score);    
+          
+        arrayChange[question].idAns = answer;
+        arrayChange[question].score = score;
+        total = total + parseInt(score);
+        this.setState({
+            results: arrayChange,
+            finalScore: total
+        });
+    }
+    renderAnswers(id,answers, indexQs){
         return(
             <div className="answers">
                 {
                     answers.map((answer, index) => (
                         <div className="ans">
-                            <div className={/*this.state.selectAll === true ? "checkbox active" : */"checkbox"} >
+                            <div className={this.state.results[indexQs].idAns === answer.id  ? "checkbox active" : "checkbox"} onClick={() => this.selectAnswer(answer.id, answer.score, indexQs)} >
                                 <span className="ico icon-checkmark"></span>
                             </div>
                             <span>{answer.label}</span>
@@ -25,15 +57,22 @@ class GeneralForm extends React.Component {
             </div>
         );
     }
+    renderTotal(){
+        return(
+            <div className="finalScore">
+                <span>Puntaje total: </span>
+                <span>{this.state.finalScore}</span>
+            </div>
+        );
+    }
     renderGeneralForm(){
-        console.log("questions", this.props.questions)
         return(
             <div className="generalForm">
                 {
                     this.props.questions.map((question, index) => (
                         <div className="question" key={index}>
                             <span className="qs">{question.id+ ".-  " + question.question}</span>
-                            {this.renderAnswers(question.answers)}
+                            {this.state.results.length !== 0 ? this.renderAnswers(question.id, question.answers, index) : null}
                         </div>
                     ))
                 }
@@ -41,11 +80,11 @@ class GeneralForm extends React.Component {
         );
     }
     render() {
-        //console.log("newComponent", this.props, this.state, this.props.history.location.state)
 		return (
 			<div className='formGeneralContainer'>
                 <span className="title">Responder el test conforme al desempeño general</span>
-                {this.renderGeneralForm()}
+                {this.state.results.length !== 0 ? this.renderTotal() : null}
+                {this.state.results.length !== 0 ? this.renderGeneralForm() : null}
 			</div>
 		);
 	}

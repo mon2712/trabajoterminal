@@ -11,7 +11,7 @@ class ProyeccionAnual extends React.Component {
         super(props);
         this.state={
             infoStudent: "",
-            view: 1,
+            view: 0,
             steps: [
                 {
                     tag: "Registro de exámenes",
