@@ -537,6 +537,9 @@ AppStore = assign({}, AppStore, {
     },
     getInfoAssistant: () => {
         return AppData.data.assistant;
+    },
+    getFormAnnualPlan: () => {
+        return AppData.data.annualPlanInfo;
     }
 });
 

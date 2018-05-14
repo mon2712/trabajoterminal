@@ -7,30 +7,55 @@
         padding-left: 10px;
     }
     .examsContainer{
-        table, th, td {
+        text-align: center;
+        .completeTable{
             border: 1px solid white;
             color: white;
             border-collapse: collapse;
-        }
-        table {
-            border-spacing: 15px;
-            width: 20%;
-            text-align: center;
-            display: inline-table;
+            display: inline-block;
             vertical-align: top;
-            margin-right: 15px;
-            .colLevels{
-                display: inline-table;
-                width: 100%;
-                display: inline-table;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+            th, td {
+                border: 1px solid white;
+                color: white;
+                border-collapse: collapse;
             }
-            .colLeft{
-                width: 50%;
-            }
-            .colRight{
-                width: 50%;
+            .smallTable {
+                border-spacing: 15px;
+                text-align: center;
+                display: inline-table;
+                vertical-align: top;
+                th, td{
+                    border: none;
+                }
+                .colLevels{
+                }
+                .colLeft{
+                    
+                }
+                .colRight{
+                    
+                    .score{
+                        display: inline-block;
+                        vertical-align: middle;
+                        background: transparent;
+                        color: white;
+                        border: none;
+                        border-bottom: 1px solid white;
+                        font-size: 18px;
+                        text-align: center;
+                    }
+                    .maxScore{
+                        display: inline-block;
+                        vertical-align: middle;
+                        margin-left: 5px;
+                    }
+                }
             }
         }
+
     }
 
 }

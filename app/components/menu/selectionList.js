@@ -199,8 +199,13 @@ class SelectionList extends React.Component {
                 console.log("flag", flag);
                 if(flag === 0){
                     var finalSelection = {selectedStudent: this.state.selected[0], selectedExams: this.state.selectedExams};
-                    this.props.actions.getFormAnualPlan(finalSelection);
-                    this.props.history.push('/proyeccionAnual',this.state.selected);
+                    //this.props.actions.getFormAnualPlan(finalSelection);
+                    this.props.history.push({
+                        pathname: '/proyeccionAnual',
+                        selected: this.state.selected[0],
+                        finalSelection: finalSelection
+                      })
+                    //this.props.history.push('/proyeccionAnual',this.state.selected);
                 }else{
                     this.setState({
                         activeTag: true

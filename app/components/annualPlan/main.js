@@ -33,8 +33,10 @@ class ProyeccionAnual extends React.Component {
         };
     }
     componentDidMount(){
+        console.log("state", this.props.history.location)
+        this.props.actions.getFormAnualPlan(this.props.history.location.finalSelection);
         this.setState({
-            infoStudent: this.props.history.location.state[0]
+            infoStudent: this.props.history.location.finalSelection.selectedStudent
         })
     }
     renderStudentInfo(){
@@ -103,8 +105,8 @@ class ProyeccionAnual extends React.Component {
                         {this.renderNavigationBar()}
                         <div className="formContainer">
                             {
-                                this.state.view === 0 && this.props.store.annualPlanInfo != null ?
-                                    <Exams {...this.props} view={this.state.view} exams={this.props.store.annualPlanInfo[1]} actions={this.props.actions} />
+                                this.state.view === 0 ?
+                                    <Exams {...this.props} view={this.state.view} finalSelection={this.props.history.location.finalSelection} actions={this.props.actions} />
                                 :
                                 this.state.view === 1 && this.props.store.annualPlanInfo != null ?
                                     <GeneralForm {...this.props} view={this.state.view} questions={this.props.store.annualPlanInfo[0].generalForm}/>
