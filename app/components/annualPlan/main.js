@@ -33,11 +33,16 @@ class ProyeccionAnual extends React.Component {
         };
     }
     componentDidMount(){
-        console.log("state", this.props.history.location)
-        this.props.actions.getFormAnualPlan(this.props.history.location.finalSelection);
-        this.setState({
-            infoStudent: this.props.history.location.finalSelection.selectedStudent
-        })
+        if(this.props.history.location.finalSelection){
+            this.props.actions.getFormAnualPlan(this.props.history.location.finalSelection);
+            this.setState({
+                infoStudent: this.props.history.location.finalSelection.selectedStudent
+            })
+        }else{
+            this.props.history.push({
+                pathname: '/menu'
+              })
+        }
     }
     renderStudentInfo(){
         return(
@@ -64,7 +69,7 @@ class ProyeccionAnual extends React.Component {
     renderNavigationBar(){
         return(
             <div className="navigationBarProcess">
-                <div className=""></div>
+                <div className="stepTitle">Pasos:</div>
                 <div className="processStatus">
                     <div className={this.state.view === 0 ? 'processIcon active' : 'processIcon'}>
                         <span className="ico icon-insert-template"></span>
@@ -93,7 +98,6 @@ class ProyeccionAnual extends React.Component {
         );
     }
     render() {
-        console.log("newComponent", this.props.store)
 		return (
 			<div className='annualPlanContainer'>
                 <NavigationContainer texto="Proyección Anual" path='/menu'/>
@@ -105,13 +109,13 @@ class ProyeccionAnual extends React.Component {
                         {this.renderNavigationBar()}
                         <div className="formContainer">
                             {
-                                this.state.view === 0 ?
+                                this.state.view === 0 && this.props.store.annualPlanInfo !== null ? 
                                     <Exams {...this.props} view={this.state.view} finalSelection={this.props.history.location.finalSelection} actions={this.props.actions} />
                                 :
-                                this.state.view === 1 && this.props.store.annualPlanInfo != null ?
+                                this.state.view === 1 && this.props.store.annualPlanInfo !== null ?
                                     <GeneralForm {...this.props} view={this.state.view} questions={this.props.store.annualPlanInfo[0].generalForm}/>
                                 :
-                                this.state.view === 2 && this.props.store.annualPlanInfo != null ?
+                                this.state.view === 2 && this.props.store.annualPlanInfo !== null ?
                                     <StartFrequencyForm {...this.props} view={this.state.view}/>
                                 :
                                     null

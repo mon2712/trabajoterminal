@@ -190,13 +190,10 @@ class SelectionList extends React.Component {
                 this.state.selectedExams.map((opt, index) => {
                     if(opt.length === 0){
                         console.log("si esta vacio")
-                        //flag=1;
                     }else{
-                        console.log("no esta vacio")
                         flag=0;
                     }
                 });
-                console.log("flag", flag);
                 if(flag === 0){
                     var finalSelection = {selectedStudent: this.state.selected[0], selectedExams: this.state.selectedExams};
                     //this.props.actions.getFormAnualPlan(finalSelection);

@@ -58,6 +58,7 @@ class App extends React.Component {
                         <PrivateRoute path="/vistaCentro" component={ViewCenter} store={this.state} actions={actions}/>
                         <PrivateRoute path="/proyeccionAnual" component={ProyeccionAnual} store={this.state} actions={actions}/>
 
+
                         <Route path="/login" render={(props) => (
                             localStorage.getItem("code") !== null && localStorage.getItem("code") === "1"
                             ? <Redirect to='/menu' />

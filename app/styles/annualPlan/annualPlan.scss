@@ -58,12 +58,16 @@
             vertical-align: top;
             width: 10%;
             text-align: center;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             z-index: -1;
             border-radius: 15px;
             padding: 10px;
             left: 10%;
             margin-top: 20px;
+            .stepTitle{
+                font-size: 25px;
+                margin-bottom: 10px;
+            }
             .processStatus{
                 .processIcon{
                     border: 1px solid white;
@@ -71,7 +75,7 @@
                     height: 60px;
                     width: 60px;
                     background: white;
-                    color: #21647F;
+                    color: #29abde;
                     text-align: center;
                     margin: 0 auto;
                     .ico{
@@ -82,8 +86,8 @@
                     }
                     &.active{
                         color: white;
-                        background: #21647F;
-                        border-color: #21647F;
+                        background: #29abde;
+                        border-color: #29abde;
                     }
                 }
                 .tab{
