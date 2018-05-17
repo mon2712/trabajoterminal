@@ -46,7 +46,7 @@ class GeneralForm extends React.Component {
             <div className="answers">
                 {
                     answers.map((answer, index) => (
-                        <div className="ans">
+                        <div className="ans" key={index}>
                             <div className={this.state.results[indexQs].idAns === answer.id  ? "checkbox active" : "checkbox"} onClick={() => this.selectAnswer(answer.id, answer.score, indexQs)} >
                                 <span className="ico icon-checkmark"></span>
                             </div>
@@ -60,8 +60,10 @@ class GeneralForm extends React.Component {
     renderTotal(){
         return(
             <div className="finalScore">
-                <span>Puntaje total: </span>
-                <span>{this.state.finalScore}</span>
+                <div className={this.state.finalScore < 30 ? "boxScore bad" : this.state.finalScore > 75 ? "boxScore good" : "boxScore medium"}>
+                    <span className={this.state.finalScore < 30 ? "totalTag bad" : this.state.finalScore > 75 ? "totalTag good" : "totalTag medium"}>Puntaje total: </span>
+                    <span className="total">{this.state.finalScore}</span>
+                </div>
             </div>
         );
     }

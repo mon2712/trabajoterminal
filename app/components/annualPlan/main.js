@@ -12,6 +12,7 @@ class ProyeccionAnual extends React.Component {
         this.state={
             infoStudent: "",
             view: 0,
+            newHeight: 1,
             steps: [
                 {
                     tag: "Registro de exámenes",
@@ -67,8 +68,14 @@ class ProyeccionAnual extends React.Component {
         );
     }
     renderNavigationBar(){
+        var h = this.state.infoStudent != "" ? document.getElementById('containerInfoStudent').clientHeight : 0;
+        
         return(
-            <div className="navigationBarProcess">
+            <div className="navigationBarProcess"
+                style={{
+                    marginTop: ((h/2)+15)+'px'
+                }}
+            >
                 <div className="stepTitle">Pasos:</div>
                 <div className="processStatus">
                     <div className={this.state.view === 0 ? 'processIcon active' : 'processIcon'}>
@@ -98,6 +105,8 @@ class ProyeccionAnual extends React.Component {
         );
     }
     render() {
+        var h = document.getElementById('containerInfoStudent') ? document.getElementById('containerInfoStudent').clientHeight : 0;
+        
 		return (
 			<div className='annualPlanContainer'>
                 <NavigationContainer texto="Proyección Anual" path='/menu'/>
@@ -106,8 +115,12 @@ class ProyeccionAnual extends React.Component {
                     this.props.store.annualPlanInfo != null || this.props.store.annualPlanInfo != "" ? 
                     
                     <div className="processContainer">
-                        {this.renderNavigationBar()}
-                        <div className="formContainer">
+                        {this.state.infoStudent !== null && this.state.infoStudent !== "" && document.getElementById('containerInfoStudent') ? this.renderNavigationBar() : null}
+                        <div className="formContainer"
+                            style={{
+                                marginTop: (h/2)+'px'
+                            }}
+                        >
                             {
                                 this.state.view === 0 && this.props.store.annualPlanInfo !== null ? 
                                     <Exams {...this.props} view={this.state.view} finalSelection={this.props.history.location.finalSelection} actions={this.props.actions} />

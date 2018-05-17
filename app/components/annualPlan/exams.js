@@ -1,10 +1,9 @@
 import React from 'react';
 import AppStore from '../../data/store';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
-import { stringify } from 'querystring';
 
 function getAppState() {
-    return AppStore.getFormAnnualPlan();
+    return AppStore.getFormAnnualPlanInfo();
 }
 
 class Exams extends React.Component {
@@ -12,18 +11,45 @@ class Exams extends React.Component {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.generalCount = this.generalCount.bind(this);
+        this.move=this.move.bind(this);        
         this.state={
-            results: getAppState()
+            results: getAppState(),
+            perPage: 3,
+            currentPage: 1,
+            position: 0,
         }
     }
     componentDidMount() {
         AppStore.addChangeListener(this._onChange);
+        this.setData();
     }
     componentWillUnmount() {
         AppStore.removeChangeListener(this._onChange);
     }
     _onChange() {
        this.setState({results: getAppState()});
+    }
+    setData(){
+        console.log("scree ", screen.width)
+        var realScreen = (screen.width*.9) - 50;
+        console.log("realScreen", realScreen)
+        this.setState({
+            perPage: Math.floor(realScreen/(170+20))
+        })
+    }
+    move(movement){
+        if(movement=="left"){
+            this.setState({
+                currentPage: this.state.currentPage-1,
+                position: this.state.position-((this.state.perPage*170)+(this.state.perPage*20))             
+            })
+        }else if(movement=="right"){
+            this.setState({
+                currentPage: this.state.currentPage+1,
+                position: this.state.position+((this.state.perPage*170)+(this.state.perPage*20))
+            })
+        }
+
     }
     handleChange(event) {
         var stateArray = this.state.results;
@@ -36,24 +62,45 @@ class Exams extends React.Component {
         levelSet = sp[1]+"";
 
         if(event.target.value.length < 3){
-            resultsArray.map((level, index) => {
-                if(level.exam === examSet){
-                    level.levels.map((scores, index) => {
-                        if(scores.level === levelSet){
-                            scores.real = event.target.value
-                        }
-                        
-                    })
-                }
-                
-            })
+            if(event.target.value.length == 0){
+                console.log("esta vacio")
+                resultsArray.map((level, index) => {
+                    if(level.exam === examSet){
+                        level.levels.map((scores, index) => {
+                            if(scores.level === levelSet){
+                                scores.real = 0
+                            }
+                            
+                        })
+                    }
+                    
+                })
 
-            stateArray[1].examsInfo = resultsArray;
+                stateArray[1].examsInfo = resultsArray;
 
-            this.setState({
-                results: stateArray
-            })
-            
+                this.setState({
+                    results: stateArray
+                })
+
+            }else{
+                resultsArray.map((level, index) => {
+                    if(level.exam === examSet){
+                        level.levels.map((scores, index) => {
+                            if(scores.level === levelSet){
+                                scores.real = event.target.value
+                            }
+                            
+                        })
+                    }
+                    
+                })
+
+                stateArray[1].examsInfo = resultsArray;
+
+                this.setState({
+                    results: stateArray
+                })
+            }
         }else{
             var str = event.target.value;
             var res = str.split("");
@@ -84,17 +131,16 @@ class Exams extends React.Component {
         var stateArray = this.state.results;
         var resultsArray = this.state.results[1].examsInfo;
         var totalScore = this.state.results[2].finalScorePerLevel;
+
         var varNivel = 0;
-        resultsArray.map((exams, index) => {
-            console.log("exams", exams)
-            exams.levels.map((level, index2) => {
-                console.log("level", level)
-                totalScore.map((totalLevel, index3) => {
-                    console.log("totalLevel", totalLevel)
+
+        totalScore.map((totalLevel, index3) => {
+            varNivel=0;
+            resultsArray.map((exams, index) => {
+                exams.levels.map((level, index2) => {
                     if(totalLevel.level === level.level){
-                        varNivel = varNivel + level.real;
+                        varNivel = varNivel + parseInt(level.real);
                         totalLevel.real = parseInt(varNivel);
-                        console.log("totalReal ", totalLevel, "varNivel", varNivel)
                     }
                 })
             })
@@ -108,15 +154,45 @@ class Exams extends React.Component {
     }
     renderExams(){
         var resultsExams = this.props.store.annualPlanInfo[1].examsInfo;
-        
+        var numExams =resultsExams.length;
+        var pages = Math.ceil(numExams / this.state.perPage);
+
+        console.log("numExams ", numExams, "pages ", pages)
+
         return(
-            <div className="examsContainer">
+            <div className="bigContainer">
+                {this.state.currentPage !== 1 ?
+                    <div className="arrow left">
+                        <span className="icon-left-arrow" onClick={()=>this.move("left")}></span>                    
+                    </div>
+                :
+                    null
+                }
+                {this.state.currentPage < pages ?
+                    <div className="arrow right">
+                        <span className="icon-right-arrow" onClick={()=>this.move("right")}></span>                    
+                    </div>
+                :
+                    null
+                }
+            <div className="wrapExams"
+                style={{
+                    width: (( this.state.perPage*170)+( this.state.perPage*20))+'px'
+                }}            
+            >
+
+            <div className="examsContainer"
+                style={{
+                    width: ((numExams*170)+(numExams*20)+30)+'px',
+                    right: this.state.position+'px'
+                }}
+            >
                     {
                         resultsExams.map((exam,index)=>(
                             <table className="completeTable" key={index}>
                                 <tbody>
                                     <tr>
-                                        <th>
+                                        <th className="borderRight">
                                             Examen
                                         </th>
                                         <td>
@@ -124,14 +200,16 @@ class Exams extends React.Component {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td className="borderRight">
                                             Niveles
                                         </td>
                                         <td>
                                             <table className="smallTable" >
                                             <tbody>
                                         {
-                                            exam.levels.map((level, index2) => (
+                                            exam.levels !== undefined && this.state.results.length !== 0 ? 
+                                            
+                                                exam.levels.map((level, index2) => (
 
                                                         <tr className="colLevels" key={index2}>
                                                             <td className="colLeft">
@@ -143,7 +221,9 @@ class Exams extends React.Component {
                                                             </td>
                                                         </tr>
                                                     
-                                            ))
+                                                ))
+                                            :
+                                            null
                                         }
                                             </tbody>
                                             </table>
@@ -155,6 +235,8 @@ class Exams extends React.Component {
                         ))
                     }
             </div>
+            </div>
+            </div>
         );
     }
     renderFinalScore(){
@@ -162,38 +244,34 @@ class Exams extends React.Component {
         
         return(
             <div className="finalScoreContainer">
-                <table>
-                    <tbody>
-                        <tr>
                 {
                     finalScore.map((finalScores, index) => (
-                        <td key={index}>
-                            {finalScores.level}
-                        </td>
+                        <div className="boxLevel" key={index}>
+                            <span className="levelTag">{finalScores.level}</span>
+                            <span className="levelScore">
+                                {finalScores.real + " / " + finalScores.total}
+                            </span>
+                        </div>
                     ))
                 }
-                        </tr>
-                        <tr>
-                {
-                    finalScore.map((finalScores, index) => (
-                        <td key={index}>
-                            <span>{finalScores.real}</span>
-                            <span>{" /" + finalScores.total}</span>
-                        </td>
-                    ))
-                }
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         );
     }
     render() {
 		return (
 			<div className='examContainer'>
-                <span className="title">Ingresar los resultados del examen</span>
-                {this.props.store.annualPlanInfo != null && this.state.results.length !== 0 && this.props.store.annualPlanInfo !== null? this.renderExams() : null}
-                {this.props.store.annualPlanInfo != null && this.state.results.length !== 0 ? this.renderFinalScore() : null}
+                <span className="title center">Puntajes totales</span> 
+                {this.props.store.annualPlanInfo !== null && this.state.results.length !== 0 ? this.renderFinalScore() : null}       
+                <span className="title">Ingresar los resultados por examen</span>         
+                {
+                    this.props.store.annualPlanInfo != null && this.state.results.length !== 0 && this.state.results ? 
+                    <div>
+                        {this.renderExams()}
+                        <div className="button">Guardar</div>
+                    </div>
+                : 
+                    null
+                }
 			</div>
 		);
 	}
