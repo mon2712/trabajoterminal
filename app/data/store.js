@@ -74,7 +74,12 @@ let AppData = {
             info: "",
             active: false
         },
-        annualPlanInfo: null
+        annualPlanInfo: null,
+        annualPlanResults: {
+            exams: [],
+            finalScore: 0,
+            startPoint: []
+        }
     },
     confirmLogin(){
         if(localStorage.getItem("code") !== null){
@@ -516,6 +521,9 @@ let AppData = {
         }).fail(function(error) {
              console.error("error", error);
         });*/
+    },
+    setAnnualPlan(action){
+        console.log("store", action)
     }
 }
 
@@ -631,6 +639,9 @@ dispatcher.register((action) => {
         break;
     case actionTypes.GET_FORMANUALPLAN:
         AppData.getFormAnualPlan(action);
+        break; 
+    case actionTypes.SET_ANNUALPLAN:
+        AppData.setAnnualPlan(action);
         break;
     default: 
 		// no op

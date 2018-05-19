@@ -122,13 +122,16 @@ class ProyeccionAnual extends React.Component {
                             }}
                         >
                             {
-                                this.state.view === 0 && this.props.store.annualPlanInfo !== null ? 
+                                this.state.view === 0 && this.props.store.annualPlanInfo !== null ?
                                     <Exams {...this.props} view={this.state.view} finalSelection={this.props.history.location.finalSelection} actions={this.props.actions} />
                                 :
                                 this.state.view === 1 && this.props.store.annualPlanInfo !== null ?
-                                    <GeneralForm {...this.props} view={this.state.view} questions={this.props.store.annualPlanInfo[0].generalForm}/>
+                                    <GeneralForm {...this.props} view={this.state.view} questions={this.props.store.annualPlanInfo.generalForm}/>
                                 :
                                 this.state.view === 2 && this.props.store.annualPlanInfo !== null ?
+                                    <StartFrequencyForm {...this.props} view={this.state.view} questions={this.props.store.annualPlanInfo.questionsPI}/>
+                                :
+                                this.state.view === 3 && this.props.store.annualPlanInfo !== null ?
                                     <StartFrequencyForm {...this.props} view={this.state.view}/>
                                 :
                                     null

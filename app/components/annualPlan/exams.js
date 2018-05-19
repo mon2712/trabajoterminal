@@ -11,6 +11,7 @@ class Exams extends React.Component {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.generalCount = this.generalCount.bind(this);
+        this.setResultsExames = this.setResultsExames.bind(this);
         this.move=this.move.bind(this);        
         this.state={
             results: getAppState(),
@@ -30,9 +31,7 @@ class Exams extends React.Component {
        this.setState({results: getAppState()});
     }
     setData(){
-        console.log("scree ", screen.width)
         var realScreen = (screen.width*.9) - 50;
-        console.log("realScreen", realScreen)
         this.setState({
             perPage: Math.floor(realScreen/(170+20))
         })
@@ -53,8 +52,8 @@ class Exams extends React.Component {
     }
     handleChange(event) {
         var stateArray = this.state.results;
-        var resultsArray = this.state.results[1].examsInfo;
-        var totalScore = this.state.results[2].finalScorePerLevel;
+        var resultsArray = this.state.results.examsInfo;
+        var totalScore = this.state.results.finalScorePerLevel;
         var examSet, levelSet;
         var sp = event.target.name.split("/");
 
@@ -63,7 +62,6 @@ class Exams extends React.Component {
 
         if(event.target.value.length < 3){
             if(event.target.value.length == 0){
-                console.log("esta vacio")
                 resultsArray.map((level, index) => {
                     if(level.exam === examSet){
                         level.levels.map((scores, index) => {
@@ -76,7 +74,7 @@ class Exams extends React.Component {
                     
                 })
 
-                stateArray[1].examsInfo = resultsArray;
+                stateArray.examsInfo = resultsArray;
 
                 this.setState({
                     results: stateArray
@@ -95,7 +93,7 @@ class Exams extends React.Component {
                     
                 })
 
-                stateArray[1].examsInfo = resultsArray;
+                stateArray.examsInfo = resultsArray;
 
                 this.setState({
                     results: stateArray
@@ -119,7 +117,7 @@ class Exams extends React.Component {
                 
             })
 
-            stateArray[1].examsInfo = resultsArray;
+            stateArray.examsInfo = resultsArray;
 
             this.setState({
                 results: stateArray
@@ -129,8 +127,8 @@ class Exams extends React.Component {
     }
     generalCount(){
         var stateArray = this.state.results;
-        var resultsArray = this.state.results[1].examsInfo;
-        var totalScore = this.state.results[2].finalScorePerLevel;
+        var resultsArray = this.state.results.examsInfo;
+        var totalScore = this.state.results.finalScorePerLevel;
 
         var varNivel = 0;
 
@@ -146,18 +144,16 @@ class Exams extends React.Component {
             })
         })
 
-        stateArray[2].finalScorePerLevel = totalScore;
+        stateArray.finalScorePerLevel = totalScore;
 
         this.setState({
             results: stateArray
         })
     }
     renderExams(){
-        var resultsExams = this.props.store.annualPlanInfo[1].examsInfo;
+        var resultsExams = this.props.store.annualPlanInfo.examsInfo;
         var numExams =resultsExams.length;
         var pages = Math.ceil(numExams / this.state.perPage);
-
-        console.log("numExams ", numExams, "pages ", pages)
 
         return(
             <div className="bigContainer">
@@ -216,7 +212,7 @@ class Exams extends React.Component {
                                                                 {level.level}
                                                             </td>
                                                             <td className="colRight">
-                                                                <input type="number" className="score" name={exam.exam+"/"+level.level} value={this.state.results[1].examsInfo[index].levels[index2].real} min="0" max={level.score} maxLength="2" onChange={this.handleChange}></input>
+                                                                <input type="number" className="score" name={exam.exam+"/"+level.level} value={this.state.results.examsInfo[index].levels[index2].real} min="0" max={level.score} maxLength="2" onChange={this.handleChange}></input>
                                                                 <span className="maxScore">{"/"+level.score}</span>
                                                             </td>
                                                         </tr>
@@ -240,7 +236,7 @@ class Exams extends React.Component {
         );
     }
     renderFinalScore(){
-        var finalScore = this.props.store.annualPlanInfo[2].finalScorePerLevel;
+        var finalScore = this.props.store.annualPlanInfo.finalScorePerLevel;
         
         return(
             <div className="finalScoreContainer">
@@ -257,6 +253,26 @@ class Exams extends React.Component {
             </div>
         );
     }
+    setResultsExames(){
+        console.log("results", this.state.results)
+        var finalArray = [];
+        this.state.results.finalScorePerLevel.map((level, index) => {
+            var percentage = (level.real*100)/level.total;
+            var desempeño = "";
+            if(percentage<30){
+                desempeño="malo";
+            }else if(percentage>80){
+                desempeño="bueno";
+            }else{
+                desempeño="medio";
+            }
+            var obj={level: level.level, desempeño: desempeño};
+            console.log(obj)
+            finalArray.push(obj);
+        })
+        console.log("final ", finalArray)
+        this.props.actions.setAnnualPlan(finalArray, this.props.view);
+    }
     render() {
 		return (
 			<div className='examContainer'>
@@ -267,7 +283,7 @@ class Exams extends React.Component {
                     this.props.store.annualPlanInfo != null && this.state.results.length !== 0 && this.state.results ? 
                     <div>
                         {this.renderExams()}
-                        <div className="button">Guardar</div>
+                        <div className="button" onClick={this.setResultsExames}>Guardar</div>
                     </div>
                 : 
                     null

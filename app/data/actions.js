@@ -182,5 +182,12 @@ const Actions = {
             infoToGet
         });
     }, 
+    setAnnualPlan(array, view){
+        dispatcher.dispatch({
+            type: actionTypes.SET_ANNUALPLAN,
+            array,
+            view
+        });
+    }, 
 };
 export default Actions;
