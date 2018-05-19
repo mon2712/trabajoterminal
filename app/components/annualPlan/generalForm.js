@@ -6,6 +6,7 @@ class GeneralForm extends React.Component {
     constructor(props){
         super(props);
         this.selectAnswer=this.selectAnswer.bind(this);
+        this.setFinalScore=this.setFinalScore.bind(this);
         this.state={
             results: [],
             finalScore: 0
@@ -81,12 +82,24 @@ class GeneralForm extends React.Component {
             </div>
         );
     }
+    setFinalScore(){
+        console.log("props", this.props)
+        this.props.actions.setAnnualPlan(this.state.finalScore, this.props.view);
+    }
     render() {
 		return (
 			<div className='formGeneralContainer'>
                 <span className="title">Responder el test conforme al desempeño general</span>
                 {this.state.results.length !== 0 ? this.renderTotal() : null}
-                {this.state.results.length !== 0 ? this.renderGeneralForm() : null}
+                {
+                    this.state.results.length !== 0 ? 
+                        <div>
+                            {this.renderGeneralForm()}
+                            <div className="button" onClick={this.setFinalScore}>Continuar</div>
+                        </div>
+                    : 
+                    null
+                }
 			</div>
 		);
 	}

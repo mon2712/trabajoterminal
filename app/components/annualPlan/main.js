@@ -78,28 +78,28 @@ class ProyeccionAnual extends React.Component {
             >
                 <div className="stepTitle">Pasos:</div>
                 <div className="processStatus">
-                    <div className={this.state.view === 0 ? 'processIcon active' : 'processIcon'}>
+                    <div className={this.props.store.annualPlanResults.view === 0 ? 'processIcon active' : 'processIcon'}>
                         <span className="ico icon-insert-template"></span>
                     </div>
-                    <span className={this.state.view === 0 ? 'tab active' : 'tab'}>Registro de exámenes</span>
+                    <span className={this.props.store.annualPlanResults.view === 0 ? 'tab active' : 'tab'}>Registro de exámenes</span>
                 </div>
                 <div className="processStatus">
-                    <div className={this.state.view === 1 ? 'processIcon active' : 'processIcon'}>
+                    <div className={this.props.store.annualPlanResults.view === 1 ? 'processIcon active' : 'processIcon'}>
                         <span className="ico icon-list"></span>
                     </div>
-                    <span className={this.state.view === 1 ? 'tab active' : 'tab'}>Desempeño General</span>
+                    <span className={this.props.store.annualPlanResults.view === 1 ? 'tab active' : 'tab'}>Desempeño General</span>
                 </div>
                 <div className="processStatus">
-                    <div className={this.state.view === 2 ? 'processIcon active' : 'processIcon'}>
+                    <div className={this.props.store.annualPlanResults.view === 2 ? 'processIcon active' : 'processIcon'}>
                         <span className="ico icon-tree"></span>
                     </div>
-                    <span className={this.state.view === 2 ? 'tab active' : 'tab'}>Frecuencia Inicial</span>
+                    <span className={this.props.store.annualPlanResults.view === 2 ? 'tab active' : 'tab'}>Frecuencia Inicial</span>
                 </div>
                 <div className="processStatus">
-                    <div className={this.state.view === 3 ? 'processIcon active' : 'processIcon'}>
+                    <div className={this.props.store.annualPlanResults.view === 3 ? 'processIcon active' : 'processIcon'}>
                         <span className="ico icon-planning"></span>
                     </div>
-                    <span className={this.state.view === 3 ? 'tab active' : 'tab'}>Proyección Anual</span>
+                    <span className={this.props.store.annualPlanResults.view === 3 ? 'tab active' : 'tab'}>Proyección Anual</span>
                 </div>
             </div>
         );
@@ -122,17 +122,17 @@ class ProyeccionAnual extends React.Component {
                             }}
                         >
                             {
-                                this.state.view === 0 && this.props.store.annualPlanInfo !== null ?
-                                    <Exams {...this.props} view={this.state.view} finalSelection={this.props.history.location.finalSelection} actions={this.props.actions} />
+                                this.props.store.annualPlanResults.view === 0 && this.props.store.annualPlanInfo !== null ?
+                                    <Exams {...this.props} view={this.props.store.annualPlanResults.view} finalSelection={this.props.history.location.finalSelection} actions={this.props.actions} />
                                 :
-                                this.state.view === 1 && this.props.store.annualPlanInfo !== null ?
-                                    <GeneralForm {...this.props} view={this.state.view} questions={this.props.store.annualPlanInfo.generalForm}/>
+                                this.props.store.annualPlanResults.view === 1 && this.props.store.annualPlanInfo !== null ?
+                                    <GeneralForm {...this.props} view={this.props.store.annualPlanResults.view} questions={this.props.store.annualPlanInfo.generalForm} actions={this.props.actions}/>
                                 :
-                                this.state.view === 2 && this.props.store.annualPlanInfo !== null ?
-                                    <StartFrequencyForm {...this.props} view={this.state.view} questions={this.props.store.annualPlanInfo.questionsPI}/>
+                                this.props.store.annualPlanResults.view === 2 && this.props.store.annualPlanInfo !== null ?
+                                    <StartFrequencyForm {...this.props} view={this.props.store.annualPlanResults.view} questions={this.props.store.annualPlanInfo.questionsPI} actions={this.props.actions}/>
                                 :
-                                this.state.view === 3 && this.props.store.annualPlanInfo !== null ?
-                                    <StartFrequencyForm {...this.props} view={this.state.view}/>
+                                this.props.store.annualPlanResults.view === 3 && this.props.store.annualPlanInfo !== null ?
+                                    <StartFrequencyForm {...this.props} view={this.props.store.annualPlanResults.view}/>
                                 :
                                     null
                             }

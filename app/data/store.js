@@ -76,6 +76,7 @@ let AppData = {
         },
         annualPlanInfo: null,
         annualPlanResults: {
+            view: 1,
             exams: [],
             finalScore: 0,
             startPoint: []

@@ -185,7 +185,7 @@ const Actions = {
     setAnnualPlan(array, view){
         dispatcher.dispatch({
             type: actionTypes.SET_ANNUALPLAN,
-            array,
+            result,
             view
         });
     }, 
