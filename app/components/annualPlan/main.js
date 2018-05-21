@@ -34,6 +34,14 @@ class ProyeccionAnual extends React.Component {
             ]
         };
     }
+    renderNavigationButton(){
+        return(
+            <div className='navigationContainer'>
+                <span className="ico icon-left-arrow"></span>
+                <span className="navigationText">Proyección Anual</span>
+            </div>
+        );
+    }
     componentDidMount(){
         if(this.props.history.location.finalSelection){
             this.props.actions.getFormAnualPlan(this.props.history.location.finalSelection);
