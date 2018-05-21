@@ -4,6 +4,8 @@ import SearchBar from '../menu/searchBar';
 import Panel from '../menu/panel';
 import AppStore from '../../data/store';
 import StudentFile from '../studentFile/main';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
+
 
 
 

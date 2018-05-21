@@ -45,6 +45,9 @@
             vertical-align: middle;
             font-size: 22px;
         }
+        .tagSelection{
+            width: 80%;
+        }
     }
     .peopleContainer{
         padding: 10px;
@@ -53,6 +56,72 @@
         background: #5aa9a9;
         margin-bottom: 15px;
         border-radius: 10px;
+    }
+    .examsSelectorContainer{
+        background: #5aa9a9;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 15px;
+        text-align: center;
+        color: white;
+        .instructions{
+            color: white;
+            font-size: 20px;
+            display: block
+        }
+        .examOption{
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            .text{
+
+            }
+            .checkbox{
+                border: 1px solid white;
+                border-radius: 50%;
+                display: inline-block;
+                vertical-align: middle;
+                width: 30px;
+                height: 30px;
+                text-align: center;
+                background: white;
+                cursor: pointer;
+                box-shadow: 3px 0px 5px #000000;
+                margin-right: 10px;
+                .circle{
+                    color: white;
+                    font-size: 16px;
+                    height: 20px;
+                    background: white;
+                    border: 1px solid white;
+                    border-radius: 50%;
+                    width: 20px;
+                    margin: 0 auto;
+                    margin-top: 15%;
+                    margin-bottom: 10%;
+                }
+                &:hover{
+                    .circle{
+                        background: #9c9797;
+                        border: #9c9797;
+                    }
+                }
+                &.active{
+                    
+                    .circle{
+                        background: #21647F;;
+                        border: #21647F;
+                    }
+                    &:hover{
+                        background: #9c9797;
+                        border: #9c9797;
+                        .ico{
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
     }
     .button{
         width: 40%;

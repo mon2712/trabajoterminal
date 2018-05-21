@@ -1,0 +1,50 @@
+.proyeccionanual{
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 15px;
+    .title{
+        font-size: 25px;
+        padding-left: 10px;
+    }
+    .annualPlan{
+        max-height: 350px;
+        overflow-y: scroll;    
+        table{
+            font-size: 18px;
+            width: 100%;
+            border-spacing: 15px;
+            th, td{
+                margin-right: 5px;
+            }
+            th{
+                font-size: 14px;
+            }
+            td {
+                border: 1px solid white;
+                border-radius: 10px;
+                color: white;
+                border-collapse: collapse;
+                text-align: center;
+                padding: 5px;
+                margin-right: 5px;
+            }
+        }
+    }
+    .button{
+        cursor: pointer;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        background: #21647F;
+        color: white;
+        border-radius: 10px;
+        width: 20%;
+        box-shadow: 3px 3px 10px #000000;
+        margin: 0 auto;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        &:hover{
+            background: #847f7f;
+        }
+    }
+}

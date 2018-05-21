@@ -177,6 +177,34 @@ const Actions = {
         dispatcher.dispatch({
             type: actionTypes.CLEAN_RESPONSE
         });
+    }, 
+    getFormAnualPlan(infoToGet){
+        dispatcher.dispatch({
+            type: actionTypes.GET_FORMANUALPLAN,
+            infoToGet
+        });
+    }, 
+    setAnnualPlan(result, view){
+        dispatcher.dispatch({
+            type: actionTypes.SET_ANNUALPLAN,
+            result,
+            view
+        });
+    }, 
+    getStudentsWithoutAnnualPlan() {
+        dispatcher.dispatch({
+            type: actionTypes.GET_STUDENTSWITHOUTANNUALPLAN
+        });
     },
+    getStudentsWithAnnualPlan() {
+        dispatcher.dispatch({
+            type: actionTypes.GET_STUDENTSWITHANNUALPLAN
+        });
+    }, 
+    cleanAnnualPlan() {
+        dispatcher.dispatch({
+            type: actionTypes.CLEAN_ANNUALPLAN
+        });
+    }, 
 };
 export default Actions;

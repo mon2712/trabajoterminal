@@ -1,0 +1,138 @@
+.formGeneralContainer{
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 15px;
+    .title{
+        font-size: 30px;
+        padding-left: 10px;
+        display: inline-block;
+        vertical-align: middle;
+        width: 80%;
+    }
+    .button{
+        cursor: pointer;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        background: #21647F;
+        color: white;
+        border-radius: 10px;
+        width: 20%;
+        box-shadow: 3px 3px 10px #000000;
+        margin: 0 auto;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        &:hover{
+            background: #847f7f;
+        }
+    }
+    .finalScore{
+        display: inline-block;
+        vertical-align: middle;
+        width: 20%;
+        font-size: 18px;
+        .boxScore{
+            border: 1px solid white;
+            border-radius: 10px;
+            text-align: center;
+            &.bad{
+                border-color: #a71515;
+            }
+            &.good{
+                border-color: #a1cc2b;
+            }
+            &.medium{
+                border-color: #fffc00;
+            }
+            .totalTag{
+                background: white;
+                color: black;
+                display: block;
+                width: 100%;
+                border-radius: 10px 10px 0px 0px;
+                &.bad{
+                    border-color: #a71515;
+                    background: #a71515;
+                    color: white;
+                }
+                &.good{
+                    border-color: #a1cc2b;
+                    background: #a1cc2b;
+                    color:white;
+                }
+                &.medium{
+                    border-color: #fffc00;
+                    background: #fffc00;
+                }
+            }
+            .total{
+                display: block;
+            }
+        }
+    }
+    .generalForm{
+        max-height: 380px;
+        overflow-y: scroll;
+        margin-top: 15px;
+        .question{
+            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+            border-radius: 10px;
+            font-size: 18px;
+            padding: 10px;
+            .answers{
+                padding: 10px;
+                .ans{
+                    display: inline-block;
+                    vertical-align: middle;
+                    margin-right: 10px;
+                    .checkbox{
+                        border: 1px solid white;
+                        border-radius: 5px;
+                        display: inline-block;
+                        vertical-align: middle;
+                        width: 25px;
+                        height: 25px;
+                        text-align: center;
+                        background: white;
+                        line-height: 25px;
+                        cursor: pointer;
+                        box-shadow: 3px 0px 5px #000000;
+                        margin-right: 10px;
+                        .ico{
+                            color: white;
+                            font-size: 16px;
+                        }
+                        &:hover{
+                            background: #9c9797;
+                            border: #9c9797;
+                            .ico{
+                                color: white;
+                            }
+                        }
+                        &.active{
+                            background: #21647F;;
+                            border: #21647F;;
+                            .ico{
+                                color: white;
+                            }
+                            &:hover{
+                                background: #9c9797;
+                                border: #9c9797;
+                                .ico{
+                                    color: white;
+                                }
+                            }
+                        }
+                    }
+                    span{
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+    }
+
+}

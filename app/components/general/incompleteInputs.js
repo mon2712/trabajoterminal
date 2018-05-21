@@ -6,7 +6,7 @@ class IncompleteInputs extends React.Component {
         return (
             <div className='tagWarning'>
                 <span className="ico icon-warning"></span>
-                <span className="msg">Llenar todos los campos requeridos</span>
+                <span className="msg">{this.props.message}</span>
             </div>
         );
     }
