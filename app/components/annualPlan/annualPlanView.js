@@ -82,14 +82,12 @@ class annualPlanView extends React.Component {
         );
     }
     returnToMenu(){
-        console.log("regresar a menu", this.props)
         this.props.actions.cleanAnnualPlan();
         this.props.history.push({
             pathname: '/menu'
         });
     }
     render() {
-        console.log("props", this.props)
 		return (
 			<div className="proyeccionanual">
                 <span className="title">Proyección Anual</span>

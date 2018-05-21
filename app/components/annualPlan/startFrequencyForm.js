@@ -3,7 +3,6 @@ import AppStore from '../../data/store';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 
 function getAppState() {
-    console.log(AppStore.getFormAnnualPlanInfo().questionsPI)
     return AppStore.getFormAnnualPlanInfo().questionsPI;
 }
 
