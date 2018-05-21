@@ -20,7 +20,6 @@ class PrintOptions extends React.Component {
         }else if(id === 3){
             this.props.actions.getAssistantInfo(this.state.selected, id);
         }else if(id === 5){
-            console.log("lista de alumnos para crear proyeccion anual")
             this.props.actions.getStudentsWithoutAnnualPlan();
         }else if(id === 6){
             this.props.actions.getStudentsWithAnnualPlan();

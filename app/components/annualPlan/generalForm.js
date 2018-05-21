@@ -83,7 +83,6 @@ class GeneralForm extends React.Component {
         );
     }
     setFinalScore(){
-        console.log("props", this.props)
         this.props.actions.setAnnualPlan(this.state.finalScore, this.props.view);
     }
     render() {
