@@ -585,6 +585,18 @@ let AppData = {
         .catch(function (error){
             console.log(error);
         });
+    },
+    cleanAnnualPlan(){
+        console.log("vaciar")
+        AppData.data.annualPlanInfo = null;
+        AppData.data.annualPlan= null;
+        AppData.data.annualPlanResults.view=0;
+        AppData.data.annualPlanResults.infoStudent="";
+        AppData.data.annualPlanResults.exams=[];
+        AppData.data.annualPlanResults.finalScore=0;
+        AppData.data.annualPlanResults.startPoint=[];
+        
+        AppStore.emitChange();
     }
 }
 
@@ -709,7 +721,10 @@ dispatcher.register((action) => {
         break;
     case actionTypes.GET_STUDENTSWITHANNUALPLAN:
         AppData.getStudentsWithAnnualPlan();
-        break;
+        break; 
+    case actionTypes.CLEAN_ANNUALPLAN:
+        AppData.cleanAnnualPlan();
+        break; 
     default: 
 		// no op
     }

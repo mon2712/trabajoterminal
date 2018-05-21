@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } fr
 class annualPlanView extends React.Component {
     constructor(props){
         super(props);
+        this.returnToMenu=this.returnToMenu.bind(this);
         //this.state={
             
         //};
@@ -80,13 +81,20 @@ class annualPlanView extends React.Component {
             </div>
         );
     }
-
+    returnToMenu(){
+        console.log("regresar a menu", this.props)
+        this.props.actions.cleanAnnualPlan();
+        this.props.history.push({
+            pathname: '/menu'
+        });
+    }
     render() {
         console.log("props", this.props)
 		return (
 			<div className="proyeccionanual">
-                ProyeccionAnual
+                <span className="title">Proyección Anual</span>
                 {this.renderPlan()}
+                <div className="button" onClick={this.returnToMenu}>Finalizar</div>
             </div>
 		);
 	}

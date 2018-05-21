@@ -198,6 +198,11 @@ const Actions = {
         dispatcher.dispatch({
             type: actionTypes.GET_STUDENTSWITHANNUALPLAN
         });
-    },
+    }, 
+    cleanAnnualPlan() {
+        dispatcher.dispatch({
+            type: actionTypes.CLEAN_ANNUALPLAN
+        });
+    }, 
 };
 export default Actions;
