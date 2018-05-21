@@ -15,10 +15,15 @@ class PrintOptions extends React.Component {
     activeView(id){
         if(id === 1  || id === 4){
             this.props.actions.getAllAssistants();
-        }else if(id === 2 || id === 5 || id === 6){
+        }else if(id === 2){
             this.props.actions.getAllStudents("");
         }else if(id === 3){
             this.props.actions.getAssistantInfo(this.state.selected, id);
+        }else if(id === 5){
+            console.log("lista de alumnos para crear proyeccion anual")
+            this.props.actions.getStudentsWithoutAnnualPlan();
+        }else if(id === 6){
+            this.props.actions.getStudentsWithAnnualPlan();
         }
         this.setState({
             view: id

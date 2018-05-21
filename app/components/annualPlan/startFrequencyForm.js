@@ -3,14 +3,17 @@ import AppStore from '../../data/store';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 
 function getAppState() {
-    return AppStore.getFormAnnualPlanInfo();
+    console.log(AppStore.getFormAnnualPlanInfo().questionsPI)
+    return AppStore.getFormAnnualPlanInfo().questionsPI;
 }
 
 class StartFrequencyForm extends React.Component {
     constructor(props){
         super(props);
+        this.setStartPoint=this.setStartPoint.bind(this);     
+        this._onChange = this._onChange.bind(this);   
         this.state={
-            results: getAppState().questionsPI
+            results: getAppState()
         }
     }
     componentDidMount() {
@@ -20,28 +23,27 @@ class StartFrequencyForm extends React.Component {
         AppStore.removeChangeListener(this._onChange);
     }
     _onChange() {
-       this.setState({results: getAppState().questionsPI});
+        if(this.refs.myRef){
+            this.setState({
+            results: getAppState()
+            });
+        }
     }
     selectAnswer(answer, question){
-        //var total = this.state.finalScore;
         var arrayChange = this.state.results;
-        //total = total - parseInt(arrayChange[question].score);    
           
         arrayChange[question].selected = answer;
-        //arrayChange[question].score = score;
-        //total = total + parseInt(score);
         this.setState({
             results: arrayChange
         });
     }
     renderAnswers(id,answers, indexQs){
-        console.log("state", this.state.results)
         return(
             <div className="answers">
                 {
                     answers.map((answer, index) => (
                         <div className="ans" key={index}>
-                            <div className={this.state.results[indexQs].selected === answer.id  ? "checkbox active" : "checkbox"} onClick={() => this.selectAnswer(answer.id, indexQs)} >
+                            <div className={parseInt(this.state.results[indexQs].selected) === answer.id  ? "checkbox active" : "checkbox"} onClick={() => this.selectAnswer(answer.id, indexQs)} >
                                 <span className="ico icon-checkmark"></span>
                             </div>
                             <span>{answer.answer}</span>
@@ -65,16 +67,32 @@ class StartFrequencyForm extends React.Component {
             </div>
         );
     }
+    setStartPoint(){
+        var array = [];
+        var seleccionada = "";
+        var valor = 0;
+
+        this.state.results.map((question, index) => {
+            question.answers.map((answer, index2) => {
+                if(parseInt(question.selected) === answer.id){
+                    seleccionada = answer.answer;
+                    valor= answer.score;
+                }
+            });
+            var obj = {identificador: question.identification, answer: valor, answerLbl: seleccionada};
+            array.push(obj);
+        });
+        this.props.actions.setAnnualPlan(array, this.props.view);
+    }
     render() {
-        console.log(this.props.questions)
         return (
-			<div className='formGeneralContainer'>
+			<div className='formGeneralContainer' ref="myRef">
                 <span className="title">Responder el test para el punto de inicio</span>
                 {
                     this.props.questions.length !== 0 ? 
                         <div>
                             {this.renderGeneralForm()} 
-                            <div className="button">Aceptar</div>
+                            <div className="button" onClick={this.setStartPoint}>Aceptar</div>
                         </div>
                     : 
                     null

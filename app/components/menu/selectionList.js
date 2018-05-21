@@ -244,7 +244,7 @@ class SelectionList extends React.Component {
                     <div className={this.state.selectAll === true ? "checkbox active" : "checkbox"} onClick={this.selectAll}>
                         <span className="ico icon-checkmark"></span>
                     </div>
-                    <span> {this.props.view === 1 ? "Generar gafetes de todos los usuarios" : this.props.view === 2 ?  "Generar etiquetas de todos los alumnos" : ""}</span>
+                    <span className="tagSelection"> {this.props.view === 1 ? "Generar gafetes de todos los usuarios" : this.props.view === 2 ?  "Generar etiquetas de todos los alumnos" : ""}</span>
                 </div>
                 <div className="peopleContainer">
                     {this.props.allPeople.map((person, i) => (

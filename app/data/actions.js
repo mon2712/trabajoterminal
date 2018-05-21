@@ -182,12 +182,22 @@ const Actions = {
             infoToGet
         });
     }, 
-    setAnnualPlan(array, view){
+    setAnnualPlan(result, view){
         dispatcher.dispatch({
             type: actionTypes.SET_ANNUALPLAN,
             result,
             view
         });
     }, 
+    getStudentsWithoutAnnualPlan() {
+        dispatcher.dispatch({
+            type: actionTypes.GET_STUDENTSWITHOUTANNUALPLAN
+        });
+    },
+    getStudentsWithAnnualPlan() {
+        dispatcher.dispatch({
+            type: actionTypes.GET_STUDENTSWITHANNUALPLAN
+        });
+    },
 };
 export default Actions;

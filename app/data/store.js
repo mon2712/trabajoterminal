@@ -76,11 +76,13 @@ let AppData = {
         },
         annualPlanInfo: null,
         annualPlanResults: {
-            view: 1,
+            view: 0,
+            infoStudent: "",
             exams: [],
             finalScore: 0,
             startPoint: []
-        }
+        },
+        annualPlan: null
     },
     confirmLogin(){
         if(localStorage.getItem("code") !== null){
@@ -524,7 +526,65 @@ let AppData = {
         });*/
     },
     setAnnualPlan(action){
-        console.log("store", action)
+        if(action.view === 0){
+            AppData.data.annualPlanResults.exams = action.result.finalArray;
+            AppData.data.annualPlanResults.infoStudent = action.result.infoStudent;
+            AppData.data.annualPlanResults.view = action.view+1;
+            AppStore.emitChange(); 
+        }else if(action.view === 1){
+            AppData.data.annualPlanResults.finalScore = action.result;
+            AppData.data.annualPlanResults.view = action.view+1;
+            AppStore.emitChange(); 
+        }else if(action.view === 2){
+            AppData.data.annualPlanResults.startPoint = action.result; 
+            AppStore.emitChange();  
+            axios.put('http://localhost:8088/pt1.pt2/webapi/proyeccionAnual/setAnnualPlan', 
+            {
+                resultsTest: AppData.data.annualPlanResults
+            }
+            ,{
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(function (response){
+                AppData.data.annualPlan = response.data.annualPlan.info;
+                AppData.data.annualPlanResults.view = 3;
+                AppStore.emitChange();
+            })
+            .catch(function (error){
+                console.log(error);
+            });
+        }
+        
+    },
+    getStudentsWithoutAnnualPlan(){
+        axios.get('http://localhost:8088/pt1.pt2/webapi/alumno/getStudentsWithoutAnnualPlan')
+        .then(function (response){
+            if(response.data.allStudents.length === 0){
+                AppData.data.students = "";
+            }else{
+                AppData.data.students = response.data.allStudents;
+            }
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log(error);
+        });
+    },
+    getStudentsWithAnnualPlan(){
+        axios.get('http://localhost:8088/pt1.pt2/webapi/alumno/getStudentsWithAnnualPlan')
+        .then(function (response){
+            if(response.data.allStudents.length === 0){
+                AppData.data.students = "";
+            }else{
+                AppData.data.students = response.data.allStudents;
+            }
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log(error);
+        });
     }
 }
 
@@ -643,6 +703,12 @@ dispatcher.register((action) => {
         break; 
     case actionTypes.SET_ANNUALPLAN:
         AppData.setAnnualPlan(action);
+        break; 
+    case actionTypes.GET_STUDENTSWITHOUTANNUALPLAN:
+        AppData.getStudentsWithoutAnnualPlan();
+        break;
+    case actionTypes.GET_STUDENTSWITHANNUALPLAN:
+        AppData.getStudentsWithAnnualPlan();
         break;
     default: 
 		// no op

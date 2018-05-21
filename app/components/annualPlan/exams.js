@@ -12,7 +12,8 @@ class Exams extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.generalCount = this.generalCount.bind(this);
         this.setResultsExames = this.setResultsExames.bind(this);
-        this.move=this.move.bind(this);        
+        this.move=this.move.bind(this);  
+        this._onChange = this._onChange.bind(this);      
         this.state={
             results: getAppState(),
             perPage: 3,
@@ -271,7 +272,9 @@ class Exams extends React.Component {
             finalArray.push(obj);
         })
         console.log("final ", finalArray)
-        this.props.actions.setAnnualPlan(finalArray, this.props.view);
+        console.log("infoStudent ", this.props.infoStudent)
+        var newObj = {finalArray: finalArray, infoStudent: this.props.infoStudent}
+        this.props.actions.setAnnualPlan(newObj, this.props.view);
     }
     render() {
 		return (
