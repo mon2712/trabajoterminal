@@ -4,6 +4,7 @@ import StudentPaymentList from '../paymentList/studentPaymentList';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 import Exams from '../annualPlan/exams';
 import GeneralForm from '../annualPlan/generalForm';
+import InfoStudent from '../general/infoStudent';
 import StartFrequencyForm from '../annualPlan/startFrequencyForm';
 import AnnualPlanView from '../annualPlan/annualPlanView';
 
@@ -90,34 +91,12 @@ class ProyeccionAnual extends React.Component {
             this.props.actions.getFormAnualPlan(this.props.history.location.finalSelection);
             this.setState({
                 infoStudent: this.props.history.location.finalSelection.selectedStudent
-            })
+            });
         }else{
             this.props.history.push({
                 pathname: '/menu'
-              })
+              });
         }
-    }
-    renderStudentInfo(){
-        return(
-            <div className="infoStudentContainer" id="containerInfoStudent">
-                <div className="nameStudent">
-                    <span className="ico icon-smile"></span>
-                    <span className="name">{this.state.infoStudent.name}</span>
-                </div>
-                <div className="infoContainer">
-                    <div className="grade">
-                        <span className="tag">Grado Escolar: {this.state.infoStudent.grade}</span>
-                    </div>
-                    <div className="level">
-                        <span className="tag">Nivel de inicio: {this.state.infoStudent.level}</span>
-                    </div>
-                    <div className="date">
-                        <span className="tag">Ingreso: {this.state.infoStudent.startDate}</span>
-                    </div>
-                    
-                </div>
-            </div>
-        );
     }
     renderNavigationBar(){
         var h = this.state.infoStudent != "" ? document.getElementById('containerInfoStudent').clientHeight : 0;
@@ -162,7 +141,7 @@ class ProyeccionAnual extends React.Component {
 		return (
 			<div className='annualPlanContainer'>
                 {this.renderNavigationButton()}
-                {this.state.infoStudent !== "" ? this.renderStudentInfo() : null}
+                {this.state.infoStudent !== "" ? <InfoStudent infoStudent={this.state.infoStudent}/> : null}
                 {
                     this.props.store.annualPlanInfo != null || this.props.store.annualPlanInfo != "" ? 
                     

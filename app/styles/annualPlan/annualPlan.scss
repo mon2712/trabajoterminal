@@ -52,58 +52,6 @@
             }
         }
     }
-    .infoStudentContainer{
-        display: inline-block;
-        vertical-align: middle;
-        width: 30%;
-        background: rgba(0, 0, 0, 0.5);
-        border-radius: 10px 0px 0px 10px;
-        color: white;
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 10px;
-        .nameStudent{
-            width: 100%;
-            text-align: center;
-            .ico{
-                font-size: 30px;
-                width: 30%;
-                text-align: right;
-                padding-right: 5px;
-                display: inline-block;
-                vertical-align: middle;
-            }
-            .name{
-                font-size: 24px;
-                width: 70%;
-                display: inline-block;
-                vertical-align: middle;
-                text-align: left;
-                padding-left: 10px;
-            }
-        }
-        .infoContainer{
-            font-size: 20px;
-            text-align: center;
-            .grade{
-                display: inline-block;
-                vertical-align: middle;
-                width: 50%;
-                text-align: left;
-                font-size: 20px;
-            }
-            .level{
-                display: inline-block;
-                vertical-align: middle;
-                font-size: 20px;
-                width: 50%;
-            }
-            .date{
-                font-size: 22px;
-            }
-        }
-    }
     .processContainer{
         color: white;
         .navigationBarProcess{

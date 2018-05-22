@@ -594,6 +594,28 @@ let AppData = {
         AppData.data.annualPlanResults.startPoint=[];
         
         AppStore.emitChange();
+    },
+    getAnnualPlan(action){
+        axios.get('http://localhost:8088/pt1.pt2/webapi/proyeccionAnual/getAnnualPlan',{
+            params: {
+                idAlumno: action.id
+            }
+        })
+        .then(function (response){
+            if(response.data.annualPlan.err){
+                AppData.data.response.info = response.data.annualPlan;
+                AppData.data.response.active = true;
+                AppData.data.annualPlan = null;
+            }else{
+                AppData.data.annualPlan = response.data.annualPlan.info;
+                AppData.data.response.info = "";
+                AppData.data.response.active = false;
+            }
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log(error);
+        });
     }
 }
 
@@ -722,6 +744,9 @@ dispatcher.register((action) => {
     case actionTypes.CLEAN_ANNUALPLAN:
         AppData.cleanAnnualPlan();
         break; 
+    case actionTypes.GET_ANNUALPLAN:
+        AppData.getAnnualPlan(action);
+        break;
     default: 
 		// no op
     }
