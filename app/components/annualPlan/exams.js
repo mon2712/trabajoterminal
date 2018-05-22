@@ -255,7 +255,6 @@ class Exams extends React.Component {
         );
     }
     setResultsExames(){
-        console.log("results", this.state.results)
         var finalArray = [];
         this.state.results.finalScorePerLevel.map((level, index) => {
             var percentage = (level.real*100)/level.total;
@@ -268,11 +267,8 @@ class Exams extends React.Component {
                 desempeño="medio";
             }
             var obj={level: level.level, desempeño: desempeño};
-            console.log(obj)
             finalArray.push(obj);
         })
-        console.log("final ", finalArray)
-        console.log("infoStudent ", this.props.infoStudent)
         var newObj = {finalArray: finalArray, infoStudent: this.props.infoStudent}
         this.props.actions.setAnnualPlan(newObj, this.props.view);
     }
