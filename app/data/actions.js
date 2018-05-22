@@ -206,5 +206,11 @@ const Actions = {
             type: actionTypes.CLEAN_ANNUALPLAN
         });
     }, 
+    getAnnualPlan(id) {
+        dispatcher.dispatch({
+            type: actionTypes.GET_ANNUALPLAN,
+            id
+        });
+    }, 
 };
 export default Actions;
