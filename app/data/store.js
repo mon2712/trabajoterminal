@@ -82,7 +82,10 @@ let AppData = {
             finalScore: 0,
             startPoint: []
         },
-        annualPlan: null
+        annualPlan: null,
+        loader: {
+            selectionList: true
+        }
     },
     confirmLogin(){
         if(localStorage.getItem("code") !== null){
@@ -168,6 +171,7 @@ let AppData = {
             }
         })
         .then(function (response){
+            AppData.data.loader.selectionList = false;            
             if(response.data.allStudents.length === 0){
                 AppData.data.students = "";
             }else{
@@ -356,6 +360,7 @@ let AppData = {
     getAllAssistants(){
         axios.get('http://localhost:8088/pt1.pt2/webapi/asistente/getAllAssistants')
         .then(function (response){
+            AppData.data.loader.selectionList = false;
             if(response.data.allAssistants.length === 0){
                 AppData.data.assistants = "";
             }else{
@@ -420,6 +425,7 @@ let AppData = {
                 }
             })
             .then(function (response){
+                AppData.data.loader.selectionList = false;            
                 
                 AppData.data.assistant = response.data.assistantInfo;
                 AppStore.emitChange();
@@ -444,7 +450,6 @@ let AppData = {
             AppData.data.assistant.sabado = "", 
             AppData.data.assistant.type = "asistente", 
             AppStore.emitChange();
-
         }
     },
     setAssistant(action){
@@ -552,6 +557,7 @@ let AppData = {
     getStudentsWithoutAnnualPlan(){
         axios.get('http://localhost:8088/pt1.pt2/webapi/alumno/getStudentsWithoutAnnualPlan')
         .then(function (response){
+            AppData.data.loader.selectionList = false;                        
             if(response.data.allStudents.length === 0){
                 AppData.data.students = "";
             }else{
@@ -566,6 +572,7 @@ let AppData = {
     getStudentsWithAnnualPlan(){
         axios.get('http://localhost:8088/pt1.pt2/webapi/alumno/getStudentsWithAnnualPlan')
         .then(function (response){
+            AppData.data.loader.selectionList = false;                        
             if(response.data.allStudents.length === 0){
                 AppData.data.students = "";
             }else{

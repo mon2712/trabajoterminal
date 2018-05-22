@@ -2,6 +2,7 @@ import React from 'react';
 import CreateUser from './createUser';
 import RegisterPayment from '../general/registerPayment';
 import IncompleteInputs from '../general/incompleteInputs';
+import Loader from '../general/loader';
 import { BrowserRouter as browserHistory, Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 
 class SelectionList extends React.Component {

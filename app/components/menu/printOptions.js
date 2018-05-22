@@ -2,6 +2,7 @@ import React from 'react';
 import SelectionList from './selectionList';
 import CreateUser from './createUser';
 import AppStore from '../../data/store';
+import Loader from '../general/loader';
 
 class PrintOptions extends React.Component {
     constructor(props){
@@ -115,7 +116,7 @@ class PrintOptions extends React.Component {
 
                         ? <SelectionList {...this.props} allPeople={this.props.store.students} view={this.state.view} actions={this.props.actions}/>
                         
-                        : null
+                        : this.props.store.loader.selectionList === true ? <Loader {...this.props}/>  : null
                     }              
                 </div>
             </div>
