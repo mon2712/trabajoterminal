@@ -13,6 +13,28 @@
             text-align: center;
         }
     }
+    .errorContainer{
+        width: 60%;
+        margin: 0 auto;
+        border-radius: 10px;
+        border: 2px solid #f54848;
+        color: #f54848;
+        text-align: center;
+        padding: 15px;
+        margin-bottom: 10px;
+        span{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .ico{
+            width: 20%;
+            font-size: 25px;
+        }
+        .text{
+            width: 80%;
+            font-size: 18px;
+        }
+    }
     .button{
         cursor: pointer;
         height: 40px;

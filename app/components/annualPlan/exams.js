@@ -10,6 +10,7 @@ class Exams extends React.Component {
     constructor(props){
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.checkValue = this.checkValue.bind(this);
         this.generalCount = this.generalCount.bind(this);
         this.setResultsExames = this.setResultsExames.bind(this);
         this.move=this.move.bind(this);  
@@ -19,6 +20,8 @@ class Exams extends React.Component {
             perPage: 3,
             currentPage: 1,
             position: 0,
+            activeError: false,
+            msgError: "Los valores no pueden exceder el puntaje total del examen"
         }
     }
     componentDidMount() {
@@ -60,6 +63,7 @@ class Exams extends React.Component {
 
         examSet = sp[0]+"";
         levelSet = sp[1]+"";
+        var error = false;
 
         if(event.target.value.length < 3){
             if(event.target.value.length == 0){
@@ -86,7 +90,10 @@ class Exams extends React.Component {
                     if(level.exam === examSet){
                         level.levels.map((scores, index) => {
                             if(scores.level === levelSet){
-                                scores.real = event.target.value
+                                scores.real = event.target.value;
+                            }
+                            if(parseInt(scores.real)>scores.score){
+                                error=true;
                             }
                             
                         })
@@ -95,9 +102,15 @@ class Exams extends React.Component {
                 })
 
                 stateArray.examsInfo = resultsArray;
+                var error = false;
+
+                if(this.state.activeError === true){
+                    error=false;
+                }
 
                 this.setState({
-                    results: stateArray
+                    results: stateArray,
+                    activeError: error
                 })
             }
         }else{
@@ -111,7 +124,10 @@ class Exams extends React.Component {
                 if(level.exam === examSet){
                     level.levels.map((scores, index) => {
                         if(scores.level === levelSet){
-                            scores.real = parseInt(stringFinal)
+                            scores.real = parseInt(stringFinal);
+                        }
+                        if(parseInt(scores.real)>scores.score){
+                            error=true;
                         }
                     })
                 }
@@ -121,7 +137,8 @@ class Exams extends React.Component {
             stateArray.examsInfo = resultsArray;
 
             this.setState({
-                results: stateArray
+                results: stateArray,
+                activeError: error
             })
         }
         this.generalCount();
@@ -149,6 +166,26 @@ class Exams extends React.Component {
 
         this.setState({
             results: stateArray
+        })
+    }
+    checkValue(event){
+        var examSet, levelSet;
+        var sp = event.target.name.split("/");
+        var resultsArray = this.state.results.examsInfo;
+
+        examSet = sp[0]+"";
+        levelSet = sp[1]+"";
+        resultsArray.map((level, index) => {
+            if(level.exam === examSet){
+                level.levels.map((scores, index) => {
+                    if(parseInt(scores.real) > scores.score){
+                        this.setState({
+                            activeError: true
+                        });
+                    }
+                })
+            }
+            
         })
     }
     renderExams(){
@@ -213,7 +250,7 @@ class Exams extends React.Component {
                                                                 {level.level}
                                                             </td>
                                                             <td className="colRight">
-                                                                <input type="number" className="score" name={exam.exam+"/"+level.level} value={this.state.results.examsInfo[index].levels[index2].real} min="0" max={level.score} maxLength="2" onChange={this.handleChange}></input>
+                                                                <input type="number" className="score" name={exam.exam+"/"+level.level} value={this.state.results.examsInfo[index].levels[index2].real} min="0" max={level.score} maxLength="2" onChange={this.handleChange} onBlur={this.checkValue}></input>
                                                                 <span className="maxScore">{"/"+level.score}</span>
                                                             </td>
                                                         </tr>
@@ -255,29 +292,44 @@ class Exams extends React.Component {
         );
     }
     setResultsExames(){
-        var finalArray = [];
-        this.state.results.finalScorePerLevel.map((level, index) => {
-            var percentage = (level.real*100)/level.total;
-            var desempeño = "";
-            if(percentage<30){
-                desempeño="malo";
-            }else if(percentage>80){
-                desempeño="bueno";
-            }else{
-                desempeño="medio";
-            }
-            var obj={level: level.level, desempeño: desempeño};
-            finalArray.push(obj);
-        })
-        var newObj = {finalArray: finalArray, infoStudent: this.props.infoStudent}
-        this.props.actions.setAnnualPlan(newObj, this.props.view);
+        if(this.state.activeError !== true){
+            var finalArray = [];
+            this.state.results.finalScorePerLevel.map((level, index) => {
+                var percentage = (level.real*100)/level.total;
+                var desempeño = "";
+                if(percentage<30){
+                    desempeño="malo";
+                }else if(percentage>80){
+                    desempeño="bueno";
+                }else{
+                    desempeño="medio";
+                }
+                var obj={level: level.level, desempeño: desempeño};
+                finalArray.push(obj);
+            })
+            var newObj = {finalArray: finalArray, infoStudent: this.props.infoStudent}
+            this.props.actions.setAnnualPlan(newObj, this.props.view);
+        }else{
+            this.setState({
+                msgError: "Revisa los valores. Recuerda que no se puede exceder del puntaje del examen."
+            });
+        }
+    }
+    renderError(){
+        return(
+            <div className="errorContainer">
+                <span className="ico icon-warning"></span>
+                <span className="text">{this.state.msgError}</span>
+            </div>
+        );
     }
     render() {
 		return (
 			<div className='examContainer'>
                 <span className="title center">Puntajes totales</span> 
                 {this.props.store.annualPlanInfo !== null && this.state.results.length !== 0 ? this.renderFinalScore() : null}       
-                <span className="title">Ingresar los resultados por examen</span>         
+                <span className="title">Ingresar los resultados por examen</span>     
+                {this.state.activeError === true ? this.renderError() : null }    
                 {
                     this.props.store.annualPlanInfo != null && this.state.results.length !== 0 && this.state.results ? 
                     <div>
