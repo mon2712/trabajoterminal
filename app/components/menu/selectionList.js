@@ -189,25 +189,29 @@ class SelectionList extends React.Component {
                 var flag=1;
                 this.state.selectedExams.map((opt, index) => {
                     if(opt.length === 0){
-                        console.log("si esta vacio")
+                        //console.log("si esta vacio")
                     }else{
                         flag=0;
                     }
                 });
                 if(flag === 0){
                     var finalSelection = {selectedStudent: this.state.selected[0], selectedExams: this.state.selectedExams};
-                    //this.props.actions.getFormAnualPlan(finalSelection);
                     this.props.history.push({
-                        pathname: '/proyeccionAnual',
+                        pathname: '/crearProyeccionAnual',
                         selected: this.state.selected[0],
                         finalSelection: finalSelection
-                      })
-                    //this.props.history.push('/proyeccionAnual',this.state.selected);
+                      });
                 }else{
                     this.setState({
                         activeTag: true
                     });
                 }
+            }
+            if(this.props.view === 6){
+                this.props.history.push({
+                    pathname: '/proyeccionAnual',
+                    selected: this.state.selected[0]
+                });
             }
         }else{
             this.setState({

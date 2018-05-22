@@ -6,6 +6,7 @@ import TiempoReducido from './tiempoReducido/main';
 import PaymentList from './paymentList/main';
 import ViewCenter from './viewCenter/main';
 import ProyeccionAnual from './annualPlan/main';
+import GeneralViewProyeccionAnual from './annualPlan/generalViewAnnualPlan';
 import StudentsCalls from './studentsCalls/main';
 import Menu from '../components/menu/main';
 import actions from '../data/actions';
@@ -56,8 +57,8 @@ class App extends React.Component {
                         <PrivateRoute path="/llamadasPendientes" component={StudentsCalls}  store={this.state} actions={actions}/>
                         <PrivateRoute path="/paymentList" component={PaymentList}  store={this.state} actions={actions}/>
                         <PrivateRoute path="/vistaCentro" component={ViewCenter} store={this.state} actions={actions}/>
-                        <PrivateRoute path="/proyeccionAnual" component={ProyeccionAnual} store={this.state} actions={actions}/>
-
+                        <PrivateRoute path="/crearProyeccionAnual" component={ProyeccionAnual} store={this.state} actions={actions}/>
+                        <PrivateRoute path="/proyeccionAnual" component={GeneralViewProyeccionAnual} store={this.state} actions={actions}/>
 
                         <Route path="/login" render={(props) => (
                             localStorage.getItem("code") !== null && localStorage.getItem("code") === "1"
