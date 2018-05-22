@@ -10,10 +10,14 @@ import AnnualPlanView from '../annualPlan/annualPlanView';
 class ProyeccionAnual extends React.Component {
     constructor(props){
         super(props);
+        this.activePopUp = this.activePopUp.bind(this);
+        this.acceptExit = this.acceptExit.bind(this);
+        this.closeExit = this.closeExit.bind(this);
         this.state={
             infoStudent: "",
             view: 0,
             newHeight: 1,
+            activePopUp: false,
             steps: [
                 {
                     tag: "Registro de exámenes",
@@ -34,11 +38,53 @@ class ProyeccionAnual extends React.Component {
             ]
         };
     }
+    activePopUp(){
+        console.log("en active popUp", this.props.store.annualPlanResults.view)
+        if(this.props.store.annualPlanResults.view === 0 || this.props.store.annualPlanResults.view === 1 || this.props.store.annualPlanResults.view === 2){
+            console.log("hola")
+            this.setState({
+                activePopUp: !this.state.activePopUp
+            })
+        }else{
+            console.log("si puede salir normal")
+            this.props.actions.cleanAnnualPlan();
+            this.props.history.push({
+                pathname: '/menu'
+            });
+        }
+    }
+    acceptExit(){
+        this.props.actions.cleanAnnualPlan();
+        this.props.history.push({
+            pathname: '/menu'
+        });
+    }
+    closeExit(){
+        this.setState({
+            activePopUp: !this.state.activePopUp
+        })
+    }
     renderNavigationButton(){
         return(
             <div className='navigationContainer'>
-                <span className="ico icon-left-arrow"></span>
+                <span className="ico icon-left-arrow" onClick={this.activePopUp}></span>
                 <span className="navigationText">Proyección Anual</span>
+            </div>
+        );
+    }
+    renderWarning(){
+        return(
+            <div className="popUpContainer">
+                <div className="warningPopUp">
+                    <div className="warningMsg">
+                        <span className="ico icon-warning"></span>
+                        <span className="text">Sí sales en este punto del proceso perderás todos tus cambios. ¿Estas seguro de querer salir?</span>
+                    </div>
+                   <div className="buttonContainer">
+                        <div className="button" onClick={this.acceptExit}>Aceptar</div>
+                        <div className="button" onClick={this.closeExit}>Cancelar</div>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -118,7 +164,7 @@ class ProyeccionAnual extends React.Component {
         
 		return (
 			<div className='annualPlanContainer'>
-                <NavigationContainer texto="Proyección Anual" path='/menu'/>
+                {this.renderNavigationButton()}
                 {this.state.infoStudent !== "" ? this.renderStudentInfo() : null}
                 {
                     this.props.store.annualPlanInfo != null || this.props.store.annualPlanInfo != "" ? 
@@ -150,6 +196,7 @@ class ProyeccionAnual extends React.Component {
                     : 
                     null
                 }
+                {this.state.activePopUp === true ? this.renderWarning() : null}
 			</div>
 		);
 	}
