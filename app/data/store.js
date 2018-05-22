@@ -450,7 +450,6 @@ let AppData = {
             AppData.data.assistant.sabado = "", 
             AppData.data.assistant.type = "asistente", 
             AppStore.emitChange();
-
         }
     },
     setAssistant(action){
