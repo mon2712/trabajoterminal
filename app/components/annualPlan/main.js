@@ -39,14 +39,11 @@ class ProyeccionAnual extends React.Component {
         };
     }
     activePopUp(){
-        console.log("en active popUp", this.props.store.annualPlanResults.view)
         if(this.props.store.annualPlanResults.view === 0 || this.props.store.annualPlanResults.view === 1 || this.props.store.annualPlanResults.view === 2){
-            console.log("hola")
             this.setState({
                 activePopUp: !this.state.activePopUp
             })
         }else{
-            console.log("si puede salir normal")
             this.props.actions.cleanAnnualPlan();
             this.props.history.push({
                 pathname: '/menu'
