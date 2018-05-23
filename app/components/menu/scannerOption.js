@@ -36,7 +36,7 @@ class ScannerOption extends React.Component {
         return(
             <div className="scanDiv">
                 <span className="ico icon-multiply" onClick={this.props.closePopUp()}></span>
-                <span className="titleContainer">Escanea código de alumno o usuario</span>
+                <span className="titleContainer">Escanea código</span>
                 <div className="scanContainer">
                     <span className="icoQr icon-qrcode"></span>
                     <input type="text" value={this.state.result} onChange={this.handleChange} ></input>

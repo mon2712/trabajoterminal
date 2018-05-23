@@ -1,5 +1,5 @@
 .studentFileContainer{
-    width: 60%;
+    width: 75%;
     background: white;
     color: #a7a7a7;
     margin: 0 auto;
@@ -42,12 +42,20 @@
             line-height: 55px;
             display: block;
         }
+
         .paymentInfo{
-            font-size: 16px;
+            font-size: 14px;
             color: red;
             text-align: center;
-            span{
-                margin-right: 10px;
+            .tag{
+                display: inline-block;
+                vertical-align: middle;
+                width: 80%;
+            }
+            .ico{
+                display: inline-block;
+                vertical-align: middle;
+                width: 10%;
             }
         }
         .assistanceFaces{
