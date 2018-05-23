@@ -1,4 +1,5 @@
 import React from 'react';
+import Loader from '../general/loader';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 
 class annualPlanView extends React.Component {

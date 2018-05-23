@@ -6,7 +6,8 @@
                 "text": "Asistencia",
                 "path": "/asistencia",
                 "color": "#156E7F",
-                "popUp": false
+                "popUp": true,
+                "id": 7
             },{
                 "ico": "icon-learning",
                 "text": "Vista Centro",

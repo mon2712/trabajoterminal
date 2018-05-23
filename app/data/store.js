@@ -84,8 +84,12 @@ let AppData = {
         },
         annualPlan: null,
         loader: {
-            selectionList: true
-        }
+            selectionList: true,
+            annualPlan: true,
+            asisstance: true
+        },
+        popUpAssistance: false,
+        welcomeInfo: null
     },
     confirmLogin(){
         if(localStorage.getItem("code") !== null){
@@ -514,6 +518,7 @@ let AppData = {
             }
         })
         .then(function (response){
+            AppData.data.loader.annualPlan = false;   
             AppData.data.annualPlanInfo = response.data.infoForm
             AppStore.emitChange();
         })
@@ -522,12 +527,15 @@ let AppData = {
         });
     },
     setAnnualPlan(action){
+        AppData.data.loader.annualPlan = true;
         if(action.view === 0){
+            AppData.data.loader.annualPlan = false;
             AppData.data.annualPlanResults.exams = action.result.finalArray;
             AppData.data.annualPlanResults.infoStudent = action.result.infoStudent;
             AppData.data.annualPlanResults.view = action.view+1;
             AppStore.emitChange(); 
         }else if(action.view === 1){
+            AppData.data.loader.annualPlan = false;
             AppData.data.annualPlanResults.finalScore = action.result;
             AppData.data.annualPlanResults.view = action.view+1;
             AppStore.emitChange(); 
@@ -544,6 +552,7 @@ let AppData = {
                 }
             })
             .then(function (response){
+                AppData.data.loader.annualPlan = false;            
                 AppData.data.annualPlan = response.data.annualPlan.info;
                 AppData.data.annualPlanResults.view = 3;
                 AppStore.emitChange();
@@ -552,7 +561,7 @@ let AppData = {
                 console.log(error);
             });
         }
-        
+        AppStore.emitChange();
     },
     getStudentsWithoutAnnualPlan(){
         axios.get('http://localhost:8088/pt1.pt2/webapi/alumno/getStudentsWithoutAnnualPlan')
@@ -602,6 +611,7 @@ let AppData = {
             }
         })
         .then(function (response){
+            AppData.data.loader.annualPlan = false;
             if(response.data.annualPlan.err){
                 AppData.data.response.info = response.data.annualPlan;
                 AppData.data.response.active = true;
@@ -616,6 +626,26 @@ let AppData = {
         .catch(function (error){
             console.log(error);
         });
+    },
+    setAssistanceStudent(action){
+        console.log("resp ", action.scanned)
+        axios.post('http://localhost:8088/pt1.pt2/webapi/recepcion/setAssistance', {
+            scanned: action.scanned
+        })
+        .then(function (response){
+            AppData.data.popUpAssistance = false;
+            AppData.data.welcomeInfo = response.data.student;
+            AppData.data.studentFileInfo = response.data.student;            
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log(error);
+        });
+    },
+    tooglePopUp(){
+        console.log("llego")
+        AppData.data.popUpAssistance = true;
+        AppStore.emitChange();
     }
 }
 
@@ -640,6 +670,9 @@ AppStore = assign({}, AppStore, {
     },
     getFormAnnualPlanInfo: () => {
         return AppData.data.annualPlanInfo;
+    },
+    getWelcomeInfo: () => {
+        return AppData.data.welcomeInfo
     }
 });
 
@@ -746,6 +779,12 @@ dispatcher.register((action) => {
         break; 
     case actionTypes.GET_ANNUALPLAN:
         AppData.getAnnualPlan(action);
+        break; 
+    case actionTypes.SET_ASSISTANCESTUDENT:
+        AppData.setAssistanceStudent(action);
+        break; 
+    case actionTypes.TOOGLE_POPUP:
+        AppData.tooglePopUp();
         break;
     default: 
 		// no op

@@ -4,6 +4,7 @@ import PrintOptions from './printOptions';
 import RegisterPayment from '../general/registerPayment';
 import SelectionList from './selectionList';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
+import ScannerOption from './scannerOption';
 
 class ButtonOptions extends React.Component {
     constructor(props){
@@ -17,10 +18,13 @@ class ButtonOptions extends React.Component {
         };  
     }
     sendAction(id){
+        console.log("id ", id)
         if(id===4){
             this.props.actions.getAllStudents("");
         }
-
+        if(id === 7){
+            this.props.actions.tooglePopUp();
+        }
         this.setState({
             popUpActive: true,
             id: id
@@ -60,6 +64,7 @@ class ButtonOptions extends React.Component {
     }
 
     render() {
+        console.log("props",this.props)
 		return (
             <div className="optionsContainer">
                {this.props.store.menuTypes[this.props.type] != undefined ? this.renderButtons() : null}
@@ -82,8 +87,11 @@ class ButtonOptions extends React.Component {
                             </div>
                         </div>
                     :
-                    this.state.popUpActive === true && this.state.id===5 ? 
+                    this.state.popUpActive === true && this.state.id===5 ?
                         <PrintOptions {...this.props} startView={this.state.id} closePopUp={()=>this.closePopUp}/> 
+                    :
+                    this.props.store.popUpAssistance === true && this.state.id===7 ?
+                        <ScannerOption {...this.props} startView={this.state.id} closePopUp={()=>this.closePopUp}/>
                     :
                     null
                 }                

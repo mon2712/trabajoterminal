@@ -1,0 +1,54 @@
+.scannerContainer{
+    width: 20%;
+    margin: 0px auto;
+    background:  #5dc4c4;
+    margin-top: 5%;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    .titleContainer{
+        font-size: 25px;
+        color: #21647F;
+        width: 80%;
+        margin-bottom: 10px;
+    }
+    .ico{
+        color: white;
+        font-size: 30px;
+        font-weight: bolder;
+        float: right;
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+        margin-right: 10px;
+        &:hover{
+            color: #a7a7a7;
+        }
+    }
+    .scanContainer{
+        background: #5aa9a9;
+        border-radius: 10px;
+        padding: 10px;
+        .icoQr{
+            display: block;
+            color: white;
+            margin-bottom: 10px;
+            font-size: 80px;
+        }
+        input{
+            display: inline-block;
+            vertical-align:  middle;
+            border-radius: 5px;
+            height: 40px;
+            border-color: white;
+            font-size: 20px;
+            color: #21647F;
+            width: 30%;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            position: relative;
+            text-align: center;
+        }
+    }
+}
