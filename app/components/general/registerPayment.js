@@ -196,7 +196,7 @@ class RegisterPayment extends React.Component {
     renderResponse(){
         return(
             <div className="response">
-                <span className="mensaje">{this.props.store.response.info.messageError}</span>
+                <span className="mensaje">{this.props.store.responsePayment.info.messageError}</span>
                 <div className="button" onClick={this.props.closePopUp()}>Aceptar</div>
             </div>
         );
@@ -243,7 +243,7 @@ class RegisterPayment extends React.Component {
         return (
             <div>
                 {this.state.activeTag === true ? <IncompleteInputs message={"Llenar campos requeridos"}/> : null}
-                {this.props.store.response.active ===true ? this.renderResponse() : this.renderForm()}
+                {this.props.store.responsePayment.active ===true ? this.renderResponse() : this.renderForm()}
             </div>
         );
     }

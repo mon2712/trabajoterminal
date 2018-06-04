@@ -74,6 +74,10 @@ let AppData = {
             info: "",
             active: false
         },
+        responsePayment: {
+            info: "",
+            active: false
+        },
         annualPlanInfo: null,
         annualPlanResults: {
             view: 0,
@@ -86,7 +90,8 @@ let AppData = {
         loader: {
             selectionList: true,
             annualPlan: true,
-            asisstance: true
+            asisstance: true,
+            notification: true
         },
         popUpAssistance: false,
         welcomeInfo: null
@@ -189,11 +194,21 @@ let AppData = {
 
     },
     getNotifications(action){
-        $.getJSON('/app/fillData/notifications.js', function(info) {
-           AppData.data.notifications = info.notifications;
-           AppStore.emitChange();
-        }).fail(function(error) {
-            console.error(error);
+        console.log("si llega hasta aca")
+        axios.get('http://localhost:8088/pt1.pt2/webapi/recepcion/getNotifications')
+        .then(function (response){
+            AppData.data.loader.notification = false;          
+            if(response.data.notifications.length === 0){
+                console.log("esta vacio")
+                AppData.data.notifications = "";
+            }else{
+                console.log("no esta vacio")
+                AppData.data.notifications = response.data.notifications;
+            }
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log(error);
         });
     },
     getStudentsAtCenter(action){
@@ -492,8 +507,8 @@ let AppData = {
             }
         })
         .then(function (response){
-            AppData.data.response.info = response.data.response;
-            AppData.data.response.active = true;
+            AppData.data.responsePayment.info = response.data.response;
+            AppData.data.responsePayment.active = true;
             AppStore.emitChange();
         })
         .catch(function (error){
@@ -637,6 +652,22 @@ let AppData = {
             AppData.data.welcomeInfo = response.data.student;
             AppData.data.studentFileInfo = response.data.student;            
             AppStore.emitChange();
+            axios.get('http://localhost:8088/pt1.pt2/webapi/recepcion/getNotifications')
+            .then(function (response){
+                AppData.data.loader.notification = false;            
+                if(response.data.notifications.length === 0){
+                    console.log("entra a vacio")
+                    AppData.data.notifications = "";
+                }else{
+                    console.log("no esta vacio")
+                    AppData.data.notifications = response.data.notifications;
+                }
+                AppStore.emitChange();
+            })
+            .catch(function (error){
+                console.log(error);
+            });
+            
         })
         .catch(function (error){
             console.log(error);

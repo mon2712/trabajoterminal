@@ -24,9 +24,9 @@ class StudentFile extends React.Component {
             </div>
         );
     }
-    render() {
-		return (
-			<div className='studentFileContainer'>
+    renderStudent(){
+        return(
+            <div>
                 <div className="leftStudentFile">
                     <span className="nameStudent">{this.props.store.studentFileInfo.name + " " + this.props.store.studentFileInfo.lastName}</span>
                     <div className="infoTutor">
@@ -62,6 +62,34 @@ class StudentFile extends React.Component {
                     }
                     {this.renderAssistance()}
                 </div>
+            </div>
+        );
+    }
+    renderAssistant(){
+        return(
+            <div>
+                <div className="leftStudentFile">
+                    <span className="nameStudent">{this.props.store.studentFileInfo.name + " " + this.props.store.studentFileInfo.lastName}</span>
+                    <div className="infoPhones">
+                        <span className="icon-call-answer" style={{display: this.props.store.studentFileInfo.phone !== "" ? 'inline-block' : 'none'}}></span>
+                        <span style={{display: this.props.store.studentFileInfo.phone !== "" ? 'inline-block' : 'none'}}>{this.props.store.studentFileInfo.phone}</span>
+                    </div>
+
+                    <span className="icon-clock2"> </span>
+                    <span className="timeEntrance">{this.props.store.studentFileInfo.realEntrance}</span>
+                </div>
+                <div className="rightStudentFile">
+                    <span className="cross icon-multiply" onClick={this.closeFileStudent}></span>
+                    <span className="level">{this.props.store.studentFileInfo.level}</span>
+                
+                </div>
+            </div>
+        );
+    }
+    render() {
+		return (
+			<div className='studentFileContainer'>
+                {this.props.store.studentFileInfo.type === "student" ? this.renderStudent() : this.renderAssistant()}
 			</div>
 		);
 	}

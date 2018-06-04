@@ -1,5 +1,6 @@
 import React from 'react';
 import Notification from '../menu/notification';
+import Loader from '../general/loader';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 
 
@@ -26,9 +27,9 @@ class Panel extends React.Component {
 		return (
             <div className="panelContainer">
                 {this.props.store.isAuthenticated === true ? this.renderSessionInfo() : null}
-                <Notification {...this.props}/>
+                {this.props.store.loader.notification === true ? <Loader {...this.props}/> : <Notification {...this.props}/> }
             </div>
 		);
 	}
   }
-  export default Panel;
+  export default withRouter(Panel);

@@ -14,7 +14,18 @@ class PaymentList extends React.Component {
         }
     }
     componentDidMount() {
-        this.props.actions.getStudentMissPayment();
+        console.log("props en main ", this.props.history)
+        if(this.props.history.location.infoStudent){
+            console.log("viene de notificaciones")
+            this.setState({
+                view: 1,
+                infoStudent: this.props.history.location.infoStudent
+            });
+        }else{
+            console.log("no viene de notificaciones")
+            this.props.actions.getStudentMissPayment();
+        }
+        
     }
     openPaymentListStudent(student){
         
@@ -59,4 +70,4 @@ class PaymentList extends React.Component {
 	}
   }
   
-  export default PaymentList;
+  export default withRouter(PaymentList);
