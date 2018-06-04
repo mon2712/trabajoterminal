@@ -39,7 +39,6 @@ class Welcome extends React.Component {
         );
     }
     render() {
-        console.log("props ", this.props)
         return (
             <div className='divLoader'>
                 {this.props.store.welcomeInfo !== null ? this.renderWelcomeStudent() : null}

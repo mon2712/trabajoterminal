@@ -18,7 +18,6 @@ class ButtonOptions extends React.Component {
         };  
     }
     sendAction(id){
-        console.log("id ", id)
         if(id===4){
             this.props.actions.getAllStudents("");
         }
@@ -64,7 +63,6 @@ class ButtonOptions extends React.Component {
     }
 
     render() {
-        console.log("props",this.props)
 		return (
             <div className="optionsContainer">
                {this.props.store.menuTypes[this.props.type] != undefined ? this.renderButtons() : null}

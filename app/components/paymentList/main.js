@@ -14,15 +14,12 @@ class PaymentList extends React.Component {
         }
     }
     componentDidMount() {
-        console.log("props en main ", this.props.history)
         if(this.props.history.location.infoStudent){
-            console.log("viene de notificaciones")
             this.setState({
                 view: 1,
                 infoStudent: this.props.history.location.infoStudent
             });
         }else{
-            console.log("no viene de notificaciones")
             this.props.actions.getStudentMissPayment();
         }
         

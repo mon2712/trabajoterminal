@@ -24,7 +24,6 @@ class StudentPaymentList extends React.Component {
     }
     componentDidMount() {
         this.getData();
-        console.log(this.props.infoStudent.idStudent)
         this.props.actions.getPaymentListStudent(this.props.infoStudent.idStudent);
     }
     renderList(){
@@ -44,7 +43,6 @@ class StudentPaymentList extends React.Component {
         });
     }
     renderStudentInfo(){
-        console.log(this.props.infoStudent)
         return(
             <div className="infoStudentContainer" id="containerInfoStudent">
                 <div className="nameStudent">

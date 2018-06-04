@@ -11,10 +11,8 @@ class Notification extends React.Component {
         console.log("hola");
     }
     goToNotification(obj){
-        console.log("props", this.props.store.notifications, obj)
 
         if(parseInt(obj.idStudent) === 0){
-            console.log("va a listas")
             this.props.history.push({
                 pathname: '/llamadasPendientes'
             });
@@ -27,7 +25,6 @@ class Notification extends React.Component {
         }
     }
     renderNotification(){
-        console.log("llega a la funcion para renderizar")
         var notifications = this.props.store.notifications;
 
         return notifications.map((opt, index) => (
@@ -47,7 +44,6 @@ class Notification extends React.Component {
     }
 
     render() {
-        console.log("llega a notificaciones", this.props.store.notifications.length)
 	    return (
             <div className="notificationsContainer">
                 {this.props.store.notifications !== null && this.props.store.notifications !== "" && this.props.store.notifications.length !== 0 ? this.renderNotification() : null}

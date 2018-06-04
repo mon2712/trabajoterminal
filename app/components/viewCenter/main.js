@@ -31,6 +31,10 @@ class ViewCenter extends React.Component {
                         <span className="circle urgent"></span>
                         <span className="text urgent">Salida Urgente</span>
                     </div>
+                    <div className="statusSize">
+                        <span className="circle tr">TR</span>
+                        <span className="text tr">Tiempo Reducido</span>
+                    </div>
                 </div>
             </div>
         );
@@ -44,13 +48,18 @@ class ViewCenter extends React.Component {
         );
     }
     renderStudent(student, i){
+        console.log("alumno en centro ",  student.timeAtCenter)
+        var d = new Date("October 13, 2014 " + student.timeReduced);
+        console.log(d)
         return(
             <div className={student.timeAtCenter>=45 && student.timeAtCenter<=60? 'studentContainer soon' : student.timeAtCenter>60 ? 'studentContainer urgent' : 'studentContainer normal'} key={i}>
                 <span className="name">{student.name}</span>
                 <span className="level">{student.level}</span>
+                <span className="tr" style={{display: student.timeReduced === '00:00:00' ? 'none' : 'block'}}>{"TR"}</span>
                 <div className="timeCont">
-                    <span>{student.lastName}</span>
-                    <span className="timeAtCenter">{Math.ceil(student.timeAtCenter)+' min'}</span>
+                    <span style={{fontSize: student.timeReduced === '00:00:00' ? '22px' : '18px'}}>{student.lastName}</span>
+                    <span className="timeAtCenter" style={{fontSize: student.timeReduced === '00:00:00' ? '22px' : '18px'}}>{Math.ceil(student.timeAtCenter)+' min'}</span>
+                    <span className="trTag" style={{display: student.timeReduced === '00:00:00' ? 'none' : 'block', fontSize: student.timeReduced === '00:00:00' ? '22px' : '18px'}}>{"TR: "+d.getMinutes() + "min"}</span>
                 </div>
             </div>
         );
@@ -106,6 +115,7 @@ class ViewCenter extends React.Component {
                             <div className="headerAssistant">
                                 <span className="icon-user-male"></span>
                                 <span>{opt.name}</span>
+                                <span>{opt.level}</span>
                             </div>
                             {opt.students.map((student, i) => (
                                 this.renderStudent(student, i)

@@ -12,22 +12,14 @@ class ScannerOption extends React.Component {
         };
     }
     handleChange(event){
-        console.log("event ", event.target.value)
         this.setState({
             result: event.target.value
         });
         var res = this.state.result.split("'");
-        console.log("res length ", res.length)
         if(res.length === 3){
-            console.log("res length es 3")
-            console.log(res[0], " ", res[1])
-            
             var obj={id: parseInt(res[0]), type: res[1]};
-            console.log(obj)
             this.props.actions.setAssistanceStudent(obj);
         }
-
-        
     }
     setString(){
         
