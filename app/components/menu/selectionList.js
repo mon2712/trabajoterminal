@@ -274,6 +274,14 @@ class SelectionList extends React.Component {
             </div>  
         );
     }
+    renderResponse(){
+        return(
+            <div className="selectPeople">
+                <span className="mensaje">{this.props.store.response.info}</span>
+                <div className="button" onClick={this.props.closePopUp()}>Aceptar</div>
+            </div>
+        );
+    }
     render() {
 		return (
             <div className="selectionListContainer">
@@ -284,7 +292,17 @@ class SelectionList extends React.Component {
 
                     : this.props.view === 55 && this.state.activeRegisterPayment === true ?
 
-                    <RegisterPayment  {...this.props} selected={this.state.selected} update={false} view={this.props.view} actions={this.props.actions} /> :
+                    <RegisterPayment  {...this.props} selected={this.state.selected} update={false} view={this.props.view} actions={this.props.actions} /> 
+                    
+                    : this.props.store.loader.gafetes === true ? 
+                    
+                    <Loader {...this.props} /> 
+                    
+                    : this.props.store.response.active === true ?
+                    
+                    this.renderResponse()
+
+                    :
                     
                     this.renderViewAll()
                 }     

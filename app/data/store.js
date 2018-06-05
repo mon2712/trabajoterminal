@@ -92,7 +92,9 @@ let AppData = {
             annualPlan: true,
             asisstance: true,
             notification: true,
-            scanCode: false
+            scanCode: false,
+            gafetes: false,
+            users: false
         },
         popUpAssistance: false,
         welcomeInfo: null
@@ -260,13 +262,6 @@ let AppData = {
         AppStore.emitChange();
     },
     getStudentMissPayment(){
-        /*$.getJSON('/app/fillData/studentsInCenter.js', function(info) {
-            AppData.data.studentsMissPayment = info.studentsInCenter;
-            AppStore.emitChange();
-        }).fail(function(error) {
-            console.error(error);
-        });*/
-
         axios.get('http://localhost:8088/pt1.pt2/webapi/instructor/getStudentsMissingPayments')
         .then(function (response){
             if(response.data.studentMissingPayment.length === 0){
@@ -279,8 +274,6 @@ let AppData = {
         .catch(function (error){
             console.log(error);
         });
-        
-        //AppStore.emitChange();  
     },
     getPaymentListStudent(action){
         axios.get('http://localhost:8088/pt1.pt2/webapi/instructor/getPaymentOfStudent',{
@@ -393,6 +386,7 @@ let AppData = {
         });
     },
     createStamp(action){
+        AppData.data.loader.gafetes = true;        
         AppData.data.selectedPeople = action.selectedPeople;
         AppStore.emitChange();
 
@@ -406,13 +400,18 @@ let AppData = {
             }
         })
         .then(function (response){
-            console.log(response)
+            console.log("response cread stamp ", response)
+            AppData.data.loader.gafetes = false;
+            AppData.data.response.info = response.data.response.message;
+            AppData.data.response.active = true;
+            AppStore.emitChange();
         })
         .catch(function (error){
             console.log(error);
         });
     },
     createIdsAssistants(action){
+        AppData.data.loader.gafetes = true;
         AppData.data.selectedPeople = action.selectedPeople;
         AppStore.emitChange();
 
@@ -426,7 +425,11 @@ let AppData = {
             }
         })
         .then(function (response){
-            console.log(response)
+            console.log("response cread ids ",response.data.response)
+            AppData.data.loader.gafetes = false;
+            AppData.data.response.info = response.data.response.message;
+            AppData.data.response.active = true;
+            AppStore.emitChange();
         })
         .catch(function (error){
             console.log(error);
@@ -446,7 +449,6 @@ let AppData = {
             })
             .then(function (response){
                 AppData.data.loader.selectionList = false;            
-                
                 AppData.data.assistant = response.data.assistantInfo;
                 AppStore.emitChange();
                 
@@ -473,6 +475,9 @@ let AppData = {
         }
     },
     setAssistant(action){
+        AppData.data.loader.users = true;
+        AppStore.emitChange();
+
         axios.post('http://localhost:8088/pt1.pt2/webapi/asistente/setAssistant', 
         {
             infoAssistant: action.infoAssistant
@@ -483,6 +488,7 @@ let AppData = {
             }
         })
         .then(function (response){
+            AppData.data.loader.users=false;
             AppData.data.response.info = response.data.assistantInfo;
             AppData.data.response.active = true;
             AppStore.emitChange();

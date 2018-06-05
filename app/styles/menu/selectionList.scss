@@ -127,7 +127,7 @@
         width: 40%;
         height: 40px;
         margin: 0 auto;
-        background: #21647F;;
+        background: #21647F;
         line-height: 40px;
         color: white;
         text-align: center;
@@ -139,5 +139,18 @@
         &:hover{
             background: #847f7f;
         }
+    }
+    .mensaje{
+        display: block;
+        width: 90%;
+        text-align: center;
+        margin: 0 auto;
+        font-size: 20px;
+        color: white;
+        background: #5aa9a9;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 15px;
+        overflow-y: auto;
     }
 }
