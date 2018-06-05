@@ -91,7 +91,8 @@ let AppData = {
             selectionList: true,
             annualPlan: true,
             asisstance: true,
-            notification: true
+            notification: true,
+            scanCode: false
         },
         popUpAssistance: false,
         welcomeInfo: null
@@ -518,6 +519,8 @@ let AppData = {
     cleanResponse(){
         AppData.data.response.info = "";
         AppData.data.response.active = false;
+        AppData.data.responsePayment.info = "";
+        AppData.data.responsePayment.active = false;
         AppStore.emitChange();
     },
     getFormAnualPlan(action){
@@ -643,11 +646,13 @@ let AppData = {
         });
     },
     setAssistanceStudent(action){
-        console.log("resp ", action.scanned)
+        AppData.data.loader.scanCode = true;
+        AppStore.emitChange();
         axios.post('http://localhost:8088/pt1.pt2/webapi/recepcion/setAssistance', {
             scanned: action.scanned
         })
         .then(function (response){
+            AppData.data.loader.scanCode = false;
             AppData.data.popUpAssistance = false;
             AppData.data.welcomeInfo = response.data.student;
             AppData.data.studentFileInfo = response.data.student;            
@@ -677,6 +682,26 @@ let AppData = {
         console.log("llego")
         AppData.data.popUpAssistance = true;
         AppStore.emitChange();
+    },
+    closeNotification(action){
+        console.log("clos notif en el store ", action)
+
+        axios.delete('http://localhost:8088/pt1.pt2/webapi/recepcion/'+action.student.idStudent)
+        .then(function(response){
+            console.log("response ", response)
+            AppData.data.loader.notification = false;            
+                if(response.data.notifications.length === 0){
+                    console.log("entra a vacio")
+                    AppData.data.notifications = "";
+                }else{
+                    console.log("no esta vacio")
+                    AppData.data.notifications = response.data.notifications;
+                }
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log( error);
+        });
     }
 }
 
@@ -816,6 +841,9 @@ dispatcher.register((action) => {
         break; 
     case actionTypes.TOOGLE_POPUP:
         AppData.tooglePopUp();
+        break; 
+    case actionTypes.CLOSE_NOTIFICATION:
+        AppData.closeNotification(action);
         break;
     default: 
 		// no op

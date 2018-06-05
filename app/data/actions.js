@@ -223,5 +223,11 @@ const Actions = {
             type: actionTypes.TOOGLE_POPUP
         });
     }, 
+    closeNotification(student) {
+        dispatcher.dispatch({
+            type: actionTypes.CLOSE_NOTIFICATION,
+            student
+        });
+    }, 
 };
 export default Actions;

@@ -7,8 +7,9 @@ class Notification extends React.Component {
         this.closeNotification = this.closeNotification.bind(this);        
         this.goToNotification = this.goToNotification.bind(this);        
     }
-    closeNotification(){
-        console.log("hola");
+    closeNotification(student){
+        console.log("close notif ", student);
+        this.props.actions.closeNotification(student);
     }
     goToNotification(obj){
 
@@ -37,7 +38,7 @@ class Notification extends React.Component {
                     <span className="title">{opt.title}</span>
                     <span className="button" onClick={()=>this.goToNotification(opt)}>{opt.button}</span>                  
                 </div>
-                <span className="ico icon-multiply" onClick={this.closeNotification}></span>
+                <span className="ico icon-multiply" onClick={()=>this.closeNotification(opt)} style={{display: opt.type === "student" ? 'inline-block' : 'none'}}></span>
               </div>
             //</Link>
         ));

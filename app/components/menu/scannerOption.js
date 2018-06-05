@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Loader from '../general/loader';
 import { BrowserRouter as browserHistory, Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 
 class ScannerOption extends React.Component {
@@ -21,18 +22,20 @@ class ScannerOption extends React.Component {
             this.props.actions.setAssistanceStudent(obj);
         }
     }
-    setString(){
-        
-    }
     renderScan(){
         return(
             <div className="scanDiv">
                 <span className="ico icon-multiply" onClick={this.props.closePopUp()}></span>
                 <span className="titleContainer">Escanea código</span>
-                <div className="scanContainer">
-                    <span className="icoQr icon-qrcode"></span>
-                    <input type="text" value={this.state.result} onChange={this.handleChange} ></input>
-                </div>
+                {this.props.store.loader.scanCode === true ? 
+                    <Loader {...this.props}/> 
+                    :
+                    <div className="scanContainer">
+                        <span className="icoQr icon-qrcode"></span>
+                        <input type="text" value={this.state.result} onChange={this.handleChange} ></input>
+                    </div>
+                }
+
             </div>
         );
     }
