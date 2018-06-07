@@ -1,6 +1,7 @@
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
 
 var extractSass = new ExtractTextPlugin({
     filename: "main_bundle.css",
@@ -12,14 +13,13 @@ const scripts = [
     './app/styles/index.scss'
 ];
 
-module.exports = {
+var config = {
     entry : scripts,
     output : {
         path: path.resolve(__dirname, 'dist'),
         filename: 'index_bundle.js',
         publicPath:'/'
     },
-    devtool: "source-map",
     module: {
         rules: [
             { test: /\.(js)$/, use: 'babel-loader' },
@@ -68,3 +68,17 @@ module.exports = {
         })
     ]
 };
+
+if(process.env.NODE_ENV === 'production'){
+    console.log(process.env.NODE_ENV)
+    config.plugins.push(
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin()
+    )
+}
+
+module.exports = config;

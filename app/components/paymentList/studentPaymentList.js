@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as browserHistory, Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 import RegisterPayment from '../general/registerPayment';
 
 class StudentPaymentList extends React.Component {
@@ -195,7 +196,7 @@ class StudentPaymentList extends React.Component {
 		return (
 			<div className='paymentContainer'>
 
-                <div className="buttonRegister" onClick={this.activePopUp}>
+                <div className="buttonRegister" onClick={this.activePopUp} style={{display: localStorage.getItem("type") !== "recepcion" ? 'none' : 'inline-block'}} >
                     Registrar nuevo Pago
                 </div>
 
@@ -224,4 +225,4 @@ class StudentPaymentList extends React.Component {
 		);
 	}
   }
-  export default StudentPaymentList;
+  export default withRouter(StudentPaymentList);

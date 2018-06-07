@@ -214,6 +214,12 @@ class SelectionList extends React.Component {
                     selected: this.state.selected[0]
                 });
             }
+            if(this.props.view === 8){
+                this.props.history.push({
+                    pathname: '/boleta',
+                    selected: this.state.selected[0]
+                });
+            }
         }else{
             this.setState({
                 activeTag: true
@@ -245,7 +251,7 @@ class SelectionList extends React.Component {
         return(
             <div className="selectPeople">
                 {this.state.activeTag === true ? <IncompleteInputs message={this.props.view == 4 || this.props.view ==55 || this.props.view === 1 ? "No se ha seleccionado un usuario" : this.props.view === 5 ? "No se ha seleccionado un alumno o los exámenes realizados" : "No se ha seleccionado un alumno"}/> : null}            
-                <div className="optionAll" style={{display: this.props.view === 4 || this.props.view === 55 || this.props.view === 5 || this.props.view === 6 ? 'none' : 'block'}}>
+                <div className="optionAll" style={{display: this.props.view === 4 || this.props.view === 55 || this.props.view === 5 || this.props.view === 6 || this.props.view === 8 ? 'none' : 'block'}}>
                     <div className={this.state.selectAll === true ? "checkbox active" : "checkbox"} onClick={this.selectAll}>
                         <span className="ico icon-checkmark"></span>
                     </div>
@@ -269,9 +275,17 @@ class SelectionList extends React.Component {
                         null
                 }
                 <div className="button" onClick={this.sendAllSelected} >
-                    {this.props.view === 4 ? "Editar" : this.props.view === 55 ? "Registrar" : this.props.view === 5 ? "Crear" : this.props.view === 6 ? "Consultar" : "Generar"}
+                    {this.props.view === 4 ? "Editar" : this.props.view === 55 ? "Registrar" : this.props.view === 5 ? "Crear" : this.props.view === 6 || this.props.view === 8 ? "Consultar" : "Generar"}
                 </div>
             </div>  
+        );
+    }
+    renderResponse(){
+        return(
+            <div className="selectPeople">
+                <span className="mensaje">{this.props.store.response.info}</span>
+                <div className="button" onClick={this.props.closePopUp()}>Aceptar</div>
+            </div>
         );
     }
     render() {
@@ -284,7 +298,17 @@ class SelectionList extends React.Component {
 
                     : this.props.view === 55 && this.state.activeRegisterPayment === true ?
 
-                    <RegisterPayment  {...this.props} selected={this.state.selected} update={false} view={this.props.view} actions={this.props.actions} /> :
+                    <RegisterPayment  {...this.props} selected={this.state.selected} update={false} view={this.props.view} actions={this.props.actions} /> 
+                    
+                    : this.props.store.loader.gafetes === true ? 
+                    
+                    <Loader {...this.props} /> 
+                    
+                    : this.props.store.response.active === true ?
+                    
+                    this.renderResponse()
+
+                    :
                     
                     this.renderViewAll()
                 }     

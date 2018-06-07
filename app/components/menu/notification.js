@@ -1,18 +1,31 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 
 class Notification extends React.Component {
     constructor(props){
         super(props);        
         this.closeNotification = this.closeNotification.bind(this);        
+        this.goToNotification = this.goToNotification.bind(this);        
     }
-    closeNotification(){
-        console.log("hola");
+    closeNotification(student){
+        this.props.actions.closeNotification(student);
+    }
+    goToNotification(obj){
+
+        if(parseInt(obj.idStudent) === 0){
+            this.props.history.push({
+                pathname: '/llamadasPendientes'
+            });
+        }else{
+            //var obj={}
+            this.props.history.push({
+                pathname: '/paymentList',
+                infoStudent: obj
+            });
+        }
     }
     renderNotification(){
         var notifications = this.props.store.notifications;
-        if (notifications === undefined || "")
-            return null;
 
         return notifications.map((opt, index) => (
             //<Link key={index} to={opt.path}>
@@ -22,9 +35,9 @@ class Notification extends React.Component {
                 </div>
                 <div className="infoDiv">
                     <span className="title">{opt.title}</span>
-                    <span className="button">{opt.button}</span>                    
+                    <span className="button" onClick={()=>this.goToNotification(opt)}>{opt.button}</span>                  
                 </div>
-                <span className="ico icon-multiply" onClick={this.closeNotification}></span>
+                <span className="ico icon-multiply" onClick={()=>this.closeNotification(opt)} style={{display: opt.type === "student" ? 'inline-block' : 'none'}}></span>
               </div>
             //</Link>
         ));
@@ -33,9 +46,9 @@ class Notification extends React.Component {
     render() {
 	    return (
             <div className="notificationsContainer">
-                {this.props.store.notifications !== null ? this.renderNotification() : null}
+                {this.props.store.notifications !== null && this.props.store.notifications !== "" && this.props.store.notifications.length !== 0 ? this.renderNotification() : null}
             </div>
 		);
     }
   }
-  export default Notification;
+  export default withRouter(Notification);

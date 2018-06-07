@@ -1,12 +1,11 @@
 import React from 'react';
-import NavigationContainer from '../general/navigationContainer';
-import StudentPaymentList from '../paymentList/studentPaymentList';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 import Exams from '../annualPlan/exams';
 import GeneralForm from '../annualPlan/generalForm';
 import InfoStudent from '../general/infoStudent';
 import StartFrequencyForm from '../annualPlan/startFrequencyForm';
 import AnnualPlanView from '../annualPlan/annualPlanView';
+import Loader from '../general/loader';
 
 class ProyeccionAnual extends React.Component {
     constructor(props){
@@ -147,27 +146,29 @@ class ProyeccionAnual extends React.Component {
                     
                     <div className="processContainer">
                         {this.state.infoStudent !== null && this.state.infoStudent !== "" && document.getElementById('containerInfoStudent') ? this.renderNavigationBar() : null}
-                        <div className="formContainer"
-                            style={{
-                                marginTop: (h/2)+'px'
-                            }}
-                        >
-                            {
-                                this.props.store.annualPlanResults.view === 0 && this.props.store.annualPlanInfo !== null ?
-                                    <Exams {...this.props} view={this.props.store.annualPlanResults.view} infoStudent={this.state.infoStudent} finalSelection={this.props.history.location.finalSelection} actions={this.props.actions} />
-                                :
-                                this.props.store.annualPlanResults.view === 1 && this.props.store.annualPlanInfo !== null ?
-                                    <GeneralForm {...this.props} view={this.props.store.annualPlanResults.view} questions={this.props.store.annualPlanInfo.generalForm} actions={this.props.actions}/>
-                                :
-                                this.props.store.annualPlanResults.view === 2 && this.props.store.annualPlanInfo !== null ?
-                                    <StartFrequencyForm {...this.props} view={this.props.store.annualPlanResults.view} questions={this.props.store.annualPlanInfo.questionsPI} actions={this.props.actions}/>
-                                :
-                                this.props.store.annualPlanResults.view === 3 && this.props.store.annualPlan !== null ?
-                                    <AnnualPlanView {...this.props} view={this.props.store.annualPlanResults.view} annualPlanInfo={this.props.store.annualPlan}/>
-                                :
+                        {this.props.store.loader.annualPlan === true ? <Loader {...this.props}/> :  
+                            <div className="formContainer"
+                                style={{
+                                    marginTop: (h/2)+'px'
+                                }}
+                            >
+                                {
+                                    this.props.store.annualPlanResults.view === 0 && this.props.store.annualPlanInfo !== null ?
+                                        <Exams {...this.props} view={this.props.store.annualPlanResults.view} infoStudent={this.state.infoStudent} finalSelection={this.props.history.location.finalSelection} actions={this.props.actions} />
+                                    :
+                                    this.props.store.annualPlanResults.view === 1 && this.props.store.annualPlanInfo !== null ?
+                                        <GeneralForm {...this.props} view={this.props.store.annualPlanResults.view} questions={this.props.store.annualPlanInfo.generalForm} actions={this.props.actions}/>
+                                    :
+                                    this.props.store.annualPlanResults.view === 2 && this.props.store.annualPlanInfo !== null ?
+                                        <StartFrequencyForm {...this.props} view={this.props.store.annualPlanResults.view} questions={this.props.store.annualPlanInfo.questionsPI} actions={this.props.actions}/>
+                                    :
+                                    this.props.store.annualPlanResults.view === 3 && this.props.store.annualPlan !== null ?
+                                        <AnnualPlanView {...this.props} view={this.props.store.annualPlanResults.view} annualPlanInfo={this.props.store.annualPlan}/>
+                                    :
                                     null
-                            }
-                        </div>
+                                }
+                            </div>
+                        }
                     </div> 
                     : 
                     null

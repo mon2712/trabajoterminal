@@ -1,0 +1,28 @@
+.selectBoletaContainer{
+    width: 50%;
+    margin: 0px auto;
+    background:  #5dc4c4;
+    margin-top: 10%;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+    .title{
+        display: inline-block;
+        width: 95%;
+        text-align: center;
+        font-size: 30px;
+        color: #21647F;
+    }
+    .icoClose{
+        display: inline-block;
+        vertical-align: top;
+        color: white;
+        font-size: 30px;
+        font-weight: bolder;
+        cursor: pointer;
+        width: 5%;
+        &:hover{
+            color: #a7a7a7;
+        }
+    }
+}

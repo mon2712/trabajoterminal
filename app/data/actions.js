@@ -212,5 +212,22 @@ const Actions = {
             id
         });
     }, 
+    setAssistanceStudent(scanned) {
+        dispatcher.dispatch({
+            type: actionTypes.SET_ASSISTANCESTUDENT,
+            scanned
+        });
+    }, 
+    tooglePopUp() {
+        dispatcher.dispatch({
+            type: actionTypes.TOOGLE_POPUP
+        });
+    }, 
+    closeNotification(student) {
+        dispatcher.dispatch({
+            type: actionTypes.CLOSE_NOTIFICATION,
+            student
+        });
+    }, 
 };
 export default Actions;

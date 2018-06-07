@@ -4,6 +4,8 @@ import PrintOptions from './printOptions';
 import RegisterPayment from '../general/registerPayment';
 import SelectionList from './selectionList';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
+import ScannerOption from './scannerOption';
+import Loader from '../general/loader';
 
 class ButtonOptions extends React.Component {
     constructor(props){
@@ -17,10 +19,12 @@ class ButtonOptions extends React.Component {
         };  
     }
     sendAction(id){
-        if(id===4){
+        if(id===4 || id===8){
             this.props.actions.getAllStudents("");
         }
-
+        if(id === 7){
+            this.props.actions.tooglePopUp();
+        }
         this.setState({
             popUpActive: true,
             id: id
@@ -78,12 +82,36 @@ class ButtonOptions extends React.Component {
                             <div className='registerPaymentContainer'>
                                 <span className="title">Registrar Pago</span>   
                                 <span className="icoClose icon-multiply" onClick={this.closePopUp} style={{display: this.props.store.response.active === true ? 'none' : 'inline-block'}} />                                                                                  
-                                {this.props.store.students !== "" && this.props.store.students !== null ? <SelectionList {...this.props} allPeople={this.props.store.students} view={55} actions={this.props.actions} closePopUp={()=>this.closePopUp2}/> : null }
+                                {
+                                    this.props.store.loader.selectionList === true ?
+                                        <Loader {...this.props}/> 
+                                    : this.props.store.students !== "" && this.props.store.students !== null ? 
+                                        <SelectionList {...this.props} allPeople={this.props.store.students} view={55} actions={this.props.actions} closePopUp={()=>this.closePopUp2}/> 
+                                    : null 
+                                }
                             </div>
                         </div>
                     :
-                    this.state.popUpActive === true && this.state.id===5 ? 
+                    this.state.popUpActive === true && this.state.id===5 ?
                         <PrintOptions {...this.props} startView={this.state.id} closePopUp={()=>this.closePopUp}/> 
+                    :
+                    this.props.store.popUpAssistance === true && this.state.id===7 ?
+                        <ScannerOption {...this.props} startView={this.state.id} closePopUp={()=>this.closePopUp}/>
+                    :
+                    this.state.popUpActive === true && this.state.id===8 ?
+                        <div className="popUpContainer">
+                            <div className='selectBoletaContainer'>
+                                <span className="title">Consultar Boleta</span>   
+                                <span className="icoClose icon-multiply" onClick={this.closePopUp} style={{display: this.props.store.response.active === true ? 'none' : 'inline-block'}} />                                                                                  
+                                {
+                                    this.props.store.loader.selectionList === true ?
+                                        <Loader {...this.props}/> 
+                                    : this.props.store.students !== "" && this.props.store.students !== null ? 
+                                        <SelectionList {...this.props} allPeople={this.props.store.students} view={8} actions={this.props.actions} closePopUp={()=>this.closePopUp2}/> 
+                                    : null 
+                                }
+                            </div>
+                        </div>
                     :
                     null
                 }                

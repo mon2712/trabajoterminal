@@ -1,14 +1,15 @@
 import AppStore from '../data/store';
 import React from 'react';
-import Header from '../components/header/main';
 import Login from '../components/login/main';
 import TiempoReducido from './tiempoReducido/main';
 import PaymentList from './paymentList/main';
 import ViewCenter from './viewCenter/main';
 import ProyeccionAnual from './annualPlan/main';
 import GeneralViewProyeccionAnual from './annualPlan/generalViewAnnualPlan';
+import FileStudent from './file/main';
 import StudentsCalls from './studentsCalls/main';
 import Menu from '../components/menu/main';
+import Welcome from '../components/welcome/main';
 import actions from '../data/actions';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 
@@ -59,7 +60,9 @@ class App extends React.Component {
                         <PrivateRoute path="/vistaCentro" component={ViewCenter} store={this.state} actions={actions}/>
                         <PrivateRoute path="/crearProyeccionAnual" component={ProyeccionAnual} store={this.state} actions={actions}/>
                         <PrivateRoute path="/proyeccionAnual" component={GeneralViewProyeccionAnual} store={this.state} actions={actions}/>
-
+                        <PrivateRoute path="/boleta" component={FileStudent} store={this.state} actions={actions}/>
+                        <Route path='/bienvenida' render={(props) => <Welcome {...this.state} actions={actions}/>} />
+                            
                         <Route path="/login" render={(props) => (
                             localStorage.getItem("code") !== null && localStorage.getItem("code") === "1"
                             ? <Redirect to='/menu' />

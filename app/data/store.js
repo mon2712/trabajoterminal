@@ -74,6 +74,10 @@ let AppData = {
             info: "",
             active: false
         },
+        responsePayment: {
+            info: "",
+            active: false
+        },
         annualPlanInfo: null,
         annualPlanResults: {
             view: 0,
@@ -84,8 +88,17 @@ let AppData = {
         },
         annualPlan: null,
         loader: {
-            selectionList: true
-        }
+            selectionList: true,
+            annualPlan: true,
+            asisstance: true,
+            notification: true,
+            scanCode: false,
+            gafetes: false,
+            users: false,
+            searchBar: false
+        },
+        popUpAssistance: false,
+        welcomeInfo: null
     },
     confirmLogin(){
         if(localStorage.getItem("code") !== null){
@@ -171,7 +184,7 @@ let AppData = {
             }
         })
         .then(function (response){
-            AppData.data.loader.selectionList = false;            
+            AppData.data.loader.selectionList = false;  
             if(response.data.allStudents.length === 0){
                 AppData.data.students = "";
             }else{
@@ -185,11 +198,18 @@ let AppData = {
 
     },
     getNotifications(action){
-        $.getJSON('/app/fillData/notifications.js', function(info) {
-           AppData.data.notifications = info.notifications;
-           AppStore.emitChange();
-        }).fail(function(error) {
-            console.error(error);
+        axios.get('http://localhost:8088/pt1.pt2/webapi/recepcion/getNotifications')
+        .then(function (response){
+            AppData.data.loader.notification = false;          
+            if(response.data.notifications.length === 0){
+                AppData.data.notifications = "";
+            }else{
+                AppData.data.notifications = response.data.notifications;
+            }
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log(error);
         });
     },
     getStudentsAtCenter(action){
@@ -240,13 +260,6 @@ let AppData = {
         AppStore.emitChange();
     },
     getStudentMissPayment(){
-        /*$.getJSON('/app/fillData/studentsInCenter.js', function(info) {
-            AppData.data.studentsMissPayment = info.studentsInCenter;
-            AppStore.emitChange();
-        }).fail(function(error) {
-            console.error(error);
-        });*/
-
         axios.get('http://localhost:8088/pt1.pt2/webapi/instructor/getStudentsMissingPayments')
         .then(function (response){
             if(response.data.studentMissingPayment.length === 0){
@@ -259,8 +272,6 @@ let AppData = {
         .catch(function (error){
             console.log(error);
         });
-        
-        //AppStore.emitChange();  
     },
     getPaymentListStudent(action){
         axios.get('http://localhost:8088/pt1.pt2/webapi/instructor/getPaymentOfStudent',{
@@ -373,6 +384,7 @@ let AppData = {
         });
     },
     createStamp(action){
+        AppData.data.loader.gafetes = true;        
         AppData.data.selectedPeople = action.selectedPeople;
         AppStore.emitChange();
 
@@ -386,13 +398,17 @@ let AppData = {
             }
         })
         .then(function (response){
-            console.log(response)
+            AppData.data.loader.gafetes = false;
+            AppData.data.response.info = response.data.response.message;
+            AppData.data.response.active = true;
+            AppStore.emitChange();
         })
         .catch(function (error){
             console.log(error);
         });
     },
     createIdsAssistants(action){
+        AppData.data.loader.gafetes = true;
         AppData.data.selectedPeople = action.selectedPeople;
         AppStore.emitChange();
 
@@ -406,7 +422,10 @@ let AppData = {
             }
         })
         .then(function (response){
-            console.log(response)
+            AppData.data.loader.gafetes = false;
+            AppData.data.response.info = response.data.response.message;
+            AppData.data.response.active = true;
+            AppStore.emitChange();
         })
         .catch(function (error){
             console.log(error);
@@ -426,7 +445,6 @@ let AppData = {
             })
             .then(function (response){
                 AppData.data.loader.selectionList = false;            
-                
                 AppData.data.assistant = response.data.assistantInfo;
                 AppStore.emitChange();
                 
@@ -453,6 +471,9 @@ let AppData = {
         }
     },
     setAssistant(action){
+        AppData.data.loader.users = true;
+        AppStore.emitChange();
+
         axios.post('http://localhost:8088/pt1.pt2/webapi/asistente/setAssistant', 
         {
             infoAssistant: action.infoAssistant
@@ -463,6 +484,7 @@ let AppData = {
             }
         })
         .then(function (response){
+            AppData.data.loader.users=false;
             AppData.data.response.info = response.data.assistantInfo;
             AppData.data.response.active = true;
             AppStore.emitChange();
@@ -488,8 +510,8 @@ let AppData = {
             }
         })
         .then(function (response){
-            AppData.data.response.info = response.data.response;
-            AppData.data.response.active = true;
+            AppData.data.responsePayment.info = response.data.response;
+            AppData.data.responsePayment.active = true;
             AppStore.emitChange();
         })
         .catch(function (error){
@@ -499,6 +521,8 @@ let AppData = {
     cleanResponse(){
         AppData.data.response.info = "";
         AppData.data.response.active = false;
+        AppData.data.responsePayment.info = "";
+        AppData.data.responsePayment.active = false;
         AppStore.emitChange();
     },
     getFormAnualPlan(action){
@@ -514,6 +538,7 @@ let AppData = {
             }
         })
         .then(function (response){
+            AppData.data.loader.annualPlan = false;   
             AppData.data.annualPlanInfo = response.data.infoForm
             AppStore.emitChange();
         })
@@ -522,12 +547,15 @@ let AppData = {
         });
     },
     setAnnualPlan(action){
+        AppData.data.loader.annualPlan = true;
         if(action.view === 0){
+            AppData.data.loader.annualPlan = false;
             AppData.data.annualPlanResults.exams = action.result.finalArray;
             AppData.data.annualPlanResults.infoStudent = action.result.infoStudent;
             AppData.data.annualPlanResults.view = action.view+1;
             AppStore.emitChange(); 
         }else if(action.view === 1){
+            AppData.data.loader.annualPlan = false;
             AppData.data.annualPlanResults.finalScore = action.result;
             AppData.data.annualPlanResults.view = action.view+1;
             AppStore.emitChange(); 
@@ -544,6 +572,7 @@ let AppData = {
                 }
             })
             .then(function (response){
+                AppData.data.loader.annualPlan = false;            
                 AppData.data.annualPlan = response.data.annualPlan.info;
                 AppData.data.annualPlanResults.view = 3;
                 AppStore.emitChange();
@@ -552,7 +581,7 @@ let AppData = {
                 console.log(error);
             });
         }
-        
+        AppStore.emitChange();
     },
     getStudentsWithoutAnnualPlan(){
         axios.get('http://localhost:8088/pt1.pt2/webapi/alumno/getStudentsWithoutAnnualPlan')
@@ -602,6 +631,7 @@ let AppData = {
             }
         })
         .then(function (response){
+            AppData.data.loader.annualPlan = false;
             if(response.data.annualPlan.err){
                 AppData.data.response.info = response.data.annualPlan;
                 AppData.data.response.active = true;
@@ -615,6 +645,56 @@ let AppData = {
         })
         .catch(function (error){
             console.log(error);
+        });
+    },
+    setAssistanceStudent(action){
+        AppData.data.loader.scanCode = true;
+        AppStore.emitChange();
+        axios.post('http://localhost:8088/pt1.pt2/webapi/recepcion/setAssistance', {
+            scanned: action.scanned
+        })
+        .then(function (response){
+            AppData.data.loader.scanCode = false;
+            AppData.data.popUpAssistance = false;
+            AppData.data.welcomeInfo = response.data.student;
+            AppData.data.studentFileInfo = response.data.student;            
+            AppStore.emitChange();
+            axios.get('http://localhost:8088/pt1.pt2/webapi/recepcion/getNotifications')
+            .then(function (response){
+                AppData.data.loader.notification = false;            
+                if(response.data.notifications.length === 0){
+                    AppData.data.notifications = "";
+                }else{
+                    AppData.data.notifications = response.data.notifications;
+                }
+                AppStore.emitChange();
+            })
+            .catch(function (error){
+                console.log(error);
+            });
+            
+        })
+        .catch(function (error){
+            console.log(error);
+        });
+    },
+    tooglePopUp(){
+        AppData.data.popUpAssistance = true;
+        AppStore.emitChange();
+    },
+    closeNotification(action){
+        axios.delete('http://localhost:8088/pt1.pt2/webapi/recepcion/'+action.student.idStudent)
+        .then(function(response){
+            AppData.data.loader.notification = false;            
+                if(response.data.notifications.length === 0){
+                    AppData.data.notifications = "";
+                }else{
+                    AppData.data.notifications = response.data.notifications;
+                }
+            AppStore.emitChange();
+        })
+        .catch(function (error){
+            console.log( error);
         });
     }
 }
@@ -640,6 +720,9 @@ AppStore = assign({}, AppStore, {
     },
     getFormAnnualPlanInfo: () => {
         return AppData.data.annualPlanInfo;
+    },
+    getWelcomeInfo: () => {
+        return AppData.data.welcomeInfo
     }
 });
 
@@ -746,6 +829,15 @@ dispatcher.register((action) => {
         break; 
     case actionTypes.GET_ANNUALPLAN:
         AppData.getAnnualPlan(action);
+        break; 
+    case actionTypes.SET_ASSISTANCESTUDENT:
+        AppData.setAssistanceStudent(action);
+        break; 
+    case actionTypes.TOOGLE_POPUP:
+        AppData.tooglePopUp();
+        break; 
+    case actionTypes.CLOSE_NOTIFICATION:
+        AppData.closeNotification(action);
         break;
     default: 
 		// no op
