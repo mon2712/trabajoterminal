@@ -27,15 +27,15 @@ class SearchBar extends React.Component {
         if(tecla === 8 && this.state.textInput === ""){
             this.setState({listActive: false})
         }else{
-            //mandar a llamar la busqueda 
             this.props.actions.getAllStudents(this.state.textInput);
+            this.setState({listActive: true});
         }
     }
     handleChange(event){
         this.setState({textInput: event.target.value});        
     }
     renderStudentsList(){
-        if(this.props.store.students !== ""){
+        if(this.props.store.students !== "" && this.props.store.students !== null){
             return this.props.store.students.map((opt, index) => (
                 <div className='student' key={index} onClick={() => this.renderStudentFile(opt.idStudent)}>
                     <span>{opt.name}</span>
@@ -57,7 +57,6 @@ class SearchBar extends React.Component {
                 <div className="studentsListContainer" style={{display: this.state.listActive===false ? 'none' : 'block'}}>
                     {this.state.listActive===false ? null : this.renderStudentsList()}
                 </div>
-                <div className="buttonSearch" onClick={this.renderStudentFile}>Buscar</div>
             </div>
         );    
     }

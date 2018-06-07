@@ -8,7 +8,6 @@ class Notification extends React.Component {
         this.goToNotification = this.goToNotification.bind(this);        
     }
     closeNotification(student){
-        console.log("close notif ", student);
         this.props.actions.closeNotification(student);
     }
     goToNotification(obj){

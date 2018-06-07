@@ -48,9 +48,7 @@ class ViewCenter extends React.Component {
         );
     }
     renderStudent(student, i){
-        console.log("alumno en centro ",  student.timeAtCenter)
         var d = new Date("October 13, 2014 " + student.timeReduced);
-        console.log(d)
         return(
             <div className={student.timeAtCenter>=45 && student.timeAtCenter<=60? 'studentContainer soon' : student.timeAtCenter>60 ? 'studentContainer urgent' : 'studentContainer normal'} key={i}>
                 <span className="name">{student.name}</span>

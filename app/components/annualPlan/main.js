@@ -1,6 +1,4 @@
 import React from 'react';
-import NavigationContainer from '../general/navigationContainer';
-import StudentPaymentList from '../paymentList/studentPaymentList';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 import Exams from '../annualPlan/exams';
 import GeneralForm from '../annualPlan/generalForm';

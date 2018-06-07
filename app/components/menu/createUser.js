@@ -66,7 +66,6 @@ class CreateUser extends React.Component {
 
     }
     sendCreateEdit(){
-        console.log("send ", this.state.infoAssistant)
         if(this.state.infoAssistant.type === "asistente"){
             if(this.state.infoAssistant.lastName !== "" && this.state.infoAssistant.name !== "" && this.state.infoAssistant.password !== "" && this.state.infoAssistant.username != "" && this.state.infoAssistant.level !== ""){
                 this.props.actions.setAssistant(this.state.infoAssistant)
@@ -78,7 +77,6 @@ class CreateUser extends React.Component {
 
         }
         if(this.state.infoAssistant.type === "recepcionista"){
-            console.log("asistente ")
             if(this.state.infoAssistant.lastName !== "" && this.state.infoAssistant.name !== "" && this.state.infoAssistant.password !== "" && this.state.infoAssistant.username != ""){
                 this.props.actions.setAssistant(this.state.infoAssistant)
             }else{

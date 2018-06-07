@@ -93,6 +93,13 @@
                 "color": "#1AA5BF",
                 "popUp": true,
                 "id": 6
+            },{
+                "ico": "icon-table",
+                "text": "Boleta del alumno",
+                "path": "/",
+                "color": "#1AA5BF",
+                "popUp": true,
+                "id": 8
             }]
         }
     }

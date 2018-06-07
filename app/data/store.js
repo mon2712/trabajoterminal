@@ -94,7 +94,8 @@ let AppData = {
             notification: true,
             scanCode: false,
             gafetes: false,
-            users: false
+            users: false,
+            searchBar: false
         },
         popUpAssistance: false,
         welcomeInfo: null
@@ -183,7 +184,7 @@ let AppData = {
             }
         })
         .then(function (response){
-            AppData.data.loader.selectionList = false;            
+            AppData.data.loader.selectionList = false;  
             if(response.data.allStudents.length === 0){
                 AppData.data.students = "";
             }else{
@@ -197,15 +198,12 @@ let AppData = {
 
     },
     getNotifications(action){
-        console.log("si llega hasta aca")
         axios.get('http://localhost:8088/pt1.pt2/webapi/recepcion/getNotifications')
         .then(function (response){
             AppData.data.loader.notification = false;          
             if(response.data.notifications.length === 0){
-                console.log("esta vacio")
                 AppData.data.notifications = "";
             }else{
-                console.log("no esta vacio")
                 AppData.data.notifications = response.data.notifications;
             }
             AppStore.emitChange();
@@ -400,7 +398,6 @@ let AppData = {
             }
         })
         .then(function (response){
-            console.log("response cread stamp ", response)
             AppData.data.loader.gafetes = false;
             AppData.data.response.info = response.data.response.message;
             AppData.data.response.active = true;
@@ -425,7 +422,6 @@ let AppData = {
             }
         })
         .then(function (response){
-            console.log("response cread ids ",response.data.response)
             AppData.data.loader.gafetes = false;
             AppData.data.response.info = response.data.response.message;
             AppData.data.response.active = true;
@@ -667,10 +663,8 @@ let AppData = {
             .then(function (response){
                 AppData.data.loader.notification = false;            
                 if(response.data.notifications.length === 0){
-                    console.log("entra a vacio")
                     AppData.data.notifications = "";
                 }else{
-                    console.log("no esta vacio")
                     AppData.data.notifications = response.data.notifications;
                 }
                 AppStore.emitChange();
@@ -685,22 +679,16 @@ let AppData = {
         });
     },
     tooglePopUp(){
-        console.log("llego")
         AppData.data.popUpAssistance = true;
         AppStore.emitChange();
     },
     closeNotification(action){
-        console.log("clos notif en el store ", action)
-
         axios.delete('http://localhost:8088/pt1.pt2/webapi/recepcion/'+action.student.idStudent)
         .then(function(response){
-            console.log("response ", response)
             AppData.data.loader.notification = false;            
                 if(response.data.notifications.length === 0){
-                    console.log("entra a vacio")
                     AppData.data.notifications = "";
                 }else{
-                    console.log("no esta vacio")
                     AppData.data.notifications = response.data.notifications;
                 }
             AppStore.emitChange();
