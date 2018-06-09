@@ -33,7 +33,7 @@ class PaymentList extends React.Component {
     }
     renderList(){
         var studentsMissPayment = this.props.store.studentsMissPayment;
-
+        console.log("students" , studentsMissPayment)
         return studentsMissPayment.map((opt,index)=>(
             <div key={index} className="nameStudent">
                 <span className="name">{index+1}. {opt.name}</span>
@@ -41,7 +41,17 @@ class PaymentList extends React.Component {
             </div>
         ));
     }
+    renderEmpty(){
+        return(
+            <div className="divEmpty">
+                <span className="ico icon-smile"></span>
+                <span className="tag">No hay alumnos con adeudo</span>
+            </div>
+        )
+    }
     render() {
+        console.log(this.props.store.studentsMissPayment)
+
 		return (
 			<div className='paymentContainer'>
                 <NavigationContainer texto="Lista Adeudos" path='/menu'/>
@@ -49,7 +59,7 @@ class PaymentList extends React.Component {
                     this.state.view === 0 ? 
 
                         <div className= "namesStudents">
-                            {this.props.store.studentsMissPayment !== null ? this.renderList() : null}
+                            {this.props.store.studentsMissPayment !== null && this.props.store.studentsMissPayment !== "" ? this.renderList() : this.renderEmpty()}
                         </div>
 
                         :

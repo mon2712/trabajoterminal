@@ -26,5 +26,19 @@
                 line-height: 30px;
             }
         }
+        .divEmpty{
+            color:white;
+            padding: 10px;
+            text-align: center;
+            .ico{
+                display: block;
+                font-size: 50px;
+                margin-bottom: 10px;
+            }
+            .tag{
+                display: block;
+                font-size: 25px;
+            }
+        }
     }
 }
