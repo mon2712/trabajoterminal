@@ -33,7 +33,7 @@ class PaymentList extends React.Component {
     }
     renderList(){
         var studentsMissPayment = this.props.store.studentsMissPayment;
-        console.log("students" , studentsMissPayment)
+        
         return studentsMissPayment.map((opt,index)=>(
             <div key={index} className="nameStudent">
                 <span className="name">{index+1}. {opt.name}</span>
@@ -50,7 +50,6 @@ class PaymentList extends React.Component {
         )
     }
     render() {
-        console.log(this.props.store.studentsMissPayment)
 
 		return (
 			<div className='paymentContainer'>
