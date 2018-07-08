@@ -15,7 +15,7 @@ class CallConfig extends React.Component {
     }
     
     configCall(active,name,id, status,note, date){
-        this.props.actions.getConfigCall(active, name,id,status, note, date, type);
+        this.props.actions.getConfigCall(active, name,id,status, note, date);
     }
     setNote(val){
         this.setState({old: val})
@@ -36,7 +36,7 @@ class CallConfig extends React.Component {
             <div className='configCallContainer'>
                 <div className="headerConfigCall">
                     <span className="callInitialText">Registro de llamada</span>
-                    <span className="ico icon-multiply" onClick={this.configCall.bind(this,null,null)}></span>
+                    <span className="ico icon-multiply" onClick={() => this.configCall(false,null,null)}></span>
                 </div>
                 <span className="callText left">Alumno: </span>
                 <span className="callText student right">{this.props.store.configCall.name}</span>

@@ -313,8 +313,10 @@ let AppData = {
             AppData.data.configCallDone.notDone = [];
                 ListOfCalls.map((student,index)=>{
                     if(student.call.done=="true"){
+                        console.log("Entro a llamadas hechas");
                         AppData.data.configCallDone.done.push(student);
                     }else{
+                        console.log("Entro a llamadas no hechas");
                         AppData.data.configCallDone.notDone.push(student);
                     }
                 });
