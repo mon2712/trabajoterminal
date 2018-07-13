@@ -1,0 +1,43 @@
+.welcomeDiv{
+    color: white;
+    text-align: center;
+    padding: 20px;
+    .welcomeMsg{
+        width: 70%;
+        height: 20%;
+        margin: 0 auto;
+        background: rgba(0, 0, 0, .8);
+        border-radius: 10px;
+        .title{
+            font-size: 40px;
+            display: block;
+        }
+        .inst{
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 50px;
+            width: 50%;
+        }
+        .name{
+            font-size: 80px;
+            display: block;
+            font-size: 50px;
+        }
+        .assistant{
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 50px;
+        }   
+        .titleRecommendations{
+            display: block;
+            font-size: 1
+        }
+        .recommendations{
+            display: block;
+            font-size: 30px;
+            span{
+                display: block;
+            }
+        }
+    }
+}
