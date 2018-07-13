@@ -25,7 +25,6 @@ class Welcome extends React.Component {
     }
     getRecomendaciones(){
         var recom = this.state.recommendations.split("-");
-        console.log(recom.length)
         return(
             <div className="recommendations">
                 {
@@ -37,7 +36,6 @@ class Welcome extends React.Component {
         );
     }
     renderWelcomeStudent(){
-        console.log("hola ", this.state)
 
         return(
             <div className="welcomeMsg">

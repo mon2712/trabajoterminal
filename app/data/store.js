@@ -661,25 +661,17 @@ let AppData = {
             AppData.data.welcomeInfo = response.data;
             AppData.data.studentFileInfo = response.data.alumno.student;
 
-            console.log("respuesta ",response.data)
-
-            console.log("recomendaciones ", response.data.asistente, Object.keys(response.data.asistente).length === 0);
             var cadenaRecomendacion = "";
             if(Object.keys(response.data.asistente).length !== 0 && Object.keys(response.data.recomendaciones).length !== 0){
-                console.log("name ", response.data.alumno.student.name)
                 if (typeof(Storage) !== "undefined") {
                     localStorage.student = response.data.alumno.student.name + " " + response.data.alumno.student.lastName;
                     localStorage.assistant = response.data.asistente.infoAssistant.name + " " + response.data.asistente.infoAssistant.lastName;
                     
                     response.data.recomendaciones.recomendations.map((reco,index) => {
-                        console.log(reco.recomendacion);
                         cadenaRecomendacion = reco.recomendacion + "-" + cadenaRecomendacion;
-                        console.log("hola")
                     });
-                    console.log("recomendacion ", cadenaRecomendacion)
                     localStorage.recommendations = cadenaRecomendacion;
 
-                    console.log(localStorage.getItem("recommendations"))
                 } else {
                     console.log("Sorry! No Web Storage support..")
                 }
