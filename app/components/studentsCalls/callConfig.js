@@ -45,7 +45,7 @@ class CallConfig extends React.Component {
                 <input type="date" name="fecha" value={this.state.date} onChange={this.handleChange}></input>
                 
                 <span className="callText note">Nota: </span>
-                <textarea type="text" name="nota" placeholder="Agregar nota" text={this.state.note} onChange={this.handleChange}></textarea>
+                <textarea type="text" name="nota"  maxLength="45" placeholder="Agregar nota" text={this.state.note} onChange={this.handleChange}></textarea>
                 
                 <div className="buttonSetNote" onClick={() => this.setNote(false)}>
                     Guardar
