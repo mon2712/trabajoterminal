@@ -15,7 +15,7 @@ class CallConfig extends React.Component {
     }
     
     configCall(active,name,id, status,note, date){
-        this.props.actions.getConfigCall(active, name,id,status, note, date, type);
+        this.props.actions.getConfigCall(active, name,id,status, note, date);
     }
     setNote(val){
         this.setState({old: val})
@@ -36,7 +36,7 @@ class CallConfig extends React.Component {
             <div className='configCallContainer'>
                 <div className="headerConfigCall">
                     <span className="callInitialText">Registro de llamada</span>
-                    <span className="ico icon-multiply" onClick={this.configCall.bind(this,null,null)}></span>
+                    <span className="ico icon-multiply" onClick={() => this.configCall(false,null,null)}></span>
                 </div>
                 <span className="callText left">Alumno: </span>
                 <span className="callText student right">{this.props.store.configCall.name}</span>
@@ -45,7 +45,7 @@ class CallConfig extends React.Component {
                 <input type="date" name="fecha" value={this.state.date} onChange={this.handleChange}></input>
                 
                 <span className="callText note">Nota: </span>
-                <textarea type="text" name="nota" placeholder="Agregar nota" text={this.state.note} onChange={this.handleChange}></textarea>
+                <textarea type="text" name="nota"  maxLength="45" placeholder="Agregar nota" text={this.state.note} onChange={this.handleChange}></textarea>
                 
                 <div className="buttonSetNote" onClick={() => this.setNote(false)}>
                     Guardar

@@ -298,9 +298,9 @@ let AppData = {
         AppData.data.configCall.name = action.name;
         AppData.data.configCall.id = action.id;
         AppData.data.configCall.status = action.status;
-        AppData.data.configCall.not = action.note;
+        AppData.data.configCall.note = action.note;
         AppData.data.configCall.date = action.date;
-         AppData.data.configCall.old = action.old;
+        AppData.data.configCall.old = action.old;
         
         AppStore.emitChange();
     },
@@ -311,10 +311,14 @@ let AppData = {
             var ListOfCalls = response.data.listOfCalls;
             AppData.data.configCallDone.done = [];
             AppData.data.configCallDone.notDone = [];
+            console.log("lista de llamadas: ", ListOfCalls);
                 ListOfCalls.map((student,index)=>{
+                    console.log(student.call.done);
                     if(student.call.done=="true"){
+                        console.log("Entro a llamadas hechas");
                         AppData.data.configCallDone.done.push(student);
                     }else{
+                        console.log("Entro a llamadas no hechas");
                         AppData.data.configCallDone.notDone.push(student);
                     }
                 });
