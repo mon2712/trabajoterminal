@@ -3,6 +3,28 @@
         margin-top: 20%;
     }
     .fileBox{
+        .errorMsg{
+            width: 70%;
+            font-size: 25px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            margin: 0 auto;
+            border-radius: 10px;
+            padding: 20px; 
+            text-align: center;   
+            margin-top: 20px;    
+            .ico{
+                width: 20%;
+                font-size: 40px;
+            }
+            .msg{
+                width: 80%;
+            }
+            span{
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
         .leftContainer{
             width: 20%;
             display: inline-block;

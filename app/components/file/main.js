@@ -136,7 +136,10 @@ class FileStudent extends React.Component {
                             </div>
                         </div>
                 : 
-                   null
+                   <div className="errorMsg">
+                       <span className="ico icon-sad"></span>
+                       <span className="msg">No tiene calificaciones registradas</span>
+                   </div>
                 }
             </div>
             

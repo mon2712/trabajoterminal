@@ -700,10 +700,16 @@ let AppData = {
         });
     },
     getFileGrades(action){
-        axios.get('http://localhost:8088/pt1.pt2/webapi/alumno/getFile')
+        axios.get('http://localhost:8088/pt1.pt2/webapi/alumno/getFile',{
+                params: {
+                    idAlumno: action.id
+                }
+            })
             .then(function (response){
-                AppData.data.loader.gradesStudent = false;            
-                if(response.data.gradesStudent.length === 0){
+                AppData.data.loader.gradesStudent = false;      
+                console.log("respuesta", response)      
+                if(response.data.gradesStudent[0].err && response.data.gradesStudent[0].err === 1){
+                    console.log("entra")
                     AppData.data.gradesStudent = "";
                 }else{
                     AppData.data.gradesStudent = response.data.gradesStudent;
