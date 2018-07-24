@@ -229,5 +229,11 @@ const Actions = {
             student
         });
     }, 
+    getFileGrades(id){
+        dispatcher.dispatch({
+            type: actionTypes.GET_FILEGRADES,
+            id
+        });
+    }
 };
 export default Actions;

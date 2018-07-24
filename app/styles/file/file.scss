@@ -1,0 +1,101 @@
+.fileContainer{
+    .fileBox{
+        .leftContainer{
+            width: 20%;
+            display: inline-block;
+            vertical-align: top;
+            padding: 15px;
+            .gradesFileSelection{
+                background: rgba(0, 0, 0, 0.5);
+                color: white;
+                text-align: center;
+                padding: 10px;
+                border-radius: 10px;
+                .selectionYears{
+                    background: none;
+                    .tag{
+                        font-size: 22px;
+                        margin-bottom: 10px;
+                    }
+                    .yearBox{
+                        background: rgba(0, 0, 0, 0.5);
+                        .year{
+                            display: inline-block;
+                            vertical-align: middle;
+                            width: 80%;
+                            font-size: 20px;
+                        }
+                        .ico{
+                            display: inline-block;
+                            vertical-align: middle;
+                            width: 20%;
+                            cursor: pointer;
+                        }
+                    }
+                    .monthsBox{
+                        background: rgba(0, 0, 0, 0.5);
+                        color: white;
+                        width: 80%;
+                        height: 90px;
+                        overflow-y: scroll;
+                        border-bottom-left-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                        .month{
+                            height: 30px;
+                            line-height: 30px;
+                            cursor: pointer;
+                            &:hover{
+                                background: white;
+                                color: black;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .rightContainer{
+            width: 80%;
+            display: inline-block;
+            vertical-align: top;
+            .file{
+                height: 550px;
+                overflow-y: scroll;
+                padding: 25px;
+                background: rgba(0, 0, 0, 0.7);
+                border-radius: 10px;
+                color: white;
+                text-align: center;
+                width: 90%;
+                .headerTable{
+                    background: white;
+                    color: black;
+                }
+                .col{
+                    display: inline-block;
+                    vertical-align: middle;
+                    border-bottom: 1px solid white;
+                    padding: 2px;
+                    border-right: 1px solid white;
+                    overflow: hidden;
+                    height: 30px;
+                    max-height: 30px;
+                    &.norm{
+                        width: 10%;
+                    }
+                    &.day{
+                        border-left: 1px solid white;
+                        background: white;
+                        color: black;
+                        width: 5%;
+                    }
+                    &.assistant{
+                        width: 15%;
+                    }
+                    &.calif{
+                        width: 5%;
+                    }
+                }
+            }
+        }
+    }
+}
