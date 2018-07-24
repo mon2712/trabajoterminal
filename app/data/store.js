@@ -706,10 +706,8 @@ let AppData = {
                 }
             })
             .then(function (response){
-                AppData.data.loader.gradesStudent = false;      
-                console.log("respuesta", response)      
+                AppData.data.loader.gradesStudent = false;    
                 if(response.data.gradesStudent[0].err && response.data.gradesStudent[0].err === 1){
-                    console.log("entra")
                     AppData.data.gradesStudent = "";
                 }else{
                     AppData.data.gradesStudent = response.data.gradesStudent;
