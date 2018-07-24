@@ -1,5 +1,6 @@
 import React from 'react';
 import NavigationContainer from '../general/navigationContainer';
+import Loader from '../general/loader';
 import InfoStudent from '../general/infoStudent';
 import { BrowserRouter as browserHistory, Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 
@@ -135,7 +136,7 @@ class FileStudent extends React.Component {
                             </div>
                         </div>
                 : 
-                    null
+                   null
                 }
             </div>
             
@@ -146,7 +147,12 @@ class FileStudent extends React.Component {
             <div className='fileContainer'>
                 <NavigationContainer texto="Boleta" path='/menu'/>
                 {this.state.infoStudent !== "" ? <InfoStudent infoStudent={this.state.infoStudent} /> : null}
-                {this.state.infoStudent !== null && document.getElementById('containerInfoStudent') ? this.renderFileBox() : null}
+                {
+                    this.state.infoStudent !== null && document.getElementById('containerInfoStudent') && this.props.store.loader.gradesStudent !== true ? 
+                        this.renderFileBox()
+                    : 
+                        <Loader {...this.props}/>
+                }
                 
                 
             </div>

@@ -96,7 +96,7 @@ let AppData = {
             gafetes: false,
             users: false,
             searchBar: false,
-            gradesStudent: false
+            gradesStudent: true
         },
         popUpAssistance: false,
         welcomeInfo: null,
