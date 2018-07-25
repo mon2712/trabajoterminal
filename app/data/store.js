@@ -95,10 +95,12 @@ let AppData = {
             scanCode: false,
             gafetes: false,
             users: false,
-            searchBar: false
+            searchBar: false,
+            gradesStudent: true
         },
         popUpAssistance: false,
-        welcomeInfo: null
+        welcomeInfo: null,
+        gradesStudent: null
     },
     confirmLogin(){
         if(localStorage.getItem("code") !== null){
@@ -311,14 +313,10 @@ let AppData = {
             var ListOfCalls = response.data.listOfCalls;
             AppData.data.configCallDone.done = [];
             AppData.data.configCallDone.notDone = [];
-            console.log("lista de llamadas: ", ListOfCalls);
                 ListOfCalls.map((student,index)=>{
-                    console.log(student.call.done);
                     if(student.call.done=="true"){
-                        console.log("Entro a llamadas hechas");
                         AppData.data.configCallDone.done.push(student);
                     }else{
-                        console.log("Entro a llamadas no hechas");
                         AppData.data.configCallDone.notDone.push(student);
                     }
                 });
@@ -700,6 +698,26 @@ let AppData = {
         .catch(function (error){
             console.log( error);
         });
+    },
+    getFileGrades(action){
+        axios.get('http://localhost:8088/pt1.pt2/webapi/alumno/getFile',{
+                params: {
+                    idAlumno: action.id
+                }
+            })
+            .then(function (response){
+                AppData.data.loader.gradesStudent = false;    
+                if(response.data.gradesStudent[0].err && response.data.gradesStudent[0].err === 1){
+                    AppData.data.gradesStudent = "";
+                }else{
+                    AppData.data.gradesStudent = response.data.gradesStudent;
+                }
+                AppStore.emitChange();
+
+            })
+            .catch(function (error){
+                console.log(error);
+            });
     }
 }
 
@@ -842,6 +860,9 @@ dispatcher.register((action) => {
         break; 
     case actionTypes.CLOSE_NOTIFICATION:
         AppData.closeNotification(action);
+        break;
+    case actionTypes.GET_FILEGRADES:
+        AppData.getFileGrades(action);
         break;
     default: 
 		// no op
