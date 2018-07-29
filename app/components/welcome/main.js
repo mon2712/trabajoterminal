@@ -3,45 +3,69 @@ import React from 'react';
 import AppStore from '../../data/store';
 import { BrowserRouter as browserHistory, Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 
-function getAppState() {
-    return AppStore.getWelcomeInfo();
-}
-
 class Welcome extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            welcomeInfo: getAppState()
+        this.renderWelcomeStudent=this.renderWelcomeStudent.bind(this);
+        this.getRecomendaciones=this.getRecomendaciones.bind(this);
+        this.state={
+            student: "",
+            assistant: "",
+            recommendations: "",
+        };
+    }
+    componentDidMount(){
+        if(localStorage.getItem("student") && localStorage.getItem("assistant") && localStorage.getItem("recommendations")){
+            this.setState({
+                student: localStorage.getItem("student"),
+                assistant: localStorage.getItem("assistant"),
+                recommendations: localStorage.getItem("recommendations")
+            });
         }
-        this._onChange = this._onChange.bind(this);
+        var time = new Date().getTime();
+
+        if(new Date().getTime() - time >= 30000){
+            window.location.reload(true);
+        }
+        else {
+            setTimeout(function() {
+                location.reload();
+            }, 30000);
+        }
+          
     }
-    componentDidMount() {
-        AppStore.addChangeListener(this._onChange);
-    }
-    componentWillUnmount() {
-        AppStore.removeChangeListener(this._onChange);
-    }
-    _onChange() {
-       this.setState({welcomeInfo: getAppState()});
-    }
-    renderWelcomeStudent(){
+    getRecomendaciones(){
+        var recom = this.state.recommendations.split("-");
         return(
-            <div>
-                Bienvenido estudiante
+            <div className="recommendations">
+                {
+                    recom.map((rec, index) => (
+                        <span key={index}>{rec}</span>
+                    ))
+                }
             </div>
         );
     }
-    renderWelcomeAssistant(){
+    renderWelcomeStudent(){
+
         return(
-            <div>
-                Bienvenido asistente
+            <div className="welcomeMsg">
+                <span className="title">Bienvenido</span>
+                <div className="nameContainer">
+                    <span className="ico icon-smile"></span>
+                    <span className="name">{this.state.student}</span>
+                </div>
+                <span className="inst">Trabajaras con: </span>
+                <span className="assistant">{this.state.assistant}</span>
+                <span className="titleRecommendations">Recuerda: </span>
+                {this.getRecomendaciones()}
             </div>
         );
     }
     render() {
         return (
-            <div className='divLoader'>
-                {this.props.store.welcomeInfo !== null ? this.renderWelcomeStudent() : null}
+            <div className='welcomeDiv'>
+                {localStorage.getItem("student") && localStorage.getItem("assistant") && localStorage.getItem("recommendations") ? this.renderWelcomeStudent() : null}
             </div>
         );
     }

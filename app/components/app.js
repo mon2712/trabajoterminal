@@ -34,13 +34,17 @@ class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            store: getAppState()
+            store: getAppState(),
+            h: 0
         }
         this._onChange = this._onChange.bind(this);
     }
     componentDidMount() {
         actions.confirmLogin();
         AppStore.addChangeListener(this._onChange);
+        this.setState({
+            h: screen.height
+        });
     }
     componentWillUnmount() {
         AppStore.removeChangeListener(this._onChange);
@@ -51,7 +55,11 @@ class App extends React.Component {
     render() {
         return (
             <Router>
-                <div id='generalDiv'>
+                <div id='generalDiv' 
+                    style={{
+                        height: (this.state.h)+'px'
+                    }}
+                >
                     <Switch>
                         <PrivateRoute path="/menu" component={Menu} store={this.state} actions={actions}/>
                         <PrivateRoute path="/tiempoReducido" component={TiempoReducido} store={this.state} actions={actions}/>

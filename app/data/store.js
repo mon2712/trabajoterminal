@@ -658,8 +658,26 @@ let AppData = {
         .then(function (response){
             AppData.data.loader.scanCode = false;
             AppData.data.popUpAssistance = false;
-            AppData.data.welcomeInfo = response.data.student;
-            AppData.data.studentFileInfo = response.data.student;            
+            AppData.data.welcomeInfo = response.data;
+            AppData.data.studentFileInfo = response.data.alumno.student;
+
+            var cadenaRecomendacion = "";
+            if(Object.keys(response.data.asistente).length !== 0 && Object.keys(response.data.recomendaciones).length !== 0){
+                if (typeof(Storage) !== "undefined") {
+                    localStorage.student = response.data.alumno.student.name + " " + response.data.alumno.student.lastName;
+                    localStorage.assistant = response.data.asistente.infoAssistant.name + " " + response.data.asistente.infoAssistant.lastName;
+                    
+                    response.data.recomendaciones.recomendations.map((reco,index) => {
+                        cadenaRecomendacion = reco.recomendacion + "-" + cadenaRecomendacion;
+                    });
+                    localStorage.recommendations = cadenaRecomendacion;
+
+                } else {
+                    console.log("Sorry! No Web Storage support..")
+                }
+            }
+
+            
             AppStore.emitChange();
             axios.get('http://localhost:8088/pt1.pt2/webapi/recepcion/getNotifications')
             .then(function (response){
