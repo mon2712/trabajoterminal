@@ -22,6 +22,17 @@ class Welcome extends React.Component {
                 recommendations: localStorage.getItem("recommendations")
             });
         }
+        var time = new Date().getTime();
+
+        if(new Date().getTime() - time >= 30000){
+            window.location.reload(true);
+        }
+        else {
+            setTimeout(function() {
+                location.reload();
+            }, 30000);
+        }
+          
     }
     getRecomendaciones(){
         var recom = this.state.recommendations.split("-");
@@ -40,10 +51,13 @@ class Welcome extends React.Component {
         return(
             <div className="welcomeMsg">
                 <span className="title">Bienvenido</span>
-                <span className="name">{this.state.student}</span>
+                <div className="nameContainer">
+                    <span className="ico icon-smile"></span>
+                    <span className="name">{this.state.student}</span>
+                </div>
                 <span className="inst">Trabajaras con: </span>
                 <span className="assistant">{this.state.assistant}</span>
-                <span className="titleRecommendations">Recuerda que: </span>
+                <span className="titleRecommendations">Recuerda: </span>
                 {this.getRecomendaciones()}
             </div>
         );
