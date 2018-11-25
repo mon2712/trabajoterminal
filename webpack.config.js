@@ -10,7 +10,8 @@ var extractSass = new ExtractTextPlugin({
 
 const scripts = [
     './app/index.js',
-    './app/styles/index.scss'
+    './app/styles/index.scss',
+    './app/fillData/menuTypes.json'
 ];
 
 var config = {
