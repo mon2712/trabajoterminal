@@ -675,12 +675,9 @@ let AppData = {
                     localStorage.assistant = response.data.asistente.infoAssistant.name + " " + response.data.asistente.infoAssistant.lastName;
                     
                     response.data.recomendaciones.recomendations.map((reco,index) => {
-                        console.log("recom ", reco.recomendacion)
                         cadenaRecomendacion = reco.recomendacion + "-" + cadenaRecomendacion;
                     });
                     localStorage.recommendations = cadenaRecomendacion;
-
-                    console.log("recomendaciones en store ", cadenaRecomendacion)
 
                 } else {
                     console.log("Sorry! No Web Storage support..")
