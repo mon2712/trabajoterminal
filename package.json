@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "build": "NODE_ENV='production' webpack -p",
-    "buildW": "SET NODE_ENV='production' && webpack -p"
+    "buildW": "SET NODE_ENV='production' && webpack -p",
+    "deploy": "aws s3 cp --recursive ./dist s3://centrolindavista.com"
   },
   "babel": {
     "presets": [

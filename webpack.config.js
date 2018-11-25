@@ -10,7 +10,8 @@ var extractSass = new ExtractTextPlugin({
 
 const scripts = [
     './app/index.js',
-    './app/styles/index.scss'
+    './app/styles/index.scss',
+    './app/fillData/menuTypes.json'
 ];
 
 var config = {
@@ -70,7 +71,7 @@ var config = {
 };
 
 if(process.env.NODE_ENV === 'production'){
-    console.log(process.env.NODE_ENV)
+    //console.log(process.env.NODE_ENV)
     config.plugins.push(
         new webpack.DefinePlugin({
             'process.env': {
