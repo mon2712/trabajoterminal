@@ -73,11 +73,23 @@ class UploadFile extends React.Component {
             </div>
         );
     }
+    renderNotSuccess(){
+        return(
+            <div>
+                <div className="headerSetRouteFile">
+                    <span className="ico icon-warning"></span>
+                    <span className="setRouteText">Hubo un problema al cargar el Archivo</span>
+                    <span className="ico icon-multiply close" onClick={this.props.closePopUp()}></span>
+                </div>
+            </div>
+        );
+    }
     render() {
         return (
             <div className="popUpContainer">
                 <div className='setRouteFileContainer'>
-                    {this.state.view === 0 ? this.renderSelectFiles() : this.state.view === 1 ? this.renderSuccess() : null}  
+                    {console.log(this.props.store.setFiles.upLoadFileError)}
+                    {this.state.view === 0 ? this.renderSelectFiles() : this.state.view === 1 && this.props.store.setFiles.upLoadFileError === 0 ? this.renderSuccess() : this.state.view === 1 && this.props.store.setFiles.upLoadFileError === 1 ? this.renderNotSuccess(): null}  
                 </div>
             </div>
             );

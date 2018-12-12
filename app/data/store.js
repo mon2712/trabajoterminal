@@ -49,7 +49,8 @@ let AppData = {
         paymentListStudent: null,
         setFiles: {
             fileBase: "",
-            fileReport: ""
+            fileReport: "",
+            upLoadFileError: 0,
         },
         studentsViewCenter: "",
         assistants: null,
@@ -350,9 +351,13 @@ let AppData = {
     setFiles(action){
         axios.put('http://localhost:8088/pt1.pt2/webapi/documento/'+action.fileBase+"/"+action.fileReport)
         .then(function(response){
+            AppData.data.setFiles.upLoadFileError=response.data; 
+            AppStore.emitChange();
         })
         .catch(function (error){
             console.log( error);
+            AppData.data.setFiles.upLoadFileError=1;
+            AppStore.emitChange();
         });
     },
     getStatusCenter(){
