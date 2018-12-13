@@ -1,0 +1,43 @@
+.containerDailySchedule{
+    .containerLevels{
+        width: 20%;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        margin-left: 10px;
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 50px;
+        #title{
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            display: inline-block;
+            width: 100%;
+        }
+        .level{
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            &:hover{
+                background: rgba(0, 0, 0, 0.8);
+            }
+        }
+    }
+    .containerSecuencias{
+        display: inline-block;
+        vertical-align: top;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        .row{
+            .set{
+                display: inline-block;
+                vertical-align: top;
+                margin-right: 15px;
+                font-size: 18px;
+                color: white;
+            }
+        }
+    }
+}

@@ -157,7 +157,6 @@ class FileStudent extends React.Component {
                         <Loader {...this.props}/>
                 }
                 
-                
             </div>
         );
     }
