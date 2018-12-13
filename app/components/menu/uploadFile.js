@@ -103,11 +103,6 @@ class UploadFile extends React.Component {
                 <div className='setRouteFileContainer'>
                     {this.props.store.loader.document===true ? <Loader {...this.props}/> :
                     this.renderSelectFiles()}
-
-                    {/*
-                    this.state.view === 0 ? this.renderSelectFiles() : 
-                    this.state.view === 1 && this.props.store.setFiles.upLoadFileError === 0  ? this.renderSuccess() :
-                    this.state.view === 1 && this.props.store.setFiles.upLoadFileError === 1  ? this.renderNotSuccess()  : null */}  
                 </div>
             </div>
             );
