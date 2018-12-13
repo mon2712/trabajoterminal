@@ -38,6 +38,7 @@ const ActionTypes = {
     TOOGLE_POPUP: 'TOOGLE_POPUP',
     CLOSE_NOTIFICATION: 'CLOSE_NOTIFICATION',
     GET_FILEGRADES: 'GET_FILEGRADES'
+
   };
 
   export default ActionTypes;
