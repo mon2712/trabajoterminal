@@ -50,7 +50,7 @@ let AppData = {
         setFiles: {
             fileBase: "",
             fileReport: "",
-            upLoadFileError: 0,
+            upLoadFileError: null,
         },
         studentsViewCenter: "",
         assistants: null,
@@ -97,7 +97,8 @@ let AppData = {
             gafetes: false,
             users: false,
             searchBar: false,
-            gradesStudent: true
+            gradesStudent: true,
+            document: false
         },
         popUpAssistance: false,
         welcomeInfo: null,
@@ -349,15 +350,20 @@ let AppData = {
         
     },
     setFiles(action){
+        AppData.data.loader.document = true;
+        AppStore.emitChange();
         axios.put('http://localhost:8088/pt1.pt2/webapi/documento/'+action.fileBase+"/"+action.fileReport)
         .then(function(response){
+            console.log("response upload ", response.data)
             AppData.data.setFiles.upLoadFileError=response.data; 
+            AppData.data.loader.document=false;
             AppStore.emitChange();
         })
         .catch(function (error){
             console.log( error);
-            AppData.data.setFiles.upLoadFileError=1;
-            AppStore.emitChange();
+            //AppData.data.setFiles.upLoadFileError=1;
+            //AppData.data.loader.document=false;
+            //AppStore.emitChange();
         });
     },
     getStatusCenter(){
@@ -530,6 +536,9 @@ let AppData = {
         AppData.data.response.active = false;
         AppData.data.responsePayment.info = "";
         AppData.data.responsePayment.active = false;
+        AppData.data.setFiles.upLoadFileError = null; 
+        AppData.data.loader.document=false;
+
         AppStore.emitChange();
     },
     getFormAnualPlan(action){
