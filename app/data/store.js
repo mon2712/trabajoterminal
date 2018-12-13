@@ -55,7 +55,8 @@ let AppData = {
         paymentListStudent: null,
         setFiles: {
             fileBase: "",
-            fileReport: ""
+            fileReport: "",
+            upLoadFileError: null,
         },
         studentsViewCenter: "",
         assistants: null,
@@ -102,7 +103,8 @@ let AppData = {
             gafetes: false,
             users: false,
             searchBar: false,
-            gradesStudent: true
+            gradesStudent: true,
+            document: false
         },
         popUpAssistance: false,
         welcomeInfo: null,
@@ -355,8 +357,13 @@ let AppData = {
         
     },
     setFiles(action){
+        AppData.data.loader.document = true;
+        AppStore.emitChange();
         axios.put(PUBLIC_REQUESTS + '/documento/'+action.fileBase+"/"+action.fileReport)
         .then(function(response){
+            AppData.data.setFiles.upLoadFileError=response.data; 
+            AppData.data.loader.document=false;
+            AppStore.emitChange();
         })
         .catch(function (error){
             console.log( error);
@@ -532,6 +539,9 @@ let AppData = {
         AppData.data.response.active = false;
         AppData.data.responsePayment.info = "";
         AppData.data.responsePayment.active = false;
+        AppData.data.setFiles.upLoadFileError = null; 
+        AppData.data.loader.document=false;
+
         AppStore.emitChange();
     },
     getFormAnualPlan(action){
