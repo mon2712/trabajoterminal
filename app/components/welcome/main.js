@@ -47,7 +47,6 @@ class Welcome extends React.Component {
         );
     }
     renderWelcomeStudent(){
-
         return(
             <div className="welcomeMsg">
                 <span className="title">Bienvenido</span>

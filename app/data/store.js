@@ -7,6 +7,11 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } fr
 import App from '../components/app';
 //import _ from 'underscore';
 
+
+const PUBLIC_REQUESTS = 'http://localhost:8088/pt1.pt2/webapi';
+//const PUBLIC_REQUESTS = 'http://webapppt2-env.cavvxieprw.us-east-2.elasticbeanstalk.com/webapi';
+
+
 const CHANGE_EVENT = 'change';
 
 let AppData = {
@@ -115,7 +120,7 @@ let AppData = {
         }
     },
     getUserLogin(action) {
-        axios.get('http://localhost:8088/pt1.pt2/webapi/personal/getLogin', {
+        axios.get(PUBLIC_REQUESTS + '/personal/getLogin', {
             params: {
                 user: action.user,
                 pass: action.pass
@@ -174,7 +179,7 @@ let AppData = {
         AppStore.emitChange();
     },
     getMenuTypes(){
-        $.getJSON('/app/fillData/menuTypes.js', function(info) {
+        $.getJSON('/app/fillData/menuTypes.json', function(info) {
            AppData.data.menuTypes = info.menuTypes;
            AppStore.emitChange();
         }).fail(function(error) {
@@ -182,7 +187,7 @@ let AppData = {
         });
     },
     getAllStudents(action){
-        axios.get('http://localhost:8088/pt1.pt2/webapi/alumno/getAllStudents', {
+        axios.get(PUBLIC_REQUESTS + '/alumno/getAllStudents', {
             params: {
                 filter: action.filter
             }
@@ -202,7 +207,7 @@ let AppData = {
 
     },
     getNotifications(action){
-        axios.get('http://localhost:8088/pt1.pt2/webapi/recepcion/getNotifications')
+        axios.get(PUBLIC_REQUESTS + '/recepcion/getNotifications')
         .then(function (response){
             AppData.data.loader.notification = false;          
             if(response.data.notifications.length === 0){
@@ -220,7 +225,7 @@ let AppData = {
         var filter=null;
         if(action.filt===undefined) filter=""
         else filter=action.filt
-        var cadena="http://localhost:8088/pt1.pt2/webapi/centro/getStateAtCenter?filter="+filter;
+        var cadena=PUBLIC_REQUESTS + "/centro/getStateAtCenter?filter="+filter;
         axios.get(cadena)
         .then(function(response){
             AppData.data.studentsAtCenter = response.data.studentsInCenter;
@@ -231,7 +236,7 @@ let AppData = {
         });
     },
     setTimeRed(action){
-        axios.put('http://localhost:8088/pt1.pt2/webapi/centro/'+action.idStudent+"/"+action.timeRed)
+        axios.put(PUBLIC_REQUESTS + '/centro/'+action.idStudent+"/"+action.timeRed)
         .then(function(response){
         })
         .catch(function (error){
@@ -239,7 +244,7 @@ let AppData = {
         });
     },
     getStudentInfo(action){
-        axios.get('http://localhost:8088/pt1.pt2/webapi/alumno/getStudentFile', {
+        axios.get(PUBLIC_REQUESTS + '/alumno/getStudentFile', {
             params: {
                 id: action.id
             }
@@ -264,7 +269,7 @@ let AppData = {
         AppStore.emitChange();
     },
     getStudentMissPayment(){
-        axios.get('http://localhost:8088/pt1.pt2/webapi/instructor/getStudentsMissingPayments')
+        axios.get(PUBLIC_REQUESTS + '/instructor/getStudentsMissingPayments')
         .then(function (response){
             if(response.data.studentMissingPayment.length === 0){
                 AppData.data.studentsMissPayment = "";
@@ -278,7 +283,7 @@ let AppData = {
         });
     },
     getPaymentListStudent(action){
-        axios.get('http://localhost:8088/pt1.pt2/webapi/instructor/getPaymentOfStudent',{
+        axios.get(PUBLIC_REQUESTS + '/instructor/getPaymentOfStudent',{
             params: {
                 idStudent: action.idStudent
             }
@@ -309,7 +314,7 @@ let AppData = {
         AppStore.emitChange();
     },
     getConfigCallDone(){
-        var cadena="http://localhost:8088/pt1.pt2/webapi/recepcion/getStudentsCalls";
+        var cadena=PUBLIC_REQUESTS + "/recepcion/getStudentsCalls";
         axios.get(cadena)
         .then(function(response){
             var ListOfCalls = response.data.listOfCalls;
@@ -338,7 +343,7 @@ let AppData = {
         AppStore.emitChange();
     },
     setNoteCall(action){
-        axios.put('http://localhost:8088/pt1.pt2/webapi/recepcion/'+action.id+"/"+action.note+"/"+action.date)
+        axios.put(PUBLIC_REQUESTS + '/recepcion/'+action.id+"/"+action.note+"/"+action.date)
         .then(function(response){
             AppData.data.configCall.active = false;
             AppData.getConfigCallDone();
@@ -352,7 +357,7 @@ let AppData = {
     setFiles(action){
         AppData.data.loader.document = true;
         AppStore.emitChange();
-        axios.put('http://localhost:8088/pt1.pt2/webapi/documento/'+action.fileBase+"/"+action.fileReport)
+        axios.put(PUBLIC_REQUESTS + '/documento/'+action.fileBase+"/"+action.fileReport)
         .then(function(response){
             console.log("response upload ", response.data)
             AppData.data.setFiles.upLoadFileError=response.data; 
@@ -361,14 +366,11 @@ let AppData = {
         })
         .catch(function (error){
             console.log( error);
-            //AppData.data.setFiles.upLoadFileError=1;
-            //AppData.data.loader.document=false;
-            //AppStore.emitChange();
         });
     },
     getStatusCenter(){
         //studentsViewCenter
-        axios.get('http://localhost:8088/pt1.pt2/webapi/centro/getStatusOfCenter')
+        axios.get(PUBLIC_REQUESTS + '/centro/getStatusOfCenter')
         .then(function (response){
             if(response.data.asistentes.length === 0){
                 AppData.data.studentsViewCenter = "";
@@ -382,7 +384,7 @@ let AppData = {
         });
     },
     getAllAssistants(){
-        axios.get('http://localhost:8088/pt1.pt2/webapi/asistente/getAllAssistants')
+        axios.get(PUBLIC_REQUESTS + '/asistente/getAllAssistants')
         .then(function (response){
             AppData.data.loader.selectionList = false;
             if(response.data.allAssistants.length === 0){
@@ -401,7 +403,7 @@ let AppData = {
         AppData.data.selectedPeople = action.selectedPeople;
         AppStore.emitChange();
 
-        axios.post('http://localhost:8088/pt1.pt2/webapi/instructor/createStampsStudents', 
+        axios.post(PUBLIC_REQUESTS + '/instructor/createStampsStudents', 
         {
             selectedPeople: AppData.data.selectedPeople
         }
@@ -425,7 +427,7 @@ let AppData = {
         AppData.data.selectedPeople = action.selectedPeople;
         AppStore.emitChange();
 
-        axios.post('http://localhost:8088/pt1.pt2/webapi/instructor/createIds', 
+        axios.post(PUBLIC_REQUESTS + '/instructor/createIds', 
         {
             selectedPeople: AppData.data.selectedPeople
         }
@@ -447,7 +449,7 @@ let AppData = {
     getAssistantInfo(action){
         if(action.view == 4){
 
-            axios.post('http://localhost:8088/pt1.pt2/webapi/asistente/getAssistantInfo', 
+            axios.post(PUBLIC_REQUESTS + '/asistente/getAssistantInfo', 
             {
                 selectedPeople: action.selectedPeople
             }
@@ -487,7 +489,7 @@ let AppData = {
         AppData.data.loader.users = true;
         AppStore.emitChange();
 
-        axios.post('http://localhost:8088/pt1.pt2/webapi/asistente/setAssistant', 
+        axios.post(PUBLIC_REQUESTS + '/asistente/setAssistant', 
         {
             infoAssistant: action.infoAssistant
         }
@@ -513,7 +515,7 @@ let AppData = {
         AppStore.emitChange();
     },
     setPaymentTuition(action){
-        axios.post('http://localhost:8088/pt1.pt2/webapi/instructor/setTuition', 
+        axios.post(PUBLIC_REQUESTS + '/instructor/setTuition', 
         {
             infoPayment: action.infoPayment
         }
@@ -542,7 +544,7 @@ let AppData = {
         AppStore.emitChange();
     },
     getFormAnualPlan(action){
-        axios.get('http://localhost:8088/pt1.pt2/webapi/test/getTestAnnualPlan', 
+        axios.get(PUBLIC_REQUESTS + '/test/getTestAnnualPlan', 
         {
             params: {
                 infoToGet: action.infoToGet
@@ -578,7 +580,7 @@ let AppData = {
         }else if(action.view === 2){
             AppData.data.annualPlanResults.startPoint = action.result; 
             AppStore.emitChange();  
-            axios.put('http://localhost:8088/pt1.pt2/webapi/proyeccionAnual/setAnnualPlan', 
+            axios.put(PUBLIC_REQUESTS + '/proyeccionAnual/setAnnualPlan', 
             {
                 resultsTest: AppData.data.annualPlanResults
             }
@@ -600,12 +602,13 @@ let AppData = {
         AppStore.emitChange();
     },
     getStudentsWithoutAnnualPlan(){
-        axios.get('http://localhost:8088/pt1.pt2/webapi/alumno/getStudentsWithoutAnnualPlan')
+        axios.get(PUBLIC_REQUESTS + '/alumno/getStudentsWithoutAnnualPlan')
         .then(function (response){
             AppData.data.loader.selectionList = false;                        
             if(response.data.allStudents.length === 0){
                 AppData.data.students = "";
             }else{
+                AppData.data.students = "";
                 AppData.data.students = response.data.allStudents;
             }
             AppStore.emitChange();
@@ -615,12 +618,13 @@ let AppData = {
         });
     },
     getStudentsWithAnnualPlan(){
-        axios.get('http://localhost:8088/pt1.pt2/webapi/alumno/getStudentsWithAnnualPlan')
+        axios.get(PUBLIC_REQUESTS + '/alumno/getStudentsWithAnnualPlan')
         .then(function (response){
             AppData.data.loader.selectionList = false;                        
             if(response.data.allStudents.length === 0){
                 AppData.data.students = "";
             }else{
+                AppData.data.students = "";
                 AppData.data.students = response.data.allStudents;
             }
             AppStore.emitChange();
@@ -641,7 +645,7 @@ let AppData = {
         AppStore.emitChange();
     },
     getAnnualPlan(action){
-        axios.get('http://localhost:8088/pt1.pt2/webapi/proyeccionAnual/getAnnualPlan',{
+        axios.get(PUBLIC_REQUESTS + '/proyeccionAnual/getAnnualPlan',{
             params: {
                 idAlumno: action.id
             }
@@ -666,7 +670,7 @@ let AppData = {
     setAssistanceStudent(action){
         AppData.data.loader.scanCode = true;
         AppStore.emitChange();
-        axios.post('http://localhost:8088/pt1.pt2/webapi/recepcion/setAssistance', {
+        axios.post(PUBLIC_REQUESTS + '/recepcion/setAssistance', {
             scanned: action.scanned
         })
         .then(function (response){
@@ -693,7 +697,7 @@ let AppData = {
 
             
             AppStore.emitChange();
-            axios.get('http://localhost:8088/pt1.pt2/webapi/recepcion/getNotifications')
+            axios.get(PUBLIC_REQUESTS + '/recepcion/getNotifications')
             .then(function (response){
                 AppData.data.loader.notification = false;            
                 if(response.data.notifications.length === 0){
@@ -717,7 +721,7 @@ let AppData = {
         AppStore.emitChange();
     },
     closeNotification(action){
-        axios.delete('http://localhost:8088/pt1.pt2/webapi/recepcion/'+action.student.idStudent)
+        axios.delete(PUBLIC_REQUESTS + '/recepcion/'+action.student.idStudent)
         .then(function(response){
             AppData.data.loader.notification = false;            
                 if(response.data.notifications.length === 0){
@@ -732,7 +736,7 @@ let AppData = {
         });
     },
     getFileGrades(action){
-        axios.get('http://localhost:8088/pt1.pt2/webapi/alumno/getFile',{
+        axios.get(PUBLIC_REQUESTS + '/alumno/getFile',{
                 params: {
                     idAlumno: action.id
                 }
