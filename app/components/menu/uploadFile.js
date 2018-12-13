@@ -21,8 +21,6 @@ class UploadFile extends React.Component {
         this.props.closePopUp();
         if(this.state.rute1 !== "" && this.state.rute2 !== ""){
             this.props.actions.setFiles(this.state.rute1,this.state.rute2);
-        }else{
-            console.log("estan vacias")
         }
         //this.setState({view: 1});
     }
@@ -78,7 +76,6 @@ class UploadFile extends React.Component {
         );
     }
     renderSuccess(){
-        console.log("Render success");
         return(
             <div>
                 <div className="headerSetRouteFile">
@@ -90,7 +87,6 @@ class UploadFile extends React.Component {
         );
     }
     renderNotSuccess(){
-        console.log("Render no success");
         return(
             <div>
                 <div className="headerSetRouteFile">
@@ -105,8 +101,6 @@ class UploadFile extends React.Component {
         return (
             <div className="popUpContainer">
                 <div className='setRouteFileContainer'>
-                    {console.log("loader state",this.props.store.setFiles.upLoadFileError)}
-                    {console.log("view state",this.state.view, this.props.store)}
                     {this.props.store.loader.document===true ? <Loader {...this.props}/> :
                     this.renderSelectFiles()}
 

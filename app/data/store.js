@@ -359,7 +359,6 @@ let AppData = {
         AppStore.emitChange();
         axios.put(PUBLIC_REQUESTS + '/documento/'+action.fileBase+"/"+action.fileReport)
         .then(function(response){
-            console.log("response upload ", response.data)
             AppData.data.setFiles.upLoadFileError=response.data; 
             AppData.data.loader.document=false;
             AppStore.emitChange();
