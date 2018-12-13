@@ -8,7 +8,8 @@ import App from '../components/app';
 //import _ from 'underscore';
 
 
-const PUBLIC_REQUESTS = 'http://localhost:8088/pt1.pt2/webapi';
+const PUBLIC_REQUESTS = 'http://192.168.1.84:8088/pt1.pt2/webapi';
+//const PUBLIC_REQUESTS = 'http://localhost:8088/pt1.pt2/webapi';
 //const PUBLIC_REQUESTS = 'http://webapppt2-env.cavvxieprw.us-east-2.elasticbeanstalk.com/webapi';
 
 
@@ -107,7 +108,8 @@ let AppData = {
         },
         popUpAssistance: false,
         welcomeInfo: null,
-        gradesStudent: null
+        gradesStudent: null,
+        dailySchedule: null
     },
     confirmLogin(){
         if(localStorage.getItem("code") !== null){
@@ -753,6 +755,30 @@ let AppData = {
             .catch(function (error){
                 console.log(error);
             });
+    },
+    getDailySchedule(action)
+    {
+        console.log("Programacion ", action)
+        axios.get(PUBLIC_REQUESTS + '/alumno/getDailySchedule', {
+            params: {
+                idAlumno: action.id
+            }
+        })
+        .then(function (response){
+            console.log(response)
+            if (response.data.success == 1){
+                AppData.data.dailySchedule = response.data.niveles;
+            }
+            else{
+                AppData.data.dailySchedule = "";
+            }
+            AppStore.emitChange();
+
+        })
+        .catch(function (error){
+            console.log(error);
+        });
+
     }
 }
 
@@ -898,6 +924,9 @@ dispatcher.register((action) => {
         break;
     case actionTypes.GET_FILEGRADES:
         AppData.getFileGrades(action);
+        break;
+    case actionTypes.GET_DAILYSCHEDULE:
+        AppData.getDailySchedule(action);
         break;
     default: 
 		// no op

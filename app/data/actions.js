@@ -234,6 +234,12 @@ const Actions = {
             type: actionTypes.GET_FILEGRADES,
             id
         });
+    },
+    getDailySchedule(id){
+        dispatcher.dispatch({
+            type: actionTypes.GET_DAILYSCHEDULE,
+            id
+        })
     }
 };
 export default Actions;

@@ -7,6 +7,7 @@ import ViewCenter from './viewCenter/main';
 import ProyeccionAnual from './annualPlan/main';
 import GeneralViewProyeccionAnual from './annualPlan/generalViewAnnualPlan';
 import FileStudent from './file/main';
+import DailySchedule from './dailySchedule/main';
 import StudentsCalls from './studentsCalls/main';
 import Menu from '../components/menu/main';
 import Welcome from '../components/welcome/main';
@@ -69,6 +70,7 @@ class App extends React.Component {
                         <PrivateRoute path="/crearProyeccionAnual" component={ProyeccionAnual} store={this.state} actions={actions}/>
                         <PrivateRoute path="/proyeccionAnual" component={GeneralViewProyeccionAnual} store={this.state} actions={actions}/>
                         <PrivateRoute path="/boleta" component={FileStudent} store={this.state} actions={actions}/>
+                        <PrivateRoute path="/programacionDiaria" component={DailySchedule} store={this.state} actions={actions}/>
                         <Route path='/bienvenida' render={(props) => <Welcome {...this.state} actions={actions}/>} />
                             
                         <Route path="/login" render={(props) => (

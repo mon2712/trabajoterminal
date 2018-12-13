@@ -19,7 +19,7 @@ class ButtonOptions extends React.Component {
         };  
     }
     sendAction(id){
-        if(id===4 || id===8){
+        if(id===4 || id===8 || id===6 ){
             this.props.actions.getAllStudents("");
         }
         if(id === 7){
@@ -108,6 +108,21 @@ class ButtonOptions extends React.Component {
                                         <Loader {...this.props}/> 
                                     : this.props.store.students !== "" && this.props.store.students !== null ? 
                                         <SelectionList {...this.props} allPeople={this.props.store.students} view={8} actions={this.props.actions} closePopUp={()=>this.closePopUp2}/> 
+                                    : null 
+                                }
+                            </div>
+                        </div>
+                    :
+                    this.state.popUpActive === true && this.state.id===6 ?
+                        <div className="popUpContainer">
+                            <div className='selectBoletaContainer'>
+                                <span className="title">Consultar Programación Diaria</span>   
+                                <span className="icoClose icon-multiply" onClick={this.closePopUp} style={{display: this.props.store.response.active === true ? 'none' : 'inline-block'}} />                                                                                  
+                                {
+                                    this.props.store.loader.selectionList === true ?
+                                        <Loader {...this.props}/> 
+                                    : this.props.store.students !== "" && this.props.store.students !== null ? 
+                                        <SelectionList {...this.props} allPeople={this.props.store.students} view={66} actions={this.props.actions} closePopUp={()=>this.closePopUp2}/> 
                                     : null 
                                 }
                             </div>
